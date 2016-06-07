@@ -65,9 +65,15 @@
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
                         <div ng-bind="product.publicUser.nickName" class="userNick"></div>
-                        <div ng-bind="parseTime(product.publicDate)"></div>
+                        <div ng-bind="parseTime(product.publicDate)" class="publicTime"></div>
                     </div>
                 </div>
+                <div class="row padding-small-horizontal" ng-if="checkProductImages(product.productImageList).length !=0">
+                    <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
+                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                    </div>
+                </div>
+                <div class="productContent" ng-bind="product.content"></div>
             </div>
 
         </div>

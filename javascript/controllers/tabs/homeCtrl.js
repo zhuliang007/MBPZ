@@ -56,7 +56,7 @@ angular.module('controllers.home',[])
                 "cmd":$config.cmds.getPage,
                 "parameters":{
                     "type":1,
-                    "numberOfPerPage":2,
+                    "numberOfPerPage":10,
                     "pageNo":0
                 }
             }
@@ -108,6 +108,13 @@ angular.module('controllers.home',[])
                     $scope.productList = result.response.data.content;
                 })
 
+        }
+
+        $scope.checkProductImages = function(productImageList){
+            if(productImageList == null || productImageList.length==0){
+                return []
+            }
+            return productImageList.slice(0,3);
         }
 
 

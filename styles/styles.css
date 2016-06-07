@@ -217,6 +217,29 @@ ion-content{
     background-color: #FFFFFF;
 }
 
+.card-item-normal .userNick{
+    font-size: 14px;
+    color: #666666;
+}
+
+.card-item-normal .publicTime{
+    font-size: 12px;
+    color: #999999;
+}
+
+.card-item-normal .row + .row{
+    padding-top: 5px;
+}
+
+.card-item-normal .productContent{
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    color: #666666;
+    padding: 5px 15px;
+    max-height: 50px;
+}
+
 
 /**轮播*/
 .headSliders .slider-slides{
@@ -302,6 +325,26 @@ ion-content{
 .padding-small-bottom,
 .padding-small-vertical{
     padding-bottom: 5px!important;
+}
+
+.padding-small-left,
+.padding-small-horizontal{
+    padding-left: 5px!important;
+}
+
+.padding-small-right,
+.padding-small-horizontal{
+    padding-right: 5px!important;
+}
+
+.padding-smaller-left,
+.padding-smaller-horizontal{
+    padding-left: 2px!important;
+}
+
+.padding-smaller-right,
+.padding-smaller-horizontal{
+    padding-right: 2px!important;
 }
 
 .padding-none-left,
