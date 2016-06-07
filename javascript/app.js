@@ -6,7 +6,14 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
         '$stateProvider',
         '$configProvider',
         '$consoleProvider',
-        function($stateProvider,$configProvider,$consoleProvider){
+        '$ionicConfigProvider',
+        function($stateProvider,$configProvider,$consoleProvider,$ionicConfigProvider){
+            $ionicConfigProvider.platform.ios.tabs.style('standard');
+            $ionicConfigProvider.platform.ios.tabs.position('bottom');
+            $ionicConfigProvider.platform.android.tabs.style('standard');
+            $ionicConfigProvider.platform.android.tabs.position('standard');
+
+
             $stateProvider
                 .state($configProvider.controllers.index.name,{
                     url:$configProvider.controllers.index.url,

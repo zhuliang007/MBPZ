@@ -157,6 +157,26 @@ ion-content{
     border-radius: 20px;
 }
 
+.homeQGItem{
+    color: #666666;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.homeQGItem>span:first-child{
+    color: #FF4E72;
+    border-radius: 7px;
+    border: 1px solid #FF4E72;
+    padding: 2px 5px;
+}
+
+.homeQGItem + .homeQGItem{
+    margin-top: 10px;
+}
+
 
 /**轮播*/
 .headSliders .slider-slides{
@@ -232,4 +252,26 @@ ion-content{
 .padding-small-bottom,
 .padding-small-vertical{
     padding-bottom: 5px!important;
+}
+
+.padding-none-left,
+.padding-none-horizontal{
+    padding-left: 0px;
+}
+
+.padding-none-right,
+.padding-none-horizontal{
+    padding-right: 0px;
+}
+
+
+
+/*border边框线*/
+.border-right{
+    border-right: 1px solid #DDDDDD;
+}
+
+/**其他基础样式*/
+.overflow-hidden{
+    overflow: hidden;
 }

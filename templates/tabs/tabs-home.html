@@ -35,14 +35,17 @@
                     <span>居家商品</span>
                 </div>
             </div>
-            <div class="row row-no-padding">
-                <div class="col col-25 padding-small-vertical">
+            <div class="row padding-none-horizontal">
+                <div class="col col-25 padding-none-horizontal padding-small-vertical border-right">
                     <div class="col-75 col-offset-10">
                         <img class="img-auto" ng-src="{{homeQGXX}}">
                     </div>
                 </div>
-                <div class="col">
-fdsafsdfdsaf
+                <div class="col padding-small-vertical padding-none-right padding-normal-left col-center overflow-hidden">
+                    <div class="homeQGItem" ng-repeat="QGXX in QGXXList track by $index">
+                        <span>求购</span>
+                        <span ng-bind="QGXX.title"></span>
+                    </div>
                 </div>
             </div>
         </div>

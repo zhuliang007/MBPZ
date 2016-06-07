@@ -34,9 +34,9 @@ angular.module('providers.config',[])
 
     /**接口cmd配置*/
     $config.cmds = {
-        home:{
-            adInfo:"market/home/advert/info"
-        }
+        adInfo:"market/home/advert/info",
+        getPage:"product/getPage"
+
     }
 
     $config.types = {
