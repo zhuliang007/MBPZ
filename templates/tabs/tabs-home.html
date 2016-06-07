@@ -49,5 +49,28 @@
                 </div>
             </div>
         </div>
+
+        <div class="home-zx">
+            <div class="line"></div>
+            <div class="title">最新商品</div>
+        </div>
+
+        <div class="card-group">
+            <div class="card-item-normal" ng-repeat="product in productList track by $index">
+                <div class="row padding-none-horizontal padding-normal-vertical">
+                    <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
+                        <div class="col col-75 col-offset-10 padding-none-vertical">
+                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',product.publicUser.userImg,'1:1')"></div>
+                        </div>
+                    </div>
+                    <div class="col col-center padding-none-vertical padding-normal-horizontal">
+                        <div ng-bind="product.publicUser.nickName" class="userNick"></div>
+                        <div ng-bind="parseTime(product.publicDate)"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </ion-content>
 </ion-view>

@@ -42,7 +42,7 @@ ion-content{
     background-image: none;
 }
 
-.mbpz-tabs .icon{
+.mbpz-tabs .tabs .icon{
     height: 28px;
 }
 
@@ -177,6 +177,46 @@ ion-content{
     margin-top: 10px;
 }
 
+.home-zx{
+    height: 48px;
+    padding: 0px 20px;
+    position: relative;
+}
+
+.home-zx .line{
+    position: relative;
+    height: 2px;
+    background-color: #CCCCCC;
+    width: 100%;
+    z-index:1;
+    top: 50%;
+}
+
+.home-zx .title {
+    position: absolute;
+    z-index: 2;
+    background-color: #F5F5F5;
+    color: #FF4E72;
+    left: calc(50% - 45px);
+    left: -webkit-calc(50% - 45px);
+    top: calc(20% + 5px);
+    top: -webkit-calc(20% + 5px);
+    padding: 0px 20px;
+}
+
+/*卡片组合*/
+.card-group{
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.card-item-normal{
+    position: relative;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
 
 /**轮播*/
 .headSliders .slider-slides{
@@ -244,6 +284,16 @@ ion-content{
     padding-right: 10px!important;
 }
 
+.padding-normal-top,
+.padding-normal-vertical{
+    padding-top: 10px!important;
+}
+
+.padding-normal-bottom,
+.padding-normal-vertical{
+    padding-bottom: 10px!important;
+}
+
 .padding-small-top,
 .padding-small-vertical{
     padding-top: 5px!important;
@@ -264,11 +314,25 @@ ion-content{
     padding-right: 0px;
 }
 
+.padding-none-top,
+.padding-none-vertical{
+    padding-top: 0px;
+}
+
+.padding-none-bottom,
+.padding-none-vertical{
+    padding-bottom: 0px;
+}
 
 
-/*border边框线*/
+
+/*border*/
 .border-right{
     border-right: 1px solid #DDDDDD;
+}
+
+.border-radius-round{
+    border-radius: 50%;
 }
 
 /**其他基础样式*/

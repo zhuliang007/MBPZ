@@ -12,16 +12,14 @@ angular.module('controllers.home',[])
     '$httpService',
     '$ionicSlideBoxDelegate',
     '$timeout',
-    '$interval',
-    function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$interval){
+    '$cache',
+    function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache){
         $rootScope.token = $stateParams.token;
 
         $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
 
         var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
 
-        var numberOfPerPageQGXX = 1;
-        var pageNoQGXX = 0;
 
         getAds();
 
@@ -35,7 +33,6 @@ angular.module('controllers.home',[])
             }
             $httpService.getJsonFromPost($config.getRequestAction(),data)
                 .then(function(result){
-                    $console.show(result);
                     $scope.adList = result.response.data;
                     adSlideBox.update();
                     $timeout(function(){
@@ -50,31 +47,73 @@ angular.module('controllers.home',[])
                 })
         }
 
-        /*$interval(function(){
-            getQGXX();
-        },2000);*/
         getQGXX();
-
+        var QGXXListCache = [];
+        var QGXXListCacheIndex = 0;
 
         function getQGXX(){
-            $console.show(pageNoQGXX);
             var data = {
                 "cmd":$config.cmds.getPage,
                 "parameters":{
                     "type":1,
-                    "numberOfPerPage":numberOfPerPageQGXX,
-                    "pageNo":pageNoQGXX
+                    "numberOfPerPage":2,
+                    "pageNo":0
                 }
             }
-            $httpService.getJsonFromPost($config.getRequestAction(),data)
+
+            $cache.setValue($config.getRequestAction(),data,'qgHome')
                 .then(function(result){
-                    $console.show(result);
-                    $scope.QGXXList = result.response.data.content;
-                    $console.show(result.response.data.totalPages);
-                    //pageNoQGXX = ((pageNoQGXX+1) == result.response.data.totalPages)? 0 : pageNoQGXX+1;
-                    //$console.show(pageNoQGXX);
+                    QGXXListCache = $cache.getValue('qgHome');
+                    slideQGXX();
                 })
         }
+
+        function slideQGXX(){
+            $scope.QGXXList = [];
+            if(QGXXListCache.length>2){
+                if(QGXXListCacheIndex == QGXXListCache.length){
+                    QGXXListCacheIndex = 0
+                }
+                $scope.QGXXList.push(QGXXListCache[QGXXListCacheIndex]);
+                QGXXListCacheIndex++;
+                if(QGXXListCacheIndex == QGXXListCache.length){
+                    QGXXListCacheIndex = 0
+                }
+                $scope.QGXXList.push(QGXXListCache[QGXXListCacheIndex]);
+                QGXXListCacheIndex++;
+            }
+            else{
+                $scope.QGXXList = QGXXListCache;
+            }
+            $timeout(function(){
+                slideQGXX();
+            },2000)
+        }
+
+        getProductHome()
+
+        function getProductHome(){
+            var data = {
+                "cmd": "product/getPage",
+                "parameters":{
+                    "numberOfPerPage":1,
+                    "pageNo":0,
+                    "type":0
+                }
+            }
+
+            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                .then(function(result){
+                    $console.show(result)
+                    $scope.productList = result.response.data.content;
+                })
+
+        }
+
+
+
+
+
 
 
 

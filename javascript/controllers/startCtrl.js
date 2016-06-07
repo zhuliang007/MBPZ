@@ -22,5 +22,9 @@ angular.module('controllers.start',[])
                     return {"background-image":"url("+imgUrl+")","-webkit-background-image":"url("+imgUrl+")"};
                 }
             }
+
+            $scope.parseTime = function(time){
+                return DateFormat.format.prettyDate(time);
+            }
         }
     ])
