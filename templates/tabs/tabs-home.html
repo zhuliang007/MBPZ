@@ -1,0 +1,50 @@
+<ion-view class="tabsHome">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="showMsg('地址')"><span>上海</span><i class="mbpz mbpz-icon-arrow-down"></i></button>
+        </div>
+        <h1 class="title">萌宝铺子</h1>
+        <div class="buttons">
+            <button class="button" ng-click="showMsg('搜索')"><i class="mbpz mbpz-icon-search"></i></button>
+        </div>
+    </ion-header-bar>
+    <div class="header-zs"></div>
+    <ion-content>
+        <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
+            <ion-slide ng-repeat="ad in adList track by $index">
+                <div id="adHead{{$index}}" class="bgImg" ng-style="resizeImage('adHead{{$index}}',ad.adImg,'3:1')"></div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="bg-color-white padding-normal-horizontal">
+            <div class="homeType">
+                <div class="homeTypeItem">
+                    <span><i class="mbpz mbpz-icon-guanfang bg-color-yellow"></i></span>
+                    <span>官方推荐</span>
+                </div>
+                <div class="homeTypeItem">
+                    <span><i class="mbpz mbpz-icon-muying bg-color-main-green"></i></span>
+                    <span>宝宝用品</span>
+                </div>
+                <div class="homeTypeItem">
+                    <span><i class="mbpz mbpz-icon-meifu bg-color-main-red"></i></span>
+                    <span>妈妈用品</span>
+                </div>
+                <div class="homeTypeItem">
+                    <span><i class="mbpz mbpz-icon-jujia bg-color-main-brown"></i></span>
+                    <span>居家商品</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-25 padding-small-vertical">
+                    <div class="col-75 col-offset-10">
+                        <img class="img-auto" ng-src="{{homeQGXX}}">
+                    </div>
+                </div>
+                <div class="col">
+fdsafsdfdsaf
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
