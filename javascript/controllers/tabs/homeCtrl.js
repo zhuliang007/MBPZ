@@ -29,20 +29,20 @@ angular.module('controllers.home',[])
                     "parameters":{
                         "adType" : $config.types.ad.Index
                     },
-                    "token":$rootScope.token
+                    "token":$scope.token
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         $scope.adList = result.response.data;
                         adSlideBox.update();
                         $timeout(function(){
-                            /*if(adSlideBox.slidesCount()){
-                             $scope.showPager = false;
-                             }
-                             else{
-                             $scope.showPager = true;
-                             adSlideBox.start();
-                             }*/
+                            if(adSlideBox.slidesCount()>1){
+                                $scope.showPager = true;
+                                adSlideBox.loop(true);
+                            }
+                            else{
+                                $scope.showPager = false;
+                            }
                         })
                     })
             }

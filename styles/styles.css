@@ -287,18 +287,116 @@ ion-content{
     font-size: 12px;
 }
 
-
-/**轮播*/
-.headSliders .slider-slides{
-    width: 100%!important;
+/**productDetail页面样式*/
+.productDetail .header{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 15px;
+    z-index: 999;
 }
 
-.slider-pager-page{
+.productDetail .header>span{
+    display: block;
+    float: left;
+    color: #FFFFFF;
+    background: #FF4E72;
+    opacity:.7;
+    text-align: center;
+    font-size: 24px;
+    padding: 4px 12px;
+    border-radius: 50%;
+}
+
+.productDetail .header>span:last-child{
+    float: right;
+    padding: 4px 7px;
+}
+
+.productDetailBody{
+    padding: 10px;
+    background: #FFFFFF;
+}
+.productDetailBody .title{
+    font-size: 14px;
+    line-height: 24px;
+    color: #333333;
+}
+
+.productDetailBody .counts{
+    font-size: 12px;
+    line-height: 20px;
+    color: #666666;
+}
+.productDetailBody span.recommoned{
+    color: #FFFFFF;
+    background: #FF4E72;
+    border-radius: 7px;
+    padding: 2px 5px;
+}
+
+.productDetailBody span.price{
+    font-size: 16px;
+    color: #FF4E72;
+    font-weight: 700;
+}
+
+.productDetailBody span.originalPrice{
+     font-size: 14px;
+     color: #999999;
+     text-decoration: line-through;
+ }
+
+.productDetailBody span.freight{
+    font-size: 12px;
+    color: #999999;
+}
+
+.productDetailBody span.content{
+    font-size: 14px;
+    color: #333333;
+}
+
+.productDetailBody span.publicTime{
+    font-size: 12px;
+    color: #999999;
+}
+
+.productDetailBody span.address.mbpz{
+    font-size: 16px;
+}
+
+.productDetailBody span.address{
+    color: #57B6E2;
+    font-size: 12px;
+}
+
+.productDetailBody span.userNick{
+    display: block;
+    color: #333333;
+    font-size: 14px;
+    padding: 10px 5px;
+    border-right: 1px solid #DDDDDD;
+}
+
+.productDetailBody .contact{
+    display: block;
+    color: #333333;
+    font-size: 14px;
+}
+
+.productDetailBody .contact>span.mbpz{
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+/**轮播*/
+.headSliders .slider-pager-page{
     opacity: .7!important;
     color: #FFFFFF;
 }
 
-.slider-pager-page.active{
+.headSliders .slider-pager-page.active{
     opacity: .7!important;
     color: #FF4E72;
 }
@@ -342,6 +440,16 @@ ion-content{
 .margin-normal-bottom,
 .margin-normal-vertical{
     margin-bottom: 10px!important;
+}
+
+.margin-normal-top,
+.margin-normal-vertical{
+    margin-top: 10px!important;
+}
+
+.margin-small-right,
+.margin-small-horizontal{
+    margin-bottom: 5px!important;
 }
 
 .padding-normal-left,

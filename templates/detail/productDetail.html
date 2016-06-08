@@ -1,5 +1,73 @@
-<ion-view>
+<ion-view class="productDetail">
     <ion-content>
-        Hello productDetail
+        <div class="header">
+            <span class="icon ion-ios-arrow-back"></span>
+            <span class="icon ion-more"></span>
+        </div>
+        <ion-slide-box ng-if="product.productImageList!=null||product.productImageList.length>0"
+                       ng-class="{true:'margin-normal-bottom',false:''}[productType==1]"
+                       class="headSliders"
+                       delegate-handle="productSlideBox"
+                       does-continue="false"
+                       auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
+            <ion-slide ng-repeat="productImage in product.productImageList track by $index">
+                <div id="productImage{{$index}}" class="bgImg" ng-style="resizeImage('productImage{{$index}}',productImage.location,'1:1')"></div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="productDetailBody" ng-if="productType==0">
+            <div class="row row-no-padding">
+                <div class="col col-75 col-center padding-normal-right title">
+                    <span ng-if="product.isRecommoned == 1" class="recommoned">官方推荐</span>
+                    <span ng-bind="product.title" ng-class="{true:'padding-small-left',false:''}[product.isRecommoned == 1]"></span>
+                </div>
+                <div class="col col-center text-right counts">
+                    <span class="mbpz mbpz-icon-readers"></span>
+                    <span ng-bind="product.browseNumber||0">1212</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-big-top">
+                    <span class="mbpz mbpz-icon-money price"></span>
+                    <span class="price padding-small-right" ng-bind="product.currentPrice"></span>
+                    <span class="originalPrice padding-small-right" ng-bind="product.currentPrice"></span>
+                    <span class="freight">运费：<span ng-bind="product.freight+'.0'"></span></span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-big-vertical">
+                    <span class="content" ng-bind="product.content"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-small-vertical border-bottom">
+                    <span class="publicTime" ng-bind="parseTime(product.publicDate)"></span>
+                    <span class="publicTime">发布</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-normal-top">
+                    <span class="mbpz mbpz-icon-position address"></span>
+                    <span ng-if="product.userLocation==null" class="address">未知</span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                </div>
+            </div>
+        </div>
+        <div class="productDetailBody padding-small-vertical margin-normal-top" ng-if="productType==0">
+            <div class="row row-no-padding">
+                <div class="col col-center">
+                    <div class="col padding-none-horizontal padding-none-vertical">
+                        <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                    </div>
+                </div>
+                <div class="col col-50 col-center">
+                    <span ng-bind="product.publicUser.nickName" class="userNick"></span>
+                </div>
+                <div class="col col-33 col-center text-center">
+                    <div class="contact" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

@@ -25,9 +25,9 @@ angular.module('controllers.start',[])
                     var element = document.getElementById(id);
                     var $element = angular.element(element);
                     scale = scale || "1:1";
-                    var scaleOption = parseInt(scale.split(":")[0],10)/parseInt(scale.split(":")[1],10);
-                    //var imgWidth = element.offsetWidth || document.body.offsetWidth;
-                    var imgWidth = element.offsetWidth;
+                    var scaleOption = parseFloat(scale.split(":")[0])/parseFloat(scale.split(":")[1]);
+                    var imgWidth = element.offsetWidth || document.body.offsetWidth;
+                    //var imgWidth = element.offsetWidth;
                     $element.css({"width":imgWidth + "px","height":(imgWidth/scaleOption)+"px"});
                     return {"background-image":"url("+imgUrl+")","-webkit-background-image":"url("+imgUrl+")"};
                 }
@@ -43,6 +43,10 @@ angular.module('controllers.start',[])
             $scope.showProduct = function(product,type){
                 var params = {token:$rootScope.token,type:type,product:angular.toJson(product)};
                 $state.go($config.controllers.productDetail.name,params)
+            }
+            
+            $scope.contactSeller = function (seller) {
+
             }
         }
     ])
