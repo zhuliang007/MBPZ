@@ -36,7 +36,8 @@ angular.module('providers.config',[])
         /**接口cmd配置*/
         $config.cmds = {
             adInfo:"market/home/advert/info",
-            getPage:"product/getPage"
+            getPage:"product/getPage",
+            details:"product/details"
 
         }
 
@@ -95,7 +96,7 @@ angular.module('providers.config',[])
             },
             productDetail:{
                 templateUrl:"templates/detail/productDetail.html",
-                url:"/productDetail/:token?:type:product",
+                url:"/productDetail/:token?:type:id",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
                 cache:false

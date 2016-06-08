@@ -9,7 +9,7 @@
                        class="headSliders"
                        delegate-handle="productSlideBox"
                        does-continue="false"
-                       auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
+                       auto-play="true" slide-interval="2000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="productImage in product.productImageList track by $index">
                 <div id="productImage{{$index}}" class="bgImg" ng-style="resizeImage('productImage{{$index}}',productImage.location,'1:1')"></div>
             </ion-slide>
@@ -31,7 +31,7 @@
                     <span class="mbpz mbpz-icon-money price"></span>
                     <span class="price padding-small-right" ng-bind="product.currentPrice"></span>
                     <span class="originalPrice padding-small-right" ng-bind="product.currentPrice"></span>
-                    <span class="freight">运费：<span ng-bind="product.freight+'.0'"></span></span>
+                    <span class="freight">运费：<span ng-bind="(product.freight||0)+'.0'"></span></span>
                 </div>
             </div>
             <div class="row row-no-padding">

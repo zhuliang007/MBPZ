@@ -34,14 +34,16 @@ angular.module('controllers.start',[])
             }
 
             $scope.parseTime = function(time){
-                return DateFormat.format.prettyDate(time);
+                if(time){
+                    return DateFormat.format.prettyDate(time);
+                }
             }
 
             $scope.defaultHead = $config.getImageUrlDebug() + $config.assets.defaultHead;
 
 
-            $scope.showProduct = function(product,type){
-                var params = {token:$rootScope.token,type:type,product:angular.toJson(product)};
+            $scope.showProduct = function(id,type){
+                var params = {token:$rootScope.token,type:type,id:id};
                 $state.go($config.controllers.productDetail.name,params)
             }
             
