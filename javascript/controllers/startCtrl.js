@@ -5,7 +5,8 @@ angular.module('controllers.start',[])
     .controller('startCtrl',[
         '$scope',
         '$console',
-        function($scope,$console){
+        '$config',
+        function($scope,$console,$config){
             $scope.showMsg = function(msg){
                 $console.show(msg);
             }
@@ -26,5 +27,7 @@ angular.module('controllers.start',[])
             $scope.parseTime = function(time){
                 return DateFormat.format.prettyDate(time);
             }
+
+            $scope.defaultHead = $config.getImageUrlDebug() + $config.assets.defaultHead;
         }
     ])

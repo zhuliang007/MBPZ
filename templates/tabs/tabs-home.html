@@ -1,7 +1,7 @@
 <ion-view class="tabsHome">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="showMsg('地址')"><span>上海</span><i class="mbpz mbpz-icon-arrow-down"></i></button>
+            <button class="button" ng-click="showMsg('地址')"><span>上海</span></button>
         </div>
         <h1 class="title">萌宝铺子</h1>
         <div class="buttons">
@@ -60,7 +60,7 @@
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',product.publicUser.userImg,'1:1')"></div>
+                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -73,10 +73,43 @@
                         <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
                     </div>
                 </div>
-                <div class="productContent" ng-bind="product.content"></div>
+                <div class="row padding-small-horizontal">
+                    <div class="col col-center padding-none-vertical">
+                        <div class="productContent" ng-bind="product.content"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal border-bottom">
+                    <div class="col col-center padding-none-vertical">
+                       <div class="priceGroup">
+                           <span class="mbpz mbpz-icon-money price"></span>
+                           <span ng-bind="product.currentPrice" class="price"></span>
+                           <span ng-bind="product.originalPrice" class="price originalPrice"></span></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal padding-none-vertical publishLocationGroup">
+                    <div class="col col-center padding-normal-vertical">
+                        <span class="mbpz mbpz-icon-position address"></span>
+                        <span ng-if="product.userLocation==null" class="address">未知</span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                    </div>
+                    <div class="col col-center padding-normal-vertical text-right">
+                        <span class="mbpz mbpz-icon-readers counts"></span>
+                        <span ng-bind="(product.browseNumbe||0)" class="counts"></span>
+                        <span class="mbpz mbpz-icon-replies counts"></span>
+                        <span ng-bind="(product.replyNumber||0)" class="counts"></span>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
 
     </ion-content>
 </ion-view>

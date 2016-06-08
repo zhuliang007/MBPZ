@@ -28,7 +28,8 @@ angular.module('providers.config',[])
 
     /**图片资源配置*/
     $config.assets = {
-        qgxx:"qgxx.png"
+        qgxx:"qgxx.png",
+        defaultHead:"default-head.png"
     }
 
 
@@ -69,25 +70,29 @@ angular.module('providers.config',[])
             templateUrl:"templates/tabs/tabs-home.html",
             url:"/tabsHome/:token?",
             name:"tabs.tabsHome",
-            controller:"HomeCtrl"
+            controller:"HomeCtrl",
+            cache:false
         },
         tabsShop : {
             templateUrl:"templates/tabs/tabs-shop.html",
             url:"/tabsShop/:token?",
             name:"tabs.tabsShop",
-            controller:"ShopCtrl"
+            controller:"ShopCtrl",
+            cache:false
         },
         tabsMessage : {
             templateUrl:"templates/tabs/tabs-message.html",
             url:"/tabsMessage/:token?",
             name:"tabs.tabsMessage",
-            controller:"MessageCtrl"
+            controller:"MessageCtrl",
+            cache:false
         },
         tabsPersonal : {
             templateUrl:"templates/tabs/tabs-personal.html",
             url:"/tabsPersonal/:token?",
             name:"tabs.tabsPersonal",
-            controller:"PersonalCtrl"
+            controller:"PersonalCtrl",
+            cache:false
         }
 
     }

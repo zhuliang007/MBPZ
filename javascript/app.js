@@ -24,16 +24,17 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     url:$configProvider.controllers.tabs.url,
                     templateUrl:$configProvider.controllers.tabs.templateUrl,
                     abstract:$configProvider.controllers.tabs.abstract,
-                    controller:$configProvider.controllers.tabs.controller
+                    controller:$configProvider.controllers.tabs.controller,
                 })
                 .state($configProvider.controllers.tabsHome.name,{
                     url:$configProvider.controllers.tabsHome.url,
                     views:{
                         'tabs-home':{
                             templateUrl:$configProvider.controllers.tabsHome.templateUrl,
-                            controller:$configProvider.controllers.tabsHome.controller
+                            controller:$configProvider.controllers.tabsHome.controller,
                         }
-                    }
+                    },
+                    cache:$configProvider.controllers.tabsHome.cache
                 })
                 .state($configProvider.controllers.tabsShop.name,{
                     url:$configProvider.controllers.tabsShop.url,
@@ -42,7 +43,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                             templateUrl:$configProvider.controllers.tabsShop.templateUrl,
                             controller:$configProvider.controllers.tabsShop.controller
                         }
-                    }
+                    },
+                    cache:$configProvider.controllers.tabsShop.cache
                 })
                 .state($configProvider.controllers.tabsMessage.name,{
                     url:$configProvider.controllers.tabsMessage.url,
@@ -51,7 +53,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                             templateUrl:$configProvider.controllers.tabsMessage.templateUrl,
                             controller:$configProvider.controllers.tabsMessage.controller
                         }
-                    }
+                    },
+                    cache:$configProvider.controllers.tabsMessage.cache
                 })
                 .state($configProvider.controllers.tabsPersonal.name,{
                     url:$configProvider.controllers.tabsPersonal.url,
@@ -60,7 +63,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                             templateUrl:$configProvider.controllers.tabsPersonal.templateUrl,
                             controller:$configProvider.controllers.tabsPersonal.controller
                         }
-                    }
+                    },
+                    cache:$configProvider.controllers.tabsPersonal.cache
                 })
 
         }])

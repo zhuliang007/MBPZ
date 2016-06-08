@@ -18,19 +18,22 @@
     text-transform: none;
     text-rendering: auto;
     line-height: 1;
-    font-size: 24px!important;
 }
 .mbpz-icon-message:before { content: "\e601"; }
 .mbpz-icon-search:before { content: "\e605"; }
+.mbpz-icon-money:before { content: "\e60b"; }
 .mbpz-icon-jujia:before { content: "\e607"; }
 .mbpz-icon-meifu:before { content: "\e608"; }
 .mbpz-icon-home:before { content: "\e600"; }
 .mbpz-icon-shop-bag:before { content: "\e602"; }
 .mbpz-icon-muying:before { content: "\e609"; }
 .mbpz-icon-arrow-down:before { content: "\e606"; }
+.mbpz-icon-readers:before { content: "\e60c"; }
+.mbpz-icon-replies:before { content: "\e60d"; }
 .mbpz-icon-personal:before { content: "\e603"; }
 .mbpz-icon-plus:before { content: "\e604"; }
 .mbpz-icon-guanfang:before { content: "\e60a"; }
+.mbpz-icon-position:before { content: "\e60e"; }
 
 
 ion-content{
@@ -42,8 +45,13 @@ ion-content{
     background-image: none;
 }
 
+.mbpz-tabs .tabs + ion-nav-view{
+    padding-bottom: 50px;
+}
+
 .mbpz-tabs .tabs .icon{
     height: 28px;
+    font-size: 24px;
 }
 
 .mbpz-tabs .tab-item.tab-item-center{
@@ -107,15 +115,15 @@ ion-content{
     font-size: 14px!important;
 }
 
-.tabsHome ion-header-bar .button i.mbpz-icon-arrow-down{
-    font-size: 14px!important;
+.tabsHome ion-header-bar .button .mbpz{
+    font-size: 24px!important;
+    padding-top: 3px;
 }
 
 
 
 /**页面body部分*/
 /**首页*/
-/*home装饰*/
 .header-zs{
     height: 12px;
     background-image: url("../assets/half-circle.png");
@@ -204,17 +212,27 @@ ion-content{
     padding: 0px 20px;
 }
 
+.tabsInfinite>ion-spinner{
+    display: block!important;
+}
+
 /*卡片组合*/
 .card-group{
     position: relative;
     width: 100%;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .card-item-normal{
     position: relative;
     width: 100%;
     background-color: #FFFFFF;
+}
+
+.card-item-normal + .card-item-normal{
+    border-top: 1px solid #DDDDDD;
 }
 
 .card-item-normal .userNick{
@@ -236,8 +254,37 @@ ion-content{
     overflow: hidden;
     font-size: 14px;
     color: #666666;
-    padding: 5px 15px;
-    max-height: 50px;
+    padding: 0px 5px;
+    line-height: 20px;
+    max-height: 40px;
+}
+
+.card-item-normal span.mbpz{
+    font-size: 16px!important;
+}
+
+.card-item-normal span.price{
+    color: #FF4E72;
+}
+
+.card-item-normal span{
+    font-size: 16px;
+    padding-right: 5px;
+}
+
+.card-item-normal span.originalPrice{
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+.card-item-normal span.address{
+    color: #57B6E2;
+    font-size: 12px;
+}
+
+.card-item-normal span.counts{
+    color: #666666;
+    font-size: 12px;
 }
 
 
@@ -337,6 +384,17 @@ ion-content{
     padding-right: 5px!important;
 }
 
+
+.padding-big-top,
+.padding-big-vertical{
+    padding-top: 15px!important;
+}
+
+.padding-big-bottom,
+.padding-big-vertical{
+    padding-bottom: 15px!important;
+}
+
 .padding-smaller-left,
 .padding-smaller-horizontal{
     padding-left: 2px!important;
@@ -372,6 +430,10 @@ ion-content{
 /*border*/
 .border-right{
     border-right: 1px solid #DDDDDD;
+}
+
+.border-bottom{
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .border-radius-round{
