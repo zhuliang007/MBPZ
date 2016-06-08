@@ -14,6 +14,7 @@ angular.module('controllers.home',[])
         '$timeout',
         '$cache',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache){
+
             $rootScope.token = $stateParams.token;
 
             $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;

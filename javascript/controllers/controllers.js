@@ -8,4 +8,4 @@ angular.module('starter.controllers',[
     'controllers.personal',
     'controllers.shop',
     'controllers.start',
-    'controllers.index'])
+    'controllers.productDetail'])

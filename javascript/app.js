@@ -17,7 +17,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
             $stateProvider
                 .state($configProvider.controllers.index.name,{
                     url:$configProvider.controllers.index.url,
-                    templateUrl:$configProvider.controllers.index.templateUrl,
                     controller:$configProvider.controllers.index.controller
                 })
                 .state($configProvider.controllers.tabs.name,{
@@ -65,6 +64,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                         }
                     },
                     cache:$configProvider.controllers.tabsPersonal.cache
+                })
+                .state($configProvider.controllers.productDetail.name,{
+                    url:$configProvider.controllers.productDetail.url,
+                    templateUrl:$configProvider.controllers.productDetail.templateUrl,
+                    controller:$configProvider.controllers.productDetail.controller,
+                    cache:$configProvider.controllers.productDetail.cache,
                 })
 
         }])

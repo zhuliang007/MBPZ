@@ -2,11 +2,20 @@
  * Created by Administrator on 2016/6/7.
  */
 angular.module('controllers.start',[])
-    .controller('startCtrl',[
+    .controller('StartCtrl',[
         '$scope',
         '$console',
         '$config',
-        function($scope,$console,$config){
+        '$state',
+        '$rootScope',
+        '$state',
+        '$stateParams',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams){
+            if($stateParams.token!=undefined){
+                $rootScope.token = $stateParams.token;
+                $state.go($config.controllers.tabsHome.name,{token:$rootScope.token});
+            }
+
             $scope.showMsg = function(msg){
                 $console.show(msg);
             }
@@ -29,5 +38,11 @@ angular.module('controllers.start',[])
             }
 
             $scope.defaultHead = $config.getImageUrlDebug() + $config.assets.defaultHead;
+
+
+            $scope.showProduct = function(product,type){
+                var params = {token:$rootScope.token,type:type,product:angular.toJson(product)};
+                $state.go($config.controllers.productDetail.name,params)
+            }
         }
     ])
