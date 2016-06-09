@@ -288,6 +288,9 @@ ion-content{
 }
 
 /**productDetail页面样式*/
+.productDetail ion-content>.scroll{
+    padding-bottom: 10px;
+}
 .productDetail .header{
     position: absolute;
     display: inline-block;
@@ -389,6 +392,62 @@ ion-content{
     font-size: 20px;
     padding-right: 5px;
 }
+
+.replyBody .list{
+    margin-top: 10px;
+}
+
+.replyBody .userNick,
+.replyBody .content{
+    color: #333333;
+    font-size: 14px;
+}
+
+.replyBody .publicTime{
+    color: #999999;
+    font-size: 12px;
+}
+
+.userCtrl + ion-content{
+    margin-bottom: 48px;
+}
+
+.userCtrl{
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 999;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: box;
+    display: -webkit-box;
+    padding-top: 0px;
+}
+.userCtrl>div{
+    box-flex:1;
+    -webkit-box-flex: 1;
+    line-height: 48px;
+    font-size: 14px;
+    text-align: left;
+    padding: 0px 10px;
+}
+.userCtrl>div>.mbpz,
+.userCtrl>div>.icon{
+    font-size: 16px;
+}
+
+.userCtrl>div.star{
+    color: #FFD33E;
+}
+.userCtrl>div.submit{
+    box-flex:1.5;
+    -webkit-box-flex: 1.5;
+    background: #FF4E72;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+}
+
 
 /**轮播*/
 .headSliders .slider-pager-page{

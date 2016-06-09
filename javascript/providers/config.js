@@ -37,7 +37,8 @@ angular.module('providers.config',[])
         $config.cmds = {
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
-            details:"product/details"
+            details:"product/details",
+            replyList:"product/reply/list"
 
         }
 
