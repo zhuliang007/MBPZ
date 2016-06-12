@@ -71,5 +71,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.productDetail.controller,
                     cache:$configProvider.controllers.productDetail.cache,
                 })
+                .state($configProvider.controllers.productListByType.name,{
+                    url:$configProvider.controllers.productListByType.url,
+                    templateUrl:$configProvider.controllers.productListByType.templateUrl,
+                    controller:$configProvider.controllers.productListByType.controller,
+                    cache:$configProvider.controllers.productListByType.cache,
+                })
 
         }])

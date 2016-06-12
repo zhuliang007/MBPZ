@@ -38,8 +38,9 @@ angular.module('providers.config',[])
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
             details:"product/details",
-            replyList:"product/reply/list"
-
+            replyList:"product/reply/list",
+            codeInfo:"system/codeInfo/getAll",
+            recommendationProduct:"market/home/recommendation"
         }
 
         $config.types = {
@@ -100,6 +101,13 @@ angular.module('providers.config',[])
                 url:"/productDetail/:token?:type:id",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
+                cache:false
+            },
+            productListByType:{
+                templateUrl:"templates/home/productListByType.html",
+                url:"/productListByType/:token?:type",
+                name:"productListByType",
+                controller:"ProductListByTypeCtrl",
                 cache:false
             }
 

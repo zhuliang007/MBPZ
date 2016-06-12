@@ -94,28 +94,37 @@ ion-content{
 }
 
 /*页面头部*/
-.tabsHome ion-header-bar{
+.tabsHome ion-header-bar,
+.productListByType ion-header-bar{
     background-color: #FF4E72;
     color: #FFFFFF;
     background-image:none;
 }
 
-.tabsHome ion-header-bar .title{
+.tabsHome ion-header-bar .title,
+.productListByType ion-header-bar .title{
     color: #FFFFFF;
     font-style: italic;
     font-weight: 700;
     font-size: 18px;
 }
 
+.productListByType ion-header-bar .title{
+    font-style: normal;
+}
+
 .tabsHome ion-header-bar .button,
-.tabsHome ion-header-bar .button.activated{
+.tabsHome ion-header-bar .button.activated,
+.productListByType ion-header-bar .button,
+.productListByType ion-header-bar .button.activated{
     background: #FF4E72;
     color: #FFFFFF;
     border:none;
     font-size: 14px!important;
 }
 
-.tabsHome ion-header-bar .button .mbpz{
+.tabsHome ion-header-bar .button .mbpz
+.productListByType ion-header-bar .button .icon{
     font-size: 24px!important;
     padding-top: 3px;
 }
@@ -225,6 +234,11 @@ ion-content{
     border-bottom: 1px solid #DDDDDD;
 }
 
+.card-per{
+    display: inline-block;
+    border: none;
+}
+
 .card-item-normal{
     position: relative;
     width: 100%;
@@ -285,6 +299,25 @@ ion-content{
 .card-item-normal span.counts{
     color: #666666;
     font-size: 12px;
+}
+
+.card-item-per{
+    float: left;
+    width: 50%;
+    height: 200px;
+    margin-top: 10px;
+}
+
+/*偶数*/
+.card-item-per:nth-child(even){
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+/*奇数*/
+.card-item-per:nth-child(odd){
+    padding-left: 10px;
+    padding-right: 5px;
 }
 
 /**productDetail页面样式*/

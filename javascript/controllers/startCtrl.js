@@ -46,9 +46,17 @@ angular.module('controllers.start',[])
                 var params = {token:$rootScope.token,type:type,id:id};
                 $state.go($config.controllers.productDetail.name,params)
             }
-            
+
+            //联系卖家
             $scope.contactSeller = function (seller) {
 
             }
+
+            $scope.showProductListByType = function(type){
+                var params = {token:$rootScope.token,type:type};
+                $state.go($config.controllers.productListByType.name,params)
+            }
+
+
         }
     ])

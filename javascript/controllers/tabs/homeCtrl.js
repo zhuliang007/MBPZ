@@ -100,7 +100,7 @@ angular.module('controllers.home',[])
             var pageNo = 0;
             function getProductHome(){
                 var data = {
-                    "cmd": "product/getPage",
+                    "cmd": $config.cmds.getPage,
                     "parameters":{
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo,
