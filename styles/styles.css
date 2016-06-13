@@ -123,7 +123,7 @@ ion-content{
     font-size: 14px!important;
 }
 
-.tabsHome ion-header-bar .button .mbpz
+.tabsHome ion-header-bar .button .mbpz,
 .productListByType ion-header-bar .button .icon{
     font-size: 24px!important;
     padding-top: 3px;
@@ -304,8 +304,46 @@ ion-content{
 .card-item-per{
     float: left;
     width: 50%;
-    height: 200px;
     margin-top: 10px;
+    position: relative;
+}
+
+.card-item-per>div{
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.card-item-per .title{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+    color: #333333;
+    font-size: 14px;
+}
+
+.card-item-per .price{
+    color: #FF4E72;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-item-per .originalPrice{
+    color: #999999;
+    text-decoration: line-through;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.card-item-per .address{
+    color: #999999;
+    font-size: 12px;
+}
+
+.card-item-per .publicTime{
+    color: #999999;
+    font-size: 12px;
 }
 
 /*偶数*/
@@ -318,6 +356,15 @@ ion-content{
 .card-item-per:nth-child(odd){
     padding-left: 10px;
     padding-right: 5px;
+}
+
+/**productListByType*/
+.productListByType .filterGroup{
+    padding: 10px;
+    background: yellow;
+    position: relative;
+    top: 44px;
+    z-index: 999;
 }
 
 /**productDetail页面样式*/
@@ -643,4 +690,21 @@ ion-content{
 /**其他基础样式*/
 .overflow-hidden{
     overflow: hidden;
+}
+
+.text-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notFoundList{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: #666666;
+    font-size: 16px;
+    top: calc(50% - 10px);
+    top: -webkit-calc(50% - 10px);
+    z-index:10;
 }

@@ -70,6 +70,10 @@ angular.module('controllers.productDetail',[])
                     .then(function(result){
                         $console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.response.data.totalPages == 0){
+                            $scope.infiniteFlag = false;
+                            return ;
+                        }
                         var items = result.response.data.content;
                         if(items==null||items.length==0){
                             $scope.infiniteFlag = false;
