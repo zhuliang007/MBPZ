@@ -57,6 +57,5 @@ angular.module('controllers.start',[])
                 $state.go($config.controllers.productListByType.name,params)
             }
 
-
         }
     ])

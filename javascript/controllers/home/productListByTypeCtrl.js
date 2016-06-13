@@ -10,14 +10,20 @@ angular.module('controllers.productListByTypeCtrl',[])
     '$stateParams',
     '$productType',
     '$httpService',
-    function($scope,$config,$console,$state,$stateParams,$productType,$httpService){
-        var numberOfPerPage = 10;
+    '$ionicPopover',
+    function($scope,$config,$console,$state,$stateParams,$productType,$httpService,$ionicPopover){
+        document.body.classList.remove('platform-ios');
+        document.body.classList.remove('platform-android');
+        document.body.classList.add('platform-ios');
+
+        var numberOfPerPage = 5;
         var pageNo = 0;
         $scope.getChildTypeCode = {};
         $scope.productList = [];
-        $scope.infiniteFlag = false;
+        $scope.filterFlag = true;
+        $scope.infiniteFlag = true;
         $scope.productList = null;
-        $scope.filterObjcet = {
+        $scope.filterObject = {
             parentClassify :'',
             secondClassify : '',
             city : '',
@@ -30,20 +36,29 @@ angular.module('controllers.productListByTypeCtrl',[])
                 .then(function(){
                     switch (parseInt($stateParams.type,10)){
                         case 2:
-                            $scope.filterObjcet.parentClassify = 'BBYP';
+                            $scope.filterObject.parentClassify = 'BBYP';
+                            $scope.filterObject.secondClassify = 'BBYP';
+                            $scope.childCode= 'BBYP';
+
                             break;
                         case 3:
-                            $scope.filterObjcet.parentClassify = 'MMYP';
+                            $scope.filterObject.parentClassify = 'MMYP';
+                            $scope.filterObject.secondClassify = 'MMYP';
+                            $scope.childCode = 'MMYP';
                             break;
                         case 4:
-                            $scope.filterObjcet.parentClassify = 'JJYP';
+                            $scope.filterObject.parentClassify = 'JJYP';
+                            $scope.filterObject.secondClassify = 'JJYP';
+                            $scope.childCode = 'JJYP';
                             break;
                     }
                     if(parseInt($stateParams.type,10)==1){
                         $scope.pageTitle = '官方推荐';
+                        $scope.filterFlag = false
                     }
                     else{
-                        $scope.getChildTypeCode = $productType.getChildTypeCode($scope.filterObjcet.parentClassify);
+                        $scope.getChildTypeCode = $productType.getChildTypeCode($scope.filterObject.parentClassify);
+                        $console.show($scope.getChildTypeCode);
                         $scope.pageTitle = $scope.getChildTypeCode.name;
                     }
                 });
@@ -85,14 +100,15 @@ angular.module('controllers.productListByTypeCtrl',[])
         }
 
         function getOtherProducts(){
+            $console.show($scope.filterObject);
             var data = {
                 "cmd": $config.cmds.getPage,
                 "parameters":{
-                    "parentClassify":$scope.filterObjcet.parentClassify,
-                    "secondClassify": $scope.filterObjcet.secondClassify,
-                    "city":$scope.filterObjcet.city,
-                    "beginPrice":$scope.filterObjcet.beginPrice,
-                    "endPrice": $scope.filterObjcet.endPrice,
+                    "parentClassify":$scope.filterObject.parentClassify,
+                    "secondClassify": $scope.filterObject.secondClassify==$scope.childCode?'':$scope.filterObject.secondClassify,
+                    "city":$scope.filterObject.city,
+                    "beginPrice":$scope.filterObject.beginPrice || null,
+                    "endPrice": $scope.filterObject.endPrice || null,
                     "numberOfPerPage":numberOfPerPage,
                     "pageNo":pageNo,
                     "type":0
@@ -138,18 +154,48 @@ angular.module('controllers.productListByTypeCtrl',[])
                     getRecommendationProducts();
                     break;
                 case 2:
-                    $scope.filterObjcet.parentClassify = 'BBYP';
+                    $scope.filterObject.parentClassify = 'BBYP';
+                    $scope.childCode = 'BBYP';
                     getOtherProducts();
                     break;
                 case 3:
-                    $scope.filterObjcet.parentClassify = 'MMYP';
+                    $scope.filterObject.parentClassify = 'MMYP';
+                    $scope.childCode = 'MMYP';
                     getOtherProducts();
                     break;
                 case 4:
-                    $scope.filterObjcet.parentClassify = 'JJYP';
+                    $scope.filterObject.parentClassify = 'JJYP';
+                    $scope.childCode = 'JJYP';
                     getOtherProducts();
                     break;
             }
         };
+
+        $ionicPopover.fromTemplateUrl($config.popovers.filterType.templateUrl,{
+            scope:$scope
+        }).then(function(popover){
+            $scope.filterTypePopover = popover;
+        })
+
+        $scope.openPopover = function($event,popName){
+            $scope[popName].show($event);
+        }
+
+        $scope.closePopover = function(popName){
+            $scope[popName].hide();
+        }
+
+        $scope.showFilter = function(){
+            $scope.productList = [];
+            pageNo = 0;
+            $scope.infiniteFlag = true;
+            $scope.closePopover('filterTypePopover');
+            //getOtherProducts();
+        }
+
+        $scope.$on('$stateChangeSuccess', function() {
+            //$scope.loadMore();
+        });
+
     }
 ])

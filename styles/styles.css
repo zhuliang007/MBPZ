@@ -359,14 +359,54 @@ ion-content{
 }
 
 /**productListByType*/
+.productListByType ion-content.leave-top{
+    top: 85px;
+}
+
 .productListByType .filterGroup{
-    padding: 10px;
-    background: yellow;
+    background: #FFFFFF;
     position: relative;
     top: 44px;
     z-index: 999;
+    display: box;
+    display: -webkit-box;
+    border-bottom: 1px solid #DDDDDD;
+    padding: 10px 0px;
 }
 
+.productListByType .filterItem{
+    box-flex : 1;
+    -webkit-box-flex: 1;
+    text-align: center;
+}
+
+.productListByType .filterItem>.mbpz{
+    color: #999999;
+}
+
+.filterPopover{
+    width: 100%;
+    left: 0px!important;
+    border-radius: 0px!important;
+}
+
+.filterPopover ion-content{
+    background-color: #FFFFFF;
+}
+
+.filterPopover .popover-arrow{
+    display: none;
+}
+
+.filterPopover .list>.item{
+    border-left: none;
+    border-right: none;
+}
+
+.filterPopover .list>.item .item-content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 /**productDetail页面样式*/
 .productDetail ion-content>.scroll{
     padding-bottom: 10px;
@@ -425,10 +465,10 @@ ion-content{
 }
 
 .productDetailBody span.originalPrice{
-     font-size: 14px;
-     color: #999999;
-     text-decoration: line-through;
- }
+    font-size: 14px;
+    color: #999999;
+    text-decoration: line-through;
+}
 
 .productDetailBody span.freight{
     font-size: 12px;

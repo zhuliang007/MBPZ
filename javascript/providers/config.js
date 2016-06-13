@@ -110,7 +110,13 @@ angular.module('providers.config',[])
                 controller:"ProductListByTypeCtrl",
                 cache:false
             }
+        }
 
+        /*popover配置*/
+        $config.popovers = {
+            filterType: {
+                templateUrl:"templates/popover/filterType.html"
+            }
         }
 
         $config.$get = function(){

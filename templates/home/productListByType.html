@@ -5,11 +5,24 @@
         </div>
         <h1 class="title" ng-bind="pageTitle"></h1>
     </ion-header-bar>
-    <div class="filterGroup"></div>
+    <div ng-if="filterFlag" class="filterGroup">
+        <div class="filterItem">
+            城市<span class="mbpz mbpz-icon-arrow-down"></span>
+        </div>
+        <div class="filterItem" ng-click="openPopover($event,'filterTypePopover')">
+            分类<span class="mbpz mbpz-icon-arrow-down"></span>
+        </div>
+        <div class="filterItem">
+            智能排序<span class="mbpz mbpz-icon-arrow-down"></span>
+        </div>
+        <div class="filterItem">
+            筛选<span class="mbpz mbpz-icon-arrow-down"></span>
+        </div>
+    </div>
     <div ng-if="productList == null" class="notFoundList">
         暂无数据
     </div>
-    <ion-content>
+    <ion-content ng-class="{true:'leave-top',false:''}[filterFlag]">
         <div ng-if="productList !=null && productList.length != 0" class="card-group card-per">
             <div class="card-item-per" ng-repeat="product in productList track by $index">
                 <div class="card-item-per-body">
