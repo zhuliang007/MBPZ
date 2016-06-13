@@ -40,7 +40,8 @@ angular.module('providers.config',[])
             details:"product/details",
             replyList:"product/reply/list",
             codeInfo:"system/codeInfo/getAll",
-            recommendationProduct:"market/home/recommendation"
+            recommendationProduct:"market/home/recommendation",
+            getScreen:"market/home/getScreen"
         }
 
         $config.types = {
@@ -116,6 +117,9 @@ angular.module('providers.config',[])
         $config.popovers = {
             filterType: {
                 templateUrl:"templates/popover/filterType.html"
+            },
+            filterOrder:{
+                templateUrl:"templates/popover/filterOrder.html"
             }
         }
 
