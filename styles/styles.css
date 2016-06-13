@@ -749,3 +749,7 @@ ion-content{
     top: -webkit-calc(50% - 10px);
     z-index:10;
 }
+
+.item-divider{
+    min-height: 10px;
+}
