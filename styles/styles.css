@@ -770,7 +770,7 @@ ion-content{
     color:white;
 }
 
-.feedback-content,.help-content,.agreement-content{
+.feedback-content,.help-content,.agreement-content,.wallet-content{
     background: white;
 }
 .feedback-input{
@@ -808,4 +808,33 @@ ion-content{
 }
 .agreementDescribe{
     font-size:16px;margin: 0px;text-align: left;font-weight: bold;
+}
+
+.walletDiv{
+    background: #FF4E72;
+
+}
+.walletDiv p{
+    text-align:center;
+    font-size: 16px;
+    color:white;
+}
+.wallet-content{
+    padding:0px;
+    margin:0px;
+}
+.walletDiv:first-child{
+    padding-top:20px;
+}
+
+.walletDiv:last-child{
+    padding-bottom:20px;
+}
+
+.withdrawalSty{
+    text-align: center;
+    border:0;
+    padding-top:40px;
+    font-size:14px;
+    color:blue;
 }

@@ -109,6 +109,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.personalSpecification.templateUrl,
                     cache:$configProvider.controllers.personalSpecification.cache,
                 })
+                .state($configProvider.controllers.myCenterWallet.name,{
+                    url:$configProvider.controllers.myCenterWallet.url,
+                    templateUrl:$configProvider.controllers.myCenterWallet.templateUrl,
+                    controller:$configProvider.controllers.myCenterWallet.controller,
+                    cache:$configProvider.controllers.myCenterWallet.cache,
+                })
 
 
 

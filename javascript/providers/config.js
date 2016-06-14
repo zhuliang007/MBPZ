@@ -148,7 +148,15 @@ angular.module('providers.config',[])
                 url:"/specification/:token?",
                 name:"personalSpecification",
                 cache:false
+            },
+            myCenterWallet:{
+                templateUrl:"templates/personal/wallet/personal-wallet.html",
+                    url:"/wallet/:token?",
+                    name:"myCenterWallet",
+                    controller:"WalletCtrl",
+                    cache:false
             }
+
 
         }
 
