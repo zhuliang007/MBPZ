@@ -57,5 +57,13 @@ angular.module('controllers.start',[])
                 $state.go($config.controllers.productListByType.name,params)
             }
 
+            $scope.myCenterSetup = function(_value){
+                $state.go(_value)
+            }
+
+            $scope.backupDown = function(_value){
+                $state.go(_value)
+            }
+
         }
     ])

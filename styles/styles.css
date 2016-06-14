@@ -753,3 +753,31 @@ ion-content{
 .item-divider{
     min-height: 10px;
 }
+
+.personal-setup ion-header-bar{
+    background-color: #FF4E72;
+}
+.personal-setup .button{
+    background-color: #FF4E72;
+}
+
+.personal-setup .button:hover{
+    background-color: #FF4E72;
+    border:0;
+}
+
+.personal-setup .ion-ios-arrow-back,.title{
+    color:white;
+}
+
+.feedback-content{
+    background: white;
+}
+.feedback-input{
+    padding:10px;
+    height: 120px;
+    border:1px solid #CCCCCC;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+}

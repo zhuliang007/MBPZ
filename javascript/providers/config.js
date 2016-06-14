@@ -110,6 +110,20 @@ angular.module('providers.config',[])
                 name:"productListByType",
                 controller:"ProductListByTypeCtrl",
                 cache:false
+            },
+            myCenterSetup:{
+                templateUrl:"templates/personal/personal-setup.html",
+                url:"/personalSetup/:token?",
+                name:"myCenterSetup",
+                controller:"MyCenterSetupCtrl",
+                cache:false
+            },
+            personalFeedback:{
+                templateUrl:"templates/personal/personal-feedback.html",
+                url:"/feedback/:token?",
+                name:"personalFeedback",
+                controller:"FeedbackCtrl",
+                cache:false
             }
         }
 
