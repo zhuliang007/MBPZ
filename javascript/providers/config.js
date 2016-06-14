@@ -119,32 +119,32 @@ angular.module('providers.config',[])
                 cache:false
             },
             personalFeedback:{
-                templateUrl:"templates/personal/personal-feedback.html",
+                templateUrl:"templates/personal/setup/personal-feedback.html",
                 url:"/feedback/:token?",
                 name:"personalFeedback",
                 controller:"FeedbackCtrl",
                 cache:false
             },
             personalHelps:{
-                templateUrl:"templates/personal/personal-help.html",
+                templateUrl:"templates/personal/setup/personal-help.html",
                 url:"/help/:token?",
                 name:"personalHelp",
                 cache:false
             },
             personalAgreement:{
-                templateUrl:"templates/personal/personal-agreement.html",
+                templateUrl:"templates/personal/setup/personal-agreement.html",
                 url:"/aggreement/:token?",
                 name:"personalAgreement",
                 cache:false
             },
             personalTerms:{
-                templateUrl:"templates/personal/personal-terms.html",
+                templateUrl:"templates/personal/setup/personal-terms.html",
                 url:"/terms/:token?",
                 name:"personalTerms",
                 cache:false
             },
             personalSpecification:{
-                templateUrl:"templates/personal/personal-specification.html",
+                templateUrl:"templates/personal/setup/personal-specification.html",
                 url:"/specification/:token?",
                 name:"personalSpecification",
                 cache:false
