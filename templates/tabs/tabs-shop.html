@@ -1,5 +1,60 @@
-<ion-view>
-    <ion-content>
-        shop
+<ion-view class="tabsShop">
+    <ion-header-bar align-title="center">
+        <h1 class="title">求购列表</h1>
+        <!--<div class="buttons">
+            <button class="button" ng-click="showMsg('搜索')"><i class="mbpz mbpz-icon-search"></i></button>
+        </div>-->
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="card-group">
+            <div class="card-item-normal" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,1)">
+                <div class="row padding-none-horizontal padding-normal-vertical">
+                    <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
+                        <div class="col col-75 col-offset-10 padding-none-vertical">
+                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                        </div>
+                    </div>
+                    <div class="col col-center padding-none-vertical padding-normal-horizontal">
+                        <div ng-bind="product.publicUser.nickName" class="userNick"></div>
+                        <div ng-bind="parseTime(product.publicDate)" class="publicTime"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal" ng-if="checkProductImages(product.productImageList).length !=0">
+                    <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
+                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal">
+                    <div class="col col-center padding-none-vertical">
+                        <div class="productTitle" ng-bind="product.title"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal">
+                    <div class="col col-center padding-none-vertical">
+                        <div class="productContent" ng-bind="product.content"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal padding-none-vertical publishLocationGroup">
+                    <div class="col col-center padding-normal-vertical">
+                        <span class="mbpz mbpz-icon-position address"></span>
+                        <span ng-if="product.userLocation==null" class="address">未知</span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                    </div>
+                    <div class="col col-center padding-normal-vertical text-right">
+                        <span class="mbpz mbpz-icon-readers counts"></span>
+                        <span ng-bind="(product.browseNumber||0)" class="counts"></span>
+                        <span class="mbpz mbpz-icon-replies counts"></span>
+                        <span ng-bind="(product.replyNumber||0)" class="counts"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>

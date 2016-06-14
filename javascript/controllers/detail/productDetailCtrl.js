@@ -15,7 +15,7 @@ angular.module('controllers.productDetail',[])
         function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate){
             $rootScope.token = $stateParams.token;
             $scope.productType = $stateParams.type;
-            var id = $stateParams.id
+            var id = $stateParams.id;
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
 
             getProductDetail();
@@ -47,14 +47,10 @@ angular.module('controllers.productDetail',[])
                         })
                     })
             }
-
-
-            var numberOfPerPage = 1;
+            var numberOfPerPage = 10;
             var pageNo = 0;
             $scope.replyList = []
             $scope.infiniteFlag = true;
-
-
             function getReplyList(){
                 var data = {
                     "cmd": $config.cmds.replyList,
@@ -62,7 +58,7 @@ angular.module('controllers.productDetail',[])
                         "productId":id,
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo,
-                        "type": $scope.productType
+                        "replyType": $scope.productType
                     }
                 }
 

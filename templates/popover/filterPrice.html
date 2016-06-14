@@ -1,0 +1,27 @@
+<ion-popover-view class="filterPopover">
+    <ion-content class="padding-normal-horizontal" has-bouncing="true" overflow-scroll="false">
+        <div class="priceTitle">价格区间</div>
+        <div class="row row-no-padding margin-normal-top">
+            <div class="col col-center text-center priceTitle">
+                开始区间
+            </div>
+            <div class="col col-33 col-center padding-small-horizontal">
+                <div class="priceInput">
+                    <input type="number" ng-model="priceObject.beginPrice">
+                </div>
+            </div>
+            <div class="col col-center text-center priceTitle">
+                结束区间
+            </div>
+            <div class="col col-33 col-center padding-small-horizontal">
+                <div class="priceInput">
+                    <input type="number"  ng-model="priceObject.endPrice">
+                </div>
+            </div>
+        </div>
+        <div class="text-right margin-normal-top">
+            <button type="button" class="priceButton" ng-click="resetPrice()">重置</button>
+            <button type="button" class="priceButton" ng-disabled="checkPrice()" ng-click="filterPrice()">确定</button>
+        </div>
+    </ion-content>
+</ion-popover-view>

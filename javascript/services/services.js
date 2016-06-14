@@ -4,4 +4,5 @@
 angular.module('starter.services',[
     'services.http',
     'services.cache',
-    'services.productType'])
+    'services.productType',
+    'services.city'])

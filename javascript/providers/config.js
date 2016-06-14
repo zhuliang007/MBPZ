@@ -41,7 +41,9 @@ angular.module('providers.config',[])
             replyList:"product/reply/list",
             codeInfo:"system/codeInfo/getAll",
             recommendationProduct:"market/home/recommendation",
-            getScreen:"market/home/getScreen"
+            getScreen:"market/home/getScreen",
+            getHotCityList:"market/home/getHotCityList",
+            getAllCityList:"market/home/getAllCityList"
         }
 
         $config.types = {
@@ -167,6 +169,17 @@ angular.module('providers.config',[])
             },
             filterOrder:{
                 templateUrl:"templates/popover/filterOrder.html"
+            },
+            filterPrice:{
+                templateUrl:"templates/popover/filterPrice.html"
+            }
+        }
+
+        /*model配置*/
+        $config.modals = {
+            city:{
+                templateUrl:"templates/modal/city.html",
+                animation:"slide-in-up"
             }
         }
 

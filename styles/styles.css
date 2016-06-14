@@ -40,6 +40,10 @@ ion-content{
     background-color: #F5F5F5;
 }
 
+.cityModel ion-content{
+    background-color: #FFFFFF;
+}
+
 /*Tabs*/
 .mbpz-tabs .tabs{
     background-image: none;
@@ -76,6 +80,7 @@ ion-content{
     border: 2px solid #FFFFFF;
     background-color: #FFFFFF;
     border-radius: 50%;
+    padding-left: 1px;
 }
 
 .mbpz-tabs .tabs{
@@ -101,6 +106,14 @@ ion-content{
     background-image:none;
 }
 
+.tabsShop ion-header-bar,
+.productDetail ion-header-bar,
+.cityModel ion-header-bar{
+    background-color: #F5F5F5;
+    background-image:none;
+    color: #333333;
+}
+
 .tabsHome ion-header-bar .title,
 .productListByType ion-header-bar .title{
     color: #FFFFFF;
@@ -113,6 +126,13 @@ ion-content{
     font-style: normal;
 }
 
+.tabsShop ion-header-bar .title,
+.productDetail ion-header-bar .title{
+    color: #333333;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 .tabsHome ion-header-bar .button,
 .tabsHome ion-header-bar .button.activated,
 .productListByType ion-header-bar .button,
@@ -123,12 +143,32 @@ ion-content{
     font-size: 14px!important;
 }
 
+
+.cityModel ion-header-bar .button,
+.cityModel ion-header-bar .button.activated{
+    background: #FFFFFF;
+    color: #333333;
+    border:none;
+}
+
 .tabsHome ion-header-bar .button .mbpz,
 .productListByType ion-header-bar .button .icon{
     font-size: 24px!important;
     padding-top: 3px;
 }
 
+.cityModel ion-header-bar .cityInput{
+    width: 95%;
+    overflow: hidden;
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+}
+
+.cityModel ion-header-bar .cityInput>input{
+    width: 100%;
+    padding: 5px 10px;
+    height: 30px;
+}
 
 
 /**页面body部分*/
@@ -225,6 +265,35 @@ ion-content{
     display: block!important;
 }
 
+/*城市选择*/
+.cityModel .cityItem{
+    color: #999999;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.cityModel .cityItem.activated{
+    background-color: #F5F5F5;
+}
+
+.cityModel .cityItem.cityTarget{
+    padding: 5px 10px;
+    background-color: #DFDFDF;
+}
+
+.cityModel .cityItem .city{
+    color: #333333;
+    padding-right: 10px;
+}
+
+.cityModel .cityDivide + .cityDivide{
+    border-top: 1px solid #DDDDDD;
+}
+
+.cityModel .list>ion-list + ion-list>.list{
+    border-top: 1px solid #DDDDDD;
+}
+
 /*卡片组合*/
 .card-group{
     position: relative;
@@ -249,9 +318,14 @@ ion-content{
     border-top: 1px solid #DDDDDD;
 }
 
+.tabsShop .card-item-normal + .card-item-normal{
+    border-top: none;
+    margin-top: 10px;
+}
+
 .card-item-normal .userNick{
     font-size: 14px;
-    color: #666666;
+    color: #333333;
 }
 
 .card-item-normal .publicTime{
@@ -271,6 +345,20 @@ ion-content{
     padding: 0px 5px;
     line-height: 20px;
     max-height: 40px;
+}
+
+.tabsShop .card-item-normal .productTitle{
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabsShop .card-item-normal .productContent{
+    color: #999999;
+    padding-bottom: 10px;
+    max-height: 50px;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .card-item-normal span.mbpz{
@@ -381,6 +469,10 @@ ion-content{
     font-size: 12px;
 }
 
+.productListByType .filterItem + .filterItem{
+    border-left: 1px solid #DDDDDD;
+}
+
 .productListByType .filterItem>.mbpz{
     color: #999999;
 }
@@ -408,10 +500,53 @@ ion-content{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.filterPopover .priceTitle{
+    color: #666666;
+    font-size: 12px;
+}
+
+.filterPopover .priceInput{
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 7px;
+}
+
+.filterPopover .priceInput>input{
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    padding: 5px;
+    background-color: #F5F5F5;
+    color: #666666;
+}
+
+.filterPopover .priceButton{
+    border: 1px solid #DDDDDD;
+    border-radius: 7px;
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #F5F5F5;
+    color: #666666;
+}
+
+.filterPopover .priceButton[disabled]{
+    color: #999999;
+}
+
+.filterPopover .priceButton + .priceButton{
+    margin-left: 10px;
+}
+
 /**productDetail页面样式*/
 .productDetail ion-content>.scroll{
     padding-bottom: 10px;
 }
+
+.productDetail ion-header-bar + ion-content{
+    margin-top: 41px;
+}
+
 .productDetail .header{
     position: absolute;
     display: inline-block;
@@ -452,7 +587,9 @@ ion-content{
     line-height: 20px;
     color: #666666;
 }
-.productDetailBody span.recommoned{
+
+.productDetailBody span.recommoned,
+.replyBody span.recommoned{
     color: #FFFFFF;
     background: #FF4E72;
     border-radius: 7px;
@@ -522,6 +659,7 @@ ion-content{
 .replyBody .content{
     color: #333333;
     font-size: 14px;
+    white-space:normal;
 }
 
 .replyBody .publicTime{
@@ -529,7 +667,11 @@ ion-content{
     font-size: 12px;
 }
 
-.userCtrl + ion-content{
+.replyBody .replyRecommoned + .replyNormal{
+    margin-top: 10px;
+}
+
+.productDetail ion-content{
     margin-bottom: 48px;
 }
 

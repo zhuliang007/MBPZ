@@ -67,6 +67,34 @@ angular.module('services.productType',[])
             return childTypeCode;
         }
 
+        $productType.setFilterOrderTypes = function(){
+            var deferred = $q.defer();
+
+            if($productType.Classify == null || $productType.Classify == undefined){
+                $productType.Classify= {}
+                var data = {
+                    "cmd": $config.cmds.getScreen,
+                    "parameters":{
+                        "typeCode":"market_product_type",
+                    }
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $productType.Classify.intelligentClassifyList = result.response.data.intelligentClassify;
+                        $productType.Classify.priceClassifyList = result.response.data.priceClassify;
+                        deferred.resolve();
+                    },function(error){
+                        deferred.reject(error);
+                    })
+            }
+            else{
+                deferred.resolve();
+            }
+            return deferred.promise;
+
+        }
+
 
         return $productType;
 }])
