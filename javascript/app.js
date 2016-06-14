@@ -77,5 +77,17 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.productListByType.controller,
                     cache:$configProvider.controllers.productListByType.cache,
                 })
+                .state($configProvider.controllers.myCenterSetup.name,{
+                    url:$configProvider.controllers.myCenterSetup.url,
+                    templateUrl:$configProvider.controllers.myCenterSetup.templateUrl,
+                    controller:$configProvider.controllers.myCenterSetup.controller,
+                    cache:$configProvider.controllers.myCenterSetup.cache,
+                })
+                .state($configProvider.controllers.personalFeedback.name,{
+                    url:$configProvider.controllers.personalFeedback.url,
+                    templateUrl:$configProvider.controllers.personalFeedback.templateUrl,
+                    controller:$configProvider.controllers.personalFeedback.controller,
+                    cache:$configProvider.controllers.personalFeedback.cache,
+                })
 
         }])
