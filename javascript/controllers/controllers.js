@@ -11,4 +11,4 @@ angular.module('starter.controllers',[
     'controllers.productDetail',
     'controllers.productListByTypeCtrl',
     'controllers.myCenterSetupCtrl',
-    'controllers.FeedbackCtrl'])
+    'controllers.feedbackCtrl'])

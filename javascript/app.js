@@ -89,5 +89,28 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.personalFeedback.controller,
                     cache:$configProvider.controllers.personalFeedback.cache,
                 })
+                .state($configProvider.controllers.personalHelps.name,{
+                    url:$configProvider.controllers.personalHelps.url,
+                    templateUrl:$configProvider.controllers.personalHelps.templateUrl,
+                    cache:$configProvider.controllers.personalHelps.cache,
+                })
+                .state($configProvider.controllers.personalAgreement.name,{
+                    url:$configProvider.controllers.personalAgreement.url,
+                    templateUrl:$configProvider.controllers.personalAgreement.templateUrl,
+                    cache:$configProvider.controllers.personalAgreement.cache,
+                })
+                .state($configProvider.controllers.personalTerms.name,{
+                    url:$configProvider.controllers.personalTerms.url,
+                    templateUrl:$configProvider.controllers.personalTerms.templateUrl,
+                    cache:$configProvider.controllers.personalTerms.cache,
+                })
+                .state($configProvider.controllers.personalSpecification.name,{
+                    url:$configProvider.controllers.personalSpecification.url,
+                    templateUrl:$configProvider.controllers.personalSpecification.templateUrl,
+                    cache:$configProvider.controllers.personalSpecification.cache,
+                })
+
+
+
 
         }])
