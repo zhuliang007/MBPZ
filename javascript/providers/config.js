@@ -112,7 +112,7 @@ angular.module('providers.config',[])
                 cache:false
             },
             myCenterSetup:{
-                templateUrl:"templates/personal/personal-setup.html",
+                templateUrl:"templates/personal/setup/personal-setup.html",
                 url:"/personalSetup/:token?",
                 name:"myCenterSetup",
                 controller:"MyCenterSetupCtrl",
