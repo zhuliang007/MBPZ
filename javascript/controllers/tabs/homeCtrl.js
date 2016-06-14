@@ -13,13 +13,16 @@ angular.module('controllers.home',[])
         '$ionicSlideBoxDelegate',
         '$timeout',
         '$cache',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache){
+        '$ionicModal',
+        '$city',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city){
 
             $rootScope.token = $stateParams.token;
 
             $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
 
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
+
 
             getAds();
 
@@ -46,6 +49,18 @@ angular.module('controllers.home',[])
                         })
                     })
             }
+
+            $city.setHotCity()
+                .then(function(){
+                    $console.show($city.hotCity);
+                    $scope.hotCityList = $city.hotCity;
+                })
+
+            $city.setAllCity()
+                .then(function(){
+                    $console.show($city.allCity);
+                    $scope.allCityList = $city.allCity;
+                })
 
             getQGXX();
             var QGXXListCache = [];
@@ -145,5 +160,35 @@ angular.module('controllers.home',[])
             }
 
             $scope.infiniteFlag = true;
+
+
+            $ionicModal.fromTemplateUrl($config.modals.city.templateUrl, {
+                scope: $scope,
+                animation: $config.modals.city.animation
+            }).then(function(modal) {
+                $scope.cityModal = modal;
+            });
+
+            $scope.openModal = function(modalName) {
+                $scope[modalName].show();
+                $scope.$$childTail.$$childTail.citySearch = '';
+
+            };
+            $scope.closeModal = function(modalName) {
+                if($scope.$$childTail.$$childTail.citySearch){
+                    $scope.$$childTail.$$childTail.citySearch = '';
+                }
+                else{
+                    $scope[modalName].hide();
+                }
+
+            };
+            $scope.citySearch = '';
+
+
+            //遗留城市选择
+            //遗留搜索功能
+
+
 
         }])

@@ -1,8 +1,8 @@
 <ion-popover-view class="filterPopover">
-    <ion-content class="padding-normal-horizontal">
+    <ion-content class="padding-normal-horizontal" has-bouncing="true" overflow-scroll="false">
         <ion-list>
             <ion-radio ng-model="filterObject.secondClassify" icon="hidden" ng-value="childCode" ng-change="showFilter()">全部</ion-radio>
-            <ion-radio ng-model="filterObject.secondClassify" icon="hidden" ng-value="childType.code" ng-change="showFilter()" ng-repeat="childType in getChildTypeCode.childCodeInfoList"><span ng-bind="childType.name"></span></ion-radio>
+            <ion-radio ng-model="filterObject.secondClassify" icon="hidden" ng-value="childType.code" ng-change="showFilter(childType)" ng-repeat="childType in getChildTypeCode.childCodeInfoList"><span ng-bind="childType.name"></span></ion-radio>
         </ion-list>
     </ion-content>
 </ion-popover-view>

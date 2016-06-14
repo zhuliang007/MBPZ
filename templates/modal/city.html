@@ -1,0 +1,36 @@
+<ion-modal-view class="cityModel">
+    <ion-header-bar>
+        <div class="buttons">
+            <button class="button" ng-click="closeModal('cityModal')"><span class="icon ion-close"></span></button>
+        </div>
+        <div class="row row-no-padding">
+            <div class="col">
+                <div class="cityInput">
+                    <input type="text" class="text-center" placeholder="输入城市名或者首字母查询" ng-model="citySearch">
+                </div>
+            </div>
+
+        </div>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="cityItem" ng-if="citySearch==''">
+            <span class="city">上海</span>当前定位
+        </div>
+        <ion-list>
+            <ion-item class="cityItem cityTarget" ng-if="citySearch==''">
+                <span class="city">热门城市</span>
+            </ion-item>
+            <div class="cityItem cityDivide" ng-repeat="city in hotCityList track by $index" ng-if="citySearch==''" ng-click="">
+                <span class="city" ng-bind="city.name"></span>
+            </div>
+            <ion-list ng-repeat="cityList in allCityList | cityFilter:citySearch track by $index">
+                <div class="cityItem cityTarget" ng-if="citySearch==''">
+                    <span class="city" ng-bind="cityList.name"></span>
+                </div>
+                <div class="cityItem cityDivide" ng-repeat="city in cityList.arrays | cityFilterN:citySearch track by $index" ng-click="">
+                    <span class="city" ng-bind="city.name"></span>
+                </div>
+            </ion-list>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>
