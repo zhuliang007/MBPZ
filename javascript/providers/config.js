@@ -124,7 +124,32 @@ angular.module('providers.config',[])
                 name:"personalFeedback",
                 controller:"FeedbackCtrl",
                 cache:false
+            },
+            personalHelps:{
+                templateUrl:"templates/personal/personal-help.html",
+                url:"/help/:token?",
+                name:"personalHelp",
+                cache:false
+            },
+            personalAgreement:{
+                templateUrl:"templates/personal/personal-agreement.html",
+                url:"/aggreement/:token?",
+                name:"personalAgreement",
+                cache:false
+            },
+            personalTerms:{
+                templateUrl:"templates/personal/personal-terms.html",
+                url:"/terms/:token?",
+                name:"personalTerms",
+                cache:false
+            },
+            personalSpecification:{
+                templateUrl:"templates/personal/personal-specification.html",
+                url:"/specification/:token?",
+                name:"personalSpecification",
+                cache:false
             }
+
         }
 
         /*popover配置*/
