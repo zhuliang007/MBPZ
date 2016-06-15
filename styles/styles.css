@@ -35,6 +35,10 @@
 .mbpz-icon-guanfang:before { content: "\e60a"; }
 .mbpz-icon-position:before { content: "\e60e"; }
 
+/*百度地图*/
+bd-map{
+    display: none;
+}
 
 ion-content{
     background-color: #F5F5F5;
@@ -146,7 +150,7 @@ ion-content{
 
 .cityModel ion-header-bar .button,
 .cityModel ion-header-bar .button.activated{
-    background: #FFFFFF;
+    background: #F5F5F5;
     color: #333333;
     border:none;
 }
@@ -270,6 +274,20 @@ ion-content{
     color: #999999;
     font-size: 14px;
     padding: 10px 15px;
+}
+
+.cityModel .cityItem>ion-spinner{
+    stroke: #FF4E72;
+}
+
+.cityModel .cityItem>ion-spinner>svg{
+    width: 28px;
+    height: 19px;
+}
+
+.cityModel .cityItem>ion-spinner+span{
+    position: relative;
+    top: -4px;
 }
 
 .cityModel .cityItem.activated{

@@ -6,8 +6,8 @@
         <h1 class="title" ng-bind="pageTitle"></h1>
     </ion-header-bar>
     <div ng-if="filterFlag" class="filterGroup">
-        <div class="filterItem">
-            城市<span class="mbpz mbpz-icon-arrow-down"></span>
+        <div class="filterItem" ng-click="openModal('cityModal')">
+            <span ng-bind="filterObject.city||'城市'"></span><span class="mbpz mbpz-icon-arrow-down"></span>
         </div>
         <div class="filterItem" ng-click="openPopover($event,'filterTypePopover')">
             <span ng-bind="childTypeName||'分类'"></span><span class="mbpz mbpz-icon-arrow-down"></span>

@@ -15,7 +15,8 @@ angular.module('controllers.home',[])
         '$cache',
         '$ionicModal',
         '$city',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city){
+        '$ionicScrollDelegate',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate){
 
             $rootScope.token = $stateParams.token;
 
@@ -23,6 +24,7 @@ angular.module('controllers.home',[])
 
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
 
+            var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
 
             getAds();
 
@@ -50,17 +52,7 @@ angular.module('controllers.home',[])
                     })
             }
 
-            $city.setHotCity()
-                .then(function(){
-                    $console.show($city.hotCity);
-                    $scope.hotCityList = $city.hotCity;
-                })
 
-            $city.setAllCity()
-                .then(function(){
-                    $console.show($city.allCity);
-                    $scope.allCityList = $city.allCity;
-                })
 
             getQGXX();
             var QGXXListCache = [];
@@ -118,6 +110,7 @@ angular.module('controllers.home',[])
                     "cmd": $config.cmds.getPage,
                     "parameters":{
                         "numberOfPerPage":numberOfPerPage,
+                        "city":$rootScope.currentCity,
                         "pageNo":pageNo,
                         "type":0
                     }
@@ -129,6 +122,7 @@ angular.module('controllers.home',[])
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.response.data.totalPages == 0){
                             $scope.infiniteFlag = false;
+                            $scope.productList = null;
                             return ;
                         }
                         var items = result.response.data.content;
@@ -161,32 +155,16 @@ angular.module('controllers.home',[])
 
             $scope.infiniteFlag = true;
 
+            $rootScope.changeCity = function(city){
+                $rootScope.currentCity = city.name;
+                pageNo = 0;
+                $scope.infiniteFlag = true;
+                $scope.productList = [];
+                $scope.closeModal('cityModal');
+                productHomeHandle.resize();
+                productHomeHandle.scrollTop();
+            }
 
-            $ionicModal.fromTemplateUrl($config.modals.city.templateUrl, {
-                scope: $scope,
-                animation: $config.modals.city.animation
-            }).then(function(modal) {
-                $scope.cityModal = modal;
-            });
-
-            $scope.openModal = function(modalName) {
-                $scope[modalName].show();
-                $scope.$$childTail.$$childTail.citySearch = '';
-
-            };
-            $scope.closeModal = function(modalName) {
-                if($scope.$$childTail.$$childTail.citySearch){
-                    $scope.$$childTail.$$childTail.citySearch = '';
-                }
-                else{
-                    $scope[modalName].hide();
-                }
-
-            };
-            $scope.citySearch = '';
-
-
-            //遗留城市选择
             //遗留搜索功能
 
 

@@ -43,7 +43,8 @@ angular.module('providers.config',[])
             recommendationProduct:"market/home/recommendation",
             getScreen:"market/home/getScreen",
             getHotCityList:"market/home/getHotCityList",
-            getAllCityList:"market/home/getAllCityList"
+            getAllCityList:"market/home/getAllCityList",
+            saveLocationAddress:"market/home/saveLocationAddress"
         }
 
         $config.types = {
@@ -177,7 +178,7 @@ angular.module('providers.config',[])
 
         /*model配置*/
         $config.modals = {
-            city:{
+            cityModal:{
                 templateUrl:"templates/modal/city.html",
                 animation:"slide-in-up"
             }

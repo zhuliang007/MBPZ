@@ -13,18 +13,19 @@ angular.module('controllers.productListByTypeCtrl',[])
         '$ionicPopover',
         '$ionicScrollDelegate',
         '$timeout',
-        function($scope,$config,$console,$state,$stateParams,$productType,$httpService,$ionicPopover,$ionicScrollDelegate,$timeout){
+        '$ionicModal',
+        '$rootScope',
+        function($scope,$config,$console,$state,$stateParams,$productType,$httpService,$ionicPopover,$ionicScrollDelegate,$timeout,$ionicModal,$rootScope){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-
+            $rootScope.token = $stateParams.token;
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.getChildTypeCode = {};
             $scope.productList = [];
             $scope.filterFlag = true;
             $scope.infiniteFlag = true;
-            $scope.productList = null;
             var productListByTypeHandle = $ionicScrollDelegate.$getByHandle('productListByTypeHandle');
             $scope.filterObject = {
                 parentClassify :'',
@@ -63,14 +64,12 @@ angular.module('controllers.productListByTypeCtrl',[])
                         }
                         else{
                             $scope.getChildTypeCode = $productType.getChildTypeCode($scope.filterObject.parentClassify);
-                            $console.show($scope.getChildTypeCode);
                             $scope.pageTitle = $scope.getChildTypeCode.name;
                         }
                     });
 
                 $productType.setFilterOrderTypes()
                     .then(function(){
-                        $console.show($productType.Classify)
                         $scope.intelligentClassifyList = $productType.Classify.intelligentClassifyList;
                         $scope.priceClassifyList = $productType.Classify.priceClassifyList;
                     })
@@ -89,7 +88,6 @@ angular.module('controllers.productListByTypeCtrl',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.response.data.totalPages == 0){
                             $scope.infiniteFlag = false;
@@ -118,7 +116,7 @@ angular.module('controllers.productListByTypeCtrl',[])
                     "parameters":{
                         "parentClassify":$scope.filterObject.parentClassify,
                         "secondClassify": $scope.filterObject.secondClassify==$scope.childCode?'':$scope.filterObject.secondClassify,
-                        "city":$scope.filterObject.city,
+                        "city":$scope.filterObject.city||$rootScope.currentCity||"",
                         "beginPrice":$scope.checkPrice()?null:$scope.priceObject.beginPrice,
                         "endPrice": $scope.checkPrice()?null:$scope.priceObject.endPrice,
                         "sortType": $scope.filterObject.sortType,
@@ -266,6 +264,15 @@ angular.module('controllers.productListByTypeCtrl',[])
                 $scope.closePopover('filterPricePopover');
             }
 
+            $rootScope.changeCity = function(city){
+                $scope.filterObject.city = city.name;
+                pageNo = 0;
+                $scope.infiniteFlag = true;
+                $scope.productList = [];
+                $scope.closeModal('cityModal');
+                productListByTypeHandle.resize();
+                productListByTypeHandle.scrollTop();
+            }
 
 
             //遗留城市选择

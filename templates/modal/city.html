@@ -14,20 +14,21 @@
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="cityItem" ng-if="citySearch==''">
-            <span class="city">上海</span>当前定位
+            <ion-spinner icon="ios" ng-if="!currentCity"></ion-spinner><span class="padding-normal-left" ng-if="!currentCity">正在定位</span>
+            <span class="city" ng-bind="currentCity" ng-if="currentCity"></span><span ng-if="currentCity">当前定位</span>
         </div>
         <ion-list>
             <ion-item class="cityItem cityTarget" ng-if="citySearch==''">
                 <span class="city">热门城市</span>
             </ion-item>
-            <div class="cityItem cityDivide" ng-repeat="city in hotCityList track by $index" ng-if="citySearch==''" ng-click="">
+            <div class="cityItem cityDivide" ng-repeat="city in hotCityList track by $index" ng-if="citySearch==''" ng-click="changeCity(city)">
                 <span class="city" ng-bind="city.name"></span>
             </div>
             <ion-list ng-repeat="cityList in allCityList | cityFilter:citySearch track by $index">
                 <div class="cityItem cityTarget" ng-if="citySearch==''">
                     <span class="city" ng-bind="cityList.name"></span>
                 </div>
-                <div class="cityItem cityDivide" ng-repeat="city in cityList.arrays | cityFilterN:citySearch track by $index" ng-click="">
+                <div class="cityItem cityDivide" ng-repeat="city in cityList.arrays track by $index" ng-click="changeCity(city)">
                     <span class="city" ng-bind="city.name"></span>
                 </div>
             </ion-list>

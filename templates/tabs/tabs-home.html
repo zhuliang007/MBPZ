@@ -1,7 +1,7 @@
 <ion-view class="tabsHome">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="openModal('cityModal')"><span>上海</span></button>
+            <button class="button" ng-click="openModal('cityModal')"><span ng-bind="currentCity||'城市'"></span></button>
         </div>
         <h1 class="title">萌宝铺子</h1>
         <div class="buttons">
@@ -9,7 +9,7 @@
         </div>
     </ion-header-bar>
     <div class="header-zs"></div>
-    <ion-content has-bouncing="true" overflow-scroll="false">
+    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHomeHandle">
         <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="ad in adList track by $index">
                 <div id="adHead{{$index}}" class="bgImg" ng-style="resizeImage('adHead{{$index}}',ad.adImg,'3:1')"></div>
@@ -101,6 +101,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div ng-if="productList == null" class="notFoundList">
+            暂无数据
         </div>
 
         <ion-infinite-scroll

@@ -10,7 +10,10 @@ angular.module('controllers.start',[])
         '$rootScope',
         '$state',
         '$stateParams',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams){
+        '$city',
+        '$ionicModal',
+        '$q',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$q){
             if($stateParams.token!=undefined){
                 $rootScope.token = $stateParams.token;
                 $state.go($config.controllers.tabsHome.name,{token:$rootScope.token});
@@ -65,5 +68,38 @@ angular.module('controllers.start',[])
                 $state.go(_value)
             }
 
+
+
+            $city.setHotCity()
+                .then(function(){
+                    $scope.hotCityList = $city.hotCity;
+                })
+
+            $city.setAllCity()
+                .then(function(){
+                    $scope.allCityList = $city.allCity;
+                })
+
+
+            createModal('cityModal')
+
+            function createModal(modalName){
+                $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
+                    scope: $scope,
+                    animation: $config.modals[modalName].animation
+                }).then(function(modal) {
+                    $scope[modalName] = modal;
+                });
+            }
+
+            $scope.citySearch = '';
+
+            $scope.openModal = function(modalName) {
+                $scope[modalName].show();
+            };
+            $scope.closeModal = function(modalName) {
+                $scope[modalName].hide()
+                $scope.$$childHead.$$childHead.citySearch = '';
+            };
         }
     ])
