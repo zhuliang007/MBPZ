@@ -1,0 +1,63 @@
+<ion-view class="searchHome">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button"><span class="icon ion-ios-arrow-back"></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
+        </div>
+        <div class="row row-no-padding">
+            <div class="col">
+                <div class="cityInput">
+                    <input type="text" placeholder="{{chooseType.placeholder}}" ng-model="searchContent" ng-focus="searchContentFlag=true">
+                    <span class="icon ion-close-circled clear" ng-if="searchContent" ng-click="clear()"></span>
+                    <span class="mbpz mbpz-icon-search search" ng-click="search(searchContent)"></span>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="button" ng-click="openPopover($event,'chooseSearchTypePopover')">
+                <span ng-bind="chooseType.name"></span>
+                <span class="mbpz mbpz-icon-arrow-down"></span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
+        </div>
+    </ion-header-bar>
+    <div ng-if="productList == null" class="notFoundList">
+        暂无数据
+    </div>
+    <div class="searchContentList" ng-if="searchContent&&searchContentFlag&&searchContentList.data&&searchContentList.data.length>0&&((searchContentList.data | filter:searchContent).length!=0)">
+        <ion-scroll has-bouncing="true" overflow-scroll="false">
+            <ion-list>
+                <ion-item ng-repeat="data in searchContentList.data | filter:searchContent track by $index" ng-click="search(data)">
+                    <span ng-bind="data"></span>
+                </ion-item>
+                <ion-item class="text-center" ng-click="clearHistorySearch()" ng-if="searchContentList.data&&searchContentList.data.length!=0&&((searchContentList.data | filter:searchContent).length!=0)">
+                    清除历史记录
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+    </div>
+    <ion-content delegate-handle="searchHandle" has-bouncing="true" overflow-scroll="false">
+        <div ng-if="productList !=null && productList.length != 0" class="card-group card-per">
+            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,0)">
+                <div class="card-item-per-body">
+                    <div class="bgImg" id="productImage{{$index}}" ng-style="resizeImage('productImage{{$index}}',product.productImageList[0].location,'1:1')"></div>
+                    <div class="title" ng-bind="product.title"></div>
+                    <div><span class="mbpz mbpz-icon-money price"></span><span class="price padding-small-right" ng-bind="product.currentPrice"></span><span class="originalPrice" ng-bind="product.originalPrice"></span></div>
+                    <div class="row row-no-padding">
+                        <div class="col col-60 text-left padding-small-horizontal padding-small-vertical text-overflow">
+                            <span class="address" ng-bind="product.userLocation.city"></span>
+                            <span class="address" ng-bind="product.userLocation.district"></span>
+                        </div>
+                        <div class="col text-right padding-small-horizontal padding-small-vertical text-overflow">
+                            <span class="publicTime" ng-bind="parseTime(product.publicDate)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

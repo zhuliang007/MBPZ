@@ -64,24 +64,24 @@ angular.module('directives.bdMap',[])
                     geoc.getLocation(result.points[0], function(rs){
                         var addComp = rs.addressComponents;
                         $rootScope.currentCity = addComp.city.split("市")[0];
-                        var locationJsonStr = {}
-                        locationJsonStr.address = addComp.city + addComp.district +addComp.street + addComp.streetNumber;
-                        locationJsonStr.city = addComp.city;
-                        locationJsonStr.cityCode = '';
-                        locationJsonStr.country = '';
-                        locationJsonStr.countryCode = '';
-                        locationJsonStr.district = addComp.district;
-                        locationJsonStr.province = addComp.province;
-                        locationJsonStr.street = addComp.street;
-                        locationJsonStr.streetNumber = addComp.streetNumber;
-                        locationJsonStr.latitude = result.points[0].lat;
-                        locationJsonStr.longitude = result.points[0].lng;
+                        var locationJosnStr = {}
+                        locationJosnStr.address = addComp.city + addComp.district +addComp.street + addComp.streetNumber;
+                        locationJosnStr.city = addComp.city;
+                        locationJosnStr.cityCode = '';
+                        locationJosnStr.country = '';
+                        locationJosnStr.countryCode = '';
+                        locationJosnStr.district = addComp.district;
+                        locationJosnStr.province = addComp.province;
+                        locationJosnStr.street = addComp.street;
+                        locationJosnStr.streetNumber = addComp.streetNumber;
+                        locationJosnStr.latitude = result.points[0].lat;
+                        locationJosnStr.longitude = result.points[0].lng;
                         $console.show('token'+$rootScope.token)
                         if($rootScope.token){
                             var data = {
                                 "cmd":$config.cmds.saveLocationAddress,
                                 "parameters":{
-                                    "locationJsonStr":angular.toJson(locationJsonStr)
+                                    "locationJosnStr":angular.toJson(locationJosnStr)
                                 },
                                 "token":$rootScope.token
                             };

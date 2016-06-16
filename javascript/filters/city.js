@@ -14,18 +14,11 @@ angular.module("filters.city",[])
                             cities.push(city);
                         }
                         else{
-                            var cityNew = {
-                                name : city.name,
-                                arrays: []
-                            };
                             for(var j = 0 ;j<city.arrays.length;j++){
                                 if(city.arrays[j].name.indexOf(filter)>=0){
-                                    cityNew.arrays.push(city.arrays[j]);
+                                    cities.push(city);
+                                    break;
                                 }
-                            }
-                            if(cityNew.arrays.length>0){
-                                city = cityNew;
-                                cities.push(city);
                             }
                         }
                     }

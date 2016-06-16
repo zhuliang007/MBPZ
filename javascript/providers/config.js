@@ -44,7 +44,8 @@ angular.module('providers.config',[])
             getScreen:"market/home/getScreen",
             getHotCityList:"market/home/getHotCityList",
             getAllCityList:"market/home/getAllCityList",
-            saveLocationAddress:"market/home/saveLocationAddress"
+            saveLocationAddress:"market/home/saveLocationAddress",
+            search:"market/home/search"
         }
 
         $config.types = {
@@ -154,12 +155,18 @@ angular.module('providers.config',[])
             },
             myCenterWallet:{
                 templateUrl:"templates/personal/wallet/personal-wallet.html",
-                    url:"/wallet/:token?",
-                    name:"myCenterWallet",
-                    controller:"WalletCtrl",
-                    cache:false
+                url:"/wallet/:token?",
+                name:"myCenterWallet",
+                controller:"WalletCtrl",
+                cache:false
+            },
+            searchHome:{
+                templateUrl:"templates/home/search.html",
+                url:"/searchHome/:token?",
+                name:"searchHome",
+                controller:"SearchHomeCtrl",
+                cache:false
             }
-
 
         }
 
@@ -173,6 +180,9 @@ angular.module('providers.config',[])
             },
             filterPrice:{
                 templateUrl:"templates/popover/filterPrice.html"
+            },
+            chooseSearchType:{
+                templateUrl:"templates/popover/chooseSearchType.html"
             }
         }
 

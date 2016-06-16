@@ -115,6 +115,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.myCenterWallet.controller,
                     cache:$configProvider.controllers.myCenterWallet.cache,
                 })
+                .state($configProvider.controllers.searchHome.name,{
+                    url:$configProvider.controllers.searchHome.url,
+                    templateUrl:$configProvider.controllers.searchHome.templateUrl,
+                    controller:$configProvider.controllers.searchHome.controller,
+                    cache:$configProvider.controllers.searchHome.cache,
+                })
 
 
 

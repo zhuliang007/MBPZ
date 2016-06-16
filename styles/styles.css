@@ -104,7 +104,8 @@ ion-content{
 
 /*页面头部*/
 .tabsHome ion-header-bar,
-.productListByType ion-header-bar{
+.productListByType ion-header-bar,
+.searchHome ion-header-bar{
     background-color: #FF4E72;
     color: #FFFFFF;
     background-image:none;
@@ -140,7 +141,9 @@ ion-content{
 .tabsHome ion-header-bar .button,
 .tabsHome ion-header-bar .button.activated,
 .productListByType ion-header-bar .button,
-.productListByType ion-header-bar .button.activated{
+.productListByType ion-header-bar .button.activated,
+.searchHome ion-header-bar .button,
+.searchHome ion-header-bar .button.activated{
     background: #FF4E72;
     color: #FFFFFF;
     border:none;
@@ -161,19 +164,61 @@ ion-content{
     padding-top: 3px;
 }
 
-.cityModel ion-header-bar .cityInput{
+.cityModel ion-header-bar .cityInput,
+.searchHome ion-header-bar .cityInput{
     width: 95%;
     overflow: hidden;
     border-radius: 7px;
     border: 1px solid #DDDDDD;
+    position: relative;
 }
 
-.cityModel ion-header-bar .cityInput>input{
+.searchHome ion-header-bar .cityInput>.clear{
+    position: absolute;
+    z-index:999;
+    top: calc(50% - 10px);
+    top: -webkit-calc(50% - 10px);
+    right: 5px;
+    color: #FF4E72;
+    font-size: 18px;
+}
+
+.searchHome ion-header-bar .cityInput>.search{
+    position: absolute;
+    z-index:999;
+    top: calc(50% - 12px);
+    top: -webkit-calc(50% - 12px);
+    left: 5px;
+    color: #FF4E72;
+    font-size: 24px;
+    border-radius: 50%;
+}
+
+.cityModel ion-header-bar .cityInput>input,
+.searchHome ion-header-bar .cityInput>input{
     width: 100%;
     padding: 5px 10px;
     height: 30px;
 }
 
+.searchHome ion-header-bar .cityInput>input{
+    padding-right: 30px;
+    padding-left: 35px;
+}
+
+.searchHome .searchContentList{
+    position: absolute;
+    background: #FFFFFF;
+    z-index:10;
+    bottom: 0;
+    top: 44px;
+    width: 100%;
+}
+
+.searchHome .searchContentList>ion-scroll{
+    width: 100%;
+    height: 100%;
+}
 
 /**页面body部分*/
 /**首页*/
@@ -501,15 +546,38 @@ ion-content{
     border-radius: 0px!important;
 }
 
-.filterPopover ion-content{
+.chooseSearchType{
+    top: 32px!important;
+    border-radius: 0px!important;
+    height: 130px;
+    width: 83px;
+}
+
+.chooseSearchType ion-content{
+    margin: 0px;
+    border-radius: 0px!important;
+}
+
+.chooseSearchType .list>.item,
+.chooseSearchType .list>.item.activated{
+    border-radius: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+}
+
+.filterPopover ion-content,
+.chooseSearchType ion-content{
     background-color: #FFFFFF;
 }
 
-.filterPopover .popover-arrow{
+.filterPopover .popover-arrow,
+.chooseSearchType .popover-arrow{
     display: none;
 }
 
-.filterPopover .list>.item{
+.filterPopover .list>.item,
+.chooseSearchType .list>.item{
     border-left: none;
     border-right: none;
 }
