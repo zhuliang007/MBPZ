@@ -19,7 +19,6 @@ angular.module('controllers.productListByTypeCtrl',[])
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $rootScope.token = $stateParams.token;
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.getChildTypeCode = {};

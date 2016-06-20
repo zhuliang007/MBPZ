@@ -170,7 +170,11 @@
     </ion-content>
     <div class="userCtrl">
         <div><span class="mbpz mbpz-icon-replies"></span><span ng-bind="product.replyNumber"></span></div>
-        <div class="star">
+        <div class="star" ng-if="productType==0">
+            <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
+            <span ng-if="productType==1" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
+        </div>
+        <div class="star" ng-if="productType==1">
             <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
             <span ng-if="productType==1" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
         </div>

@@ -61,11 +61,6 @@ angular.module('providers.config',[])
 
         /**controller配置*/
         $config.controllers = {
-            index:{
-                url:"/:token?",
-                name:"index",
-                controller:"StartCtrl"
-            },
             tabs : {
                 templateUrl:"templates/tabs/tabs.html",
                 url:"/tabs",
@@ -75,94 +70,95 @@ angular.module('providers.config',[])
             },
             tabsHome : {
                 templateUrl:"templates/tabs/tabs-home.html",
-                url:"/tabsHome/:token?",
+                url:"/tabsHome",
                 name:"tabs.tabsHome",
                 controller:"HomeCtrl",
                 cache:false
             },
             tabsShop : {
                 templateUrl:"templates/tabs/tabs-shop.html",
-                url:"/tabsShop/:token?",
+                url:"/tabsShop" +
+                "",
                 name:"tabs.tabsShop",
                 controller:"ShopCtrl",
                 cache:false
             },
             tabsMessage : {
                 templateUrl:"templates/tabs/tabs-message.html",
-                url:"/tabsMessage/:token?",
+                url:"/tabsMessage",
                 name:"tabs.tabsMessage",
                 controller:"MessageCtrl",
                 cache:false
             },
             tabsPersonal : {
                 templateUrl:"templates/tabs/tabs-personal.html",
-                url:"/tabsPersonal/:token?",
+                url:"/tabsPersonal",
                 name:"tabs.tabsPersonal",
                 controller:"PersonalCtrl",
                 cache:false
             },
             productDetail:{
                 templateUrl:"templates/detail/productDetail.html",
-                url:"/productDetail/:token?:type:id",
+                url:"/productDetail/:type&:id",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
                 cache:false
             },
             productListByType:{
                 templateUrl:"templates/home/productListByType.html",
-                url:"/productListByType/:token?:type",
+                url:"/productListByType/:type",
                 name:"productListByType",
                 controller:"ProductListByTypeCtrl",
                 cache:false
             },
             myCenterSetup:{
                 templateUrl:"templates/personal/setup/personal-setup.html",
-                url:"/personalSetup/:token?",
+                url:"/personalSetup",
                 name:"myCenterSetup",
                 controller:"MyCenterSetupCtrl",
                 cache:false
             },
             personalFeedback:{
                 templateUrl:"templates/personal/setup/personal-feedback.html",
-                url:"/feedback/:token?",
+                url:"/feedback",
                 name:"personalFeedback",
                 controller:"FeedbackCtrl",
                 cache:false
             },
             personalHelps:{
                 templateUrl:"templates/personal/setup/personal-help.html",
-                url:"/help/:token?",
+                url:"/help",
                 name:"personalHelp",
                 cache:false
             },
             personalAgreement:{
                 templateUrl:"templates/personal/setup/personal-agreement.html",
-                url:"/aggreement/:token?",
+                url:"/agreement",
                 name:"personalAgreement",
                 cache:false
             },
             personalTerms:{
                 templateUrl:"templates/personal/setup/personal-terms.html",
-                url:"/terms/:token?",
+                url:"/terms",
                 name:"personalTerms",
                 cache:false
             },
             personalSpecification:{
                 templateUrl:"templates/personal/setup/personal-specification.html",
-                url:"/specification/:token?",
+                url:"/specification",
                 name:"personalSpecification",
                 cache:false
             },
             myCenterWallet:{
                 templateUrl:"templates/personal/wallet/personal-wallet.html",
-                url:"/wallet/:token?",
+                url:"/wallet",
                 name:"myCenterWallet",
                 controller:"WalletCtrl",
                 cache:false
             },
             searchHome:{
                 templateUrl:"templates/home/search.html",
-                url:"/searchHome/:token?",
+                url:"/searchHome",
                 name:"searchHome",
                 controller:"SearchHomeCtrl",
                 cache:false

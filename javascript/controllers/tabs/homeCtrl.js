@@ -16,9 +16,10 @@ angular.module('controllers.home',[])
         '$ionicModal',
         '$city',
         '$ionicScrollDelegate',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate){
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$locals){
 
-            $rootScope.token = $stateParams.token;
+           /* $rootScope.token = $stateParams.token;*/
 
             $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
 
@@ -34,7 +35,7 @@ angular.module('controllers.home',[])
                     "parameters":{
                         "adType" : $config.types.ad.Index
                     },
-                    "token":$scope.token
+                    "token":$locals.get('token','')
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){

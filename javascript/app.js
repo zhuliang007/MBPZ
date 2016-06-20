@@ -15,10 +15,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
 
 
             $stateProvider
-                .state($configProvider.controllers.index.name,{
-                    url:$configProvider.controllers.index.url,
-                    controller:$configProvider.controllers.index.controller
-                })
                 .state($configProvider.controllers.tabs.name,{
                     url:$configProvider.controllers.tabs.url,
                     templateUrl:$configProvider.controllers.tabs.templateUrl,

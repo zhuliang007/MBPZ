@@ -18,7 +18,6 @@ angular.module('controllers.searchHomeCtrl',[])
         document.body.classList.remove('platform-ios');
         document.body.classList.remove('platform-android');
         document.body.classList.add('platform-ios');
-        $rootScope.token = $stateParams.token;
         var searchHandle = $ionicScrollDelegate.$getByHandle('searchHandle');
         $scope.searchContentFlag = false;
         $scope.searchTypes = [

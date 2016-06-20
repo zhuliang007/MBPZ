@@ -12,11 +12,12 @@ angular.module('controllers.start',[])
         '$stateParams',
         '$city',
         '$ionicModal',
-        '$q',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$q){
-            if($stateParams.token!=undefined){
-                $rootScope.token = $stateParams.token;
-                $state.go($config.controllers.tabsHome.name,{token:$rootScope.token});
+        '$location',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location){
+
+            var url = $location.url();
+            if(!url){
+                $state.go($config.controllers.tabsHome.name);
             }
 
             $scope.showMsg = function(msg){
@@ -46,7 +47,7 @@ angular.module('controllers.start',[])
 
 
             $scope.showProduct = function(id,type){
-                var params = {token:$rootScope.token,type:type,id:id};
+                var params = {type:type,id:id};
                 $state.go($config.controllers.productDetail.name,params)
             }
 
@@ -56,7 +57,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.showProductListByType = function(type){
-                var params = {token:$rootScope.token,type:type};
+                var params = {type:type};
                 $state.go($config.controllers.productListByType.name,params)
             }
 

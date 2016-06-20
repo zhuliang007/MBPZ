@@ -13,7 +13,6 @@ angular.module('controllers.productDetail',[])
         '$timeout',
         '$ionicSlideBoxDelegate',
         function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate){
-            $rootScope.token = $stateParams.token;
             $scope.productType = $stateParams.type;
             var id = $stateParams.id;
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");

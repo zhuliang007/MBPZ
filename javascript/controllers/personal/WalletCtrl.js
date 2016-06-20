@@ -11,7 +11,6 @@ angular.module('controllers.walletCtrl',[])
         '$stateParams',
         '$state',
         function($scope,$console,$config,$rootScope,$stateParams,$state){
-            $rootScope.token = $stateParams.token;
 
 
         }])
