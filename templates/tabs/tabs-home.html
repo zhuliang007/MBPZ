@@ -1,15 +1,15 @@
 <ion-view class="tabsHome">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="showMsg('地址')"><span>上海</span></button>
+            <button class="button" ng-click="openModal('cityModal')"><span ng-bind="currentCity||'城市'"></span></button>
         </div>
         <h1 class="title">萌宝铺子</h1>
         <div class="buttons">
-            <button class="button" ng-click="showMsg('搜索')"><i class="mbpz mbpz-icon-search"></i></button>
+            <button class="button" ui-sref="searchHome()"><i class="mbpz mbpz-icon-search"></i></button>
         </div>
     </ion-header-bar>
     <div class="header-zs"></div>
-    <ion-content>
+    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHomeHandle">
         <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="ad in adList track by $index">
                 <div id="adHead{{$index}}" class="bgImg" ng-style="resizeImage('adHead{{$index}}',ad.adImg,'3:1')"></div>
@@ -35,7 +35,7 @@
                     <span>家居用品</span>
                 </div>
             </div>
-            <div class="row padding-none-horizontal">
+            <div class="row padding-none-horizontal" ui-sref="tabs.tabsShop()">
                 <div class="col col-25 padding-none-horizontal padding-small-vertical border-right">
                     <div class="col-75 col-offset-10">
                         <img class="img-auto" ng-src="{{homeQGXX}}">
@@ -95,13 +95,16 @@
                     </div>
                     <div class="col col-center padding-normal-vertical text-right">
                         <span class="mbpz mbpz-icon-readers counts"></span>
-                        <span ng-bind="(product.browseNumbe||0)" class="counts"></span>
+                        <span ng-bind="(product.browseNumber||0)" class="counts"></span>
                         <span class="mbpz mbpz-icon-replies counts"></span>
                         <span ng-bind="(product.replyNumber||0)" class="counts"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div ng-if="productList == null" class="notFoundList">
+            暂无数据
         </div>
 
         <ion-infinite-scroll

@@ -10,7 +10,6 @@ angular.module('controllers.message',[])
     '$stateParams',
     '$state',
     function($scope,$console,$config,$rootScope,$stateParams,$state){
-        $rootScope.token = $stateParams.token;
 
 
     }])

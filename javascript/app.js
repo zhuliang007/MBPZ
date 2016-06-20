@@ -15,10 +15,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
 
 
             $stateProvider
-                .state($configProvider.controllers.index.name,{
-                    url:$configProvider.controllers.index.url,
-                    controller:$configProvider.controllers.index.controller
-                })
                 .state($configProvider.controllers.tabs.name,{
                     url:$configProvider.controllers.tabs.url,
                     templateUrl:$configProvider.controllers.tabs.templateUrl,
@@ -114,6 +110,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.myCenterWallet.templateUrl,
                     controller:$configProvider.controllers.myCenterWallet.controller,
                     cache:$configProvider.controllers.myCenterWallet.cache,
+                })
+                .state($configProvider.controllers.searchHome.name,{
+                    url:$configProvider.controllers.searchHome.url,
+                    templateUrl:$configProvider.controllers.searchHome.templateUrl,
+                    controller:$configProvider.controllers.searchHome.controller,
+                    cache:$configProvider.controllers.searchHome.cache,
                 })
 
 

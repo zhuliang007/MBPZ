@@ -13,13 +13,19 @@ angular.module('controllers.home',[])
         '$ionicSlideBoxDelegate',
         '$timeout',
         '$cache',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache){
+        '$ionicModal',
+        '$city',
+        '$ionicScrollDelegate',
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$locals){
 
-            $rootScope.token = $stateParams.token;
+           /* $rootScope.token = $stateParams.token;*/
 
             $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
 
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
+
+            var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
 
             getAds();
 
@@ -29,7 +35,7 @@ angular.module('controllers.home',[])
                     "parameters":{
                         "adType" : $config.types.ad.Index
                     },
-                    "token":$scope.token
+                    "token":$locals.get('token','')
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
@@ -46,6 +52,8 @@ angular.module('controllers.home',[])
                         })
                     })
             }
+
+
 
             getQGXX();
             var QGXXListCache = [];
@@ -103,6 +111,7 @@ angular.module('controllers.home',[])
                     "cmd": $config.cmds.getPage,
                     "parameters":{
                         "numberOfPerPage":numberOfPerPage,
+                        "city":$rootScope.currentCity,
                         "pageNo":pageNo,
                         "type":0
                     }
@@ -114,6 +123,7 @@ angular.module('controllers.home',[])
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.response.data.totalPages == 0){
                             $scope.infiniteFlag = false;
+                            $scope.productList = null;
                             return ;
                         }
                         var items = result.response.data.content;
@@ -145,5 +155,19 @@ angular.module('controllers.home',[])
             }
 
             $scope.infiniteFlag = true;
+
+            $rootScope.changeCity = function(city){
+                $rootScope.currentCity = city.name;
+                pageNo = 0;
+                $scope.infiniteFlag = true;
+                $scope.productList = [];
+                $scope.closeModal('cityModal');
+                productHomeHandle.resize();
+                productHomeHandle.scrollTop();
+            }
+
+            //遗留搜索功能
+
+
 
         }])
