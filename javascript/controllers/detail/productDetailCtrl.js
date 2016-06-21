@@ -47,7 +47,12 @@ angular.module('controllers.productDetail',[])
                             }
                         })
                     },function(error){
-                        $console.show(error);
+                        if(error.systemError){
+                            var systemError = error.systemError;
+                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                $scope.openModal('loginModal');
+                            }
+                        }
                     })
             }
             var numberOfPerPage = 10;
@@ -128,17 +133,22 @@ angular.module('controllers.productDetail',[])
                 }
                 else if($scope.productType == 1){
                     data.cmd = $config.cmds.spot;
-                    data.parameters.isCollect = $scope.product.isSpot?0:1;
+                    data.parameters.isSpot = $scope.product.isSpot?0:1;
                 }
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        if(result){
-                            $console.show(result);
-                            $scope.product.isCollect=$scope.product.isCollect?0:1;
+                        $console.show(result);
+                        if($scope.productType==0){
+                            $scope.product.isCollect = $scope.product.isCollect?0:1;
                         }
-                        else{
-                            if(result.error.errorCode==15 || result.error.errorCode==14){
+                        else if($scope.productType == 1){
+                            $scope.product.isSpot = $scope.product.isSpot?0:1;
+                        }
+                    },function(error){
+                        if(error.systemError){
+                            var systemError = error.systemError;
+                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
                                 $scope.openModal('loginModal');
                             }
                         }
