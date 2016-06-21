@@ -1143,9 +1143,28 @@ ion-content{
 }
 .ion-ios-arrow-forward:before{
     color:#9e9e9e;
-    font-size: 20px;
+    font-size: 16px;
+}
+.ion-ios-gear-outline:before{
+    font-size:20px;
+    padding-top:8px;
 }
 
+.personal-user-image{
+    padding-left:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+.personal-user-image div{
+    margin-top:5px;
+    width:60px;
+    height: 60px;
+    float:left;
+}
+ .personal-name{
+    padding-top:13px;
+    display: block;
+}
 .walletDiv p{
     text-align:center;
     font-size: 16px;
@@ -1170,3 +1189,28 @@ ion-content{
     font-size:14px;
     color:blue;
 }
+.address-button{
+    margin-left:35%;
+    height: auto;
+}
+.address-font{
+    font-size:16px;
+    padding-right:10px;
+}
+.personal-refund .tabs.tabs-top{
+    top:0px;
+}
+.personal-refund .tabs-striped.tabs-color-light .tab-item{
+    color:#9e9e9e;
+}
+.personal-refund .tabs{
+    border:0px;
+}
+.personal-refund a{
+    display: block;
+}
+.personal-refund a:hover,.personal-refund a:focus,.personal-refund .active,.personal-refund a{
+    color:#FF4E72;
+}
+
+

@@ -117,7 +117,24 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.searchHome.controller,
                     cache:$configProvider.controllers.searchHome.cache,
                 })
-
+                .state($configProvider.controllers.myCenterAddress.name,{
+                    url:$configProvider.controllers.myCenterAddress.url,
+                    templateUrl:$configProvider.controllers.myCenterAddress.templateUrl,
+                    controller:$configProvider.controllers.myCenterAddress.controller,
+                    cache:$configProvider.controllers.myCenterAddress.cache,
+                })
+                .state($configProvider.controllers.myCenterAddAdrs.name,{
+                    url:$configProvider.controllers.myCenterAddAdrs.url,
+                    templateUrl:$configProvider.controllers.myCenterAddAdrs.templateUrl,
+                    controller:$configProvider.controllers.myCenterAddAdrs.controller,
+                    cache:$configProvider.controllers.myCenterAddAdrs.cache,
+                })
+                .state($configProvider.controllers.myCenterRefund.name,{
+                    url:$configProvider.controllers.myCenterRefund.url,
+                    templateUrl:$configProvider.controllers.myCenterRefund.templateUrl,
+                    controller:$configProvider.controllers.myCenterRefund.controller,
+                    cache:$configProvider.controllers.myCenterRefund.cache,
+                 })
 
 
 

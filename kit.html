@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+<!--[if lt IE 9]>
+<script src="https://g.alicdn.com/aliww/ww/json/json.js" charset="utf-8"></script>
+<![endif]-->
+<!-- 自动适配移动端与pc端 -->
+<script src="https://g.alicdn.com/aliww/??h5.openim.sdk/1.0.6/scripts/wsdk.js,h5.openim.kit/0.3.3/scripts/kit.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var sdk = new WSDK();
+
+    sdk.Base.login({
+        uid:'13818155072',
+        credential:'13818155072',
+        appkey: '23369408',
+        timeout: 4000,
+        success: function(data){
+            // {code: 1000, resultText: 'SUCCESS'}
+           sdk.Base.getRecentContact({
+               count:10,
+               success: function (datas) {
+                   console.log(datas);
+               }
+           })
+        },
+        error: function(error){
+            // {code: 1002, resultText: 'TIMEOUT'}
+            console.log('login fail', error);
+        }
+    });
+</script>
+</body>
+</html>

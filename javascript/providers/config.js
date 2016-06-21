@@ -165,6 +165,27 @@ angular.module('providers.config',[])
                 controller:"WalletCtrl",
                 cache:false
             },
+            myCenterRefund:{
+                templateUrl:"templates/personal/refund/personal-refund.html",
+                url:"/refund",
+                name:"myCenterRefund",
+                controller:"RefundListCtrl",
+                cache:false
+            },
+            myCenterAddress:{
+                templateUrl:"templates/personal/address/personal-address.html",
+                url:"/address",
+                name:"myCenterAddress",
+                controller:"AddressCtrl",
+                cache:false
+            },
+            myCenterAddAdrs:{
+                templateUrl:"templates/personal/address/personal-add-address.html",
+                url:"/addAddress",
+                name:"myCenterAddAdrs",
+                controller:"AddAdrsCtrl",
+                cache:false
+            },
             searchHome:{
                 templateUrl:"templates/home/search.html",
                 url:"/searchHome",
