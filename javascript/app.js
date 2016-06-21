@@ -117,6 +117,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.searchHome.controller,
                     cache:$configProvider.controllers.searchHome.cache,
                 })
+                .state($configProvider.controllers.report.name,{
+                    url:$configProvider.controllers.report.url,
+                    templateUrl:$configProvider.controllers.report.templateUrl,
+                    controller:$configProvider.controllers.report.controller,
+                    cache:$configProvider.controllers.report.cache,
+                })
 
 
 

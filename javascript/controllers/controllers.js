@@ -13,4 +13,5 @@ angular.module('starter.controllers',[
     'controllers.myCenterSetupCtrl',
     'controllers.feedbackCtrl',
     'controllers.walletCtrl',
-    'controllers.searchHomeCtrl'])
+    'controllers.searchHomeCtrl',
+    'controllers.report'])
