@@ -11,7 +11,6 @@ angular.module('controllers.shop',[])
     '$state',
     '$httpService',
     function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService){
-        $rootScope.token = $stateParams.token;
 
         $scope.productList = []
         var numberOfPerPage = 10;
