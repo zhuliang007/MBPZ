@@ -1,0 +1,40 @@
+<ion-modal-view class="loginModal">
+    <ion-content scroll="false" class="bgImg" ng-style="setBackGroundImage(loginBg)">
+        <span class="icon ion-close closeLogin" ng-click="closeModal('loginModal')"></span>
+        <div class="loginGroup">
+            <div class="row">
+                <div class="col col-34 col-offset-33">
+                    <div class="bgImg" id="launcher" ng-style="resizeImage('launcher',launcher,'1:1')"></div>
+                </div>
+            </div>
+            <div class="row ba-color-white-less margin-normal-top border-radius-normal padding-small-vertical">
+                <div class="col col-center color-red">
+                    手机号
+                </div>
+                <div class="col col-80 col-center">
+                    <div class="inputGroup">
+                        <input type="tel" class="tel" placeholder="请输入手机号" maxlength="11" ng-model="telNumber">
+                        <span class="icon ion-close-circled clearTel" ng-if="telNumber" ng-click="clearTel()"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row ba-color-white-less margin-normal-top border-radius-normal padding-small-vertical">
+                <div class="col col-center color-red">
+                    验证码
+                </div>
+                <div class="col col-80 col-center">
+                    <div class="inputGroup">
+                        <input type="text" class="code" placeholder="请输入验证码" maxlength="4" ng-model="codeNumber">
+                        <span class="icon ion-close-circled clearCode" ng-if="codeNumber" ng-click="clearCode()"></span>
+                        <button class="getCode" ng-bind="codeTarget" ng-click="getCode(telNumber)" ng-class="{true:'',false:'disable'}[codeFlag]"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-color-main-red color-white margin-normal-top border-radius-normal padding-small-vertical">
+                <div class="col text-center" ng-click="login(telNumber,codeNumber)">
+                    登录
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

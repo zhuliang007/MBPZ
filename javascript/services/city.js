@@ -24,7 +24,7 @@ angular.module('services.city',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $city.hotCity = result.response.data.hotCity;
+                        $city.hotCity = result.data.hotCity;
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);
@@ -47,7 +47,7 @@ angular.module('services.city',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $city.allCity = result.response.data.allCity;
+                        $city.allCity = result.data.allCity;
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);

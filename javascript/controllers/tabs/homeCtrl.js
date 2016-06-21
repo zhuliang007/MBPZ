@@ -21,7 +21,6 @@ angular.module('controllers.home',[])
 
            /* $rootScope.token = $stateParams.token;*/
 
-            $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
 
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
 
@@ -39,7 +38,7 @@ angular.module('controllers.home',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $scope.adList = result.response.data;
+                        $scope.adList = result.data;
                         adSlideBox.update();
                         $timeout(function(){
                             if(adSlideBox.slidesCount()>1){
@@ -121,18 +120,18 @@ angular.module('controllers.home',[])
                     .then(function(result){
                         $console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.response.data.totalPages == 0){
+                        if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
                             $scope.productList = null;
                             return ;
                         }
-                        var items = result.response.data.content;
+                        var items = result.data.content;
                         if(items==null||items.length==0){
                             $scope.infiniteFlag = false;
                             return ;
                         }
                         addItem(items);
-                        if(pageNo == result.response.data.totalPages-1 ){
+                        if(pageNo == result.data.totalPages-1 ){
                             $scope.infiniteFlag = false;
                             return;
                         }
@@ -165,9 +164,6 @@ angular.module('controllers.home',[])
                 productHomeHandle.resize();
                 productHomeHandle.scrollTop();
             }
-
-            //遗留搜索功能
-
 
 
         }])

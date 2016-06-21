@@ -88,19 +88,19 @@ angular.module('controllers.productListByTypeCtrl',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.response.data.totalPages == 0){
+                        if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
                             $scope.productList = null;
                             return ;
                         }
 
-                        var items = result.response.data.content;
+                        var items = result.data.content;
                         if(items==null||items.length==0){
                             $scope.infiniteFlag = false;
                             return ;
                         }
                         addItem(items);
-                        if(pageNo == result.response.data.totalPages-1 ){
+                        if(pageNo == result.data.totalPages-1 ){
                             $scope.infiniteFlag = false;
                             return;
                         }
@@ -129,19 +129,19 @@ angular.module('controllers.productListByTypeCtrl',[])
                     .then(function(result){
                         $console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.response.data.totalPages == 0){
+                        if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
                             $scope.productList = null;
                             return ;
                         }
 
-                        var items = result.response.data.content;
+                        var items = result.data.content;
                         if(items==null||items.length==0){
                             $scope.infiniteFlag = false;
                             return ;
                         }
                         addItem(items);
-                        if(pageNo == result.response.data.totalPages-1 ){
+                        if(pageNo == result.data.totalPages-1 ){
                             $scope.infiniteFlag = false;
                             return;
                         }
@@ -181,31 +181,42 @@ angular.module('controllers.productListByTypeCtrl',[])
                 }
             };
 
-            $ionicPopover.fromTemplateUrl($config.popovers.filterType.templateUrl,{
-                scope:$scope
-            }).then(function(popover){
-                $scope.filterTypePopover = popover;
-            })
-
-            $ionicPopover.fromTemplateUrl($config.popovers.filterOrder.templateUrl,{
-                scope:$scope
-            }).then(function(popover){
-                $scope.filterOrderPopover = popover;
-            })
-
-            $ionicPopover.fromTemplateUrl($config.popovers.filterPrice.templateUrl,{
-                scope:$scope
-            }).then(function(popover){
-                $scope.filterPricePopover = popover;
-            })
-
             $scope.openPopover = function($event,popName){
-                $scope[popName].show($event);
+                $console.show($scope[popName])
+                if(!$scope[popName]){
+                    $ionicPopover.fromTemplateUrl($config.popovers[popName].templateUrl,{
+                        scope:$scope
+                    }).then(function(popover){
+                        $scope[popName] = popover;
+                        $scope[popName].show($event);
+                    })
+                }
+                else{
+                    $scope[popName].show($event);
+                }
+
             }
 
             $scope.closePopover = function(popName){
                 $scope[popName].hide();
             }
+
+            $scope.$on('$destroy', function() {
+                if($scope['filterType']){
+                    $scope['filterType'].remove();
+                    $scope['filterType']=null;
+                }
+
+                if($scope['filterOrder']){
+                    $scope['filterOrder'].remove();
+                    $scope['filterOrder']=null;
+                }
+
+                if($scope['filterPrice']){
+                    $scope['filterPrice'].remove();
+                    $scope['filterPrice']=null;
+                }
+            });
 
             $scope.showFilter = function(childType){
                 if(!childType){
@@ -219,7 +230,7 @@ angular.module('controllers.productListByTypeCtrl',[])
                 productListByTypeHandle.scrollTop();
                 pageNo = 0;
                 $scope.infiniteFlag = true;
-                $scope.closePopover('filterTypePopover');
+                $scope.closePopover('filterType');
             }
 
             $scope.showFilterOrder = function(intelligentClassify){
@@ -229,7 +240,7 @@ angular.module('controllers.productListByTypeCtrl',[])
                 productListByTypeHandle.scrollTop();
                 pageNo = 0;
                 $scope.infiniteFlag = true;
-                $scope.closePopover('filterOrderPopover');
+                $scope.closePopover('filterOrder');
             }
 
             $scope.checkPrice = function(){
@@ -250,17 +261,17 @@ angular.module('controllers.productListByTypeCtrl',[])
                 productListByTypeHandle.scrollTop();
                 pageNo = 0;
                 $scope.infiniteFlag = true;
-                $scope.closePopover('filterPricePopover');
+                $scope.closePopover('filterPrice');
             }
 
 
-            $scope.filterPrice = function(){
+            $scope.filterByPrice = function(){
                 $scope.productList = [];
                 productListByTypeHandle.resize();
                 productListByTypeHandle.scrollTop();
                 pageNo = 0;
                 $scope.infiniteFlag = true;
-                $scope.closePopover('filterPricePopover');
+                $scope.closePopover('filterPrice');
             }
 
             $rootScope.changeCity = function(city){

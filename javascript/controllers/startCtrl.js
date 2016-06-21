@@ -13,8 +13,9 @@ angular.module('controllers.start',[])
         '$city',
         '$ionicModal',
         '$location',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location){
-
+        '$interval',
+        '$httpService',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService){
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
@@ -37,6 +38,10 @@ angular.module('controllers.start',[])
                 }
             }
 
+            $scope.setBackGroundImage = function(imgUrl){
+                return {"background-image":"url("+imgUrl+")","-webkit-background-image":"url("+imgUrl+")"};
+            }
+
             $scope.parseTime = function(time){
                 if(time){
                     return DateFormat.format.prettyDate(time);
@@ -44,6 +49,12 @@ angular.module('controllers.start',[])
             }
 
             $scope.defaultHead = $config.getImageUrlDebug() + $config.assets.defaultHead;
+            $scope.homeQGXX = $config.getImageUrlDebug() + $config.assets.qgxx;
+            $scope.halfCircle = $config.getImageUrlDebug() + $config.assets.halfCircle;
+            $scope.loginBg = $config.getImageUrlDebug() + $config.assets.loginBg;
+            $scope.launcher = $config.getImageUrlDebug() + $config.assets.launcher;
+
+
 
 
             $scope.showProduct = function(id,type){
@@ -81,26 +92,84 @@ angular.module('controllers.start',[])
                     $scope.allCityList = $city.allCity;
                 })
 
-
-            createModal('cityModal')
-
-            function createModal(modalName){
-                $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
-                    scope: $scope,
-                    animation: $config.modals[modalName].animation
-                }).then(function(modal) {
-                    $scope[modalName] = modal;
-                });
-            }
-
             $scope.citySearch = '';
 
             $scope.openModal = function(modalName) {
-                $scope[modalName].show();
+                if(!$scope[modalName]){
+                    $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
+                        scope: $scope,
+                        animation: $config.modals[modalName].animation
+                    }).then(function(modal) {
+                        $scope[modalName] = modal;
+                        $scope[modalName].show();
+                    });
+                }
+
             };
             $scope.closeModal = function(modalName) {
-                $scope[modalName].hide()
-                $scope.$$childHead.$$childHead.citySearch = '';
+                $scope[modalName].hide().then(function(){
+                    $scope[modalName].remove();
+                })
             };
+            $scope.$on('modal.removed', function() {
+                if($scope['cityModal']){
+                    $scope['cityModal'] = null;
+                }
+
+                if($scope['loginModal']){
+                    $scope['loginModal'] = null;
+                }
+            });
+
+            $scope.clearTel = function(){
+                $scope.$$childTail.$$childTail.$$childTail.telNumber = '';
+            }
+
+            $scope.clearCode = function(){
+                $scope.$$childTail.$$childTail.$$childTail.codeNumber = '';
+            }
+
+            $scope.codeTarget = '获取验证码';
+            $scope.codeFlag = true;
+            $scope.totalTime = 60;
+            var time = $scope.totalTime;
+            $scope.getCode = function(telNumber){
+
+                if(!telNumber){
+                    $console.show($config.messages.noTel);
+                    return;
+                }
+
+                if($scope.codeFlag){
+                    $scope.codeFlag = false;
+                    $scope.codeTarget = '验证码'+time+'s';
+                    var data = {
+                        "cmd": $config.cmds.getSecurityCode,
+                        "parameters":{
+                            "loginAccount":telNumber
+                        }
+                    }
+
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $console.show(result)
+                        })
+
+
+                    var timeInterval = $interval(function(){
+                        time--;
+                        if(time<0){
+                            $interval.cancel(timeInterval);
+                            $scope.codeFlag = true;
+                            time = $scope.totalTime;
+                            $scope.codeTarget = '获取验证码';
+                        }
+                        else{
+                            $scope.codeTarget = '验证码'+time+'s';
+                        }
+                    },1000)
+                }
+            }
+
         }
     ])

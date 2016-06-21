@@ -8,7 +8,7 @@
             <button class="button" ui-sref="searchHome()"><i class="mbpz mbpz-icon-search"></i></button>
         </div>
     </ion-header-bar>
-    <div class="header-zs"></div>
+    <div class="header-zs" ng-style="setBackGroundImage(halfCircle)"></div>
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHomeHandle">
         <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="ad in adList track by $index">

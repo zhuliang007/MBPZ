@@ -27,7 +27,7 @@ angular.module('services.productType',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $productType.typeCodes = result.response.data;
+                        $productType.typeCodes = result.data;
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);
@@ -81,8 +81,8 @@ angular.module('services.productType',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $productType.Classify.intelligentClassifyList = result.response.data.intelligentClassify;
-                        $productType.Classify.priceClassifyList = result.response.data.priceClassify;
+                        $productType.Classify.intelligentClassifyList = result.data.intelligentClassify;
+                        $productType.Classify.priceClassifyList = result.data.priceClassify;
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);

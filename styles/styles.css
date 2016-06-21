@@ -32,6 +32,8 @@
 .mbpz-icon-replies:before { content: "\e60d"; }
 .mbpz-icon-personal:before { content: "\e603"; }
 .mbpz-icon-plus:before { content: "\e604"; }
+.mbpz-icon-zan:before { content: "\e610"; }
+.mbpz-icon-zansel:before { content: "\e611"; }
 .mbpz-icon-guanfang:before { content: "\e60a"; }
 .mbpz-icon-position:before { content: "\e60e"; }
 
@@ -44,7 +46,7 @@ ion-content{
     background-color: #F5F5F5;
 }
 
-.cityModel ion-content{
+.cityModal ion-content{
     background-color: #FFFFFF;
 }
 
@@ -113,7 +115,7 @@ ion-content{
 
 .tabsShop ion-header-bar,
 .productDetail ion-header-bar,
-.cityModel ion-header-bar{
+.cityModal ion-header-bar{
     background-color: #F5F5F5;
     background-image:none;
     color: #333333;
@@ -151,8 +153,8 @@ ion-content{
 }
 
 
-.cityModel ion-header-bar .button,
-.cityModel ion-header-bar .button.activated{
+.cityModal ion-header-bar .button,
+.cityModal ion-header-bar .button.activated{
     background: #F5F5F5;
     color: #333333;
     border:none;
@@ -164,7 +166,7 @@ ion-content{
     padding-top: 3px;
 }
 
-.cityModel ion-header-bar .cityInput,
+.cityModal ion-header-bar .cityInput,
 .searchHome ion-header-bar .cityInput{
     width: 95%;
     overflow: hidden;
@@ -194,7 +196,7 @@ ion-content{
     border-radius: 50%;
 }
 
-.cityModel ion-header-bar .cityInput>input,
+.cityModal ion-header-bar .cityInput>input,
 .searchHome ion-header-bar .cityInput>input{
     width: 100%;
     padding: 5px 10px;
@@ -224,7 +226,6 @@ ion-content{
 /**首页*/
 .header-zs{
     height: 12px;
-    background-image: url("../assets/half-circle.png");
     -webkit-background-size: 16px 12px;
     background-size: 16px 12px;
     background-repeat: repeat-x;
@@ -315,47 +316,114 @@ ion-content{
 }
 
 /*城市选择*/
-.cityModel .cityItem{
+.cityModal .cityItem{
     color: #999999;
     font-size: 14px;
     padding: 10px 15px;
 }
 
-.cityModel .cityItem>ion-spinner{
+.cityModal .cityItem>ion-spinner{
     stroke: #FF4E72;
 }
 
-.cityModel .cityItem>ion-spinner>svg{
+.cityModal .cityItem>ion-spinner>svg{
     width: 28px;
     height: 19px;
 }
 
-.cityModel .cityItem>ion-spinner+span{
+.cityModal .cityItem>ion-spinner+span{
     position: relative;
     top: -4px;
 }
 
-.cityModel .cityItem.activated{
+.cityModal .cityItem.activated{
     background-color: #F5F5F5;
 }
 
-.cityModel .cityItem.cityTarget{
+.cityModal .cityItem.cityTarget{
     padding: 5px 10px;
     background-color: #DFDFDF;
 }
 
-.cityModel .cityItem .city{
+.cityModal .cityItem .city{
     color: #333333;
     padding-right: 10px;
 }
 
-.cityModel .cityDivide + .cityDivide{
+.cityModal .cityDivide + .cityDivide{
     border-top: 1px solid #DDDDDD;
 }
 
-.cityModel .list>ion-list + ion-list>.list{
+.cityModal .list>ion-list + ion-list>.list{
     border-top: 1px solid #DDDDDD;
 }
+
+/*登录模块loginModal*/
+.loginModal .closeLogin{
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+}
+
+.loginModal .loginGroup{
+    position: absolute;
+    width: 100%;
+    padding: 0px 10px;
+    height: 70%;
+    top: calc(50% - 35%);
+    top: -webkit-calc(50% - 35%);
+}
+
+.loginModal .inputGroup{
+    width: 100%;
+    position: relative;
+}
+
+.loginModal .inputGroup>.tel::-webkit-input-placeholder,
+.loginModal .inputGroup>.code::-webkit-input-placeholder{
+    color: #666666;
+}
+
+.loginModal .inputGroup>.tel,
+.loginModal .inputGroup>.code{
+    width: 100%;
+    background-color: transparent;
+    color: #666666;
+    height: 20px;
+}
+
+.loginModal .inputGroup>.tel + .clearTel{
+    position: absolute;
+    z-index: 10;
+    color: #FF4E72;
+    top: 0px;
+    right: 0px;
+    font-size: 18px;
+}
+
+.loginModal .inputGroup>.clearCode{
+    position: absolute;
+    z-index: 10;
+    color: #FF4E72;
+    font-size: 18px;
+    top: 0px;
+    right: 100px;
+    margin-right: 10px;
+}
+
+.loginModal .inputGroup>.getCode{
+    position: absolute;
+    z-index: 10;
+    color: #FF4E72;
+    border:none;
+    background-color: transparent;
+    top: 0px;
+    right: 0px;
+    border-left: 1px solid #FF4E72;
+    padding-left: 10px;
+    width: 100px;
+}
+
 
 /*卡片组合*/
 .card-group{
@@ -785,16 +853,31 @@ ion-content{
     font-size: 16px;
 }
 
-.userCtrl>div.star{
-    color: #FFD33E;
+.userCtrl>div.judge.star{
+    color: #666666;
 }
-.userCtrl>div.submit{
+.userCtrl>div.judge.zan{
+    color: #666666;
+}
+
+.userCtrl>button.submit{
     box-flex:1.5;
     -webkit-box-flex: 1.5;
     background: #FF4E72;
     color: #FFFFFF;
     text-align: center;
     font-size: 16px;
+    display: block;
+    border:none;
+}
+
+.userCtrl>button.submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
+
+.userCtrl>button.submit[disabled]{
+    background-color: #F5F5F5;
+    color: #999999;
 }
 
 
@@ -836,6 +919,18 @@ ion-content{
 
 .bg-color-white{
     background-color: #FFFFFF;
+}
+
+.ba-color-white-less{
+    background-color: rgba(255,255,255,.5);
+}
+
+.color-red{
+    color: #FF4E72;
+}
+
+.color-white{
+    color: #FFFFFF;
 }
 
 .img-auto{
@@ -954,6 +1049,10 @@ ion-content{
 
 .border-radius-round{
     border-radius: 50%;
+}
+
+.border-radius-normal{
+    border-radius: 7px;
 }
 
 /**其他基础样式*/
