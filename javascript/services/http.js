@@ -10,9 +10,9 @@ angular.module("services.http",[])
                 .success(function(result){
                     if(result.error){
                         var systemError = {
-                            systemError: angular.toJson(result.error)
+                            systemError: result.error
                         }
-                        deferred.reject(angular.toJson(systemError));
+                        deferred.reject(systemError);
                     }
                     else{
                         deferred.resolve(result.response);
@@ -20,9 +20,9 @@ angular.module("services.http",[])
                 })
                 .error(function(error){
                     var httpError = {
-                        httpError : angular.toJson(error)
+                        httpError : error
                     }
-                    deferred.reject(angular.toJson(httpError));
+                    deferred.reject(httpError);
                 })
             return deferred.promise;
         }
