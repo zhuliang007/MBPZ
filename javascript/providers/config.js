@@ -29,7 +29,10 @@ angular.module('providers.config',[])
         /**图片资源配置*/
         $config.assets = {
             qgxx:"qgxx.png",
-            defaultHead:"default-head.png"
+            defaultHead:"default-head.png",
+            halfCircle:"half-circle.png",
+            loginBg:"login_back.jpg",
+            launcher:"ic_launcher.png"
         }
 
 
@@ -45,7 +48,11 @@ angular.module('providers.config',[])
             getHotCityList:"market/home/getHotCityList",
             getAllCityList:"market/home/getAllCityList",
             saveLocationAddress:"market/home/saveLocationAddress",
-            search:"market/home/search"
+            search:"market/home/search",
+            getSecurityCode:"market/getSecurityCode",
+            login:"market/login",
+            collect:"product/collect",
+            spot:"product/askToBuy/spot"
         }
 
         $config.types = {
@@ -56,7 +63,9 @@ angular.module('providers.config',[])
 
         /**提示信息配置*/
         $config.messages = {
-
+            noTel:"请输入手机号",
+            noCode:"请输入验证码",
+            errorCode:"验证码错误"
         }
 
         /**controller配置*/
@@ -186,6 +195,10 @@ angular.module('providers.config',[])
         $config.modals = {
             cityModal:{
                 templateUrl:"templates/modal/city.html",
+                animation:"slide-in-up"
+            },
+            loginModal:{
+                templateUrl:"templates/modal/login.html",
                 animation:"slide-in-up"
             }
         }

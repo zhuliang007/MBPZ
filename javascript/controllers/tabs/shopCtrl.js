@@ -30,17 +30,17 @@ angular.module('controllers.shop',[])
                 .then(function(result){
                     $console.show(result)
                     $scope.$broadcast('scroll.infiniteScrollComplete');
-                    if(result.response.data.totalPages == 0){
+                    if(result.data.totalPages == 0){
                         $scope.infiniteFlag = false;
                         return ;
                     }
-                    var items = result.response.data.content;
+                    var items = result.data.content;
                     if(items==null||items.length==0){
                         $scope.infiniteFlag = false;
                         return ;
                     }
                     addItem(items);
-                    if(pageNo == result.response.data.totalPages-1 ){
+                    if(pageNo == result.data.totalPages-1 ){
                         $scope.infiniteFlag = false;
                         return;
                     }

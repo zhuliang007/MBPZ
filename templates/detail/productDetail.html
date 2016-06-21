@@ -170,18 +170,17 @@
     </ion-content>
     <div class="userCtrl">
         <div><span class="mbpz mbpz-icon-replies"></span><span ng-bind="product.replyNumber"></span></div>
-        <div class="star" ng-if="productType==0">
-            <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
-            <span ng-if="productType==1" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
-        </div>
-        <div class="star" ng-if="productType==1">
-            <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
-            <span ng-if="productType==1" class="icon" ng-class="{true:'ion-ios-star',false:'ion-ios-star-outline'}[false]"></span>
+        <div class="judge" ng-class="{true:'star',false:'zan'}[productType==0]" ng-click="judgeProduct()">
+            <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star-outline',false:'ion-ios-star'}[product.isCollect==null||product.isCollect==0]"></span>
+            <span ng-if="productType==1" class="mbpz" ng-class="{true:'mbpz-icon-zan',false:'mbpz-icon-zansel'}[product.isSpot==null||product.isSpot==0]"></span>
         </div>
         <div>
             <span class="icon ion-share padding-small-right"></span>分享
         </div>
-        <div ng-if="productType==0" class="submit">我要买</div>
+        <button ng-if="productType==0" class="submit" ng-disabled="product.productStatus==1" ng-click="buyProduct()">
+            <span ng-if="product.productStatus==0">我要买</span>
+            <span ng-if="product.productStatus==1">已下架</span>
+        </button>
         <div ng-if="productType==1" class="submit">确认解决</div>
     </div>
 </ion-view>
