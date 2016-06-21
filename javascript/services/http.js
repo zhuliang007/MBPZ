@@ -8,10 +8,21 @@ angular.module("services.http",[])
             var deferred = $q.defer();
             $http.post(action,data)
                 .success(function(result){
-                    deferred.resolve(result);
+                    if(result.error){
+                        var systemError = {
+                            systemError: angular.toJson(result.error)
+                        }
+                        deferred.reject(angular.toJson(systemError));
+                    }
+                    else{
+                        deferred.resolve(result.response);
+                    }
                 })
                 .error(function(error){
-                    deferred.reject(error);
+                    var httpError = {
+                        httpError : angular.toJson(error)
+                    }
+                    deferred.reject(angular.toJson(httpError));
                 })
             return deferred.promise;
         }

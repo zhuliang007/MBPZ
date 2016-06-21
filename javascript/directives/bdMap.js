@@ -8,7 +8,7 @@ angular.module('directives.bdMap',[])
 
             bdMap.restrict = 'E';
             bdMap.template = '<div id="map"></div>';
-            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService){
+            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals){
 
                 var latitude ;//纬度
                 var longitude ; //经度
@@ -76,14 +76,13 @@ angular.module('directives.bdMap',[])
                         locationJosnStr.streetNumber = addComp.streetNumber;
                         locationJosnStr.latitude = result.points[0].lat;
                         locationJosnStr.longitude = result.points[0].lng;
-                        $console.show('token'+$rootScope.token)
-                        if($rootScope.token){
+                        if($locals.get('token','')){
                             var data = {
                                 "cmd":$config.cmds.saveLocationAddress,
                                 "parameters":{
                                     "locationJosnStr":angular.toJson(locationJosnStr)
                                 },
-                                "token":$rootScope.token
+                                "token":$locals.get('token','')
                             };
                             $httpService.getJsonFromPost($config.getRequestAction(),data)
                                 .then(function(result){

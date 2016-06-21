@@ -17,7 +17,7 @@ angular.module("services.cache",[])
             var deferred = $q.defer();
             $httpService.getJsonFromPost(action,data)
                 .then(function(result){
-                    addItems(key,result.response.data.content);
+                    addItems(key,result.data.content);
                     deferred.resolve(result);
                 },function(error){
                     deferred.reject(error);
