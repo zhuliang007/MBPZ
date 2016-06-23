@@ -17,4 +17,5 @@ angular.module('starter.controllers',[
     'controllers.addressCtrl',
     'controllers.addAdrsCtrl',
     'controllers.refundListCtrl',
-    'controllers.messageTalking'])
+    'controllers.messageTalking',
+    'controllers.report'])

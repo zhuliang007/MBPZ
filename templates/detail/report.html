@@ -1,0 +1,21 @@
+<ion-view class="report">
+    <ion-header-bar align-title="center">
+        <div class="buttons" >
+            <button class="button"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">举报</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="title">请选择举报原因</div>
+        <div class="reportBody">
+            <ion-radio icon="ion-ios-checkmark-outline" ng-class="{true:'radioBorder',false:''}[reportType.name=='其他']" ng-model="reportReason.choiceType" ng-value="reportType.value" ng-repeat="reportType in reportTypeList track by $index"><span ng-bind="reportType.name"></span></ion-radio>
+            <div class="reasonBody" ng-if="reportTypeList&&reportTypeList.length>0">
+                <textarea maxlength="200" ng-disabled="reportReason.choiceType!=4" placeholder="其输入其他举报内容" ng-model="reportReason.reasonText">
+                </textarea>
+            </div>
+        </div>
+        <div class="padding-normal-horizontal">
+            <button type="button" class="button-block submit" ng-click="submitReport(reportReason.choiceType,reportReason.reasonText)">提交申请</button>
+        </div>
+    </ion-content>
+</ion-view>

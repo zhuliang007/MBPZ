@@ -13,7 +13,12 @@ angular.module('controllers.productDetail',[])
         '$timeout',
         '$ionicSlideBoxDelegate',
         '$locals',
-        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals){
+        '$ionicPopover',
+        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals,$ionicPopover){
+            document.body.classList.remove('platform-ios');
+            document.body.classList.remove('platform-android');
+            document.body.classList.add('platform-ios');
+
             $scope.productType = $stateParams.type;
             var id = $stateParams.id;
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
@@ -154,6 +159,32 @@ angular.module('controllers.productDetail',[])
                         }
                     })
             }
+
+            $scope.openPopover = function($event,popName){
+                if(!$scope[popName]){
+                    $ionicPopover.fromTemplateUrl($config.popovers[popName].templateUrl,{
+                        scope:$scope
+                    }).then(function(popover){
+                        $scope[popName] = popover;
+                        $scope[popName].show($event);
+                    })
+                }
+                else{
+                    $scope[popName].show($event);
+                }
+
+            }
+
+            $scope.closePopover = function(popName){
+                $scope[popName].hide();
+            }
+
+            $scope.$on('$destroy', function() {
+                if($scope['productReport']){
+                    $scope['productReport'].remove();
+                    $scope['productReport']=null;
+                }
+            });
 
 
             $rootScope.login = function(telNumber,codeNumber){

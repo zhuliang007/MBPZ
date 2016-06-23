@@ -141,5 +141,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.messageTalking.controller,
                     cache:$configProvider.controllers.messageTalking.cache,
                 })
+                .state($configProvider.controllers.report.name,{
+                    url:$configProvider.controllers.report.url,
+                    templateUrl:$configProvider.controllers.report.templateUrl,
+                    controller:$configProvider.controllers.report.controller,
+                    cache:$configProvider.controllers.report.cache,
+                })
+
 
         }])

@@ -5,14 +5,14 @@
         </div>
         <h1 class="title">求购</h1>
         <div class="buttons">
-            <button class="button"><i class="icon ion-more"></i></button>
+            <button class="button" ng-click="openPopover($event,'productReport')"><i class="icon ion-more"></i></button>
         </div>
     </ion-header-bar>
 
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="header" ng-if="(product.productImageList!=null)&&(product.productImageList.length>0)">
             <span class="icon ion-ios-arrow-back"></span>
-            <span class="icon ion-more"></span>
+            <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
         </div>
         <ion-slide-box ng-show="product.productImageList!=null"
                        ng-class="{true:'margin-normal-bottom',false:''}[productType==1]"

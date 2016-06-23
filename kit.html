@@ -7,9 +7,11 @@
 <!--[if lt IE 9]>
 <script src="https://g.alicdn.com/aliww/ww/json/json.js" charset="utf-8"></script>
 <![endif]-->
-<!-- 自动适配移动端与pc端 -->
-<script src="https://g.alicdn.com/aliww/??h5.openim.sdk/1.0.6/scripts/wsdk.js,h5.openim.kit/0.3.3/scripts/kit.js" charset="utf-8"></script>
+<!-- 自动适配移动端与pc端
+<script src="https://g.alicdn.com/aliww/h5.imsdk/2.1.5/scripts/yw/wsdk.js" charset="utf-8"></script>-->
+<script src="https://g.alicdn.com/aliww/h5.imsdk/2.1.5/scripts/yw/wsdk.js" charset="utf-8"></script>
 <script type="text/javascript">
+    var list;
     var sdk = new WSDK();
 
     sdk.Base.login({
@@ -19,18 +21,25 @@
         timeout: 4000,
         success: function(data){
             // {code: 1000, resultText: 'SUCCESS'}
-           sdk.Base.getRecentContact({
-               count:10,
+            sdk.Base.getRecentContact({
+               count:30,
                success: function (datas) {
-                   console.log(datas);
+                   statechange(datas.data.cnts)
                }
-           })
+           });
         },
         error: function(error){
             // {code: 1002, resultText: 'TIMEOUT'}
             console.log('login fail', error);
         }
     });
+
+    document.onreadystatechange = statechange;
+    function statechange(datas) {
+        list = datas;
+    }
+
+    console.log(list);
 </script>
 </body>
 </html>

@@ -52,7 +52,9 @@ angular.module('providers.config',[])
             getSecurityCode:"market/getSecurityCode",
             login:"market/login",
             collect:"product/collect",
-            spot:"product/askToBuy/spot"
+            spot:"product/askToBuy/spot",
+            tipoffs:"system/tipoffs/getPage",
+            report:"system/tipoffs/report"
         }
 
         $config.types = {
@@ -86,8 +88,7 @@ angular.module('providers.config',[])
             },
             tabsShop : {
                 templateUrl:"templates/tabs/tabs-shop.html",
-                url:"/tabsShop" +
-                "",
+                url:"/tabsShop",
                 name:"tabs.tabsShop",
                 controller:"ShopCtrl",
                 cache:false
@@ -193,11 +194,18 @@ angular.module('providers.config',[])
                 controller:"SearchHomeCtrl",
                 cache:false
             },
-            messageTalking:{
-                templateUrl:"templates/message/message-list.html",
-                url:"/talking",
-                name:"messageTalking",
-                controller:"MessageTalking",
+
+            messageTalking: {
+                templateUrl: "templates/message/message-list.html",
+                url: "/talking",
+                name: "messageTalking",
+                controller: "MessageTalking",
+            },
+            report:{
+                templateUrl:"templates/detail/report.html",
+                url:"/report/:productId",
+                name:"report",
+                controller:"ReportCtrl",
                 cache:false
             }
 
@@ -216,6 +224,9 @@ angular.module('providers.config',[])
             },
             chooseSearchType:{
                 templateUrl:"templates/popover/chooseSearchType.html"
+            },
+            productReport:{
+                templateUrl:"templates/popover/productReport.html"
             }
         }
 
