@@ -192,6 +192,13 @@ angular.module('providers.config',[])
                 name:"searchHome",
                 controller:"SearchHomeCtrl",
                 cache:false
+            },
+            messageTalking:{
+                templateUrl:"templates/message/message-list.html",
+                url:"/talking",
+                name:"messageTalking",
+                controller:"MessageTalking",
+                cache:false
             }
 
         }

@@ -135,7 +135,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.myCenterRefund.controller,
                     cache:$configProvider.controllers.myCenterRefund.cache,
                  })
-
-
+                .state($configProvider.controllers.messageTalking.name,{
+                    url:$configProvider.controllers.messageTalking.url,
+                    templateUrl:$configProvider.controllers.messageTalking.templateUrl,
+                    controller:$configProvider.controllers.messageTalking.controller,
+                    cache:$configProvider.controllers.messageTalking.cache,
+                })
 
         }])

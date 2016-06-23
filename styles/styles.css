@@ -116,9 +116,9 @@ ion-content{
 .tabsShop ion-header-bar,
 .productDetail ion-header-bar,
 .cityModal ion-header-bar{
-    background-color: #F5F5F5;
+    background-color: #FF4E72;
     background-image:none;
-    color: #333333;
+    color: #FFFFFF;
 }
 
 .tabsHome ion-header-bar .title,
@@ -135,7 +135,7 @@ ion-content{
 
 .tabsShop ion-header-bar .title,
 .productDetail ion-header-bar .title{
-    color: #333333;
+    color: #FFFFFF;
     font-weight: 700;
     font-size: 18px;
 }
@@ -145,13 +145,13 @@ ion-content{
 .productListByType ion-header-bar .button,
 .productListByType ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
-.searchHome ion-header-bar .button.activated{
+.searchHome ion-header-bar .button.activated,
+.tabsShop ion-header-bar .button{
     background: #FF4E72;
     color: #FFFFFF;
     border:none;
     font-size: 14px!important;
 }
-
 
 .cityModal ion-header-bar .button,
 .cityModal ion-header-bar .button.activated{
@@ -1213,4 +1213,33 @@ ion-content{
     color:#FF4E72;
 }
 
+.message-list .item-thumbnail-left
+{
+    min-height:50px;
+    padding-left:60px;
+    !important;
+}
+.message-list .item-thumbnail-left>img{
+    max-width: 40px;
+    max-height: 40px;
+    !important;
+}
 
+.message-title{
+    font-size:16px;
+    color:black;
+}
+.message-p{
+    font-size: 14px;
+    color:#CCCCCC;
+}
+
+.wsdk-emot{
+    width:10%;
+    height:10%;
+}
+
+.message-list{
+    margin-bottom:10px;
+    !important;
+}
