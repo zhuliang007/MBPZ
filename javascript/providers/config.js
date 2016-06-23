@@ -200,6 +200,7 @@ angular.module('providers.config',[])
                 url: "/talking",
                 name: "messageTalking",
                 controller: "MessageTalking",
+                cache:false
             },
             report:{
                 templateUrl:"templates/detail/report.html",
