@@ -1,0 +1,36 @@
+<ion-modal-view class="provinceCityModal">
+    <ion-content scroll="false">
+        <ion-header-bar align-title="center">
+            <div class="buttons">
+                <button class="button" ng-click="closeModal('provinceCityModal')">取消</button>
+            </div>
+            <h1 class="title">选择所在地区</h1>
+            <div class="buttons">
+                <button class="button" ng-click="submitProvinceCity()">确定</button>
+            </div>
+        </ion-header-bar>
+        <div class="provinceCityGroup">
+            <div class="provinceCityItem">
+                <ion-scroll has-bouncing="true" overflow-scroll="false">
+                    <ion-list>
+                        <ion-radio  ng-repeat="province in provinceCityList.provinceList  track by $index" ng-model="provinceCityModalObject.provinceCode" ng-value="{{province.code}}" name="province" ng-change="change(provinceCityModalObject.provinceCode,'provinceCode')"><span ng-bind="province.name"></span></ion-radio>
+                    </ion-list>
+                </ion-scroll>
+            </div>
+            <div class="provinceCityItem">
+                <ion-scroll has-bouncing="true" overflow-scroll="false" delegate-handle="cityHandle">
+                    <ion-list>
+                        <ion-radio  ng-repeat="city in provinceCityList.cityList  track by $index" ng-model="provinceCityModalObject.cityCode" ng-value="city.code" name="city" ng-change="change(provinceCityModalObject.cityCode,'cityCode')"><span ng-bind="city.name"></span></ion-radio>
+                    </ion-list>
+                </ion-scroll>
+            </div>
+            <div class="provinceCityItem">
+                <ion-scroll has-bouncing="true" overflow-scroll="false" delegate-handle="districtHandle">
+                    <ion-list>
+                        <ion-radio  ng-repeat="district in provinceCityList.districtList track by $index" ng-model="provinceCityModalObject.districtCode" ng-value="district.code" name="district"><span ng-bind="district.name"></span></ion-radio>
+                    </ion-list>
+                </ion-scroll>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

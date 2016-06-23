@@ -13,9 +13,8 @@ angular.module('starter.controllers',[
     'controllers.myCenterSetupCtrl',
     'controllers.feedbackCtrl',
     'controllers.walletCtrl',
-    'controllers.searchHomeCtrl',
-    'controllers.addressCtrl',
-    'controllers.addAdrsCtrl',
-    'controllers.refundListCtrl',
-    'controllers.messageTalking',
-    'controllers.report'])
+    'controllers.searchHome',
+    'controllers.report',
+    'controllers.orderPreview',
+    'controllers.orderAddress',
+    'controllers.editAddress'])

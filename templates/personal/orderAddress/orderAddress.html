@@ -1,0 +1,20 @@
+<ion-view class="orderAddress">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">地址管理</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <ion-list></ion-list>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
+    <ion-footer-bar align-title="center">
+        <button type="button" class="button-block submit" ng-click="edictAddress()">添加新地址</button>
+    </ion-footer-bar>
+</ion-view>

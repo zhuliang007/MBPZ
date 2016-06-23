@@ -117,36 +117,32 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.searchHome.controller,
                     cache:$configProvider.controllers.searchHome.cache,
                 })
-                .state($configProvider.controllers.myCenterAddress.name,{
-                    url:$configProvider.controllers.myCenterAddress.url,
-                    templateUrl:$configProvider.controllers.myCenterAddress.templateUrl,
-                    controller:$configProvider.controllers.myCenterAddress.controller,
-                    cache:$configProvider.controllers.myCenterAddress.cache,
-                })
-                .state($configProvider.controllers.myCenterAddAdrs.name,{
-                    url:$configProvider.controllers.myCenterAddAdrs.url,
-                    templateUrl:$configProvider.controllers.myCenterAddAdrs.templateUrl,
-                    controller:$configProvider.controllers.myCenterAddAdrs.controller,
-                    cache:$configProvider.controllers.myCenterAddAdrs.cache,
-                })
-                .state($configProvider.controllers.myCenterRefund.name,{
-                    url:$configProvider.controllers.myCenterRefund.url,
-                    templateUrl:$configProvider.controllers.myCenterRefund.templateUrl,
-                    controller:$configProvider.controllers.myCenterRefund.controller,
-                    cache:$configProvider.controllers.myCenterRefund.cache,
-                 })
-                .state($configProvider.controllers.messageTalking.name,{
-                    url:$configProvider.controllers.messageTalking.url,
-                    templateUrl:$configProvider.controllers.messageTalking.templateUrl,
-                    controller:$configProvider.controllers.messageTalking.controller,
-                    cache:$configProvider.controllers.messageTalking.cache,
-                })
                 .state($configProvider.controllers.report.name,{
                     url:$configProvider.controllers.report.url,
                     templateUrl:$configProvider.controllers.report.templateUrl,
                     controller:$configProvider.controllers.report.controller,
                     cache:$configProvider.controllers.report.cache,
                 })
+                .state($configProvider.controllers.orderPreview.name,{
+                    url:$configProvider.controllers.orderPreview.url,
+                    templateUrl:$configProvider.controllers.orderPreview.templateUrl,
+                    controller:$configProvider.controllers.orderPreview.controller,
+                    cache:$configProvider.controllers.orderPreview.cache,
+                })
+                .state($configProvider.controllers.orderAddress.name,{
+                    url:$configProvider.controllers.orderAddress.url,
+                    templateUrl:$configProvider.controllers.orderAddress.templateUrl,
+                    controller:$configProvider.controllers.orderAddress.controller,
+                    cache:$configProvider.controllers.orderAddress.cache,
+                })
+                .state($configProvider.controllers.editAddress.name,{
+                    url:$configProvider.controllers.editAddress.url,
+                    templateUrl:$configProvider.controllers.editAddress.templateUrl,
+                    controller:$configProvider.controllers.editAddress.controller,
+                    cache:$configProvider.controllers.editAddress.cache,
+                })
+
+
 
 
         }])

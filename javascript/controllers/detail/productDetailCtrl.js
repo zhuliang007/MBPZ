@@ -119,6 +119,8 @@ angular.module('controllers.productDetail',[])
                     $console.show("是帖子本人")
                     return;
                 }
+
+                $state.go($config.controllers.orderPreview.name,{productId:id});
             }
 
             $scope.judgeProduct = function(){

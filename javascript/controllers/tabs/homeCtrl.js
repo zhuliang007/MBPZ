@@ -20,8 +20,6 @@ angular.module('controllers.home',[])
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$locals){
 
            /* $rootScope.token = $stateParams.token;*/
-
-
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
 
             var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
@@ -164,6 +162,5 @@ angular.module('controllers.home',[])
                 productHomeHandle.resize();
                 productHomeHandle.scrollTop();
             }
-
 
         }])

@@ -54,7 +54,11 @@ angular.module('providers.config',[])
             collect:"product/collect",
             spot:"product/askToBuy/spot",
             tipoffs:"system/tipoffs/getPage",
-            report:"system/tipoffs/report"
+            report:"system/tipoffs/report",
+            reserve:"market/order/reserve",
+            addressList:"userAddress/getPage",
+            provinceCity:"provinceCity/getAll",
+            userAddressSave:"userAddress/save",
         }
 
         $config.types = {
@@ -166,27 +170,6 @@ angular.module('providers.config',[])
                 controller:"WalletCtrl",
                 cache:false
             },
-            myCenterRefund:{
-                templateUrl:"templates/personal/refund/personal-refund.html",
-                url:"/refund",
-                name:"myCenterRefund",
-                controller:"RefundListCtrl",
-                cache:false
-            },
-            myCenterAddress:{
-                templateUrl:"templates/personal/address/personal-address.html",
-                url:"/address",
-                name:"myCenterAddress",
-                controller:"AddressCtrl",
-                cache:false
-            },
-            myCenterAddAdrs:{
-                templateUrl:"templates/personal/address/personal-add-address.html",
-                url:"/addAddress",
-                name:"myCenterAddAdrs",
-                controller:"AddAdrsCtrl",
-                cache:false
-            },
             searchHome:{
                 templateUrl:"templates/home/search.html",
                 url:"/searchHome",
@@ -194,19 +177,32 @@ angular.module('providers.config',[])
                 controller:"SearchHomeCtrl",
                 cache:false
             },
-
-            messageTalking: {
-                templateUrl: "templates/message/message-list.html",
-                url: "/talking",
-                name: "messageTalking",
-                controller: "MessageTalking",
-                cache:false
-            },
             report:{
                 templateUrl:"templates/detail/report.html",
                 url:"/report/:productId",
                 name:"report",
                 controller:"ReportCtrl",
+                cache:false
+            },
+            orderPreview:{
+                templateUrl:"templates/order/orderPreview.html",
+                url:"/orderPreview/:productId",
+                name:"orderPreview",
+                controller:"OrderPreviewCtrl",
+                cache:false
+            },
+            orderAddress:{
+                templateUrl:"templates/personal/orderAddress/orderAddress.html",
+                url:"/orderAddress/:type",
+                name:"orderAddress",
+                controller:"OrderAddressCtrl",
+                cache:false
+            },
+            editAddress:{
+                templateUrl:"templates/personal/orderAddress/editAddress.html",
+                url:"/editAddress/:type&:id?",
+                name:"editAddress",
+                controller:"EditAddressCtrl",
                 cache:false
             }
 
@@ -239,6 +235,10 @@ angular.module('providers.config',[])
             },
             loginModal:{
                 templateUrl:"templates/modal/login.html",
+                animation:"slide-in-up"
+            },
+            provinceCityModal:{
+                templateUrl:"templates/modal/provinceCity.html",
                 animation:"slide-in-up"
             }
         }
