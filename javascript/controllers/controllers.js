@@ -14,4 +14,8 @@ angular.module('starter.controllers',[
     'controllers.feedbackCtrl',
     'controllers.walletCtrl',
     'controllers.searchHomeCtrl',
+    'controllers.addressCtrl',
+    'controllers.addAdrsCtrl',
+    'controllers.refundListCtrl',
+    'controllers.messageTalking',
     'controllers.report'])

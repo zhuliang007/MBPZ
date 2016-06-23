@@ -1,4 +1,4 @@
-<ion-view class="tabsHome">
+<ion-view class="tabsShop">
     <ion-header-bar align-title="center">
         <h1 class="title">我的</h1>
         <div class="buttons">
@@ -7,10 +7,10 @@
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="list">
-            <a class="item item-avatar item-icon-right" href="#">
-                <img src="venkman.jpg">
-                <h2>name</h2>
-                <p>性别|未设置</p>
+            <a class="item item-avatar item-icon-right personal-user-image" href="#">
+                <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                <p class="personal-name">name</p>
+                <p>性别 | 未设置</p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
@@ -22,7 +22,7 @@
             </a>
             <div class="item item-divider">
             </div>
-            <a class="item  item-icon-left item-icon-right" href="#">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('myCenterRefund')">
                 <i class="icon ion-ios-arrow-forward"></i>
                 <h2>退款管理</h2>
                 <i class="icon ion-ios-arrow-forward"></i>
@@ -58,7 +58,7 @@
             </a>
             <div class="item item-divider">
             </div>
-            <a class="item  item-icon-left item-icon-right" href="#">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('myCenterAddress')">
                 <i class="icon ion-ios-arrow-forward"></i>
                 <h2>地址管理</h2>
                 <i class="icon ion-ios-arrow-forward"></i>

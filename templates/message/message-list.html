@@ -1,0 +1,17 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="loginOut()"><span class="icon ion-ios-arrow-back">消息</span></button>
+        </div>
+        <h1 class="title">即时聊天</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list message-list" ng-repeat="item in items track by $index">
+            <a class="item item-avatar" href="#">
+                <img src="{{item.avator}}">
+                <h2 >{{item.nickname}}</h2>
+                <p ng-bind-html="item.emot"></p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

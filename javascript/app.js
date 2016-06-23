@@ -117,14 +117,36 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.searchHome.controller,
                     cache:$configProvider.controllers.searchHome.cache,
                 })
+                .state($configProvider.controllers.myCenterAddress.name,{
+                    url:$configProvider.controllers.myCenterAddress.url,
+                    templateUrl:$configProvider.controllers.myCenterAddress.templateUrl,
+                    controller:$configProvider.controllers.myCenterAddress.controller,
+                    cache:$configProvider.controllers.myCenterAddress.cache,
+                })
+                .state($configProvider.controllers.myCenterAddAdrs.name,{
+                    url:$configProvider.controllers.myCenterAddAdrs.url,
+                    templateUrl:$configProvider.controllers.myCenterAddAdrs.templateUrl,
+                    controller:$configProvider.controllers.myCenterAddAdrs.controller,
+                    cache:$configProvider.controllers.myCenterAddAdrs.cache,
+                })
+                .state($configProvider.controllers.myCenterRefund.name,{
+                    url:$configProvider.controllers.myCenterRefund.url,
+                    templateUrl:$configProvider.controllers.myCenterRefund.templateUrl,
+                    controller:$configProvider.controllers.myCenterRefund.controller,
+                    cache:$configProvider.controllers.myCenterRefund.cache,
+                 })
+                .state($configProvider.controllers.messageTalking.name,{
+                    url:$configProvider.controllers.messageTalking.url,
+                    templateUrl:$configProvider.controllers.messageTalking.templateUrl,
+                    controller:$configProvider.controllers.messageTalking.controller,
+                    cache:$configProvider.controllers.messageTalking.cache,
+                })
                 .state($configProvider.controllers.report.name,{
                     url:$configProvider.controllers.report.url,
                     templateUrl:$configProvider.controllers.report.templateUrl,
                     controller:$configProvider.controllers.report.controller,
                     cache:$configProvider.controllers.report.cache,
                 })
-
-
 
 
         }])

@@ -81,7 +81,6 @@ angular.module('controllers.start',[])
             }
 
 
-
             $city.setHotCity()
                 .then(function(){
                     $scope.hotCityList = $city.hotCity;
