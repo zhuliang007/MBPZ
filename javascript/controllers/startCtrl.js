@@ -15,7 +15,11 @@ angular.module('controllers.start',[])
         '$location',
         '$interval',
         '$httpService',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService){
+        '$ionicHistory',
+        '$q',
+        '$keywords',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords){
+
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
@@ -40,6 +44,7 @@ angular.module('controllers.start',[])
 
             $scope.setBackGroundImage = function(imgUrl){
                 return {"background-image":"url("+imgUrl+")","-webkit-background-image":"url("+imgUrl+")"};
+
             }
 
             $scope.parseTime = function(time){
@@ -55,7 +60,26 @@ angular.module('controllers.start',[])
             $scope.launcher = $config.getImageUrlDebug() + $config.assets.launcher;
 
 
+            $scope.orderReceive = {
+                receiveName : '',
+                receivePhone : '',
+                address : ''
+            }
 
+            $rootScope.provinceCityList = {
+                provinceList: [],
+                cityList: [],
+                districtList: []
+            }
+
+
+
+            $keywords.getProvinceCity()
+                .then(function(result){
+                    $rootScope.provinceCityList.provinceList = result.provinceList;
+                    $rootScope.provinceCityList.cityList = result[110000];
+                    $rootScope.provinceCityList.districtList = result[110100];
+                })
 
             $scope.showProduct = function(id,type){
                 var params = {type:type,id:id};
@@ -81,6 +105,13 @@ angular.module('controllers.start',[])
             }
 
 
+            $scope.goBack = function(){
+                var deferred = $q.defer();
+                window.history.go(-1);
+                deferred.resolve();
+                return deferred.promise;
+            }
+
             $city.setHotCity()
                 .then(function(){
                     $scope.hotCityList = $city.hotCity;
@@ -94,6 +125,7 @@ angular.module('controllers.start',[])
             $scope.citySearch = '';
 
             $scope.openModal = function(modalName) {
+                var deferred = $q.defer();
                 if(!$scope[modalName]){
                     $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
                         scope: $scope,
@@ -101,9 +133,13 @@ angular.module('controllers.start',[])
                     }).then(function(modal) {
                         $scope[modalName] = modal;
                         $scope[modalName].show();
+                        deferred.resolve();
                     });
                 }
-
+                else{
+                    deferred.resolve();
+                }
+                return deferred.promise;
             };
             $scope.closeModal = function(modalName) {
                 $scope[modalName].hide().then(function(){
@@ -117,6 +153,10 @@ angular.module('controllers.start',[])
 
                 if($scope['loginModal']){
                     $scope['loginModal'] = null;
+                }
+
+                if($scope['provinceCityModal']){
+                    $scope['provinceCityModal'] = null;
                 }
             });
 

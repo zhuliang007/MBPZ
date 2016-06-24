@@ -1,7 +1,7 @@
 <ion-view class="productDetail">
     <ion-header-bar align-title="center" ng-if="(productType==1)&&((product.productImageList==null)||(product.productImageList.length==0))">
         <div class="buttons">
-            <button class="button"><i class="icon ion-ios-arrow-back"></i></button>
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title">求购</h1>
         <div class="buttons">
@@ -11,7 +11,7 @@
 
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="header" ng-if="(product.productImageList!=null)&&(product.productImageList.length>0)">
-            <span class="icon ion-ios-arrow-back"></span>
+            <span ng-click="goBack()" class="icon ion-ios-arrow-back"></span>
             <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
         </div>
         <ion-slide-box ng-show="product.productImageList!=null"
@@ -40,7 +40,7 @@
                 <div class="col col-center padding-big-top">
                     <span class="mbpz mbpz-icon-money price"></span>
                     <span class="price padding-small-right" ng-bind="product.currentPrice"></span>
-                    <span class="originalPrice padding-small-right" ng-bind="product.currentPrice"></span>
+                    <span class="originalPrice padding-small-right" ng-bind="product.originalPrice" ng-if="product.originalPrice"></span>
                     <span class="freight">运费：<span ng-bind="(product.freight||0)+'.0'"></span></span>
                 </div>
             </div>
@@ -181,6 +181,6 @@
             <span ng-if="product.productStatus==0">我要买</span>
             <span ng-if="product.productStatus==1">已下架</span>
         </button>
-        <div ng-if="productType==1" class="submit">确认解决</div>
+        <button ng-if="productType==1" class="submit">确认解决</button>
     </div>
 </ion-view>
