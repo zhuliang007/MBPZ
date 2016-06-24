@@ -14,11 +14,9 @@ angular.module('controllers.editAddress',[])
         '$locals',
         '$httpService',
         function($scope,$state,$stateParams,$config,$console,$rootScope,$keywords,$ionicScrollDelegate,$locals,$httpService){
-            //$console.show($stateParams.type);
             $console.show($stateParams.id);
             var cityHandle = $ionicScrollDelegate.$getByHandle('cityHandle');
             var districtHandle = $ionicScrollDelegate.$getByHandle('districtHandle');
-            //$scope.type = $stateParams.type?1:0;
             $scope.addressId = $stateParams.id;
             $scope.title = $stateParams.id?'修改地址':'添加新地址';
 
@@ -41,13 +39,58 @@ angular.module('controllers.editAddress',[])
                 cityCode : 0,
                 districtCode : 0
             }
+            getAddressObject();
+            function getAddressObject(){
+                if($stateParams.id){
+                    var data = {
+                        "cmd":$config.cmds.userAddressDetail,
+                        "parameters":{
+                            "id":$stateParams.id
+                        },
+                        "token":$locals.get('token','')
+                    }
 
-            $keywords.getProvinceCity()
-                .then(function(result){
-                    $rootScope.provinceCityList.provinceList = result.provinceList;
-                    $rootScope.provinceCityList.cityList = result[110000];
-                    $rootScope.provinceCityList.districtList = result[110100];
-                })
+                    $keywords.getProvinceCity()
+                        .then(function(result){
+                            var provinceCityList = result;
+                            $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
+                            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                .then(function(result){
+                                    $console.show(result);
+                                    $rootScope.provinceCityList.cityList = provinceCityList[result.data.province];
+                                    $rootScope.provinceCityList.districtList = provinceCityList[result.data.city];
+                                    $scope.addressObject = {
+                                        receiveName:result.data.receiveName,
+                                        receivePhone:result.data.receivePhone,
+                                        postCode:result.data.postCode,
+                                        address:result.data.address,
+                                        isDefault:result.data.isDefault?true:false,
+                                        provinceText:result.data.provinceText,
+                                        cityText:result.data.cityText,
+                                        districtText:result.data.districtText,
+                                        provinceCode : result.data.province,
+                                        cityCode : result.data.city,
+                                        districtCode : result.data.district,
+                                    }
+                                    $rootScope.provinceCityModalObject = {
+                                        provinceCode : result.data.province,
+                                        cityCode : result.data.city,
+                                        districtCode : result.data.district,
+                                    }
+                                })
+                        })
+                }
+                else{
+                    $keywords.getProvinceCity()
+                        .then(function(result){
+                            $rootScope.provinceCityList.provinceList = result.provinceList;
+                            $rootScope.provinceCityList.cityList = result[110000];
+                            $rootScope.provinceCityList.districtList = result[110100];
+                        })
+                }
+            }
+
+
 
 
             $scope.showProvinceCityModal = function(){

@@ -59,6 +59,7 @@ angular.module('providers.config',[])
             addressList:"userAddress/getPage",
             provinceCity:"provinceCity/getAll",
             userAddressSave:"userAddress/save",
+            userAddressDetail:"userAddress/detail",
         }
 
         $config.types = {
