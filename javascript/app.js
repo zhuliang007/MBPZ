@@ -147,6 +147,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.editAddress.controller,
                     cache:$configProvider.controllers.editAddress.cache,
                 })
+                .state($configProvider.controllers.messageChat.name,{
+                    url:$configProvider.controllers.messageChat.url,
+                    templateUrl:$configProvider.controllers.messageChat.templateUrl,
+                    controller:$configProvider.controllers.messageChat.controller,
+                    cache:$configProvider.controllers.messageChat.cache,
+                })
+
 
 
 

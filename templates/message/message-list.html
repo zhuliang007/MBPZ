@@ -7,7 +7,7 @@
     </ion-header-bar>
     <ion-content cache-view="false">
         <div class="list message-list" ng-repeat="item in items track by $index">
-            <a class="item item-avatar" href="#">
+            <a class="item item-avatar" ng-click="myCenterSetup('messageChat')">
                 <img src="{{item.avator}}">
                 <h2 >{{item.nickname}}</h2>
                 <p ng-bind-html="item.emot"></p>

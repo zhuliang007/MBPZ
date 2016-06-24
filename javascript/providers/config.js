@@ -191,6 +191,13 @@ angular.module('providers.config',[])
                 controller: "MessageTalking",
                 cache:false
             },
+            messageChat:{
+                templateUrl: "templates/message/message-chat.html",
+                url: "/chat",
+                name: "messageChat",
+                controller: "MessageChat",
+                cache:false
+            },
             report:{
                 templateUrl:"templates/detail/report.html",
                 url:"/report/:productId",

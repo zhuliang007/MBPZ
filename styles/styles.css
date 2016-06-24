@@ -1564,4 +1564,8 @@ ion-content{
 .provinceCityModal .provinceCityGroup .list>.item-radio .radio-icon{
     display: none;
 }
+.message-chat{
+    width:100%;
+    height: 100%;
+}
 
