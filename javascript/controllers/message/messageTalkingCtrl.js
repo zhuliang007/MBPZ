@@ -12,7 +12,7 @@ angular.module('controllers.messageTalking',[])
         '$state',
         function($scope,$console,$config,$rootScope,$stateParams,$state){
             var sdk = new WSDK();
-
+            $scope.items = [];
             sdk.Base.login({
                 uid:'13818155071',
                 credential:'13818155071',
@@ -33,7 +33,6 @@ angular.module('controllers.messageTalking',[])
                 sdk.Base.getRecentContact({
                     count:30,
                     success: function (data) {
-                        $scope.items = [];
                         var list = data.data.cnts;
 
                         list.forEach(function(item){
