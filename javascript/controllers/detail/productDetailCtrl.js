@@ -120,6 +120,8 @@ angular.module('controllers.productDetail',[])
                     return;
                 }
 
+                $console.show($scope.product);
+
                 $state.go($config.controllers.orderPreview.name,{productId:id});
             }
 

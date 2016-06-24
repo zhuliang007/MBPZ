@@ -120,6 +120,7 @@ ion-content{
 .orderPreview ion-header-bar,
 .orderAddress ion-header-bar,
 .editAddress ion-header-bar,
+.payModal ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
     background-image:none;
@@ -129,6 +130,7 @@ ion-content{
 .report ion-header-bar,
 .orderPreview ion-header-bar,
 .editAddress ion-header-bar,
+.payModal ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
 }
@@ -150,6 +152,7 @@ ion-content{
 .orderPreview ion-header-bar .title,
 .orderAddress ion-header-bar .title,
 .editAddress ion-header-bar .title,
+.payModal ion-header-bar .title,
 .productDetail ion-header-bar .title{
     color: #333333;
     font-weight: 700;
@@ -177,6 +180,8 @@ ion-content{
 .orderPreview ion-header-bar .button.activated,
 .editAddress ion-header-bar .button,
 .editAddress ion-header-bar .button.activated,
+.payModal ion-header-bar .button,
+.payModal ion-header-bar .button.activated,
 .orderAddress ion-header-bar .button,
 .orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
@@ -448,6 +453,50 @@ ion-content{
     width: 100px;
 }
 
+/*支付方式*/
+.payModal ion-content{
+    background-color: #FFFFFF;
+}
+
+.payModal ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
+.payModal ion-footer-bar .title{
+    right: 88px!important;
+    color: #666666;
+    font-size: 14px;
+}
+
+.payModal ion-footer-bar .title>.price{
+    font-size: 16px;
+    color: #FF4E72;
+}
+
+.payModal ion-footer-bar .title>.price.mbpz{
+    font-size: 20px;
+}
+
+.payModal ion-footer-bar .buttons{
+    top: 0px!important;
+    right: 0px!important;
+    bottom: 0px!important;
+}
+
+.payModal ion-footer-bar .button{
+    background-color: #FF4E72;
+    border-radius: 0px;
+    color: #FFFFFF;
+    padding:0px 20px;
+    font-size: 16px;
+    border:none;
+}
+
+.payModal ion-footer-bar .button.activated{
+    background-color: rgba(255,78,114,.7);
+}
 
 /*卡片组合*/
 .card-group{

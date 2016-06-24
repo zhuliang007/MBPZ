@@ -60,6 +60,7 @@ angular.module('providers.config',[])
             provinceCity:"provinceCity/getAll",
             userAddressSave:"userAddress/save",
             userAddressDetail:"userAddress/detail",
+            orderCommit:"market/order/commit",
         }
 
         $config.types = {
@@ -261,6 +262,10 @@ angular.module('providers.config',[])
             },
             provinceCityModal:{
                 templateUrl:"templates/modal/provinceCity.html",
+                animation:"slide-in-up"
+            },
+            payModal: {
+                templateUrl:"templates/modal/pay.html",
                 animation:"slide-in-up"
             }
         }

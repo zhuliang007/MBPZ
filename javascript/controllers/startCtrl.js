@@ -124,6 +124,8 @@ angular.module('controllers.start',[])
 
             $scope.citySearch = '';
 
+            $rootScope.orderPreviewObject = {};
+
             $scope.openModal = function(modalName) {
                 var deferred = $q.defer();
                 if(!$scope[modalName]){
@@ -157,6 +159,10 @@ angular.module('controllers.start',[])
 
                 if($scope['provinceCityModal']){
                     $scope['provinceCityModal'] = null;
+                }
+
+                if($scope['payModal']){
+                    $scope['payModal'] = null;
                 }
             });
 
