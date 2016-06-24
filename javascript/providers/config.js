@@ -170,11 +170,25 @@ angular.module('providers.config',[])
                 controller:"WalletCtrl",
                 cache:false
             },
+            myCenterRefund:{
+                templateUrl:"templates/personal/refund/personal-refund.html",
+                url:"/refund",
+                name:"myCenterRefund",
+                controller:"RefundListCtrl",
+                cache:false
+            },
             searchHome:{
                 templateUrl:"templates/home/search.html",
                 url:"/searchHome",
                 name:"searchHome",
                 controller:"SearchHomeCtrl",
+                cache:false
+            },
+            messageTalking: {
+                templateUrl: "templates/message/message-list.html",
+                url: "/talking",
+                name: "messageTalking",
+                controller: "MessageTalking",
                 cache:false
             },
             report:{
