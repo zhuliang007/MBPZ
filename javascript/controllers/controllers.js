@@ -17,4 +17,5 @@ angular.module('starter.controllers',[
     'controllers.report',
     'controllers.orderPreview',
     'controllers.orderAddress',
-    'controllers.editAddress'])
+    'controllers.editAddress',
+    'controllers.messageTalking'])
