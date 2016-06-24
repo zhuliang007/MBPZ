@@ -1475,8 +1475,20 @@ ion-content{
 }
 
 /*地址管理*/
-.orderAddress{
+.orderAddress .isDefault{
+    font-size: 24px;
+    color:  rgba(255,78,114,.7);
+}
 
+.orderAddress .userTitle{
+    font-size: 14px;
+    color: #333333;
+}
+
+
+.orderAddress .userAddress{
+    font-size: 14px;
+    color: #666666;
 }
 
 .editAddress ion-content ion-list ion-item .address{
@@ -1558,7 +1570,7 @@ ion-content{
 }
 
 .provinceCityModal .provinceCityGroup .list>.item-radio input:checked+.radio-content .item-content{
-    background-color: rgba(255,78,114,.7);
+    background-color: rgba(0,122,255,.7);
     color: #FFFFFF;
 }
 .provinceCityModal .provinceCityGroup .list>.item-radio .radio-icon{

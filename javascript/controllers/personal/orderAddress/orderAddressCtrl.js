@@ -14,6 +14,7 @@ angular.module('controllers.orderAddress',[])
         function($scope,$config,$state,$stateParams,$locals,$httpService,$console,$rootScope){
             var type = $stateParams.type;
             $console.show(type)
+            //1订单预览设置收货地址 0或不带通过我的地址管理进入
             $scope.addressList = []
             var numberOfPerPage = 10;
             var pageNo = 0;
@@ -99,19 +100,42 @@ angular.module('controllers.orderAddress',[])
 
             }
 
-            $scope.edictAddress = function(address){
-                if(address){
-                    if(type==0){
-                        //选择订单地址
+            $scope.goOwnBack = function(){
+                $scope.goBack().then(function(){
+                    $rootScope.orderAddressObject = {
+                        receiveName : '',
+                        receivePhone : '',
+                        address : '',
                     }
-                    else if(type==1){
-                        //订单修改编辑
-                    }
+                })
+            }
+
+            $scope.edictAddress = function(address,slideType){
+                if(slideType){
+                    $state.go($config.controllers.editAddress.name,{id:address.id})
                 }
                 else{
-                    //开启新地址编辑
-                    $state.go($config.controllers.editAddress.name,{type:0})
+                    if(address){
+                        if(type==1){
+                            //选择订单地址
+                            $rootScope.orderAddressObject = {
+                                receiveName : address.receiveName,
+                                receivePhone : address.receivePhone,
+                                address : address.provinceText + address.cityText + address.districtText +address.address,
+                            }
+                            $scope.goBack();
+                        }
+                        else{
+                            //订单修改编辑
+                            $state.go($config.controllers.editAddress.name,{id:address.id})
+                        }
+                    }
+                    else{
+                        //开启新地址编辑
+                        $state.go($config.controllers.editAddress.name)
+                    }
                 }
             }
+
         }
     ])

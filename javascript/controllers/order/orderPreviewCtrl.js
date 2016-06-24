@@ -14,6 +14,12 @@ angular.module('controllers.orderPreview',[])
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
             var id = $stateParams.productId;
 
+            checkOrderAddressObject();
+            function checkOrderAddressObject(){
+                if($rootScope.orderAddressObject && $rootScope.orderAddressObject.receiveName){
+                    $rootScope.orderAddressCacheObject = angular.copy($rootScope.orderAddressObject);
+                }
+            }
             getOrderPreview();
             function getOrderPreview(){
                 var data = {
@@ -24,11 +30,17 @@ angular.module('controllers.orderPreview',[])
                     "token":$locals.get('token','')
                 }
 
+                $console.show($rootScope.orderAddressObject);
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         $console.show(result);
-                        $scope.order = result.data;
                         $scope.product = result.data.product;
+                        $scope.order = result.data;
+                        if($rootScope.orderAddressCacheObject){
+                            $scope.order.receiveName = $rootScope.orderAddressCacheObject.receiveName;
+                            $scope.order.receivePhone = $rootScope.orderAddressCacheObject.receivePhone;
+                            $scope.order.address = $rootScope.orderAddressCacheObject.address;
+                        }
                     },function(error){
                         if(error.systemError){
                             var systemError = error.systemError;
@@ -81,11 +93,8 @@ angular.module('controllers.orderPreview',[])
 
                 $scope.goBack().then(
                     function(){
-                        $scope.orderReceive = {
-                            receiveName : '',
-                            receivePhone : '',
-                            address : ''
-                        }
+                        $rootScope.orderAddressObject= null
+                        $rootScope.orderAddressCacheObject= null
                     }
                 );
 
@@ -93,11 +102,8 @@ angular.module('controllers.orderPreview',[])
 
             $scope.goOwnBack = function(){
                 $scope.goBack().then(function(){
-                    $scope.orderReceive = {
-                        receiveName : '',
-                        receivePhone : '',
-                        address : ''
-                    }
+                    $rootScope.orderAddressObject= null
+                    $rootScope.orderAddressCacheObject= null
                 })
             }
 
@@ -109,7 +115,7 @@ angular.module('controllers.orderPreview',[])
                     return ;
                 }
 
-                $state.go($config.controllers.orderAddress.name,{type:0});
+                $state.go($config.controllers.orderAddress.name,{type:1});
 
 
             }
