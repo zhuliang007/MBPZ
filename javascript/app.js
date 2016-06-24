@@ -117,6 +117,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.searchHome.controller,
                     cache:$configProvider.controllers.searchHome.cache,
                 })
+                .state($configProvider.controllers.messageTalking.name,{
+                    url:$configProvider.controllers.messageTalking.url,
+                    templateUrl:$configProvider.controllers.messageTalking.templateUrl,
+                    controller:$configProvider.controllers.messageTalking.controller,
+                    cache:$configProvider.controllers.messageTalking.cache,
+                })
                 .state($configProvider.controllers.report.name,{
                     url:$configProvider.controllers.report.url,
                     templateUrl:$configProvider.controllers.report.templateUrl,
