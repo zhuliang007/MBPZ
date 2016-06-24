@@ -14,13 +14,13 @@ angular.module('controllers.editAddress',[])
         '$locals',
         '$httpService',
         function($scope,$state,$stateParams,$config,$console,$rootScope,$keywords,$ionicScrollDelegate,$locals,$httpService){
-            $console.show($stateParams.type);
+            //$console.show($stateParams.type);
             $console.show($stateParams.id);
             var cityHandle = $ionicScrollDelegate.$getByHandle('cityHandle');
             var districtHandle = $ionicScrollDelegate.$getByHandle('districtHandle');
-            $scope.type = $stateParams.type;
-
-            $scope.title = $stateParams.type?'添加新地址':'修改地址';
+            //$scope.type = $stateParams.type?1:0;
+            $scope.addressId = $stateParams.id;
+            $scope.title = $stateParams.id?'修改地址':'添加新地址';
 
             $scope.addressObject = {
                 receiveName:'',

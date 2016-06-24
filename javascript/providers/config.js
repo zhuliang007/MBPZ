@@ -207,14 +207,14 @@ angular.module('providers.config',[])
             },
             orderAddress:{
                 templateUrl:"templates/personal/orderAddress/orderAddress.html",
-                url:"/orderAddress/:type",
+                url:"/orderAddress/:type?",
                 name:"orderAddress",
                 controller:"OrderAddressCtrl",
                 cache:false
             },
             editAddress:{
                 templateUrl:"templates/personal/orderAddress/editAddress.html",
-                url:"/editAddress/:type&:id?",
+                url:"/editAddress/:id?",
                 name:"editAddress",
                 controller:"EditAddressCtrl",
                 cache:false

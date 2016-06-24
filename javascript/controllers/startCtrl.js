@@ -60,11 +60,11 @@ angular.module('controllers.start',[])
             $scope.launcher = $config.getImageUrlDebug() + $config.assets.launcher;
 
 
-            $scope.orderReceive = {
+            /*$scope.orderReceive = {
                 receiveName : '',
                 receivePhone : '',
                 address : ''
-            }
+            }*/
 
             $rootScope.provinceCityList = {
                 provinceList: [],
