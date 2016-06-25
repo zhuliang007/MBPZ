@@ -6,4 +6,5 @@ angular.module('starter.services',[
     'services.cache',
     'services.productType',
     'services.city',
-    'services.locals'])
+    'services.locals',
+    'services.keywords'])

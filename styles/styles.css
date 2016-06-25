@@ -26,6 +26,7 @@
 .mbpz-icon-meifu:before { content: "\e608"; }
 .mbpz-icon-home:before { content: "\e600"; }
 .mbpz-icon-shop-bag:before { content: "\e602"; }
+.mbpz-icon-report:before { content: "\e60f"; }
 .mbpz-icon-muying:before { content: "\e609"; }
 .mbpz-icon-arrow-down:before { content: "\e606"; }
 .mbpz-icon-readers:before { content: "\e60c"; }
@@ -115,10 +116,23 @@ ion-content{
 
 .tabsShop ion-header-bar,
 .productDetail ion-header-bar,
+.report ion-header-bar,
+.orderPreview ion-header-bar,
+.orderAddress ion-header-bar,
+.editAddress ion-header-bar,
+.payModal ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
     background-image:none;
     color: #333333;
+}
+
+.report ion-header-bar,
+.orderPreview ion-header-bar,
+.editAddress ion-header-bar,
+.payModal ion-header-bar,
+.orderAddress ion-header-bar{
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .tabsHome ion-header-bar .title,
@@ -134,6 +148,11 @@ ion-content{
 }
 
 .tabsShop ion-header-bar .title,
+.report ion-header-bar .title,
+.orderPreview ion-header-bar .title,
+.orderAddress ion-header-bar .title,
+.editAddress ion-header-bar .title,
+.payModal ion-header-bar .title,
 .productDetail ion-header-bar .title{
     color: #333333;
     font-weight: 700;
@@ -154,7 +173,17 @@ ion-content{
 
 
 .cityModal ion-header-bar .button,
-.cityModal ion-header-bar .button.activated{
+.cityModal ion-header-bar .button.activated,
+.report ion-header-bar .button,
+.report ion-header-bar .button.activated,
+.orderPreview ion-header-bar .button,
+.orderPreview ion-header-bar .button.activated,
+.editAddress ion-header-bar .button,
+.editAddress ion-header-bar .button.activated,
+.payModal ion-header-bar .button,
+.payModal ion-header-bar .button.activated,
+.orderAddress ion-header-bar .button,
+.orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
     color: #333333;
     border:none;
@@ -424,6 +453,50 @@ ion-content{
     width: 100px;
 }
 
+/*支付方式*/
+.payModal ion-content{
+    background-color: #FFFFFF;
+}
+
+.payModal ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
+.payModal ion-footer-bar .title{
+    right: 88px!important;
+    color: #666666;
+    font-size: 14px;
+}
+
+.payModal ion-footer-bar .title>.price{
+    font-size: 16px;
+    color: #FF4E72;
+}
+
+.payModal ion-footer-bar .title>.price.mbpz{
+    font-size: 20px;
+}
+
+.payModal ion-footer-bar .buttons{
+    top: 0px!important;
+    right: 0px!important;
+    bottom: 0px!important;
+}
+
+.payModal ion-footer-bar .button{
+    background-color: #FF4E72;
+    border-radius: 0px;
+    color: #FFFFFF;
+    padding:0px 20px;
+    font-size: 16px;
+    border:none;
+}
+
+.payModal ion-footer-bar .button.activated{
+    background-color: rgba(255,78,114,.7);
+}
 
 /*卡片组合*/
 .card-group{
@@ -691,6 +764,30 @@ ion-content{
 .filterPopover .priceButton + .priceButton{
     margin-left: 10px;
 }
+.productReport{
+    width: 110px;
+    height: 50px;
+}
+
+.productReport ion-content{
+    background-color: #FFFFFF;
+    border-radius: 4px!important;
+}
+
+.productReport .reportButton{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #FFFFFF;
+    color: #333333;
+}
+
+.productReport .reportButton>.mbpz{
+    font-size: 20px;
+    color: #FF4E72;
+    padding-right: 10px;
+}
 
 /**productDetail页面样式*/
 .productDetail ion-content>.scroll{
@@ -880,6 +977,80 @@ ion-content{
     color: #999999;
 }
 
+/*举报*/
+.report ion-content .title{
+    color: #999999;
+    padding: 20px 10px 10px;
+}
+
+.report .reportBody{
+    background-color: #FFFFFF;
+    padding: 0px;
+}
+
+.report .item-radio .item-content{
+    padding: 10px 16px 10px 49px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.report .item-radio .radio-icon{
+    right: inherit;
+    left:0;
+    visibility: visible;
+    padding: 6px;
+    color: #999999;
+    font-size: 20px;
+    font-weight: bold;
+}
+.report .item-radio input:checked+.radio-content .item-content{
+    background-color: transparent;
+}
+
+.report .item-radio input:checked+.radio-content .radio-icon{
+    color: #333333;
+}
+
+.report .item-radio{
+    border: none;
+}
+
+.report .item-radio.radioBorder{
+    border-top: 30px solid #F5F5F5;
+}
+.report .reasonBody{
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+}
+
+.report .reasonBody>textarea{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    resize: none;
+    text-indent: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
+
+.report .reasonBody>textarea[disabled]{
+    background-color: #F5F5F5;
+}
+
+.report .submit{
+    border: none;
+    background-color: #FF4E72;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.report .submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
 
 /**轮播*/
 .headSliders .slider-pager-page{
@@ -1161,7 +1332,7 @@ ion-content{
     height: 60px;
     float:left;
 }
- .personal-name{
+.personal-name{
     padding-top:13px;
     display: block;
 }
@@ -1213,4 +1384,249 @@ ion-content{
     color:#FF4E72;
 }
 
+.message-list .item-thumbnail-left
+{
+    min-height:50px;
+    padding-left:60px;
+!important;
+}
+.message-list .item-thumbnail-left>img{
+    max-width: 40px;
+    max-height: 40px;
+!important;
+}
+
+.message-title{
+    font-size:16px;
+    color:black;
+}
+.message-p{
+    font-size: 14px;
+    color:#CCCCCC;
+}
+
+.wsdk-emot{
+    width:10%;
+    height:10%;
+}
+
+.message-list{
+    margin-bottom:10px;
+!important;
+}
+
+/*订单预览*/
+.orderPreview ion-content .title{
+    color: #333333;
+}
+
+.orderPreview ion-content .price{
+    padding-top: 10px;
+}
+
+.orderPreview ion-content .price>.mbpz{
+    font-size: 16px;
+}
+
+.orderPreview ion-content .price>.currentPrice{
+    color: #FF4E72;
+    font-weight: bold;
+}
+
+.orderPreview ion-content .price>.originalPrice{
+    color: #999999;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 10px;
+    text-decoration: line-through;
+}
+
+.orderPreview ion-content .addressGroup{
+    padding-top: 5px;
+}
+
+.orderPreview ion-content .addressGroup>.address{
+    color: #999999;
+    font-size: 12px;
+    padding-right: 5px;
+}
+
+.orderPreview ion-content .addressGroup>.online{
+    color: #999999;
+    font-size: 12px;
+    border-left: 1px solid #DDDDDD;
+    padding-left: 7px;
+}
+
+.orderPreview ion-footer-bar .submit,
+.editAddress ion-footer-bar .submit,
+.orderAddress ion-footer-bar .submit{
+    background-color: #FF4E72;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.orderPreview ion-footer-bar .submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
+
+.orderPreview ion-list>.list{
+    margin-top: 10px;
+}
+
+.orderPreview ion-list>.list>ion-item{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #999999;
+}
+
+.orderPreview ion-list>.list>ion-item .icon{
+    font-size: 20px!important;
+    color: #999999;
+}
+
+.orderPreview ion-list>.list>ion-item .address{
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    top: 0;
+    right: 40px;
+    color: #999999;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 5px 0px;
+}
+
+.orderPreview ion-list>.list>ion-item .address>div{
+    white-space: normal;
+}
+
+.orderPreview ion-list>.list>ion-item .freight{
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    top: 0;
+    right: 20px;
+    color: #999999;
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+.orderPreview ion-list>.list>ion-item .price{
+    color: #FF4E72;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.orderPreview ion-list>.list>ion-item .price.mbpz{
+    font-size: 18px;
+}
+
+/*地址管理*/
+.orderAddress .isDefault{
+    font-size: 24px;
+    color:  rgba(255,78,114,.7);
+}
+
+.orderAddress .userTitle{
+    font-size: 14px;
+    color: #333333;
+}
+
+
+.orderAddress .userAddress{
+    font-size: 14px;
+    color: #666666;
+}
+
+.editAddress ion-content ion-list ion-item .address{
+    font-size: 12px;
+    display: block;
+    width: 50%;
+    white-space: normal;
+}
+
+
+/*provinceCityModal*/
+.provinceCityModal{
+    background-color: rgba(0,0,0,.3);
+}
+.provinceCityModal ion-content{
+    top: 50%;
+    background-color: #F5F5F5;
+    padding-top: 45px;
+}
+
+.provinceCityModal ion-content ion-header-bar{
+    background-image: none;
+    border-bottom: 1px solid #dddddd;
+}
+
+.provinceCityModal ion-content ion-header-bar .title{
+    color: #333333;
+    font-size: 12px!important;
+}
+
+.provinceCityModal ion-content ion-header-bar .button,
+.provinceCityModal ion-content ion-header-bar .button.activated{
+    background-color: #FFFFFF;
+    color: #007AFF;
+    border: none;
+}
+
+.provinceCityModal .provinceCityGroup{
+    padding: 10px 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: box;
+    display: -webkit-box;
+}
+.provinceCityModal .provinceCityGroup .provinceCityItem{
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    height: 100%;
+}
+
+.provinceCityModal .provinceCityGroup ion-scroll{
+    height: 100%;
+    padding-top: calc(50% - 90px);
+    padding-bottom: calc(50% - 90px);
+}
+
+.provinceCityModal .provinceCityGroup ion-scroll .scroll-bar{
+    display: none;
+}
+
+.provinceCityModal .provinceCityGroup .list{
+    border: none;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.provinceCityModal .provinceCityGroup .list>.item-radio{
+    border:none;
+    background-color: transparent;
+}
+
+.provinceCityModal .provinceCityGroup .list>.item-radio .item-content{
+    padding: 10px 0px;
+    text-align: center;
+    background-color: transparent;
+    font-size: 12px;
+}
+
+.provinceCityModal .provinceCityGroup .list>.item-radio input:checked+.radio-content .item-content{
+    background-color: rgba(0,122,255,.7);
+    color: #FFFFFF;
+}
+.provinceCityModal .provinceCityGroup .list>.item-radio .radio-icon{
+    display: none;
+}
+.message-chat{
+    width:100%;
+    height: 100%;
+}
 

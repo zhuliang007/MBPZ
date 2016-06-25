@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/6/16.
  */
-angular.module('controllers.searchHomeCtrl',[])
+angular.module('controllers.searchHome',[])
 .controller('SearchHomeCtrl',[
     '$scope',
     '$rootScope',
@@ -72,7 +72,6 @@ angular.module('controllers.searchHomeCtrl',[])
                     $scope.searchContentList.data.push(searchContent)
                     $locals.setObject($scope.chooseType.name,$scope.searchContentList);
                 }
-                $console.show($scope.searchContentList)
             }
         }
 
@@ -97,23 +96,22 @@ angular.module('controllers.searchHomeCtrl',[])
                         "pageNo":pageNo
                     }
                 }
-                $console.show(data);
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         $console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.response.data.totalPages == 0){
+                        if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
                             $scope.productList = null;
                             return ;
                         }
-                        var items = result.response.data.content;
+                        var items = result.data.content;
                         if(items==null||items.length==0){
                             $scope.infiniteFlag = false;
                             return ;
                         }
                         addItem(items);
-                        if(pageNo == result.response.data.totalPages-1 ){
+                        if(pageNo == result.data.totalPages-1 ){
                             $scope.infiniteFlag = false;
                             return;
                         }

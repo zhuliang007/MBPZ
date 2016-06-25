@@ -1,0 +1,59 @@
+<ion-view class="orderPreview">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goOwnBack()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">购买宝贝</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="row row-no-padding bg-color-white">
+            <div class="col col-center col-25">
+                <div class="bgImg" id="productImage" ng-style="resizeImage('productImage',product.productImageList[0].location,'1:1')">
+                </div>
+            </div>
+            <div class="col col-center padding-normal-left">
+                <div class="title" ng-bind="product.title"></div>
+                <div class="price">
+                    <span class="mbpz mbpz-icon-money currentPrice"></span>
+                    <span class="currentPrice" ng-bind="product.currentPrice"></span>
+                    <span class="originalPrice" ng-if="product.originalPrice" ng-bind="product.originalPrice"></span>
+                </div>
+                <div class="addressGroup">
+                    <span class="address" ng-if="product.userLocation" ng-bind="product.userLocation.city"></span>
+                    <span class="address" ng-if="product.userLocation" ng-bind="product.userLocation.district"></span>
+                    <span class="address" ng-if="!product.userLocation">未知</span>
+                    <span class="online">在线交易</span>
+                </div>
+            </div>
+        </div>
+        <ion-list>
+            <ion-item class="item-icon-right" ng-click="setOrderAddress()">
+                <i class="icon ion-chevron-right"></i>
+                收货地址
+                <div class="address text-right">
+                    <div><span ng-bind="order.receiveName + '&nbsp;&nbsp;&nbsp;&nbsp;' + order.receivePhone"></span></div>
+                    <div><span ng-bind="order.address"></span></div>
+                </div>
+            </ion-item>
+            <ion-item>
+                运费
+                <div class="freight text-right">
+                    快递
+                    <span class="price mbpz mbpz-icon-money"></span>
+                    <span class="price" ng-bind="order.freight||0"></span>
+                </div>
+            </ion-item>
+            <ion-item>
+                实付金额
+                <div class="freight text-right">
+                    <span class="price mbpz mbpz-icon-money"></span>
+                    <span class="price" ng-bind="order.price"></span>
+                </div>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+    <ion-footer-bar align-title="center">
+        <button type="button" class="button-block submit" ng-click="submitOrder()">确定</button>
+    </ion-footer-bar>
+</ion-view>

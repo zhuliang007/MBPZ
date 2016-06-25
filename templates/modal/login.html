@@ -24,7 +24,7 @@
                 </div>
                 <div class="col col-80 col-center">
                     <div class="inputGroup">
-                        <input type="text" class="code" placeholder="请输入验证码" maxlength="4" ng-model="codeNumber">
+                        <input type="number" class="code" placeholder="请输入验证码" oninput="if(value.length>4)value=value.slice(0,4)" ng-model="codeNumber">
                         <span class="icon ion-close-circled clearCode" ng-if="codeNumber" ng-click="clearCode()"></span>
                         <button class="getCode" ng-bind="codeTarget" ng-click="getCode(telNumber)" ng-class="{true:'',false:'disable'}[codeFlag]"></button>
                     </div>

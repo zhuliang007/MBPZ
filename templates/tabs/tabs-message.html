@@ -1,5 +1,29 @@
-<ion-view>
+<ion-view class="tabsShop">
+    <ion-header-bar align-title="center">
+        <h1 class="title">消息</h1>
+    </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
-        message
+        <div class="list message-list">
+            <a class="item item-thumbnail-left" href="#">
+                <img src="./assets/icon_message_system40x40.png">
+                <p class="message-title">系统消息</p>
+                <p class="message-p">没有新消息</p>
+            </a>
+            <a class="item item-thumbnail-left" href="#">
+                <img src="./assets/icon_message_order40x40.png">
+                <p class="message-title">订单动态</p>
+                <p class="message-p">没有新消息</p>
+            </a>
+            <a class="item item-thumbnail-left" href="#">
+                <img src="./assets/icon_message_goods40x40.png">
+                <p class="message-title">商品回复</p>
+                <p class="message-p">没有新消息</p>
+            </a>
+            <a class="item item-thumbnail-left" ng-click="myCenterSetup('messageTalking')">
+                <img src="./assets/icon_message_talking40.png">
+                <p class="message-title">即时聊天</p>
+                <p class="message-p">没有新消息</p>
+            </a>
+        </div>
     </ion-content>
 </ion-view>

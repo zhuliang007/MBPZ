@@ -13,6 +13,12 @@
     <script src="libs/dateFormat/js/dateFormat.min.js"></script>
     <script src="http://api.map.baidu.com/api?v2.0&ak=e9BfApilt9oRpSfTImOACdrE9OGwoM5R"></script>
 
+    <!--[if lt IE 9]   kit>
+    <script src="https://g.alicdn.com/aliww/ww/json/json.js" charset="utf-8"></script>
+    <![endif]-->
+    <!-- 自动适配移动端与pc端
+    <script src="https://g.alicdn.com/aliww/h5.imsdk/2.1.5/scripts/yw/wsdk.js" charset="utf-8"></script>-->
+    <script src="https://g.alicdn.com/aliww/??h5.imsdk/2.1.5/scripts/yw/wsdk.js,h5.openim.kit/0.4.0/scripts/kit.js" charset="utf-8"></script>
 
     <!-- your app's js -->
     <script src="javascript/app.js"></script>
@@ -24,14 +30,18 @@
     <script src="javascript/controllers/tabs/messageCtrl.js"></script>
     <script src="javascript/controllers/tabs/personalCtrl.js"></script>
     <script src="javascript/controllers/detail/productDetailCtrl.js"></script>
+    <script src="javascript/controllers/detail/reportCtrl.js"></script>
     <script src="javascript/controllers/home/productListByTypeCtrl.js"></script>
     <script src="javascript/controllers/home/searchHomeCtrl.js"></script>
     <script src="javascript/controllers/personal/myCenterSetupCtrl.js"></script>
     <script src="javascript/controllers/personal/refundListCtrl.js"></script>
     <script src="javascript/controllers/personal/feedbackCtrl.js"></script>
     <script src="javascript/controllers/personal/walletCtrl.js"></script>
-    <script src="javascript/controllers/personal/addressCtrl.js"></script>
-    <script src="javascript/controllers/personal/addAdrsCtrl.js"></script>
+    <script src="javascript/controllers/personal/orderAddress/orderAddressCtrl.js"></script>
+    <script src="javascript/controllers/personal/orderAddress/editAddressCtrl.js"></script>
+    <script src="javascript/controllers/message/messageTalkingCtrl.js"></script>
+    <script src="javascript/controllers/message/messageChatCtrl.js"></script>
+    <script src="javascript/controllers/order/orderPreviewCtrl.js"></script>
     <script src="javascript/directives/directives.js"></script>
     <script src="javascript/directives/bdMap.js"></script>
     <script src="javascript/filters/filters.js"></script>
@@ -45,6 +55,7 @@
     <script src="javascript/services/productType.js"></script>
     <script src="javascript/services/city.js"></script>
     <script src="javascript/services/locals.js"></script>
+    <script src="javascript/services/keywords.js"></script>
   </head>
   <body ng-app="starter" ng-controller="StartCtrl">
     <bd-map></bd-map>

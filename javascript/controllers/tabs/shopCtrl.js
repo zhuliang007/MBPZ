@@ -65,5 +65,4 @@ angular.module('controllers.shop',[])
         $scope.loadMore = function() {
             getProductShop();
         };
-
     }])
