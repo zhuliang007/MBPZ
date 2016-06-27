@@ -8,24 +8,28 @@ angular.module('controllers.messageChat',[])
         '$state',
         function($scope,$console,$config,$rootScope,$stateParams,$state){
             var height = window.screen.height ;
-            document.getElementById('J_demo').style.height = height+'px';
+            var width = window.screen.width;
+            document.getElementById('J_demos').style.height = height+'px';
 
              WKIT.init({
-                container: document.getElementById('J_demo'),
-                width: 700,
-                height: 500,
-                uid: '13818155071',
-                appkey: 23369408,
-                credential: '13818155071',
-                touid: 'test1',
-                logo: 'http://interface.im.taobao.com/mobileimweb/fileupload/downloadPriFile.do?type=1&fileId=876114ca44f4362f629f7d592014e057.jpg&suffix=jpg&width=1920&height=1200&wangxintype=1&client=ww',
-                pluginUrl: 'http://www.taobao.com/market/seller/openim/plugindemo.php',
+                container: document.getElementById('J_demos'),
+                width: width,
+                height: height,
+                uid: $stateParams.uid,
+                appkey: $stateParams.appkey,
+                credential: $stateParams.credential,
+                touid: $stateParams.touid,
                 onBack:function(){
                     WKIT.destroy();
-                    var demo = document.getElementById('J_demo');
+                    var demo = document.getElementById('J_demos');
                     demo.parentNode.removeChild(demo);
                     $state.go('messageTalking');
-                }
+                },
+                 onLoginSuccess:function(data){
+                     $scope.WSDK = WKIT.Conn.sdk;
+                     document.getElementById('J_wkitTitle').innerHTML= $stateParams.nickName;
+                 }
             });
+
         }
     ])

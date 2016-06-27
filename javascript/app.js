@@ -121,7 +121,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     url:$configProvider.controllers.messageTalking.url,
                     templateUrl:$configProvider.controllers.messageTalking.templateUrl,
                     controller:$configProvider.controllers.messageTalking.controller,
-                    cache:$configProvider.controllers.messageTalking.cache,
+                    cache:false,
                 })
                 .state($configProvider.controllers.report.name,{
                     url:$configProvider.controllers.report.url,
@@ -152,10 +152,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.messageChat.templateUrl,
                     controller:$configProvider.controllers.messageChat.controller,
                     cache:$configProvider.controllers.messageChat.cache,
+                    params:$configProvider.controllers.messageChat.params,
                 })
-
-
-
-
+                .state($configProvider.controllers.messageSystem.name,{
+                    url:$configProvider.controllers.messageSystem.url,
+                    templateUrl:$configProvider.controllers.messageSystem.templateUrl,
+                    controller:$configProvider.controllers.messageSystem.controller,
+                    cache:$configProvider.controllers.messageSystem.cache,
+                })
 
         }])

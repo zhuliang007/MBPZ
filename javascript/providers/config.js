@@ -198,7 +198,14 @@ angular.module('providers.config',[])
                 url: "/chat",
                 name: "messageChat",
                 controller: "MessageChat",
-                cache:false
+                cache:false,
+                params:{
+                    uid:null,
+                    credential:null,
+                    touid:null,
+                    nickName:null,
+                    appkey:null
+                }
             },
             report:{
                 templateUrl:"templates/detail/report.html",
@@ -226,6 +233,13 @@ angular.module('providers.config',[])
                 url:"/editAddress/:id?",
                 name:"editAddress",
                 controller:"EditAddressCtrl",
+                cache:false
+            },
+            messageSystem:{
+                templateUrl:"templates/message/message-system.html",
+                url:"/messageSystem",
+                name:"messageSystem",
+                controller:"MessageSystemCtrl",
                 cache:false
             }
 
