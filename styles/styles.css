@@ -1630,3 +1630,25 @@ ion-content{
     height: 100%;
 }
 
+.wkit-title {
+    padding-top:10px;
+    background:#FF4E72 !important;
+}
+
+.wkit-title .wkit-back-trigger{
+    padding:0px !important;
+    padding-top:6px !important;
+    width:10px !important;
+    height:20px !important;
+}
+
+.wkit-emot-trigger,.wkit-img-trigger{
+    width:16px !important;
+}
+#J_wkitEmotTrigger{
+    display:none;
+}
+
+
+
+

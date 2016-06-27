@@ -198,7 +198,14 @@ angular.module('providers.config',[])
                 url: "/chat",
                 name: "messageChat",
                 controller: "MessageChat",
-                cache:false
+                cache:false,
+                params:{
+                    uid:null,
+                    credential:null,
+                    touid:null,
+                    nickName:null,
+                    appkey:null
+                }
             },
             report:{
                 templateUrl:"templates/detail/report.html",
