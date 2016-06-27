@@ -154,9 +154,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.messageChat.cache,
                     params:$configProvider.controllers.messageChat.params,
                 })
-
-
-
-
+                .state($configProvider.controllers.messageSystem.name,{
+                    url:$configProvider.controllers.messageSystem.url,
+                    templateUrl:$configProvider.controllers.messageSystem.templateUrl,
+                    controller:$configProvider.controllers.messageSystem.controller,
+                    cache:$configProvider.controllers.messageSystem.cache,
+                })
 
         }])
