@@ -11,41 +11,48 @@ angular.module('controllers.messageTalking',[])
         '$stateParams',
         '$state',
         function($scope,$console,$config,$rootScope,$stateParams,$state){
-            var sdk = new WSDK();
             $scope.items = [];
-            sdk.Base.login({
-                uid:'13818155071',
-                credential:'13818155071',
-                appkey: '23369408',
-                timeout: 4000,
-                success: function(data){
-                    console.log(data);
-                    if( data.resultText=="SUCCESS"){
-                        loginIn();
-                    }
+            $scope.WSDK = null;
+            document.getElementById('J_demo').style.visibility='hidden';
+            var uid = '13818155071';
+            var credential='13818155071';
+            var appkeys = '23369408';
+
+            WKIT.init({
+                container: document.getElementById('J_demo'),
+                width: 700,
+                height: 500,
+                uid: uid,
+                appkey:appkeys ,
+                credential:credential,
+                touid: 'test1',
+                onBack:function(){
+                    wkitDestroy();
+                    $state.go('tabs.tabsMessage')
                 },
-                error: function(error){
-                    console.log('login fail', error);
+                onLoginSuccess:function(data){
+                    $scope.WSDK = WKIT.Conn.sdk;
+                    loginIn( $scope.WSDK);
                 }
             });
 
-            function loginIn(){
+            function loginIn(sdk){
                 sdk.Base.getRecentContact({
                     count:30,
                     success: function (data) {
                         var list = data.data.cnts;
-
                         list.forEach(function(item){
                             var param={
                                 nickname:'',
                                 avator:'',
-                                emot:''
+                                emot:'',
+                                uid:''
                             }
                             param.nickname=item.nickname;
-                            param.avator = item.avator;
+                            param.avators = item.avator;
                             param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
+                            param.uid = sdk.Base.getNick(item.uid);
                             $scope.items.push(param);
-                            console.log($scope.items);
                         })
                     },
                     error:function(error){
@@ -55,9 +62,19 @@ angular.module('controllers.messageTalking',[])
             }
 
             $scope.loginOut = function(){
-                sdk.Base.destroy();
-                sdk=null;
+                wkitDestroy();
                 $state.go('tabs.tabsMessage');
+            }
+
+            $scope.contactFn = function(nickName,userId){
+                wkitDestroy();
+                $state.go('messageChat',{uid:uid,credential:credential,touid:userId,nickName:nickName,appkey:appkeys});
+            }
+
+            var wkitDestroy = function(){
+                var demo = document.getElementById('J_demo');
+                demo.parentNode.removeChild(demo);
+                WKIT.destroy();
             }
 
         }])
