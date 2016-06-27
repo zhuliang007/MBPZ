@@ -61,6 +61,7 @@ angular.module('providers.config',[])
             userAddressSave:"userAddress/save",
             userAddressDetail:"userAddress/detail",
             orderCommit:"market/order/commit",
+            addFeedback:"myself/feedback/opinion",
         }
 
         $config.types = {

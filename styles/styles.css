@@ -1649,6 +1649,22 @@ ion-content{
     display:none;
 }
 
+.system-img{
+    width:20px;
+    height:20px;
+}
+.system-item{
+    padding:5px;
+}
+
+.system-content{
+    padding:5px;
+    border:0;
+    text-indent: 2em ;
+    font-size:14px;
+    color:#b2b2b2;
+}
+
 
 
 
