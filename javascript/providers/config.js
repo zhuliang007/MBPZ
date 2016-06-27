@@ -234,6 +234,13 @@ angular.module('providers.config',[])
                 name:"editAddress",
                 controller:"EditAddressCtrl",
                 cache:false
+            },
+            messageSystem:{
+                templateUrl:"templates/message/message-system.html",
+                url:"/messageSystem",
+                name:"messageSystem",
+                controller:"MessageSystemCtrl",
+                cache:false
             }
 
         }

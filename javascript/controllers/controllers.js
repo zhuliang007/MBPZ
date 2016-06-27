@@ -19,4 +19,5 @@ angular.module('starter.controllers',[
     'controllers.orderAddress',
     'controllers.editAddress',
     'controllers.messageTalking',
-    'controllers.messageChat'])
+    'controllers.messageChat',
+    'controllers.messageSystemCtrl'])
