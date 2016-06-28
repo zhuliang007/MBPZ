@@ -37,7 +37,14 @@ angular.module('providers.config',[])
             icWant:"ic_want.png",
             icCancel:"ic_cancel.png",
             icAddPhoto:"ic_add_photo.png",
-
+            mineAdd:"mine/icon_mine_add.png",
+            mineBuy:"mine/icon_mine_buy.png",
+            mineCollect:"mine/icon_mine_collect.png",
+            mineRefunds:"mine/icon_mine_refunds.png",
+            mineRelease:"mine/icon_mine_release.png",
+            mineSold:"mine/icon_mine_sold.png",
+            mineUndercarriage:"mine/icon_mine_undercarriage.png",
+            mineWallet:"mine/icon_mine_wallet.png",
         }
 
 
@@ -69,6 +76,7 @@ angular.module('providers.config',[])
             addFeedback:"myself/feedback/opinion",
             systemMessage:"market/message/getPage",
             messageNum:"market/message/getType",
+            walletNum:"wallet/account/index",
         }
 
         $config.types = {

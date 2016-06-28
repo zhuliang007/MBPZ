@@ -9,12 +9,12 @@
         <div class="list">
             <div class="item walletDiv" >
                 <p >我的账户余额</p>
-                <p>0.00</p>
+                <p ng-bind="balance"></p>
             </div>
             <div class="item item-icon-left item-icon-right" >
                 <i class="icon ion-ios-arrow-forward"></i>
                 <h2>预收款</h2>
-                <i class="icon">0.00</i>
+                <i class="icon walletDivPre" ng-bind="prePayment"></i>
             </div>
             <div class="withdrawalSty"  >
                 如需提现请下载萌宝铺子
