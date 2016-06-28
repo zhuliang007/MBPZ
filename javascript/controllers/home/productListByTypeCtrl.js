@@ -46,7 +46,6 @@ angular.module('controllers.productListByTypeCtrl',[])
                             case 2:
                                 $scope.filterObject.parentClassify = 'BBYP';
                                 $scope.childCode= 'BBYP';
-
                                 break;
                             case 3:
                                 $scope.filterObject.parentClassify = 'MMYP';

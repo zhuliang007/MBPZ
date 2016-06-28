@@ -32,7 +32,12 @@ angular.module('providers.config',[])
             defaultHead:"default-head.png",
             halfCircle:"half-circle.png",
             loginBg:"login_back.jpg",
-            launcher:"ic_launcher.png"
+            launcher:"ic_launcher.png",
+            icSale:"ic_sale.png",
+            icWant:"ic_want.png",
+            icCancel:"ic_cancel.png",
+            icAddPhoto:"ic_add_photo.png",
+
         }
 
 
@@ -242,6 +247,13 @@ angular.module('providers.config',[])
                 name:"messageSystem",
                 controller:"MessageSystemCtrl",
                 cache:false
+            },
+            publish:{
+                templateUrl:"templates/publish/publish.html",
+                url:"/publish/:type&:id?",
+                name:"publish",
+                controller:"PublishCtrl",
+                cache:false
             }
 
         }
@@ -282,6 +294,10 @@ angular.module('providers.config',[])
             payModal: {
                 templateUrl:"templates/modal/pay.html",
                 animation:"slide-in-up"
+            },
+            publishModal: {
+                templateUrl:"templates/modal/publish.html",
+                animation:null
             }
         }
 

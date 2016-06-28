@@ -160,5 +160,15 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.messageSystem.controller,
                     cache:$configProvider.controllers.messageSystem.cache,
                 })
+                .state($configProvider.controllers.publish.name,{
+                    url:$configProvider.controllers.publish.url,
+                    templateUrl:$configProvider.controllers.publish.templateUrl,
+                    controller:$configProvider.controllers.publish.controller,
+                    cache:$configProvider.controllers.publish.cache,
+                })
+
+
+
+
 
         }])

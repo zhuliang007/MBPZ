@@ -121,6 +121,7 @@ ion-content{
 .orderAddress ion-header-bar,
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
+.publish ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
     background-image:none;
@@ -131,6 +132,7 @@ ion-content{
 .orderPreview ion-header-bar,
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
+.publish ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
 }
@@ -153,6 +155,7 @@ ion-content{
 .orderAddress ion-header-bar .title,
 .editAddress ion-header-bar .title,
 .payModal ion-header-bar .title,
+.publish ion-header-bar .title,
 .productDetail ion-header-bar .title{
     color: #333333;
     font-weight: 700;
@@ -182,6 +185,8 @@ ion-content{
 .editAddress ion-header-bar .button.activated,
 .payModal ion-header-bar .button,
 .payModal ion-header-bar .button.activated,
+.publish ion-header-bar .button,
+.publish ion-header-bar .button.activated,
 .orderAddress ion-header-bar .button,
 .orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
@@ -1630,6 +1635,264 @@ ion-content{
     height: 100%;
 }
 
+/*发布*/
+.publishModal{
+    background-color: transparent;
+}
+.publishModal ion-content{
+    background-color: rgba(0,0,0,.7);
+}
+
+.publishModal .chooseGroup{
+    text-align: center;
+    font-size: 14px;
+    color: #FFFFFF;
+    position: absolute;
+    z-index: 2;
+    bottom: 92px;
+}
+
+.publishModal .chooseGroup>img{
+    display: block;
+}
+
+.publishModal .chooseGroup.sale{
+    left: calc(50% - 108px);
+    left: -webkit-calc(50% - 108px);
+}
+
+.publishModal .chooseGroup.want{
+    right: calc(50% - 108px);
+    right: -webkit-calc(50% - 108px);
+}
+
+.publishModal .chooseGroup.cancel>img{
+    width: 54px;
+}
+
+.publishModal .chooseGroup.cancel{
+    bottom: 20px;
+    left: calc(50% - 27px);
+    left: -webkit-calc(50% - 27px);
+}
+
+.publish ion-footer-bar{
+    background-color: #FFFFFF;
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+}
+
+.publish ion-footer-bar .submit{
+    background-color: #FF4E72;
+    color: #FFFFFF;
+    border:none;
+}
+
+.publish ion-footer-bar .submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
+
+.publish ion-item{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.publish ion-item.title>input{
+    width: 100%;
+}
+
+.publish ion-item.content{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.publish ion-item>textarea{
+    width: 100%;
+    resize: none;
+    height: 100px;
+}
+
+.publish ion-item.publishImage{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 109px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.publish ion-item.address{
+    color: #57B6E2;
+    font-size: 14px;
+}
+
+.publish ion-item.address>.mbpz{
+    font-size: 16px;
+}
+
+
+.publish ion-item.publishImage>ion-scroll{
+    width: 100%;
+    height: 100%;
+}
+
+.publish ion-item.publishImage>ion-scroll>.scroll{
+    position: relative;
+    width: 294px;
+    /*此处的width需要动态改变*/
+}
+
+.publish ion-item.publishImage>ion-scroll>.scroll-bar{
+    display: none;
+}
+
+.publish ion-item.publishImage .photoGroup{
+    display: block;
+    float: left;
+    width: 88px;
+    height: 88px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    -webkit-background-size: cover;
+    background-image: url('../assets/ic_add_photo.png');
+    -webkit-background-image: url('../assets/ic_add_photo.png');
+    position: relative;
+}
+
+.publish ion-item.publishImage .photoGroup>.cancel{
+    color: #FF4E72;
+    display: block;
+    position: absolute;
+    z-index:2;
+    top: 0px;
+    right: 2px;
+    font-size: 20px;
+}
+
+.publish ion-item.publishImage .photoGroup>ion-spinner{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    position: absolute;
+    z-index: 3;
+    stroke: #FFFFFF;
+}
+
+.publish ion-item.publishImage .photoGroup>ion-spinner>svg{
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    color: #FFFFFF;
+}
+
+.publish ion-item.publishImage .photoGroup>.failed{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    color: #FFFFFF;
+    z-index: 3;
+    font-size: 12px;
+    text-align: center;
+    padding-top: calc(50% - 12px);
+    padding-top: -webkit-calc(50% - 12px);
+}
+
+.publish ion-item.publishImage .photoGroup>img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.publish ion-item.publishType{
+    margin-bottom: 100px;
+    margin-top: 10px;
+}
+
+.publish ion-item.publishType>.input-label{
+    font-weight: bold;
+    width: 20%;
+}
+
+.publish ion-item.publishType>span.icon{
+    font-size: 24px;
+    color: #999999;
+}
+
+.publish ion-item.publishType>select{
+    border: none;
+    -webkit-appearance: list;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 10px;
+}
+
+.publish ion-item.publishType>select>option{
+    border:none;
+}
+
+.publish .priceGroup>.list{
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}
+
+.publish .priceGroup>.list>.price{
+    display: block;
+    width: 50%;
+    float: left;
+    position: relative;
+    border: none;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.publish .priceGroup>.list>.price>.priceTitle{
+    display: block;
+    position: absolute;
+    font-size: 14px;
+    color: #333333;
+    left: 16px;
+    top: 13px;
+    font-weight: bold;
+}
+
+.publish .priceGroup>.list>.price>.priceTitle>span{
+    font-size: 14px;
+    color: #999999;
+    padding-left: 10px;
+}
+
+.publish .priceGroup>.list>.price>.priceUnit{
+    display: block;
+    position: absolute;
+    font-size: 14px;
+    color: #333333;
+    right: 16px;
+    top: 13px;
+}
+
+.publish .priceGroup>.list>.price>.priceInput{
+    display: block;
+    width: 100%;
+    padding-left: 55px;
+    padding-right: 20px;
+}
+
+.publish .priceGroup>.list>.price>.priceInput>input{
+    display: block;
+    width: 100%;
+}
+
+.publish .priceGroup>.list>.price.freight{
+    width: 100%;
+    clear: both;
+}
+
+/*聊天*/
 .wkit-title {
     padding-top:10px;
     background:#FF4E72 !important;

@@ -58,21 +58,16 @@ angular.module('controllers.start',[])
             $scope.halfCircle = $config.getImageUrlDebug() + $config.assets.halfCircle;
             $scope.loginBg = $config.getImageUrlDebug() + $config.assets.loginBg;
             $scope.launcher = $config.getImageUrlDebug() + $config.assets.launcher;
-
-
-            /*$scope.orderReceive = {
-                receiveName : '',
-                receivePhone : '',
-                address : ''
-            }*/
+            $scope.icSale = $config.getImageUrlDebug()  + $config.assets.icSale;
+            $scope.icWant = $config.getImageUrlDebug()  + $config.assets.icWant;
+            $scope.icCancel = $config.getImageUrlDebug()  + $config.assets.icCancel;
+            $scope.icAddPhoto = $config.getImageUrlDebug()  + $config.assets.icAddPhoto;
 
             $rootScope.provinceCityList = {
                 provinceList: [],
                 cityList: [],
                 districtList: []
             }
-
-
 
             $keywords.getProvinceCity()
                 .then(function(result){
@@ -164,6 +159,10 @@ angular.module('controllers.start',[])
                 if($scope['payModal']){
                     $scope['payModal'] = null;
                 }
+
+                if($scope['publishModal']){
+                    $scope['publishModal'] = null;
+                }
             });
 
             $scope.clearTel = function(){
@@ -172,6 +171,11 @@ angular.module('controllers.start',[])
 
             $scope.clearCode = function(){
                 $scope.$$childTail.$$childTail.$$childTail.codeNumber = '';
+            }
+
+            $scope.goPublish = function(type){
+                $state.go($config.controllers.publish.name,{type:type});
+                $scope.closeModal('publishModal');
             }
 
             $scope.codeTarget = '获取验证码';

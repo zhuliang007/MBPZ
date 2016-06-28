@@ -20,4 +20,6 @@ angular.module('starter.controllers',[
     'controllers.editAddress',
     'controllers.messageTalking',
     'controllers.messageChat',
+    'controllers.publish',
+    'controllers.messageChat',
     'controllers.messageSystemCtrl'])
