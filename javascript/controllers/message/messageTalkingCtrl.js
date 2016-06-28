@@ -13,13 +13,13 @@ angular.module('controllers.messageTalking',[])
         function($scope,$console,$config,$rootScope,$stateParams,$state){
             $scope.items = [];
             $scope.WSDK = null;
-            document.getElementById('J_demo').style.visibility='hidden';
+           // document.getElementById('J_demo').style.display='hidden';
             var uid = '13818155071';
             var credential='13818155071';
             var appkeys = '23369408';
 
             WKIT.init({
-                container: document.getElementById('J_demo'),
+               // container: document.getElementById('J_demo'),
                 width: 700,
                 height: 500,
                 uid: uid,
@@ -72,8 +72,8 @@ angular.module('controllers.messageTalking',[])
             }
 
             var wkitDestroy = function(){
-                var demo = document.getElementById('J_demo');
-                demo.parentNode.removeChild(demo);
+               // var demo = document.getElementById('J_demo');
+             //   demo.parentNode.removeChild(demo);
                 WKIT.destroy();
             }
 
