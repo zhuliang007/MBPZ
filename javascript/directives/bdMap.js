@@ -62,25 +62,25 @@ angular.module('directives.bdMap',[])
                     var geoc = new BMap.Geocoder();
                     $console.show("Hello")
                     geoc.getLocation(result.points[0], function(rs){
-                        var addComp = rs.addressComponents;
+                        $rootScope.addComp = rs.addressComponents;
                         $rootScope.currentCity = addComp.city.split("市")[0];
-                        var locationJosnStr = {}
-                        locationJosnStr.address = addComp.city + addComp.district +addComp.street + addComp.streetNumber;
-                        locationJosnStr.city = addComp.city;
-                        locationJosnStr.cityCode = '';
-                        locationJosnStr.country = '';
-                        locationJosnStr.countryCode = '';
-                        locationJosnStr.district = addComp.district;
-                        locationJosnStr.province = addComp.province;
-                        locationJosnStr.street = addComp.street;
-                        locationJosnStr.streetNumber = addComp.streetNumber;
-                        locationJosnStr.latitude = result.points[0].lat;
-                        locationJosnStr.longitude = result.points[0].lng;
+                        $rootScope.locationJosnStr = {}
+                        $rootScope.locationJosnStr.address = $rootScope.addComp.city + $rootScope.addComp.district +$rootScope.addComp.street + $rootScope.addComp.streetNumber;
+                        $rootScope.locationJosnStr.city = $rootScope.addComp.city;
+                        $rootScope.locationJosnStr.cityCode = '';
+                        $rootScope.locationJosnStr.country = '';
+                        $rootScope.locationJosnStr.countryCode = '';
+                        $rootScope.locationJosnStr.district = $rootScope.addComp.district;
+                        $rootScope.locationJosnStr.province = $rootScope.addComp.province;
+                        $rootScope.locationJosnStr.street = $rootScope.addComp.street;
+                        $rootScope.locationJosnStr.streetNumber = $rootScope.addComp.streetNumber;
+                        $rootScope.locationJosnStr.latitude = result.points[0].lat;
+                        $rootScope.locationJosnStr.longitude = result.points[0].lng;
                         if($locals.get('token','')){
                             var data = {
                                 "cmd":$config.cmds.saveLocationAddress,
                                 "parameters":{
-                                    "locationJosnStr":angular.toJson(locationJosnStr)
+                                    "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
                                 },
                                 "token":$locals.get('token','')
                             };

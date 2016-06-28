@@ -1,0 +1,15 @@
+<ion-modal-view class="publishModal">
+    <ion-content has-bouncing="true" overflow-scroll="false" scroll="false">
+        <div class="chooseGroup sale" ng-click="goPublish(0)">
+            <img ng-src="{{icSale}}">
+            出售
+        </div>
+        <div class="chooseGroup want"  ng-click="goPublish(1)">
+            <img ng-src="{{icWant}}">
+            求购
+        </div>
+        <div class="chooseGroup cancel" ng-click="closeModal('publishModal')">
+            <img ng-src="{{icCancel}}">
+        </div>
+    </ion-content>
+</ion-modal-view>

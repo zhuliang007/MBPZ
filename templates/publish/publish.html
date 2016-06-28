@@ -1,0 +1,77 @@
+<ion-view class="publish">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+        <h1 class="title" ng-bind="publishTitle"></h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <ion-item class="title">
+            <input type="text" placeholder="标题最多不超过20个字" maxlength="20">
+        </ion-item>
+        <ion-item class="content">
+            <textarea placeholder="{{publishContentPlaceHold}}"></textarea>
+        </ion-item>
+        <ion-item class="publishImage">
+            <ion-scroll has-bouncing="true" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle">
+                <div class="photoGroup">
+                    <span class="icon ion-android-cancel cancel"></span>
+                    <ion-spinner icon="ios"></ion-spinner>
+                    <div class="failed">
+                        重新上传
+                    </div>
+                </div>
+                <div class="photoGroup">
+                    <span class="icon ion-android-cancel cancel"></span>
+                    <ion-spinner icon="ios"></ion-spinner>
+                    <div class="failed">
+                        重新上传
+                    </div>
+                </div>
+                <div class="photoGroup">
+                    <img ng-src="{{icAddPhoto}}">
+                </div>
+            </ion-scroll>
+        </ion-item>
+        <ion-item class="address">
+            <span class="mbpz mbpz-icon-position"></span>
+            <span ng-if="addComp" ng-bind="addComp.province + ' '+addComp.city + ' ' +addComp.district"></span>
+            <span ng-if="!addComp">未知</span>
+        </ion-item>
+        <ion-list class="priceGroup" ng-if="publishType==0">
+            <ion-item class="price">
+                <span class="priceTitle">价格<span class="icon ion-social-yen"></span></span>
+                <span class="priceUnit">元</span>
+                <div class="priceInput">
+                    <input type="number">
+                </div>
+            </ion-item>
+            <ion-item class="price">
+                <span class="priceTitle">原价<span class="icon ion-social-yen"></span></span>
+                <span class="priceUnit">元</span>
+                <div class="priceInput">
+                    <input type="number">
+                </div>
+            </ion-item>
+            <ion-item class="price freight">
+                <span class="priceTitle">运费<span class="icon ion-social-yen"></span></span>
+                <span class="priceUnit">元</span>
+                <div class="priceInput">
+                    <input type="number">
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-item class="publishType item-input">
+            <span class="input-label">分类</span>
+            <select ng-model="selectParent" ng-options="typeCode.value as typeCode.name for typeCode in typeCodes" ng-change="changeParent(selectParent)">
+                <option  value="">--请选择--</option>
+            </select>
+            <select ng-model="selectChild" ng-options="childCode.value as childCode.name for childCode in childCodes" ng-change="changeChild(selectParent,selectChild)">
+                <option value="">--请选择--</option>
+            </select>
+        </ion-item>
+    </ion-content>
+    <ion-footer-bar align-title="center">
+        <button type="button" class="button-block submit">确定发布</button>
+    </ion-footer-bar>
+</ion-view>
