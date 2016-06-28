@@ -1964,5 +1964,18 @@ ion-content{
     color:white !important;
 }
 
+#J_WkitToast{
+    display:none;
+}
+
+.walletDivPre{
+    font-size:22px !important;
+}
+
+.myCenterImg{
+    width:40px;
+    height: 40px;
+}
+
 
 

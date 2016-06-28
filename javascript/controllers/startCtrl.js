@@ -62,6 +62,14 @@ angular.module('controllers.start',[])
             $scope.icWant = $config.getImageUrlDebug()  + $config.assets.icWant;
             $scope.icCancel = $config.getImageUrlDebug()  + $config.assets.icCancel;
             $scope.icAddPhoto = $config.getImageUrlDebug()  + $config.assets.icAddPhoto;
+            $scope.mineAdd=$config.getImageUrlDebug() + $config.assets.mineAdd;
+            $scope.mineBuy=$config.getImageUrlDebug() + $config.assets.mineBuy;
+            $scope.mineCollect=$config.getImageUrlDebug() + $config.assets.mineCollect;
+            $scope.mineRefunds=$config.getImageUrlDebug() + $config.assets.mineRefunds;
+            $scope.mineRelease=$config.getImageUrlDebug() + $config.assets.mineRelease;
+            $scope.mineSold=$config.getImageUrlDebug() + $config.assets.mineSold;
+            $scope.mineUndercarriage=$config.getImageUrlDebug() + $config.assets.mineUndercarriage;
+            $scope.mineWallet=$config.getImageUrlDebug() + $config.assets.mineWallet;
 
             $rootScope.provinceCityList = {
                 provinceList: [],
