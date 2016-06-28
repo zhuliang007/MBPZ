@@ -10,7 +10,9 @@ angular.module('controllers.feedbackCtrl',[])
         '$rootScope',
         '$stateParams',
         '$state',
-        function($scope,$console,$config,$rootScope,$stateParams,$state){
+        '$locals',
+        '$http',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$http){
 
                 $scope.submitFeedback = function () {
                         var val = $scope.feedback;
@@ -19,11 +21,14 @@ angular.module('controllers.feedbackCtrl',[])
                                 "parameters":{
                                         "contents" : val
                                 },
-                                "token":$locals.get('token','')
+                                "token":$locals.get('token','NGZmOGFmNDctMThjZS00MzM4LTgzYmMtZWE5YTAxNTRmMWZm')
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                console.log(result)
-                            })
+                        $http.post($config.getRequestAction(),data).success(function(data){
+                                console.log(data)
+                                if(data.statusCode=='200'){
+                                        alert('提交成功')
+                                        $state.go('myCenterSetup');
+                                }
+                        })
                 }
         }])

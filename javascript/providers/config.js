@@ -67,6 +67,8 @@ angular.module('providers.config',[])
             userAddressDetail:"userAddress/detail",
             orderCommit:"market/order/commit",
             addFeedback:"myself/feedback/opinion",
+            systemMessage:"market/message/getPage",
+            messageNum:"market/message/getType",
         }
 
         $config.types = {
@@ -245,8 +247,31 @@ angular.module('providers.config',[])
                 templateUrl:"templates/message/message-system.html",
                 url:"/messageSystem",
                 name:"messageSystem",
-                controller:"MessageSystemCtrl",
-                cache:false
+                controller:"MessagesCtrl",
+                cache:false,
+                params:{
+                    modual:"system"
+                },
+            },
+            messageOrder:{
+                templateUrl:"templates/message/message-order.html",
+                url:"/messageOrder",
+                name:"messageOrder",
+                controller:"MessagesCtrl",
+                cache:false,
+                params:{
+                    modual:"order"
+                },
+            },
+            messageProduct:{
+                templateUrl:"templates/message/message-product.html",
+                url:"/messageProduct",
+                name:"messageProduct",
+                controller:"MessagesCtrl",
+                cache:false,
+                params:{
+                    modual:"product"
+                },
             },
             publish:{
                 templateUrl:"templates/publish/publish.html",

@@ -1918,6 +1918,7 @@ ion-content{
 }
 .system-item{
     padding:5px;
+    margin-bottom:4px;
 }
 
 .system-content{
@@ -1928,6 +1929,31 @@ ion-content{
     color:#b2b2b2;
 }
 
+.system-time{
+    font-size:10px;
+    color:#b2b2b2;
+}
+
+.message-order{
+    padding:0px;
+}
+.message-order img{
+    width:40px;
+    height:40px;
+}
+.orderTitle{
+    float:left;
+    color:black;
+}
+
+.orderTime{
+    text-align:right;
+}
+.orderDirct,.orderTime{
+    color:#b2b2b2 !important;
+    font-size:10px !important;
+    padding-right:5px;
+}
 
 
 
