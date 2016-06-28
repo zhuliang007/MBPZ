@@ -1404,6 +1404,7 @@ ion-content{
 .message-title{
     font-size:16px;
     color:black;
+    font-weight: bold;
 }
 .message-p{
     font-size: 14px;
@@ -1953,6 +1954,13 @@ ion-content{
     color:#b2b2b2 !important;
     font-size:10px !important;
     padding-right:5px;
+}
+
+.messages,.messages .button{
+    background:#FF4E72 !important;
+}
+.messages .title,.messages .ion-ios-gear-outline{
+    color:white !important;
 }
 
 
