@@ -3,26 +3,24 @@
         <div class="buttons">
             <button class="button" ng-click="backupDown('tabs.tabsMessage')"><span class="icon ion-ios-arrow-back">消息</span></button>
         </div>
-        <h1 class="title">系统消息</h1>
+        <h1 class="title">商品回复</h1>
     </ion-header-bar>
     <ion-content  >
         <ion-list ng-repeat="item in items track by $index">
-            <div class="item system-item">
+            <a class="item message-order">
                 <div class="row">
-                    <div class="col-10">
-                        <img src="./assets/icon_message_system40x40.png"  class="system-img"/>
+                    <div class="col-20 col-center">
+                        <img ng-src="{{item.img}}" />
                     </div>
-                    <div class="col-60">
-                        系统消息
-                    </div>
-                    <div class="col-30 system-time" ng-bind="parseTime(item.createDate)">
+                    <div class="col-80">
+                        <p class="orderTitle" ng-bind="item.title"></p>
+                        <p class="orderTime" ng-bind="parseTime(item.createDate)"></p>
+                        <p class="orderDirct" ng-bind="item.contents"></p>
                     </div>
                 </div>
-                <div class="item item-body system-content">
-                    {{item.contents}}
-                </div>
-            </div>
+            </a>
         </ion-list>
+
         <ion-infinite-scroll
                 on-infinite="loadMore()"
                 ng-if="!noMoreLoad"

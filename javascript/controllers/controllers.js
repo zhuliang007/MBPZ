@@ -21,5 +21,4 @@ angular.module('starter.controllers',[
     'controllers.messageTalking',
     'controllers.messageChat',
     'controllers.publish',
-    'controllers.messageChat',
-    'controllers.messageSystemCtrl'])
+    'controllers.messagesCtrl'])

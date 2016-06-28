@@ -121,7 +121,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     url:$configProvider.controllers.messageTalking.url,
                     templateUrl:$configProvider.controllers.messageTalking.templateUrl,
                     controller:$configProvider.controllers.messageTalking.controller,
-                    cache:false,
+                    cache:$configProvider.controllers.messageTalking.cache,
                 })
                 .state($configProvider.controllers.report.name,{
                     url:$configProvider.controllers.report.url,
@@ -159,6 +159,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.messageSystem.templateUrl,
                     controller:$configProvider.controllers.messageSystem.controller,
                     cache:$configProvider.controllers.messageSystem.cache,
+                    params:$configProvider.controllers.messageSystem.params,
                 })
                 .state($configProvider.controllers.publish.name,{
                     url:$configProvider.controllers.publish.url,
@@ -166,8 +167,20 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.publish.controller,
                     cache:$configProvider.controllers.publish.cache,
                 })
-
-
+                .state($configProvider.controllers.messageOrder.name,{
+                    url:$configProvider.controllers.messageOrder.url,
+                    templateUrl:$configProvider.controllers.messageOrder.templateUrl,
+                    controller:$configProvider.controllers.messageOrder.controller,
+                    cache:$configProvider.controllers.messageOrder.cache,
+                    params:$configProvider.controllers.messageOrder.params,
+                })
+                .state($configProvider.controllers.messageProduct.name,{
+                    url:$configProvider.controllers.messageProduct.url,
+                    templateUrl:$configProvider.controllers.messageProduct.templateUrl,
+                    controller:$configProvider.controllers.messageProduct.controller,
+                    cache:$configProvider.controllers.messageProduct.cache,
+                    params:$configProvider.controllers.messageProduct.params,
+                })
 
 
 

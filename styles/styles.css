@@ -1912,6 +1912,48 @@ ion-content{
     display:none;
 }
 
+.system-img{
+    width:20px;
+    height:20px;
+}
+.system-item{
+    padding:5px;
+    margin-bottom:4px;
+}
+
+.system-content{
+    padding:5px;
+    border:0;
+    text-indent: 2em ;
+    font-size:14px;
+    color:#b2b2b2;
+}
+
+.system-time{
+    font-size:10px;
+    color:#b2b2b2;
+}
+
+.message-order{
+    padding:0px;
+}
+.message-order img{
+    width:40px;
+    height:40px;
+}
+.orderTitle{
+    float:left;
+    color:black;
+}
+
+.orderTime{
+    text-align:right;
+}
+.orderDirct,.orderTime{
+    color:#b2b2b2 !important;
+    font-size:10px !important;
+    padding-right:5px;
+}
 
 
 
