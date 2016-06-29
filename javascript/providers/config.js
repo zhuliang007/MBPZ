@@ -304,6 +304,13 @@ angular.module('providers.config',[])
                 name:"publish",
                 controller:"PublishCtrl",
                 cache:false
+            },
+            postRelease:{
+                templateUrl:"templates/personal/post-release.html",
+                url:"/release",
+                name:"postRelease",
+                controller:"PostReleaseCtrl",
+                cache:false
             }
 
         }
