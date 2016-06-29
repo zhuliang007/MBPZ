@@ -52,6 +52,7 @@ angular.module('controllers.productDetail',[])
                             }
                         })
                     },function(error){
+                        $console.show(error);
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 14 || systemError.errorCode == 15){
@@ -155,6 +156,7 @@ angular.module('controllers.productDetail',[])
                             $scope.product.isSpot = $scope.product.isSpot?0:1;
                         }
                     },function(error){
+                        $console.show(error);
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 14 || systemError.errorCode == 15){

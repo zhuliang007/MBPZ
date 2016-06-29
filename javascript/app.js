@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/6/6.
  */
-angular.module('starter', ['ionic','starter.controllers','starter.directives','starter.providers','starter.filters','starter.services'])
+angular.module('starter', ['ionic','starter.controllers','starter.directives','starter.providers','starter.filters','starter.services','ngFileUpload'])
     .config([
         '$stateProvider',
         '$configProvider',
