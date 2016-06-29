@@ -2083,6 +2083,7 @@ ion-content{
 
 .releaseTab .tabs{
     top:0px !important;
+    border-bottom:1px solid #e5e5e5 !important;
 }
 
 .releaseTab .tab-item.tab-item-active{
@@ -2096,7 +2097,15 @@ ion-content{
 }
 
 .releaseBtn{
+    padding-top:10px;
    text-align:right;
+}
+.releaseItem{
+    margin-top:5px;
+    padding:5px;
+}
+.releaseRow{
+    border-bottom:1px solid #e5e5e5;
 }
 
 
