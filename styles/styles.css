@@ -1977,5 +1977,16 @@ ion-content{
     height: 40px;
 }
 
+.releaseTab .tabs{
+    top:0px !important;
+}
+
+.releaseTab .tab-item.tab-item-active{
+    color:red !important;
+    border-bottom:1px solid red !important;
+}
+
+
+
 
 

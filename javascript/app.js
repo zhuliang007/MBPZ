@@ -181,7 +181,12 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.messageProduct.cache,
                     params:$configProvider.controllers.messageProduct.params,
                 })
-
+                .state($configProvider.controllers.postRelease.name,{
+                    url:$configProvider.controllers.postRelease.url,
+                    templateUrl:$configProvider.controllers.postRelease.templateUrl,
+                    controller:$configProvider.controllers.postRelease.controller,
+                    cache:$configProvider.controllers.postRelease.cache,
+                })
 
 
         }])
