@@ -18,7 +18,8 @@ angular.module('controllers.start',[])
         '$ionicHistory',
         '$q',
         '$keywords',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords){
+        '$locals',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$locals){
 
             var url = $location.url();
             if(!url){
@@ -136,8 +137,12 @@ angular.module('controllers.start',[])
                         scope: $scope,
                         animation: $config.modals[modalName].animation
                     }).then(function(modal) {
-                        $scope[modalName] = modal;
-                        $scope[modalName].show();
+                        if(!$scope[modalName]){
+                            $scope[modalName] = modal;
+                        }
+                        if(!$scope[modalName].isShown()){
+                            $scope[modalName].show();
+                        }
                         deferred.resolve();
                     });
                 }
@@ -182,7 +187,12 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type){
-                $state.go($config.controllers.publish.name,{type:type});
+                if(!$locals.get('token','')){
+                    $scope.openModal('loginModal');
+                }
+                else{
+                    $state.go($config.controllers.publish.name,{type:type});
+                }
                 $scope.closeModal('publishModal');
             }
 

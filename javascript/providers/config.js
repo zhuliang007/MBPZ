@@ -17,6 +17,23 @@ angular.module('providers.config',[])
             return this.requestAction;
         }
 
+        $config.requestPublish = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
+        //$config.requestPublishDebug = 'http://192.168.100.109:8080/';
+        $config.requestPublishDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
+        $config.getRequestPublish = function(){
+            if(this.debug){
+                return this.requestPublishDebug;
+            }
+            return this.requestPublish;
+        }
+
+        $config.publish = {
+            upload:"media/image/upload",
+            delete:"media/image/delete",
+            create:"product/v1.1/public",
+            edit:"product/v1.1/edit"
+        }
+
         $config.imageUrl = '';
         $config.imageUrlDebug = 'assets/';
         $config.getImageUrlDebug = function(){

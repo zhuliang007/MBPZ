@@ -7,28 +7,45 @@
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
         <ion-item class="title">
-            <input type="text" placeholder="标题最多不超过20个字" maxlength="20">
+            <input type="text" placeholder="标题最多不超过20个字" maxlength="20" ng-model="publishObject.title">
         </ion-item>
         <ion-item class="content">
-            <textarea placeholder="{{publishContentPlaceHold}}"></textarea>
+            <textarea placeholder="{{publishContentPlaceHold}}" maxlength="1000" ng-model="publishObject.content"></textarea>
         </ion-item>
         <ion-item class="publishImage">
-            <ion-scroll has-bouncing="true" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle">
-                <div class="photoGroup">
-                    <span class="icon ion-android-cancel cancel"></span>
-                    <ion-spinner icon="ios"></ion-spinner>
-                    <div class="failed">
+            <ion-scroll has-bouncing="true" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle" id="publishImageHandle">
+                <div class="photoGroup" ng-repeat="publishImage in publishObject.publishImageList track by $index" ngf-background="publishImage.url||(publishImage | ngfDataUrl)" ng-init="updateFile($index)">
+                    <span class="icon ion-android-cancel cancel" ng-click="deletePublishImage($index)" ng-class="{true:'success',false:''}[publishImage.isSuccess]"></span>
+                    <div class="progress" ng-class="{true:'success',false:''}[publishImage.isProgress && !publishImage.isFailed]" ng-if="!publishImage.isFailed">
+                        <div class="progress-wrap">
+                            <div class="left">
+                                <div class="circle" style="transform:rotate({{publishImage.leftProgress}}deg)">
+                                    <div class="left"></div>
+                                    <div class="right"></div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="circle" style="transform:rotate({{publishImage.rightProgress}}deg)">
+                                    <div class="left"></div>
+                                    <div class="right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="failed" ng-if="publishImage.isFailed">
                         重新上传
                     </div>
                 </div>
-                <div class="photoGroup">
-                    <span class="icon ion-android-cancel cancel"></span>
-                    <ion-spinner icon="ios"></ion-spinner>
-                    <div class="failed">
-                        重新上传
-                    </div>
-                </div>
-                <div class="photoGroup">
+                <div class="photoGroup"
+                     ngf-select
+                     ng-model="files"
+                     ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'"
+                     ngf-capture="'camera'"
+                     ngf-change="getChangFile($files)"
+                     multiple="multiple"
+                     ngf-max-files="5"
+                     ng-if="publishObject.publishImageList.length<5">
                     <img ng-src="{{icAddPhoto}}">
                 </div>
             </ion-scroll>
@@ -43,35 +60,35 @@
                 <span class="priceTitle">价格<span class="icon ion-social-yen"></span></span>
                 <span class="priceUnit">元</span>
                 <div class="priceInput">
-                    <input type="number">
+                    <input type="number" ng-model="publishObject.currentPrice">
                 </div>
             </ion-item>
             <ion-item class="price">
                 <span class="priceTitle">原价<span class="icon ion-social-yen"></span></span>
                 <span class="priceUnit">元</span>
                 <div class="priceInput">
-                    <input type="number">
+                    <input type="number" ng-model="publishObject.originalPrice">
                 </div>
             </ion-item>
             <ion-item class="price freight">
                 <span class="priceTitle">运费<span class="icon ion-social-yen"></span></span>
                 <span class="priceUnit">元</span>
                 <div class="priceInput">
-                    <input type="number">
+                    <input type="number" ng-model="publishObject.freight">
                 </div>
             </ion-item>
         </ion-list>
         <ion-item class="publishType item-input">
             <span class="input-label">分类</span>
-            <select ng-model="selectParent" ng-options="typeCode.value as typeCode.name for typeCode in typeCodes" ng-change="changeParent(selectParent)">
+            <select ng-model="selectType.selectParent" ng-options="typeCode.value as typeCode.name for typeCode in typeCodes" ng-change="changeParent()">
                 <option  value="">--请选择--</option>
             </select>
-            <select ng-model="selectChild" ng-options="childCode.value as childCode.name for childCode in childCodes" ng-change="changeChild(selectParent,selectChild)">
+            <select ng-model="selectType.selectChild" ng-options="childCode.value as childCode.name for childCode in childCodes" ng-change="changeChild()">
                 <option value="">--请选择--</option>
             </select>
         </ion-item>
     </ion-content>
     <ion-footer-bar align-title="center">
-        <button type="button" class="button-block submit">确定发布</button>
+        <button type="button" class="button-block submit" ng-click="submitPublish()">确定发布</button>
     </ion-footer-bar>
 </ion-view>
