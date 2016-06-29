@@ -2090,6 +2090,15 @@ ion-content{
     border-bottom:1px solid red !important;
 }
 
+.releasePaddingTop{
+    top:50px !important;
+    height:92% !important;
+}
+
+.releaseBtn{
+   text-align:right;
+}
+
 
 
 
