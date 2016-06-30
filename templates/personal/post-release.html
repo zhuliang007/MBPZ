@@ -11,8 +11,8 @@
                 <ion-content has-tabs="true" class="releasePaddingTop"  >
                     <div class="list" ng-repeat="item in items track by $index">
                         <div class="item releaseItem">
-                            <div class="row">
-                                <div class="col-30">1</div>
+                            <div class="row" ng-if="item.productImageList.length!=0" ng-repeat="">
+                                <div class="col-30" >1</div>
                             </div>
                             <div class="row">
                                 <p ng-bind="item.content"></p>
@@ -27,7 +27,7 @@
                                     <span ng-bind="item.originalPrice"></span>
                                 </p>
                             </div>
-                            <div class="row ">
+                            <div class="row releaseRows">
                                 <div class="col-90 releaseBtns">
                                     <button class="button button-light releaseBtn">删除</button>
                                     <button class="button button-light releaseBtn">编辑</button>

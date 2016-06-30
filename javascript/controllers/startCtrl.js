@@ -254,5 +254,11 @@ angular.module('controllers.start',[])
                 }
             }
 
+            $scope.checkProductImages = function(productImageList){
+                if(productImageList == null || productImageList.length==0){
+                    return []
+                }
+                return productImageList.slice(0,3);
+            }
         }
     ])
