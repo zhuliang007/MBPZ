@@ -17,50 +17,54 @@
             </div>
             <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('myCenterWallet')">
                 <i class="icon "><img src="{{mineWallet}}" class="myCenterImg"></i>
-                <h2>我的钱包</h2>
+                <p class="personalTitles">我的钱包</p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
             </div>
             <a class="item  item-icon-left item-icon-right" ng-click="">
                 <i class="icon "><img src="{{mineRefunds}}" class="myCenterImg"></i>
-                <h2>退款管理</h2>
+                <p class="personalTitles">退款管理</p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
             </div>
-            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('postRelease')">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('postRelease.sell')">
                 <i class="icon "><img src="{{mineRelease}}" class="myCenterImg"></i>
-                <h2>宝贝发布</h2>
+                <p class="personalTitles">宝贝发布</p>
+                <p class="personalNum" ng-bind="productPublicCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <a class="item  item-icon-left item-icon-right" href="#">
                 <i class="icon "><img src="{{mineSold}}" class="myCenterImg"></i>
-                <h2>宝贝已售</h2>
+                <p class="personalTitles">宝贝已售</p>
+                <p class="personalNum" ng-bind="productSoldCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <a class="item  item-icon-left item-icon-right" href="#">
                 <i class="icon "><img src="{{mineBuy}}" class="myCenterImg"></i>
-                <h2>宝贝已购</h2>
+                <p class="personalTitles">宝贝已购</p>
+                <p class="personalNum" ng-bind="productBoughtCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
-            <a class="item  item-icon-left item-icon-right" href="#">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('myCollection')">
                 <i class="icon "><img src="{{mineCollect}}" class="myCenterImg"></i>
-                <h2>宝贝收藏</h2>
+                <p class="personalTitles">宝贝收藏</p>
+                <p class="personalNum" ng-bind="productCollectCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
             </div>
             <a class="item  item-icon-left item-icon-right" href="#">
                 <i class="icon "><img src="{{mineUndercarriage}}" class="myCenterImg"></i>
-                <h2>下架管理</h2>
+                <p class="personalTitles">下架管理</p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
             </div>
             <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('orderAddress')">
                 <i class="icon "><img src="{{mineAdd}}" class="myCenterImg"></i>
-                <h2>地址管理</h2>
+                <p class="personalTitles">地址管理</p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
