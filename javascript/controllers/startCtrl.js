@@ -85,9 +85,25 @@ angular.module('controllers.start',[])
                     $rootScope.provinceCityList.districtList = result[110100];
                 })
 
-            $scope.showProduct = function(id,type){
-                var params = {type:type,id:id};
+            $scope.showProduct = function(id){
+                var params = {id:id};
                 $state.go($config.controllers.productDetail.name,params)
+            }
+
+            $scope.showShop = function(id){
+                var params = {id:id};
+                $state.go($config.controllers.shopDetail.name,params)
+            }
+
+            $scope.showDetail = function(product){
+                switch (product.type){
+                    case 'SELL':
+                        $scope.showProduct(product.id)
+                        break;
+                    case 'ASK_TO_BUY':
+                        $scope.showShop(product.id)
+                        break;
+                }
             }
 
             //联系卖家

@@ -1,8 +1,8 @@
 /**
  * Created by Administrator on 2016/6/8.
  */
-angular.module('controllers.productDetail',[])
-    .controller('ProductDetailCtrl',[
+angular.module('controllers.shopDetail',[])
+    .controller('ShopDetailCtrl',[
         '$scope',
         '$config',
         '$console',
@@ -18,12 +18,11 @@ angular.module('controllers.productDetail',[])
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $console.show("productDetail")
+            $console.show("shopDetail")
+            /*$scope.productType = $stateParams.type;
             var id = $stateParams.id;
-            var numberOfPerPage = 10;
-            var pageNo = 0;
-            $scope.replyList = []
-            $scope.infiniteFlag = true;
+            var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
+
             getProductDetail();
             function getProductDetail(){
                 var data = {
@@ -38,6 +37,20 @@ angular.module('controllers.productDetail',[])
                     .then(function(result){
                         $console.show(result);
                         $scope.product = result.data;
+                        $timeout(function(){
+                            if(productSlideBox){
+                                productSlideBox.update();
+                                $timeout(function(){
+                                    if(productSlideBox.slidesCount()>1){
+                                        $scope.showPager = true;
+                                        productSlideBox.loop(true);
+                                    }
+                                    else{
+                                        $scope.showPager = false;
+                                    }
+                                })
+                            }
+                        })
                     },function(error){
                         $console.show(error);
                         if(error.systemError){
@@ -48,7 +61,10 @@ angular.module('controllers.productDetail',[])
                         }
                     })
             }
-
+            var numberOfPerPage = 10;
+            var pageNo = 0;
+            $scope.replyList = []
+            $scope.infiniteFlag = true;
             function getReplyList(){
                 var data = {
                     "cmd": $config.cmds.replyList,
@@ -93,34 +109,6 @@ angular.module('controllers.productDetail',[])
                 getReplyList();
             };
 
-            $scope.judgeProduct = function(){
-                if(!$locals.get('token','')){
-                    $scope.openModal('loginModal');
-                    return ;
-                }
-                var data = {
-                    "cmd":$config.cmds.collect,
-                    "parameters":{
-                        "productId": $scope.product.id,
-                        "isCollect":$scope.product.isCollect?0:1
-                    },
-                    "token":$locals.get('token','')
-                };
-
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $scope.product.isCollect = $scope.product.isCollect?0:1;
-                    },function(error){
-                        $console.show(error);
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
-                            }
-                        }
-                    })
-            }
 
             $scope.buyProduct = function(){
                 if(!$locals.get('token','')){
@@ -136,6 +124,46 @@ angular.module('controllers.productDetail',[])
                 $console.show($scope.product);
 
                 $state.go($config.controllers.orderPreview.name,{productId:id});
+            }
+
+            $scope.judgeProduct = function(){
+                if(!$locals.get('token','')){
+                    $scope.openModal('loginModal');
+                    return ;
+                }
+                var data = {
+                    "parameters":{
+                        "productId": $scope.product.id,
+                    },
+                    "token":$locals.get('token','')
+                };
+                if($scope.productType==0){
+                    data.cmd = $config.cmds.collect;
+                    data.parameters.isCollect = $scope.product.isCollect?0:1;
+                }
+                else if($scope.productType == 1){
+                    data.cmd = $config.cmds.spot;
+                    data.parameters.isSpot = $scope.product.isSpot?0:1;
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $console.show(result);
+                        if($scope.productType==0){
+                            $scope.product.isCollect = $scope.product.isCollect?0:1;
+                        }
+                        else if($scope.productType == 1){
+                            $scope.product.isSpot = $scope.product.isSpot?0:1;
+                        }
+                    },function(error){
+                        $console.show(error);
+                        if(error.systemError){
+                            var systemError = error.systemError;
+                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                $scope.openModal('loginModal');
+                            }
+                        }
+                    })
             }
 
             $scope.openPopover = function($event,popName){
@@ -164,6 +192,7 @@ angular.module('controllers.productDetail',[])
                 }
             });
 
+
             $rootScope.login = function(telNumber,codeNumber){
                 if(!telNumber){
                     $console.show($config.messages.noTel);
@@ -189,7 +218,8 @@ angular.module('controllers.productDetail',[])
                         getProductDetail();
                     })
 
-            }
+            }*/
+
 
 
         }])
