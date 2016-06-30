@@ -23,4 +23,4 @@ angular.module('starter.controllers',[
     'controllers.publish',
     'controllers.messagesCtrl',
     'controllers.postReleaseCtrl',
-    'controllers.shopDetail'])
+    'controllers.sellCtrl'])

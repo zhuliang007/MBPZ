@@ -94,6 +94,7 @@ angular.module('providers.config',[])
             systemMessage:"market/message/getPage",
             messageNum:"market/message/getType",
             walletNum:"wallet/account/index",
+            productPublic:"myself/productPublic/list",
         }
 
         $config.types = {
