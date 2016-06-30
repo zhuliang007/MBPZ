@@ -7,28 +7,40 @@
     </ion-header-bar>
     <ion-content  overflow-scroll="true" style="overflow: hidden">
         <ion-tabs class="tabs-top releaseTab tabs-stable">
-            <ion-tab title="出售"  >
+            <ion-tab title="出售" ng-controller="SellCtrl" >
                 <ion-content has-tabs="true" class="releasePaddingTop"  >
-                    <div class="list">
+                    <div class="list" ng-repeat="item in items track by $index">
                         <div class="item releaseItem">
                             <div class="row">
                                 <div class="col-30">1</div>
-                                <div class="col-30">2</div>
-                                <div class="col-30">3</div>
                             </div>
                             <div class="row">
-                                <p>31231312313</p>
+                                <p ng-bind="item.content"></p>
                             </div>
                             <div class="row releaseRow">
-                                <p>31231312313</p>
+                                <p class="sellFont">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.currentPrice"></span>
+                                </p>
+                                <p class="sellOriginalFont" ng-if="item.originalPrice!=null">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.originalPrice"></span>
+                                </p>
                             </div>
                             <div class="row ">
-                                <div class="col-90 releaseBtn">
-                                    <button>1</button>
+                                <div class="col-90 releaseBtns">
+                                    <button class="button button-light releaseBtn">删除</button>
+                                    <button class="button button-light releaseBtn">编辑</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <ion-infinite-scroll
+                            on-infinite="publicLoadMore()"
+                            ng-if="!noMoreLoad"
+                            icon="ion-loading-c"
+                            distance="1%">
+                    </ion-infinite-scroll>
                 </ion-content>
             </ion-tab>
             <ion-tab title="求购">

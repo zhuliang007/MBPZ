@@ -22,4 +22,5 @@ angular.module('starter.controllers',[
     'controllers.messageChat',
     'controllers.publish',
     'controllers.messagesCtrl',
-    'controllers.postReleaseCtrl'])
+    'controllers.postReleaseCtrl',
+    'controllers.sellCtrl'])

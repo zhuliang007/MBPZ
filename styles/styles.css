@@ -2096,16 +2096,40 @@ ion-content{
     height:92% !important;
 }
 
-.releaseBtn{
+.releaseBtns{
     padding-top:10px;
    text-align:right;
 }
+
+.releaseBtn .button{
+    min-height:20px !important;
+    min-width:40px !important;
+}
+
 .releaseItem{
     margin-top:5px;
     padding:5px;
 }
 .releaseRow{
     border-bottom:1px solid #e5e5e5;
+}
+.sellFont{
+    padding-right:10px;
+}
+.sellFont span{
+    color:red;
+}
+.sellOriginalFont span{
+    color:#9e9e9e;
+}
+
+.sellOriginalFont span,.sellFont span{
+    font-size:14px;
+}
+
+.sellOriginalFont {
+    text-color:#9e9e9e;
+    text-decoration:line-through;
 }
 
 
