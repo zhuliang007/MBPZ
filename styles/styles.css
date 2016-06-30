@@ -26,17 +26,20 @@
 .mbpz-icon-meifu:before { content: "\e608"; }
 .mbpz-icon-home:before { content: "\e600"; }
 .mbpz-icon-shop-bag:before { content: "\e602"; }
+.mbpz-icon-fill-star:before { content: "\e612"; }
+.mbpz-icon-star:before { content: "\e613"; }
 .mbpz-icon-report:before { content: "\e60f"; }
 .mbpz-icon-muying:before { content: "\e609"; }
 .mbpz-icon-arrow-down:before { content: "\e606"; }
-.mbpz-icon-readers:before { content: "\e60c"; }
-.mbpz-icon-replies:before { content: "\e60d"; }
+.mbpz-icon-replies:before { content: "\e615"; }
 .mbpz-icon-personal:before { content: "\e603"; }
 .mbpz-icon-plus:before { content: "\e604"; }
 .mbpz-icon-zan:before { content: "\e610"; }
 .mbpz-icon-zansel:before { content: "\e611"; }
 .mbpz-icon-guanfang:before { content: "\e60a"; }
 .mbpz-icon-position:before { content: "\e60e"; }
+.mbpz-icon-more:before { content: "\e614"; }
+.mbpz-icon-readers:before { content: "\e60d"; }
 
 /*百度地图*/
 bd-map{
@@ -108,6 +111,7 @@ ion-content{
 /*页面头部*/
 .tabsHome ion-header-bar,
 .productListByType ion-header-bar,
+.productDetail.product ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
     color: #FFFFFF;
@@ -138,6 +142,7 @@ ion-content{
 }
 
 .tabsHome ion-header-bar .title,
+.productDetail.product ion-header-bar .title,
 .productListByType ion-header-bar .title{
     color: #FFFFFF;
     font-style: italic;
@@ -145,6 +150,7 @@ ion-content{
     font-size: 18px;
 }
 
+.productDetail.product ion-header-bar .title,
 .productListByType ion-header-bar .title{
     font-style: normal;
 }
@@ -162,10 +168,16 @@ ion-content{
     font-size: 18px;
 }
 
+.productDetail.product ion-header-bar .button>.mbpz{
+    font-size: 20px;
+}
+
 .tabsHome ion-header-bar .button,
 .tabsHome ion-header-bar .button.activated,
 .productListByType ion-header-bar .button,
 .productListByType ion-header-bar .button.activated,
+.productDetail.product ion-header-bar .button,
+.productDetail.product ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
 .searchHome ion-header-bar .button.activated{
     background: #FF4E72;
@@ -803,6 +815,10 @@ ion-content{
     margin-top: 41px;
 }
 
+.productDetail.product ion-header-bar + ion-content{
+    margin-top: 0px;
+}
+
 .productDetail .header{
     position: absolute;
     display: inline-block;
@@ -956,8 +972,13 @@ ion-content{
 }
 
 .userCtrl>div.judge.star{
-    color: #666666;
+    color: #FFD43F;
 }
+
+.userCtrl>div.judge>.mbpz{
+    font-size: 20px;
+}
+
 .userCtrl>div.judge.zan{
     color: #666666;
 }

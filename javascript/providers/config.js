@@ -149,9 +149,16 @@ angular.module('providers.config',[])
             },
             productDetail:{
                 templateUrl:"templates/detail/productDetail.html",
-                url:"/productDetail/:type&:id",
+                url:"/productDetail/:id",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
+                cache:false
+            },
+            shopDetail:{
+                templateUrl:"templates/detail/shopDetail.html",
+                url:"/shopDetail/:id",
+                name:"shopDetail",
+                controller:"ShopDetailCtrl",
                 cache:false
             },
             productListByType:{

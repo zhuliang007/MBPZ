@@ -1,0 +1,186 @@
+<ion-view class="productDetail">
+    <ion-header-bar align-title="center" ng-if="(productType==1)&&((product.productImageList==null)||(product.productImageList.length==0))">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+        <h1 class="title">求购</h1>
+        <div class="buttons">
+            <button class="button" ng-click="openPopover($event,'productReport')"><i class="icon ion-more"></i></button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="header" ng-if="(product.productImageList!=null)&&(product.productImageList.length>0)">
+            <span ng-click="goBack()" class="icon ion-ios-arrow-back"></span>
+            <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
+        </div>
+        <ion-slide-box ng-show="product.productImageList!=null"
+                       ng-class="{true:'margin-normal-bottom',false:''}[productType==1]"
+                       class="headSliders"
+                       delegate-handle="productSlideBox"
+                       does-continue="false"
+                       auto-play="true" slide-interval="2000" show-pager="{{showPager}}">
+            <ion-slide ng-repeat="productImage in product.productImageList track by $index">
+                <div id="productImage{{$index}}" class="bgImg" ng-style="resizeImage('productImage{{$index}}',productImage.location,'1:1')"></div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="productDetailBody" ng-if="productType==0">
+            <div class="row row-no-padding">
+                <div class="col col-75 col-center padding-normal-right title">
+                    <span ng-if="product.isRecommoned == 1" class="recommoned">官方推荐</span>
+                    <span ng-bind="product.title" ng-class="{true:'padding-small-left',false:''}[product.isRecommoned == 1]"></span>
+                </div>
+                <div class="col col-center text-right counts">
+                    <span class="mbpz mbpz-icon-readers"></span>
+                    <span ng-bind="product.browseNumber||0">1212</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-big-top">
+                    <span class="mbpz mbpz-icon-money price"></span>
+                    <span class="price padding-small-right" ng-bind="product.currentPrice"></span>
+                    <span class="originalPrice padding-small-right" ng-bind="product.originalPrice" ng-if="product.originalPrice"></span>
+                    <span class="freight">运费：<span ng-bind="(product.freight||0)+'.0'"></span></span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-big-vertical">
+                    <span class="content" ng-bind="product.content"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-small-vertical border-bottom">
+                    <span class="publicTime" ng-bind="parseTime(product.publicDate)"></span>
+                    <span class="publicTime">发布</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-normal-top">
+                    <span class="mbpz mbpz-icon-position address"></span>
+                    <span ng-if="product.userLocation==null" class="address">未知</span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                </div>
+            </div>
+        </div>
+        <div class="productDetailBody padding-small-vertical margin-normal-top" ng-if="productType==0">
+            <div class="row row-no-padding">
+                <div class="col col-center">
+                    <div class="col padding-none-horizontal padding-none-vertical">
+                        <div class="bgImg border-radius-round" id="publicUserImage_{{$index}}" ng-style="resizeImage('publicUserImage_{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                    </div>
+                </div>
+                <div class="col col-50 col-center">
+                    <span ng-bind="product.publicUser.nickName" class="userNick"></span>
+                </div>
+                <div class="col col-33 col-center text-center">
+                    <div class="contact" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                </div>
+            </div>
+        </div>
+        <div class="productDetailBody" ng-if="productType==1">
+            <div class="row row-no-padding">
+                <div class="col col-75 col-center padding-normal-right title">
+                    <span ng-bind="product.title"></span>
+                </div>
+                <div class="col col-center text-right counts">
+                    <span class="mbpz mbpz-icon-readers"></span>
+                    <span ng-bind="product.browseNumber||0">1212</span>
+                </div>
+            </div>
+        </div>
+        <div class="productDetailBody margin-normal-top" ng-if="productType==1">
+            <div class="row row-no-padding border-bottom">
+                <div class="col col-center">
+                    <div class="col padding-none-horizontal">
+                        <div class="bgImg border-radius-round" id="publicUserImage_type1_{{$index}}" ng-style="resizeImage('publicUserImage_type1_{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                    </div>
+                </div>
+                <div class="col col-50 col-center">
+                    <span ng-bind="product.publicUser.nickName" class="userNick"></span>
+                </div>
+                <div class="col col-33 col-center text-center">
+                    <div class="contact" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-big-vertical">
+                    <span class="content" ng-bind="product.content"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-small-vertical border-bottom">
+                    <span class="publicTime" ng-bind="parseTime(product.publicDate)"></span>
+                    <span class="publicTime">发布</span>
+                </div>
+            </div>
+            <div class="row row-no-padding">
+                <div class="col col-center padding-normal-top">
+                    <span class="mbpz mbpz-icon-position address"></span>
+                    <span ng-if="product.userLocation==null" class="address">未知</span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                    <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                </div>
+            </div>
+        </div>
+
+        <ion-list ng-if="(replyList!=null)&&(replyList.length>0)" class="replyBody">
+            <ion-item ng-if="productType==0"  class="row row-no-padding" ng-repeat="reply in replyList track by $index">
+                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
+                    <div class="bgImg border-radius-round" ng-style="resizeImage('userHead{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead{{$index}}"></div>
+                </div>
+                <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
+                    <div ng-bind="reply.createUser.nickName" class="userNick"></div>
+                    <div class="margin-normal-top"><span ng-bind="reply.contents" class="content"></span></div>
+                </div>
+                <div class="col col-top text-right padding-normal-horizontal padding-normal-vertical">
+                    <span ng-bind="parseTime(reply.createDate)" class="publicTime"></span>
+                </div>
+            </ion-item>
+            <ion-item ng-if="productType==1 && reply.isRecommoned == 1" class="row row-no-padding replyRecommoned" ng-repeat="reply in replyList track by $index">
+                <div class="col col-75 padding-normal-horizontal padding-normal-vertical">
+                    <span class="recommoned">官方推荐</span>
+                    <div class="margin-normal-top">推荐理由：<span  ng-bind="reply.contents"></span></div>
+                </div>
+                <div class="col padding-normal-horizontal padding-normal-vertical">
+                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg" id="officialImage{{$index}}" ng-style="resizeImage('officialImage{{$index}}',reply.recommonedProductImageList[0].location)"></div>
+                </div>
+            </ion-item>
+            <ion-item ng-if="productType==1 && reply.isRecommoned == null" class="row row-no-padding replyNormal" ng-repeat="reply in replyList track by $index">
+                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
+                    <div class="bgImg border-radius-round" ng-style="resizeImage('userHead_type1_{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead_type1_{{$index}}"></div>
+                </div>
+                <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
+                    <div><span class="userNick" ng-bind="reply.createUser.nickName"></span><span class="publicTime padding-normal-left" ng-bind="parseTime(reply.createDate)"></span><span class="publicTime">回复</span></div>
+                    <div class="margin-normal-top"><span class="content" ng-bind="reply.contents"></span></div>
+                </div>
+                <div class="col padding-normal-horizontal padding-normal-vertical">
+                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg" id="replyImage{{$index}}" ng-style="resizeImage('replyImage{{$index}}',reply.recommonedProductImageList[0].location)"></div>
+                </div>
+            </ion-item>
+        </ion-list>
+
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="userCtrl">
+        <div><span class="mbpz mbpz-icon-replies"></span><span ng-bind="product.replyNumber"></span></div>
+        <div class="judge" ng-class="{true:'star',false:'zan'}[productType==0]" ng-click="judgeProduct()">
+            <span ng-if="productType==0" class="icon" ng-class="{true:'ion-ios-star-outline',false:'ion-ios-star'}[product.isCollect==null||product.isCollect==0]"></span>
+            <span ng-if="productType==1" class="mbpz" ng-class="{true:'mbpz-icon-zan',false:'mbpz-icon-zansel'}[product.isSpot==null||product.isSpot==0]"></span>
+        </div>
+        <div>
+            <span class="icon ion-share padding-small-right"></span>分享
+        </div>
+        <button ng-if="productType==0" class="submit" ng-disabled="product.productStatus==1" ng-click="buyProduct()">
+            <span ng-if="product.productStatus==0">我要买</span>
+            <span ng-if="product.productStatus==1">已下架</span>
+        </button>
+        <button ng-if="productType==1" class="submit">确认解决</button>
+    </div>
+</ion-view>
