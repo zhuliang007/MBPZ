@@ -2103,7 +2103,6 @@ ion-content{
 }
 
 .releaseTab .tabs{
-    top:0px !important;
     border-bottom:1px solid #e5e5e5 !important;
 }
 
@@ -2113,7 +2112,7 @@ ion-content{
 }
 
 .releasePaddingTop{
-    top:50px !important;
+    top:15% !important;
     height:92% !important;
 }
 .releaseRows{
@@ -2134,7 +2133,6 @@ ion-content{
     color:#9e9e9e !important;
     background: white !important;
     border:1px solid #9e9e9e !important;
-    border-radius:0px !important;
 }
 
 .releaseItem{
@@ -2161,6 +2159,31 @@ ion-content{
 .sellOriginalFont {
     text-color:#9e9e9e;
     text-decoration:line-through;
+}
+
+.sellContent{
+    padding:5px;
+    font-size:14px;
+}
+
+.personalTitles{
+    color:black !important;
+    font-size:16px;
+    float:left;
+}
+
+.personalNum{
+   text-align: right;
+}
+
+.productStatus{
+    text-align: right;
+    padding-right:5px;
+    color:red !important;
+}
+.collection-item{
+    margin-bottom:5px;
+    -webkit-margin-bottom-collapse: 5px;
 }
 
 

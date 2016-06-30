@@ -95,6 +95,9 @@ angular.module('providers.config',[])
             messageNum:"market/message/getType",
             walletNum:"wallet/account/index",
             productPublic:"myself/productPublic/list",
+            productDel:"product/delete",
+            personalCount:"myself/getCount",
+            myProductList:"myself/productCollect/list",
         }
 
         $config.types = {
@@ -315,9 +318,30 @@ angular.module('providers.config',[])
             },
             postRelease:{
                 templateUrl:"templates/personal/post-release.html",
-                url:"/release",
+                url:"/postRelease",
+                abstract:true,
                 name:"postRelease",
                 controller:"PostReleaseCtrl",
+            },
+            sellContent:{
+                templateUrl:"templates/personal/postRelease-sell.html",
+                url:"/postReleaseSell",
+                name:"postRelease.sell",
+                controller:"SellCtrl",
+                cache:false
+            },
+            lookingContent:{
+                templateUrl:"templates/personal/postRelease-looking.html",
+                url:"/looking",
+                name:"postRelease.looking",
+                controller:"LookingCtrl",
+                cache:false
+            },
+            myCollection:{
+                templateUrl:"templates/personal/personal-collection.html",
+                url:"/myCollection",
+                name:"myCollection",
+                controller:"CollectionCtrl",
                 cache:false
             }
 

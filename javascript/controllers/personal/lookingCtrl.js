@@ -6,8 +6,8 @@
  * Created by zl_sam on 16/6/14.
  */
 
-angular.module('controllers.sellCtrl',[])
-    .controller('SellCtrl',[
+angular.module('controllers.lookingCtrl',[])
+    .controller('LookingCtrl',[
         '$scope',
         '$console',
         '$config',
@@ -22,11 +22,11 @@ angular.module('controllers.sellCtrl',[])
             $scope.noMoreLoad = false;
             $scope.items = [];
 
-            $scope.publicLoadMore = function () {
+            $scope.lookLoadMore = function () {
                 var data = {
                     "cmd":$config.cmds.productPublic,
                     "parameters":{
-                        "type":0,
+                        "type":1,
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo
                     },
@@ -34,31 +34,29 @@ angular.module('controllers.sellCtrl',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            if(result.data.content.length==0||result.data.content==null){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }else{
-                                var arry = result.data.content;
-                                arry.forEach(function(item){
-                                    $scope.items.push(item);
-                                });
-                            }
-                            if(result.data.totalPages==0){
-                                $scope.noMoreLoad=true;
-                                $scope.items=null;
-                                return;
-                            }
-                            if(pageNo==(result.data.totalPages-1)){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }
-                            pageNo++;
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.data.content.length==0||result.data.content==null){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }else{
+                            var arry = result.data.content;
+                            arry.forEach(function(item){
+                                $scope.items.push(item);
+                            });
+                        }
+                        if(result.data.totalPages==0){
+                            $scope.noMoreLoad=true;
+                            $scope.items=null;
+                            return;
+                        }
+                        if(pageNo==(result.data.totalPages-1)){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }
+                        pageNo++;
                     })
 
             }
-
-
 
             $scope.releaseDel = function(productid){
                 var delData =  {

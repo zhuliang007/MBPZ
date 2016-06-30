@@ -1,0 +1,30 @@
+<ion-view >
+    <ion-content has-bouncing="true" class="releasePaddingTop" >
+        <div class="list" ng-repeat="item in items track by $index">
+            <div class="item releaseItem">
+                <a ng-click="showProduct(item.id)">
+                    <div class="row" ng-if="item.productImageList.length!=0" >
+                        <div class="col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index" >
+                            <div id="lookImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('lookImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        </div>
+                    </div>
+                    <div class="row releaseRow">
+                        <p ng-bind="item.content"></p>
+                    </div>
+                </a>
+                <div class="row releaseRows">
+                    <div class="col-90 releaseBtns">
+                        <button class="button button-light releaseBtn" ng-click="releaseDel(item.id)">删除</button>
+                        <button class="button button-light releaseBtn" ng-click="releaseDetail(item.id,0)">编辑</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="lookLoadMore()"
+                ng-if="!noMoreLoad"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>
