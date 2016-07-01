@@ -2112,8 +2112,11 @@ ion-content{
 }
 
 .releasePaddingTop{
-    top:15% !important;
+    top:13% !important;
     height:92% !important;
+}
+.releasePaddingTop .list{
+    margin-bottom: 1px !important;
 }
 .releaseRows{
     padding:0px;
@@ -2184,6 +2187,27 @@ ion-content{
 .collection-item{
     margin-bottom:5px;
     -webkit-margin-bottom-collapse: 5px;
+}
+
+.shelvesTitles{
+    margin-top:2%;
+}
+
+.shelvesRow{
+    border-bottom: 1px solid #e5e5e5;
+}
+.shelvesBtn{
+    text-align: right;
+}
+.shelvesItems{
+    padding:0px;
+}
+.shelvesBtn .button{
+    margin-top:1%;
+    background: transparent;
+    min-height:15% !important;
+    line-height:20px !important;
+    font-size:14px !important;
 }
 
 

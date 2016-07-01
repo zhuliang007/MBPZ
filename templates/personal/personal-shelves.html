@@ -6,8 +6,41 @@
         <h1 class="title">下架管理</h1>
     </ion-header-bar>
     <ion-content >
-        <ion-list>
-
+        <ion-list ng-repeat="item in items track by $index">
+            <a class="item shelvesItems " >
+                <div class="row shelvesRow">
+                    <div class="col col-10 col-center">
+                        <img src="cover.jpg">
+                    </div>
+                    <div class="col col-90">
+                        <div class="shelvesTitles">
+                            <span >1</span>
+                            <span>2</span>
+                        </div>
+                        <div>
+                            <p class="sellFont">
+                                <span>¥&nbsp;</span>
+                                <span ng-bind="item.currentPrice"></span>
+                            </p>
+                            <p class="sellOriginalFont" ng-if="item.originalPrice!=null">
+                                <span>¥&nbsp;</span>
+                                <span ng-bind="item.originalPrice"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col shelvesBtn">
+                        <button class="button" title="重新上架" ng-click="releaseDetail(item.id,0)">重新上架</button>
+                    </div>
+                </div>
+            </a>
         </ion-list>
+        <ion-infinite-scroll
+                on-infinite="shelvesLoadMore()"
+                ng-if="!noMoreLoad"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
