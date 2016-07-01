@@ -124,7 +124,7 @@ angular.module('controllers.productDetail',[])
 
             $scope.buyProduct = function(){
                 if(!$locals.get('token','')){
-                    $console.show("需要登录")
+                    $scope.openModal('loginModal');
                     return ;
                 }
 
@@ -185,6 +185,7 @@ angular.module('controllers.productDetail',[])
                         $console.show(result);
                         $locals.set('token',result.data.loginToken);
                         $locals.set('userId',result.data.id);
+                        $locals.set('loginAccount',result.data.loginAccount);
                         $scope.closeModal('loginModal');
                         getProductDetail();
                     })

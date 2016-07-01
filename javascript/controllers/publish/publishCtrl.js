@@ -171,7 +171,12 @@ angular.module('controllers.publish',[])
                         },function(error){
                             $console.show(error);
                             $scope.publishObject.publishImageList[index].isFailed = true;
-                            $scope.openModal('loginModal');
+                            if(error.systemError) {
+                                var systemError = error.systemError;
+                                if (systemError.errorCode == 14 || systemError.errorCode == 15) {
+                                    $scope.openModal('loginModal');
+                                }
+                            }
                         },function(progressEvent){
                             $console.show(progressEvent)
                             $scope.publishObject.publishImageList[index].isProgress = true;
@@ -234,7 +239,7 @@ angular.module('controllers.publish',[])
                     }
 
                     if(!checkPublishImage()){
-                        $console.show("描述图片为上传完毕")
+                        $console.show("描述图片尚未上传完毕")
                         return;
                     }
                 }
@@ -314,6 +319,7 @@ angular.module('controllers.publish',[])
                         $console.show(result);
                         $locals.set('token',result.data.loginToken);
                         $locals.set('userId',result.data.id);
+                        $locals.set('loginAccount',result.data.loginAccount);
                         $scope.closeModal('loginModal');
                         getPublishDetail();
                     })

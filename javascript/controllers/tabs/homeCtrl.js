@@ -19,7 +19,7 @@ angular.module('controllers.home',[])
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$locals){
 
-           /* $rootScope.token = $stateParams.token;*/
+            /* $rootScope.token = $stateParams.token;*/
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
 
             var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
@@ -36,18 +36,26 @@ angular.module('controllers.home',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $scope.adList = result.data;
-                        adSlideBox.update();
-                        $timeout(function(){
-                            if(adSlideBox.slidesCount()>1){
-                                $scope.showPager = true;
-                                adSlideBox.loop(true);
-                            }
-                            else{
-                                $scope.showPager = false;
+                            $scope.adList = result.data;
+                            adSlideBox.update();
+                            $timeout(function(){
+                                if(adSlideBox.slidesCount()>1){
+                                    $scope.showPager = true;
+                                    adSlideBox.loop(true);
+                                }
+                                else{
+                                    $scope.showPager = false;
+                                }
+                            })
+                        },
+                        function(error){
+                            if(error.systemError){
+                                var systemError = error.systemError;
+                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                    $scope.openModal('loginModal');
+                                }
                             }
                         })
-                    })
             }
 
 
@@ -161,6 +169,33 @@ angular.module('controllers.home',[])
                 $scope.closeModal('cityModal');
                 productHomeHandle.resize();
                 productHomeHandle.scrollTop();
+            }
+
+            $rootScope.login = function(telNumber,codeNumber){
+                if(!telNumber){
+                    $console.show($config.messages.noTel);
+                    return;
+                }
+                if(!codeNumber){
+                    $console.show($config.messages.noCode);
+                    return;
+                }
+                var data = {
+                    "cmd": $config.cmds.login,
+                    "parameters":{
+                        "loginAccount":telNumber,
+                        "securityCode":codeNumber
+                    }
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $console.show(result);
+                        $locals.set('token',result.data.loginToken);
+                        $locals.set('userId',result.data.id);
+                        $locals.set('loginAccount',result.data.loginAccount);
+                        $scope.closeModal('loginModal');
+                    })
+
             }
 
         }])

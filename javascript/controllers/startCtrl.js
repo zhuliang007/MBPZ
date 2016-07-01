@@ -203,12 +203,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type){
-                if(!$locals.get('token','')){
-                    $scope.openModal('loginModal');
-                }
-                else{
-                    $state.go($config.controllers.publish.name,{type:type});
-                }
+                $state.go($config.controllers.publish.name,{type:type});
                 $scope.closeModal('publishModal');
             }
 
@@ -253,6 +248,5 @@ angular.module('controllers.start',[])
                     },1000)
                 }
             }
-
         }
     ])
