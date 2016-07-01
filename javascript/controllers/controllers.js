@@ -26,4 +26,5 @@ angular.module('starter.controllers',[
     'controllers.postReleaseCtrl',
     'controllers.sellCtrl',
     'controllers.lookingCtrl',
-    'controllers.collectionCtrl'])
+    'controllers.collectionCtrl',
+    'controllers.myShelvesCtrl'])
