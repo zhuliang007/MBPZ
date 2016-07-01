@@ -9,6 +9,7 @@ angular.module('starter.controllers',[
     'controllers.shop',
     'controllers.start',
     'controllers.productDetail',
+    'controllers.shopDetail',
     'controllers.productListByTypeCtrl',
     'controllers.myCenterSetupCtrl',
     'controllers.feedbackCtrl',
