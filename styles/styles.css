@@ -2156,7 +2156,7 @@ ion-content{
 }
 
 .sellOriginalFont span,.sellFont span{
-    font-size:14px;
+    font-size:16px;
 }
 
 .sellOriginalFont {
@@ -2189,10 +2189,6 @@ ion-content{
     -webkit-margin-bottom-collapse: 5px;
 }
 
-.shelvesTitles{
-    margin-top:2%;
-}
-
 .shelvesRow{
     border-bottom: 1px solid #e5e5e5;
 }
@@ -2210,6 +2206,18 @@ ion-content{
     font-size:14px !important;
 }
 
+.shelvesTitle{
+    float:left;
+}
+
+.shelvesStatus{
+    text-align: right;
+}
+
+.shelvesPrice{
+    clear: both;
+    padding-top:6% !important;
+}
 
 
 

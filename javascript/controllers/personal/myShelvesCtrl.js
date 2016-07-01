@@ -30,7 +30,27 @@ angular.module('controllers.myShelvesCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
+                                    console.log(result)
+                                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                                    if(result.data.content.length==0||result.data.content==null){
+                                            $scope.noMoreLoad=true;
+                                            return;
+                                    }else{
+                                            var arry = result.data.content;
+                                            arry.forEach(function(item){
+                                                    $scope.items.push(item);
+                                            });
+                                    }
+                                    if(result.data.totalPages==0){
+                                            $scope.noMoreLoad=true;
+                                            $scope.items=null;
+                                            return;
+                                    }
+                                    if(pageNo==(result.data.totalPages-1)){
+                                            $scope.noMoreLoad=true;
+                                            return;
+                                    }
+                                    pageNo++;
                             })
                 }
 

@@ -7,17 +7,17 @@
     </ion-header-bar>
     <ion-content >
         <ion-list ng-repeat="item in items track by $index">
-            <a class="item shelvesItems " >
+            <a class="item shelvesItems" >
                 <div class="row shelvesRow">
-                    <div class="col col-10 col-center">
-                        <img src="cover.jpg">
+                    <div class="col col-20 col-center" ng-if="item.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index">
+                        <div id="shelvesImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
                     </div>
-                    <div class="col col-90">
+                    <div class="col col-70">
                         <div class="shelvesTitles">
-                            <span >1</span>
-                            <span>2</span>
+                            <p class="shelvesTitle" ng-bind="item.title"></p>
+                            <p class="shelvesStatus" ng-bind="item.productStatusText"></p>
                         </div>
-                        <div>
+                        <div class="shelvesPrice">
                             <p class="sellFont">
                                 <span>¥&nbsp;</span>
                                 <span ng-bind="item.currentPrice"></span>
