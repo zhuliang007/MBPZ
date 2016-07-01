@@ -220,4 +220,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.myCollection.controller,
                     cache:$configProvider.controllers.myCollection.cache,
                 })
+                .state($configProvider.controllers.myShelves.name,{
+                    url:$configProvider.controllers.myShelves.url,
+                    templateUrl:$configProvider.controllers.myShelves.templateUrl,
+                    controller:$configProvider.controllers.myShelves.controller,
+                    cache:$configProvider.controllers.myShelves.cache,
+                })
         }])

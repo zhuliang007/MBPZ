@@ -343,6 +343,13 @@ angular.module('providers.config',[])
                 name:"myCollection",
                 controller:"CollectionCtrl",
                 cache:false
+            },
+            myShelves:{
+                templateUrl:"templates/personal/personal-shelves.html",
+                url:"/myShelves",
+                name:"myShelves",
+                controller:"MyShelvesCtrl",
+                cache:false
             }
 
         }
