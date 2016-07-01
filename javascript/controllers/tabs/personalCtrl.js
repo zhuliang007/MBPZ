@@ -9,7 +9,21 @@ angular.module('controllers.personal',[])
     '$rootScope',
     '$stateParams',
     '$state',
-    function($scope,$console,$config,$rootScope,$stateParams,$state){
-
+    '$httpService',
+    '$locals',
+    function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        var data = {
+            "cmd":$config.cmds.personalCount,
+            "parameters":{
+            },
+            "token":$locals.get('token','N2MyYThhODktNTZkNi00ZDdmLTljMTQtY2UxYzFmMjY0MTIz')
+        }
+        $httpService.getJsonFromPost($config.getRequestAction(),data)
+            .then(function(result){
+                $scope.productPublicCount=result.data.productPublicCount;
+                $scope.productSoldCount=result.data.productSoldCount;
+                $scope.productBoughtCount=result.data.productBoughtCount;
+                $scope.productCollectCount=result.data.productCollectCount;
+            })
 
     }])

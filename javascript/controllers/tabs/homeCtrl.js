@@ -152,13 +152,6 @@ angular.module('controllers.home',[])
                 }
             }
 
-            $scope.checkProductImages = function(productImageList){
-                if(productImageList == null || productImageList.length==0){
-                    return []
-                }
-                return productImageList.slice(0,3);
-            }
-
             $scope.infiniteFlag = true;
 
             $rootScope.changeCity = function(city){

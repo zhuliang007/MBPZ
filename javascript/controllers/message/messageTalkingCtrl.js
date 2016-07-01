@@ -18,6 +18,7 @@ angular.module('controllers.messageTalking',[])
             var credential='13818155071';
             var appkeys = '23369408';
 
+            $state.reload;
             WKIT.init({
                // container: document.getElementById('J_demo'),
                 width: 700,

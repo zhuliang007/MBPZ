@@ -27,6 +27,7 @@ angular.module('controllers.messagesCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
+                                console.log(result)
                                     $scope.$broadcast('scroll.infiniteScrollComplete');
                                     if(result.data.content.length==0||result.data.content==null){
                                             $scope.noMoreLoad=true;
@@ -49,6 +50,18 @@ angular.module('controllers.messagesCtrl',[])
                                     pageNo++;
                             });
                 };
+
+            $scope.messageDetails = function(id,type){
+                var params = {id:id};
+                switch (type){
+                    case 0:
+                        $state.go($config.controllers.productDetail.name,params);
+                        break;
+                    case 1:
+                        $state.go($config.controllers.shopDetail.name,params);
+                        break;
+                }
+            }
 
         }
     ])

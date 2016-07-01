@@ -7,7 +7,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
         '$configProvider',
         '$consoleProvider',
         '$ionicConfigProvider',
-        function($stateProvider,$configProvider,$consoleProvider,$ionicConfigProvider){
+        '$urlRouterProvider',
+        function($stateProvider,$configProvider,$consoleProvider,$ionicConfigProvider,$urlRouterProvider){
             $ionicConfigProvider.platform.ios.tabs.style('standard');
             $ionicConfigProvider.platform.ios.tabs.position('bottom');
             $ionicConfigProvider.platform.android.tabs.style('standard');
@@ -189,10 +190,34 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                 })
                 .state($configProvider.controllers.postRelease.name,{
                     url:$configProvider.controllers.postRelease.url,
+                    abstract:$configProvider.controllers.postRelease.abstract,
                     templateUrl:$configProvider.controllers.postRelease.templateUrl,
                     controller:$configProvider.controllers.postRelease.controller,
-                    cache:$configProvider.controllers.postRelease.cache,
                 })
-
-
+                .state($configProvider.controllers.sellContent.name,{
+                    url:$configProvider.controllers.sellContent.url,
+                    views:{
+                        'tabs-sell':{
+                            templateUrl: $configProvider.controllers.sellContent.templateUrl,
+                            controller:$configProvider.controllers.sellContent.controller,
+                        }
+                    },
+                    cache:$configProvider.controllers.sellContent.cache,
+                })
+                .state($configProvider.controllers.lookingContent.name,{
+                    url:$configProvider.controllers.lookingContent.url,
+                    views:{
+                        'tabs-looking':{
+                            templateUrl: $configProvider.controllers.lookingContent.templateUrl,
+                            controller:$configProvider.controllers.lookingContent.controller,
+                        }
+                    },
+                    cache:$configProvider.controllers.lookingContent.cache,
+                })
+                .state($configProvider.controllers.myCollection.name,{
+                    url:$configProvider.controllers.myCollection.url,
+                    templateUrl:$configProvider.controllers.myCollection.templateUrl,
+                    controller:$configProvider.controllers.myCollection.controller,
+                    cache:$configProvider.controllers.myCollection.cache,
+                })
         }])
