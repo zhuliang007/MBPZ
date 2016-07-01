@@ -17,10 +17,11 @@ angular.module('controllers.walletCtrl',[])
                         "cmd":$config.cmds.walletNum,
                         "parameters":{
                         },
-                        "token":$locals.get('token','N2MyYThhODktNTZkNi00ZDdmLTljMTQtY2UxYzFmMjY0MTIz')
+                        "token":$locals.get('token','MmY1Zjk5N2MtZGY1OC00YTE4LWJhZTItZjUxMTI2NjY0YjM2')
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
+                            console.log(result);
                         $scope.balance = result.data.balance==null?0:result.data.balance;
                         $scope.prePayment = result.data.prePayment==null?0:result.data.prePayment;
                     })
