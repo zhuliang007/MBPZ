@@ -238,6 +238,37 @@ angular.module('controllers.start',[])
                 }
                 return deferred.promise;
             };
+
+            //开启支付
+            $scope.openPayModal = function(modalName) {
+                var deferred = $q.defer();
+                if(!$scope[modalName]){
+                    $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
+                        scope: $rootScope,
+                        animation: $config.modals[modalName].animation
+                    }).then(function(modal) {
+                        if(!$rootScope[modalName]){
+                            $rootScope[modalName] = modal;
+                        }
+                        if(!$rootScope[modalName].isShown()){
+                            $rootScope[modalName].show();
+                        }
+                        deferred.resolve();
+                    });
+                }
+                else{
+                    deferred.resolve();
+                }
+                return deferred.promise;
+            };
+
+            //关闭支付
+            $rootScope.closePayModal = function(modalName) {
+                $rootScope[modalName].hide().then(function(){
+                    $rootScope[modalName].remove();
+                })
+            };
+
             $scope.closeModal = function(modalName) {
                 $scope[modalName].hide().then(function(){
                     $scope[modalName].remove();

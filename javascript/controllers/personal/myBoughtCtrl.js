@@ -61,4 +61,9 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.myContant = function(buyPhone,nickName,type){
                         $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
                 }
+
+                $scope.openPay = function(obj){
+                    $rootScope.orderPreviewObject = obj;
+                    $scope.openPayModal('payModal');
+                }
         }])
