@@ -396,6 +396,9 @@ angular.module('providers.config',[])
             },
             productReport:{
                 templateUrl:"templates/popover/productReport.html"
+            },
+            reply:{
+                templateUrl:"templates/popover/reply.html"
             }
         }
 

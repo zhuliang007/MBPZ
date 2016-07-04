@@ -69,7 +69,7 @@
             </div>
         </div>
         <ion-list ng-if="(replyList!=null)&&(replyList.length>0)" class="replyBody">
-            <ion-item class="row row-no-padding" ng-repeat="reply in replyList track by $index" ng-click="productReply(reply.createUser.id)">
+            <ion-item class="row row-no-padding" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser.id)">
                 <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
                     <div class="bgImg border-radius-round" ng-style="resizeImage('userHead{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead{{$index}}"></div>
                 </div>
@@ -91,7 +91,7 @@
     </ion-content>
 
     <div class="userCtrl">
-        <div ng-click="productReply(product.publicUser.id)"><span class="mbpz mbpz-icon-replies padding-small-right"></span><span ng-bind="product.replyNumber"></span></div>
+        <div ng-click="productReply($event,product.publicUser.id)"><span class="mbpz mbpz-icon-replies padding-small-right"></span><span ng-bind="product.replyNumber"></span></div>
         <div class="judge star" ng-click="judgeProduct()">
             <span class="mbpz" ng-class="{true:'mbpz-icon-star',false:'mbpz-icon-fill-star'}[product.isCollect==null||product.isCollect==0]"></span>
         </div>
