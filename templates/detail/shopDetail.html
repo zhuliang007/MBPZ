@@ -47,7 +47,7 @@
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact padding-big-vertical" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
             <div class="row row-no-padding">
@@ -111,7 +111,10 @@
             <span class="icon ion-share padding-small-right"></span>分享
         </div>
         <button class="submit" ng-disabled="product.isResolve==1">
-            <span ng-if="userInfo.loginAccount==product.publicUser.loginAccount">确认解决</span>
+            <span ng-if="userInfo.loginAccount==product.publicUser.loginAccount">
+                <span ng-if="userInfo.isResolve==null||userInfo.isResolve==0">确认解决</span>
+                <span ng-if="userInfo.isResolve==1">已解决</span>
+            </span>
             <span ng-if="userInfo.loginAccount!=product.publicUser.loginAccount">推荐给TA</span>
         </button>
     </div>

@@ -65,7 +65,7 @@ angular.module('services.keywords',[])
             return deferred.promise;
         }
 
-        $keywords.setKeyWords = function(keyName) {
+        $keywords.setKeyWords = function(keyName,token) {
             var deferred = $q.defer();
             if (!$keywords[keyName]){
                 var data;
@@ -73,7 +73,7 @@ angular.module('services.keywords',[])
                     case 'report':
                         data = {
                             "cmd": $config.cmds.tipoffs,
-                            "token":$locals.get('token','')
+                            "token":token
                         }
                         break;
                 }

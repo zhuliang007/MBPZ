@@ -134,8 +134,6 @@ angular.module('controllers.productDetail',[])
             }
 
             $scope.buyProduct = function(){
-
-
                 $scope.checkLogin()
                     .then(function(){
                         $state.go($config.controllers.orderPreview.name,{productId:id});
@@ -172,5 +170,9 @@ angular.module('controllers.productDetail',[])
                     $scope['productReport']=null;
                 }
             });
+
+            $scope.productReply = function(toReplyUserId){
+                $console.show(toReplyUserId)
+            }
 
         }])
