@@ -10,7 +10,6 @@ angular.module('controllers.messageChat',[])
             var height = window.screen.height ;
             var width = window.screen.width;
             document.getElementById('J_demos').style.height = height+'px';
-            console.log($stateParams)
 
              WKIT.init({
                 container: document.getElementById('J_demos'),
@@ -24,12 +23,25 @@ angular.module('controllers.messageChat',[])
                     WKIT.destroy();
                     var demo = document.getElementById('J_demos');
                     demo.parentNode.removeChild(demo);
-                    if($stateParams.type==0){
-                        $state.go('messageTalking');
-                    }else if($stateParams.type==1){
-                        $state.go($config.controllers.mySold.name);
-                    }else if($stateParams.type == 2){
-                        $scope.goBack();
+                    switch (parseInt($stateParams.type)){
+                        case 0:
+                            $state.go('messageTalking');
+                            break;
+                        case 1:
+                            $state.go($config.controllers.mySold.name);
+                            break;
+                        case 2:
+                            $scope.goBack();
+                            break;
+                        case 3:
+                            $state.go($config.controllers.myBought.name);
+                            break;
+                        case 4:
+                            $state.go($config.controllers.sellRefundsRelease.name);
+                            break;
+                        case 5:
+                            $state.go($config.controllers.boughtRefundsRelease.name);
+                            break;
                     }
                 },
                  onLoginSuccess:function(data){

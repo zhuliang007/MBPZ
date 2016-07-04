@@ -30,7 +30,7 @@ angular.module('controllers.lookingCtrl',[])
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo
                     },
-                    "token":$locals.get('token','ZGY4OGViNDItYTQ1Yy00ZjQyLTkyMGItOGI1OWMwZjlmNzJk')
+                    "token":$locals.get('token','ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2')
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){

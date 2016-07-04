@@ -213,13 +213,6 @@ angular.module('providers.config',[])
                 controller:"WalletCtrl",
                 cache:false
             },
-            myCenterRefund:{
-                templateUrl:"templates/personal/refund/personal-refund.html",
-                url:"/refund",
-                name:"myCenterRefund",
-                controller:"RefundListCtrl",
-                cache:false
-            },
             searchHome:{
                 templateUrl:"templates/home/search.html",
                 url:"/searchHome",
@@ -325,6 +318,27 @@ angular.module('providers.config',[])
                 url:"/looking",
                 name:"postRelease.looking",
                 controller:"LookingCtrl",
+                cache:false
+            },
+            refundsRelease:{
+                templateUrl:"templates/personal/refunds-release.html",
+                url:"/refundsRelease",
+                abstract:true,
+                controller:"RefundsReleaseCtrl",
+                name:"refundsRelease",
+            },
+            sellRefundsRelease:{
+                templateUrl:"templates/personal/refundsRelease-sell.html",
+                url:"/refundsReleaseSell",
+                name:"refundsRelease.sell",
+                controller:"RefundsSellCtrl",
+                cache:false
+            },
+            boughtRefundsRelease:{
+                templateUrl:"templates/personal/refundsRelease-bought.html",
+                url:"/bought",
+                name:"refundsRelease.bought",
+                controller:"RefundsBoughtCtrl",
                 cache:false
             },
             myCollection:{
