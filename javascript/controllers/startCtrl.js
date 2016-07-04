@@ -21,9 +21,60 @@ angular.module('controllers.start',[])
         '$locals',
         function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$locals){
 
+            $scope.thirdType = 4;
+            $scope.userPhone = purl().param('userPhone');
+
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
+            }
+
+
+            $scope.autoLogin = function(){
+                var deferred = $q.defer();
+                var data = {
+                    "cmd": $config.cmds.login,
+                    "parameters":{
+                        "loginAccount":$scope.userPhone,
+                        "thirdType":$scope.thirdType
+                    }
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.userInfo = {
+                            loginToken:result.data.loginToken,
+                            loginAccount:result.data.loginAccount,
+                            id:result.data.id,
+                            city:result.data.city,
+                            cityText:result.data.cityText,
+                            introduce:result.data.introduce,
+                            nickName:result.data.nickName,
+                            province:result.data.province,
+                            provinceText:result.data.provinceText,
+                            sex:result.data.sex,
+                            userImg:result.data.userImg,
+                            userLevel:result.data.userLevel
+                        }
+                        $console.show($scope.userInfo);
+                        deferred.resolve();
+                    },function(error){
+                        deferred.reject(error);
+                    })
+
+                return deferred.promise;
+            }
+
+            $scope.checkLogin = function(){
+                var deferred = $q.defer();
+                if($scope.userInfo){
+                    $console.show("登录成功");
+                    deferred.resolve();
+                }
+                else{
+                    $console.show("需要登录");
+                    deferred.reject();
+                }
+                return deferred.promise;
             }
 
             $scope.showMsg = function(msg){

@@ -10,6 +10,7 @@ angular.module('providers.config',[])
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
         $config.requestActionDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
+        //$config.requestActionDebug = 'http://192.168.100.64:8085/wine-market-rest/cgi/';
         $config.getRequestAction = function(){
             if(this.debug){
                 return this.requestActionDebug;
@@ -18,8 +19,8 @@ angular.module('providers.config',[])
         }
 
         $config.requestPublish = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
-        //$config.requestPublishDebug = 'http://192.168.100.109:8080/';
         $config.requestPublishDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
+        //$config.requestPublishDebug = 'http://192.168.100.64:8085/wine-market-rest/';
         $config.getRequestPublish = function(){
             if(this.debug){
                 return this.requestPublishDebug;
@@ -98,12 +99,6 @@ angular.module('providers.config',[])
             productDel:"product/delete",
             personalCount:"myself/getCount",
             myProductList:"myself/productCollect/list",
-        }
-
-        $config.types = {
-            ad:{
-                Index:"INDEX"
-            }
         }
 
         /**提示信息配置*/

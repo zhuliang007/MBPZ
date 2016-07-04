@@ -23,45 +23,55 @@ angular.module('controllers.orderAddress',[])
                 getAddressList();
             };
             function getAddressList(){
-                var data = {
-                    "cmd":$config.cmds.addressList,
-                    "parameters":{
-                        "numberOfPerPage" : numberOfPerPage,
-                        "pageNo" : pageNo
-                    },
-                    "token":$locals.get('token','')
-                }
-
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result)
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.data.total == 0){
-                            $scope.infiniteFlag = false;
-                            return ;
+                $scope.checkLogin()
+                    .then(function(){
+                        var data = {
+                            "cmd":$config.cmds.addressList,
+                            "parameters":{
+                                "numberOfPerPage" : numberOfPerPage,
+                                "pageNo" : pageNo
+                            },
+                            "token":$scope.userInfo.loginToken
                         }
-                        var items = result.data.rows;
-                        if(items==null||items.length==0){
-                            $scope.infiniteFlag = false;
-                            return ;
-                        }
-                        addItem(items);
-                        if(pageNo == result.data.total-1 ){
-                            $scope.infiniteFlag = false;
-                            return;
-                        }
-                        pageNo++;
-                    },
-                        function(error){
-                        $scope.infiniteFlag = false;
-                        $scope.addressList = [];
-                        pageNo = 0;
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
-                            }
-                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                    $console.show(result)
+                                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                                    if(result.data.total == 0){
+                                        $scope.infiniteFlag = false;
+                                        return ;
+                                    }
+                                    var items = result.data.rows;
+                                    if(items==null||items.length==0){
+                                        $scope.infiniteFlag = false;
+                                        return ;
+                                    }
+                                    addItem(items);
+                                    if(pageNo == result.data.total-1 ){
+                                        $scope.infiniteFlag = false;
+                                        return;
+                                    }
+                                    pageNo++;
+                                },
+                                function(error){
+                                    $scope.infiniteFlag = false;
+                                    if(error.systemError){
+                                        var systemError = error.systemError;
+                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                            $scope.autoLogin()
+                                                .then(function(){
+                                                    $scope.infiniteFlag = true;
+                                                    $scope.addressList = [];
+                                                    pageNo = 0;
+                                                    getAddressList();
+                                                })
+                                        }
+                                    }
+                                })
+                    },function(){
+                        $scope.autoLogin().then(function(){
+                            getAddressList();
+                        })
                     })
             }
 
@@ -69,36 +79,6 @@ angular.module('controllers.orderAddress',[])
                 for(var item in items){
                     $scope.addressList.push(items[item]);
                 }
-            }
-
-            $rootScope.login = function(telNumber,codeNumber){
-                if(!telNumber){
-                    $console.show($config.messages.noTel);
-                    return;
-                }
-                if(!codeNumber){
-                    $console.show($config.messages.noCode);
-                    return;
-                }
-                var data = {
-                    "cmd": $config.cmds.login,
-                    "parameters":{
-                        "loginAccount":telNumber,
-                        "securityCode":codeNumber
-                    }
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $locals.set('token',result.data.loginToken);
-                        $locals.set('userId',result.data.id);
-                        $locals.set('loginAccount',result.data.loginAccount);
-                        $scope.closeModal('loginModal');
-                        $scope.infiniteFlag = true;
-                        $scope.addressList = [];
-                        pageNo = 0;
-                    })
-
             }
 
             $scope.goOwnBack = function(){
