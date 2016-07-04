@@ -19,43 +19,39 @@ angular.module('controllers.home',[])
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$locals){
 
-           /* $rootScope.token = $stateParams.token;*/
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
-
             var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
+            var QGXXListCache = [];
+            var QGXXListCacheIndex = 0;
+            $scope.productList = []
+            var numberOfPerPage = 10;
+            var pageNo = 0;
+            $scope.infiniteFlag = true;
 
             getAds();
-
+            getQGXX();
             function getAds(){
                 var data = {
                     "cmd":$config.cmds.adInfo,
                     "parameters":{
-                        "adType" : $config.types.ad.Index
-                    },
-                    "token":$locals.get('token','')
+                        "adType" : 'INDEX'
+                    }
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $scope.adList = result.data;
-                        adSlideBox.update();
-                        $timeout(function(){
-                            if(adSlideBox.slidesCount()>1){
-                                $scope.showPager = true;
-                                adSlideBox.loop(true);
-                            }
-                            else{
-                                $scope.showPager = false;
-                            }
+                            $scope.adList = result.data;
+                            adSlideBox.update();
+                            $timeout(function(){
+                                if(adSlideBox.slidesCount()>1){
+                                    $scope.showPager = true;
+                                    adSlideBox.loop(true);
+                                }
+                                else{
+                                    $scope.showPager = false;
+                                }
+                            })
                         })
-                    })
             }
-
-
-
-            getQGXX();
-            var QGXXListCache = [];
-            var QGXXListCacheIndex = 0;
-
             function getQGXX(){
                 var data = {
                     "cmd":$config.cmds.getPage,
@@ -72,7 +68,6 @@ angular.module('controllers.home',[])
                         slideQGXX();
                     })
             }
-
             function slideQGXX(){
                 $scope.QGXXList = [];
                 if(QGXXListCache.length>2){
@@ -95,14 +90,10 @@ angular.module('controllers.home',[])
                 },2000)
             }
 
-
             $scope.loadMore = function() {
                 getProductHome();
             };
 
-            $scope.productList = []
-            var numberOfPerPage = 10;
-            var pageNo = 0;
             function getProductHome(){
                 var data = {
                     "cmd": $config.cmds.getPage,
@@ -135,7 +126,6 @@ angular.module('controllers.home',[])
                         }
                         pageNo++;
                     })
-
             }
 
             function addItem(items){
@@ -143,8 +133,6 @@ angular.module('controllers.home',[])
                     $scope.productList.push(items[item]);
                 }
             }
-
-            $scope.infiniteFlag = true;
 
             $rootScope.changeCity = function(city){
                 $rootScope.currentCity = city.name;

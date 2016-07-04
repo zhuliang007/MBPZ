@@ -14,7 +14,8 @@ angular.module('controllers.productDetail',[])
         '$ionicSlideBoxDelegate',
         '$locals',
         '$ionicPopover',
-        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals,$ionicPopover){
+        '$q',
+        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals,$ionicPopover,$q){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
@@ -31,7 +32,7 @@ angular.module('controllers.productDetail',[])
                     "parameters":{
                         "productId":id
                     },
-                    "token": $locals.get('token','')
+                    "token": $scope.userInfo?$scope.userInfo.loginToken:''
                 }
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
@@ -43,7 +44,10 @@ angular.module('controllers.productDetail',[])
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        getProductDetail();
+                                    })
                             }
                         }
                     })
@@ -94,48 +98,53 @@ angular.module('controllers.productDetail',[])
             };
 
             $scope.judgeProduct = function(){
-                if(!$locals.get('token','')){
-                    $scope.openModal('loginModal');
-                    return ;
-                }
-                var data = {
-                    "cmd":$config.cmds.collect,
-                    "parameters":{
-                        "productId": $scope.product.id,
-                        "isCollect":$scope.product.isCollect?0:1
-                    },
-                    "token":$locals.get('token','')
-                };
+                $scope.checkLogin()
+                    .then(function(){
+                        var data = {
+                            "cmd":$config.cmds.collect,
+                            "parameters":{
+                                "productId": $scope.product.id,
+                                "isCollect":$scope.product.isCollect?0:1
+                            },
+                            "token":$scope.userInfo.loginToken
+                        };
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $scope.product.isCollect = $scope.product.isCollect?0:1;
-                    },function(error){
-                        $console.show(error);
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
-                            }
-                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $console.show(result);
+                                $scope.product.isCollect = $scope.product.isCollect?0:1;
+                            },function(error){
+                                $console.show(error);
+                                if(error.systemError){
+                                    var systemError = error.systemError;
+                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                                getProductDetail();
+                                            })
+                                    }
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                            })
                     })
             }
 
             $scope.buyProduct = function(){
-                if(!$locals.get('token','')){
-                    $console.show("需要登录")
-                    return ;
-                }
 
-                if($locals.get('userId',0)==$scope.product.publicUser.id){
-                    $console.show("是帖子本人")
-                    return;
-                }
 
-                $console.show($scope.product);
-
-                $state.go($config.controllers.orderPreview.name,{productId:id});
+                $scope.checkLogin()
+                    .then(function(){
+                        $state.go($config.controllers.orderPreview.name,{productId:id});
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                            })
+                    })
             }
 
             $scope.openPopover = function($event,popName){
@@ -163,33 +172,5 @@ angular.module('controllers.productDetail',[])
                     $scope['productReport']=null;
                 }
             });
-
-            $rootScope.login = function(telNumber,codeNumber){
-                if(!telNumber){
-                    $console.show($config.messages.noTel);
-                    return;
-                }
-                if(!codeNumber){
-                    $console.show($config.messages.noCode);
-                    return;
-                }
-                var data = {
-                    "cmd": $config.cmds.login,
-                    "parameters":{
-                        "loginAccount":telNumber,
-                        "securityCode":codeNumber
-                    }
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $locals.set('token',result.data.loginToken);
-                        $locals.set('userId',result.data.id);
-                        $scope.closeModal('loginModal');
-                        getProductDetail();
-                    })
-
-            }
-
 
         }])

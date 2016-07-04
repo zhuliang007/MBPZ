@@ -214,6 +214,7 @@ angular.module('controllers.shopDetail',[])
                         $console.show(result);
                         $locals.set('token',result.data.loginToken);
                         $locals.set('userId',result.data.id);
+             $locals.set('loginAccount',result.data.loginAccount);
                         $scope.closeModal('loginModal');
                         getProductDetail();
                     })

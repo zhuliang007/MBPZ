@@ -76,13 +76,13 @@ angular.module('directives.bdMap',[])
                         $rootScope.locationJosnStr.streetNumber = $rootScope.addComp.streetNumber;
                         $rootScope.locationJosnStr.latitude = result.points[0].lat;
                         $rootScope.locationJosnStr.longitude = result.points[0].lng;
-                        if($locals.get('token','')){
+                        if($scope.userInfo){
                             var data = {
                                 "cmd":$config.cmds.saveLocationAddress,
                                 "parameters":{
                                     "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
                                 },
-                                "token":$locals.get('token','')
+                                "token":$scope.userInfo.loginToken
                             };
                             $httpService.getJsonFromPost($config.getRequestAction(),data)
                                 .then(function(result){

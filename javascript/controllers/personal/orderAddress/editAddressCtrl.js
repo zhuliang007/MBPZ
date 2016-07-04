@@ -41,56 +41,72 @@ angular.module('controllers.editAddress',[])
             }
             getAddressObject();
             function getAddressObject(){
-                if($stateParams.id){
-                    var data = {
-                        "cmd":$config.cmds.userAddressDetail,
-                        "parameters":{
-                            "id":$stateParams.id
-                        },
-                        "token":$locals.get('token','')
-                    }
+                $scope.checkLogin()
+                    .then(function(){
+                        if($stateParams.id){
+                            var data = {
+                                "cmd":$config.cmds.userAddressDetail,
+                                "parameters":{
+                                    "id":$stateParams.id
+                                },
+                                "token":$scope.userInfo.loginToken
+                            }
 
-                    $keywords.getProvinceCity()
-                        .then(function(result){
-                            var provinceCityList = result;
-                            $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            $keywords.getProvinceCity()
                                 .then(function(result){
-                                    $console.show(result);
-                                    $rootScope.provinceCityList.cityList = provinceCityList[result.data.province];
-                                    $rootScope.provinceCityList.districtList = provinceCityList[result.data.city];
-                                    $scope.addressObject = {
-                                        receiveName:result.data.receiveName,
-                                        receivePhone:result.data.receivePhone,
-                                        postCode:result.data.postCode,
-                                        address:result.data.address,
-                                        isDefault:result.data.isDefault?true:false,
-                                        provinceText:result.data.provinceText,
-                                        cityText:result.data.cityText,
-                                        districtText:result.data.districtText,
-                                        provinceCode : result.data.province,
-                                        cityCode : result.data.city,
-                                        districtCode : result.data.district,
-                                    }
-                                    $rootScope.provinceCityModalObject = {
-                                        provinceCode : result.data.province,
-                                        cityCode : result.data.city,
-                                        districtCode : result.data.district,
-                                    }
+                                    var provinceCityList = result;
+                                    $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
+                                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                        .then(function(result){
+                                            $console.show(result);
+                                            $rootScope.provinceCityList.cityList = provinceCityList[result.data.province];
+                                            $rootScope.provinceCityList.districtList = provinceCityList[result.data.city];
+                                            $scope.addressObject = {
+                                                receiveName:result.data.receiveName,
+                                                receivePhone:result.data.receivePhone,
+                                                postCode:result.data.postCode,
+                                                address:result.data.address,
+                                                isDefault:result.data.isDefault?true:false,
+                                                provinceText:result.data.provinceText,
+                                                cityText:result.data.cityText,
+                                                districtText:result.data.districtText,
+                                                provinceCode : result.data.province,
+                                                cityCode : result.data.city,
+                                                districtCode : result.data.district,
+                                            }
+                                            $rootScope.provinceCityModalObject = {
+                                                provinceCode : result.data.province,
+                                                cityCode : result.data.city,
+                                                districtCode : result.data.district,
+                                            }
+                                        },function(error){
+                                            if(error.systemError){
+                                                var systemError = error.systemError;
+                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                    $scope.autoLogin()
+                                                        .then(function(){
+                                                            getAddressObject();
+                                                        })
+                                                }
+                                            }
+                                        })
                                 })
-                        })
-                }
-                else{
-                    $keywords.getProvinceCity()
-                        .then(function(result){
-                            $rootScope.provinceCityList.provinceList = result.provinceList;
-                            $rootScope.provinceCityList.cityList = result[110000];
-                            $rootScope.provinceCityList.districtList = result[110100];
-                        })
-                }
+                        }
+                        else{
+                            $keywords.getProvinceCity()
+                                .then(function(result){
+                                    $rootScope.provinceCityList.provinceList = result.provinceList;
+                                    $rootScope.provinceCityList.cityList = result[110000];
+                                    $rootScope.provinceCityList.districtList = result[110100];
+                                })
+                        }
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getAddressObject();
+                            })
+                    })
             }
-
-
 
 
             $scope.showProvinceCityModal = function(){
@@ -158,66 +174,77 @@ angular.module('controllers.editAddress',[])
             }
 
             $scope.edictAddress = function(){
-                $console.show($scope.addressObject);
-                if(!$scope.addressObject.receiveName){
-                    //姓名不能为空
-                    return ;
-                }
+                $scope.checkLogin()
+                    .then(function(){
+                        $console.show($scope.addressObject);
+                        if(!$scope.addressObject.receiveName){
+                            //姓名不能为空
+                            return ;
+                        }
 
-                if(!$scope.addressObject.receivePhone){
-                    //手机号不能为空
-                    return ;
-                }
+                        if(!$scope.addressObject.receivePhone){
+                            //手机号不能为空
+                            return ;
+                        }
 
-                if (!/^(13\d{9})|(147\d{8})|(15[02356789]\d{8})|(17[08]\d{8})|(18[012356789]\d{8})$/.test($scope.addressObject.receivePhone)){
-                    //手机号格式错误
-                    return;
-                }
+                        if (!/^(13\d{9})|(147\d{8})|(15[02356789]\d{8})|(17[08]\d{8})|(18[012356789]\d{8})$/.test($scope.addressObject.receivePhone)){
+                            //手机号格式错误
+                            return;
+                        }
 
-                if(!$scope.addressObject.provinceCode||!$scope.addressObject.cityCode||!$scope.addressObject.districtCode){
-                    //请选择城市
-                    return;
-                }
+                        if(!$scope.addressObject.provinceCode||!$scope.addressObject.cityCode||!$scope.addressObject.districtCode){
+                            //请选择城市
+                            return;
+                        }
 
-                if(!$scope.addressObject.address){
-                    //详细地址不能为空
-                    return ;
-                }
+                        if(!$scope.addressObject.address){
+                            //详细地址不能为空
+                            return ;
+                        }
 
-                if($scope.addressObject.postCode){
-                    if (!/^[1-9][0-9]{5}$/.test($scope.addressObject.postCode)){
-                        //邮政编码格式错误
-                        return;
-                    }
-                }
-                $console.show("保存中");
-                var data = {
-                    "cmd":$config.cmds.userAddressSave,
-                    "parameters":{
-                        "id": $stateParams.id,
-                        "receiveName":$scope.addressObject.receiveName,
-                        "receivePhone":$scope.addressObject.receivePhone,
-                        "postCode":$scope.addressObject.postCode,
-                        "province":$scope.addressObject.provinceCode,
-                        "city":$scope.addressObject.cityCode,
-                        "district":$scope.addressObject.districtCode,
-                        "address":$scope.addressObject.address,
-                        "isDefault":$scope.addressObject.isDefault?1:0
-                    },
-                    "token":$locals.get('token','')
-                }
-
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $scope.goBack();
-                    },function(error){
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
+                        if($scope.addressObject.postCode){
+                            if (!/^[1-9][0-9]{5}$/.test($scope.addressObject.postCode)){
+                                //邮政编码格式错误
+                                return;
                             }
                         }
+                        $console.show("保存中");
+                        var data = {
+                            "cmd":$config.cmds.userAddressSave,
+                            "parameters":{
+                                "id": $stateParams.id,
+                                "receiveName":$scope.addressObject.receiveName,
+                                "receivePhone":$scope.addressObject.receivePhone,
+                                "postCode":$scope.addressObject.postCode,
+                                "province":$scope.addressObject.provinceCode,
+                                "city":$scope.addressObject.cityCode,
+                                "district":$scope.addressObject.districtCode,
+                                "address":$scope.addressObject.address,
+                                "isDefault":$scope.addressObject.isDefault?1:0
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $console.show(result);
+                                $scope.goBack();
+                            },function(error){
+                                if(error.systemError){
+                                    var systemError = error.systemError;
+                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                                $scope.edictAddress();
+                                            })
+                                    }
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                $scope.edictAddress();
+                            })
                     })
             }
         }
