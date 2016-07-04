@@ -152,6 +152,7 @@ angular.module('controllers.productDetail',[])
                     }).then(function(popover){
                         $scope[popName] = popover;
                         $scope[popName].show($event);
+                        $console.show($event);
                     })
                 }
                 else{
@@ -171,8 +172,9 @@ angular.module('controllers.productDetail',[])
                 }
             });
 
-            $scope.productReply = function(toReplyUserId){
-                $console.show(toReplyUserId)
+            $scope.productReply = function($event,toReplyUserId){
+                $console.show($event)
+                $scope.openPopover($event,'reply');
             }
 
         }])

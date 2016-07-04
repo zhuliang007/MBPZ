@@ -193,7 +193,6 @@ angular.module('controllers.productListByTypeCtrl',[])
                 else{
                     $scope[popName].show($event);
                 }
-
             }
 
             $scope.closePopover = function(popName){
