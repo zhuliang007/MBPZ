@@ -159,7 +159,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.messageChat.templateUrl,
                     controller:$configProvider.controllers.messageChat.controller,
                     cache:$configProvider.controllers.messageChat.cache,
-                    params:$configProvider.controllers.messageChat.params,
                 })
                 .state($configProvider.controllers.messageSystem.name,{
                     url:$configProvider.controllers.messageSystem.url,
@@ -225,5 +224,19 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.myShelves.templateUrl,
                     controller:$configProvider.controllers.myShelves.controller,
                     cache:$configProvider.controllers.myShelves.cache,
+                })
+                .state($configProvider.controllers.mySold.name,{
+                    url:$configProvider.controllers.mySold.url,
+                    templateUrl:$configProvider.controllers.mySold.templateUrl,
+                    controller:$configProvider.controllers.mySold.controller,
+                    cache:$configProvider.controllers.mySold.cache,
+                    params:$configProvider.controllers.mySold.params,
+                })
+                .state($configProvider.controllers.myBought.name,{
+                    url:$configProvider.controllers.myBought.url,
+                    templateUrl:$configProvider.controllers.myBought.templateUrl,
+                    controller:$configProvider.controllers.myBought.controller,
+                    cache:$configProvider.controllers.myBought.cache,
+                    params:$configProvider.controllers.myBought.params,
                 })
         }])

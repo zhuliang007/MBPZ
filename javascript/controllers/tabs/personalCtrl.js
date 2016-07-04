@@ -16,7 +16,7 @@ angular.module('controllers.personal',[])
             "cmd":$config.cmds.personalCount,
             "parameters":{
             },
-            "token":$locals.get('token','MmY1Zjk5N2MtZGY1OC00YTE4LWJhZTItZjUxMTI2NjY0YjM2')
+            "token":$locals.get('token','ZGY4OGViNDItYTQ1Yy00ZjQyLTkyMGItOGI1OWMwZjlmNzJk')
         }
         $httpService.getJsonFromPost($config.getRequestAction(),data)
             .then(function(result){
