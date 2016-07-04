@@ -7,34 +7,36 @@
     </ion-header-bar>
     <ion-content >
         <ion-list ng-repeat="item in items track by $index">
-            <a class="item shelvesItems" >
-                <div class="row shelvesRow">
-                    <div class="col col-20 col-center" ng-if="item.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index">
-                        <div id="shelvesImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
-                    </div>
-                    <div class="col col-70">
-                        <div class="shelvesTitles">
-                            <p class="shelvesTitle" ng-bind="item.title"></p>
-                            <p class="shelvesStatus" ng-bind="item.productStatusText"></p>
+            <div class="item shelvesItems">
+                <a  ng-click="showProduct(item.id)">
+                    <div class="row shelvesRow">
+                        <div class="col col-20 col-center" ng-if="item.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index">
+                            <div id="shelvesImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
                         </div>
-                        <div class="shelvesPrice">
-                            <p class="sellFont">
-                                <span>¥&nbsp;</span>
-                                <span ng-bind="item.currentPrice"></span>
-                            </p>
-                            <p class="sellOriginalFont" ng-if="item.originalPrice!=null">
-                                <span>¥&nbsp;</span>
-                                <span ng-bind="item.originalPrice"></span>
-                            </p>
+                        <div class="col col-70">
+                            <div class="shelvesTitles">
+                                <p class="shelvesTitle" ng-bind="item.title"></p>
+                                <p class="shelvesStatus" ng-bind="item.productStatusText"></p>
+                            </div>
+                            <div class="shelvesPrice">
+                                <p class="sellFont">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.currentPrice"></span>
+                                </p>
+                                <p class="sellOriginalFont" ng-if="item.originalPrice!=null">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.originalPrice"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 <div class="row">
                     <div class="col shelvesBtn">
-                        <button class="button" title="重新上架" ng-click="releaseDetail(item.id,0)">重新上架</button>
+                        <button class="button "  ng-click="releaseDetail(item.id,0)">重新上架</button>
                     </div>
                 </div>
-            </a>
+            </div>
         </ion-list>
         <ion-infinite-scroll
                 on-infinite="shelvesLoadMore()"

@@ -1,13 +1,5 @@
-/**
- * Created by Administrator on 2016/6/30.
- */
-
-/**
- * Created by zl_sam on 16/6/14.
- */
-
-angular.module('controllers.lookingCtrl',[])
-    .controller('LookingCtrl',[
+angular.module('controllers.mySoldCtrl',[])
+    .controller('MySoldCtrl',[
         '$scope',
         '$console',
         '$config',
@@ -22,18 +14,20 @@ angular.module('controllers.lookingCtrl',[])
             $scope.noMoreLoad = false;
             $scope.items = [];
 
-            $scope.lookLoadMore = function () {
+            $scope.soldLoadMore= function () {
                 var data = {
-                    "cmd":$config.cmds.productPublic,
+                    "cmd": $config.cmds.myOrderList,
                     "parameters":{
-                        "type":1,
+                        "orderType":$stateParams.orderType,
                         "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
+                        "pageNo":pageNo,
+                        "saleType":$stateParams.saleType
                     },
-                    "token":$locals.get('token','ZGY4OGViNDItYTQ1Yy00ZjQyLTkyMGItOGI1OWMwZjlmNzJk')
+                    "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
+                        console.log(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
                             $scope.noMoreLoad=true;
@@ -55,26 +49,13 @@ angular.module('controllers.lookingCtrl',[])
                         }
                         pageNo++;
                     })
-
-            }
-
-            $scope.releaseDel = function(productid){
-                var delData =  {
-                    "cmd": $config.cmds.productDel,
-                    "parameters":{
-                        "productId":productid
-                    },
-                    "token":"N2MyYThhODktNTZkNi00ZDdmLTljMTQtY2UxYzFmMjY0MTIz"
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),delData)
-                    .then(function(result){
-                        alert(result.msg);
-                        $state.reload();
-                    })
             }
 
             $scope.releaseDetail=function(id,type){
                 $state.go($config.controllers.publish.name,{type:type,id:id})
             }
 
+            $scope.myContant = function(buyPhone,nickName,type){
+                $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+            }
         }])

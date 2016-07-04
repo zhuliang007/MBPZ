@@ -6,6 +6,7 @@ angular.module('providers.config',[])
         var $config = {}
         /**debug模式*/
         $config.debug = true;
+        $config.appkeys = '23369408';
 
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
@@ -98,6 +99,7 @@ angular.module('providers.config',[])
             productDel:"product/delete",
             personalCount:"myself/getCount",
             myProductList:"myself/productCollect/list",
+            myOrderList:"market/order/list",
         }
 
         $config.types = {
@@ -239,17 +241,10 @@ angular.module('providers.config',[])
             },
             messageChat:{
                 templateUrl: "templates/message/message-chat.html",
-                url: "/chat",
+                url: "/chat/:uid&:credential&:touid&:nickName&:type?",
                 name: "messageChat",
                 controller: "MessageChat",
                 cache:false,
-                params:{
-                    uid:null,
-                    credential:null,
-                    touid:null,
-                    nickName:null,
-                    appkey:null
-                }
             },
             report:{
                 templateUrl:"templates/detail/report.html",
@@ -349,6 +344,28 @@ angular.module('providers.config',[])
                 url:"/myShelves",
                 name:"myShelves",
                 controller:"MyShelvesCtrl",
+                cache:false
+            },
+            mySold:{
+                templateUrl:"templates/personal/personal-sold.html",
+                url:"/mySold",
+                name:"mySold",
+                controller:"MySoldCtrl",
+                params:{
+                    orderType:"order",
+                    saleType:"sell"
+                },
+                cache:false
+            },
+            myBought:{
+                templateUrl:"templates/personal/personal-bought.html",
+                url:"/myBought",
+                name:"myBought",
+                controller:"MyBoughtCtrl",
+                params:{
+                    orderType:"order",
+                    saleType:"buy"
+                },
                 cache:false
             }
 

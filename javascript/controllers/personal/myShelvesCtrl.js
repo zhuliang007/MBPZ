@@ -26,11 +26,10 @@ angular.module('controllers.myShelvesCtrl',[])
                                         "pageNo":pageNo,
                                         "status":1
                                 },
-                                "token":"MmY1Zjk5N2MtZGY1OC00YTE4LWJhZTItZjUxMTI2NjY0YjM2"
+                                "token":"ZGY4OGViNDItYTQ1Yy00ZjQyLTkyMGItOGI1OWMwZjlmNzJk"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                    console.log(result)
                                     $scope.$broadcast('scroll.infiniteScrollComplete');
                                     if(result.data.content.length==0||result.data.content==null){
                                             $scope.noMoreLoad=true;
@@ -52,6 +51,10 @@ angular.module('controllers.myShelvesCtrl',[])
                                     }
                                     pageNo++;
                             })
+                }
+
+                $scope.releaseDetail=function(id,type){
+                    $state.go($config.controllers.publish.name,{type:type,id:id})
                 }
 
         }])

@@ -10,20 +10,25 @@ angular.module('controllers.messageChat',[])
             var height = window.screen.height ;
             var width = window.screen.width;
             document.getElementById('J_demos').style.height = height+'px';
+            console.log($stateParams)
 
              WKIT.init({
                 container: document.getElementById('J_demos'),
                 width: width,
                 height: height,
                 uid: $stateParams.uid,
-                appkey: $stateParams.appkey,
+                appkey: $config.appkeys,
                 credential: $stateParams.credential,
                 touid: $stateParams.touid,
                 onBack:function(){
                     WKIT.destroy();
                     var demo = document.getElementById('J_demos');
                     demo.parentNode.removeChild(demo);
-                    $state.go('messageTalking');
+                    if($stateParams.type==0){
+                        $state.go('messageTalking');
+                    }else if($stateParams.type==1){
+                        $state.go($config.controllers.mySold.name);
+                    }
                 },
                  onLoginSuccess:function(data){
                      $scope.WSDK = WKIT.Conn.sdk;
