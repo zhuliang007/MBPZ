@@ -68,6 +68,10 @@ ion-content{
     font-size: 24px;
 }
 
+.mbpz-tabs .tab-item{
+    text-decoration: none;
+}
+
 .mbpz-tabs .tab-item.tab-item-center{
     position: relative;
     overflow: visible;

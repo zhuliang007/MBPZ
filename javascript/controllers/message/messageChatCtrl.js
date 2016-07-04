@@ -28,6 +28,8 @@ angular.module('controllers.messageChat',[])
                         $state.go('messageTalking');
                     }else if($stateParams.type==1){
                         $state.go($config.controllers.mySold.name);
+                    }else if($stateParams.type == 2){
+                        $scope.goBack();
                     }
                 },
                  onLoginSuccess:function(data){

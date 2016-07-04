@@ -159,7 +159,27 @@ angular.module('controllers.start',[])
 
             //联系卖家
             $scope.contactSeller = function (seller) {
+                $scope.checkLogin()
+                    .then(function(){
+                        if($scope.userInfo.loginAccount == seller.loginAccount){
+                            //当前是自己本人
+                            $console.show("It`s your self")
+                            return;
+                        }
 
+                        $state.go($config.controllers.messageChat.name,{
+                            uid:$scope.userInfo.loginAccount,
+                            credential:$scope.userInfo.loginAccount,
+                            touid:seller.loginAccount,
+                            nickName:seller.nickName,
+                            type:2})
+
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                $scope.contactSeller(seller);
+                            })
+                    })
             }
 
             $scope.showProductListByType = function(type){

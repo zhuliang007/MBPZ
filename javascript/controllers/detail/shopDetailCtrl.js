@@ -19,10 +19,12 @@ angular.module('controllers.shopDetail',[])
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
             $console.show("shopDetail")
-            /*$scope.productType = $stateParams.type;
             var id = $stateParams.id;
+            var numberOfPerPage = 10;
+            var pageNo = 0;
+            $scope.replyList = []
+            $scope.infiniteFlag = true;
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
-
             getProductDetail();
             function getProductDetail(){
                 var data = {
@@ -30,7 +32,7 @@ angular.module('controllers.shopDetail',[])
                     "parameters":{
                         "productId":id
                     },
-                    "token": $locals.get('token','')
+                    "token": $scope.userInfo?$scope.userInfo.loginToken:''
                 }
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
@@ -56,15 +58,19 @@ angular.module('controllers.shopDetail',[])
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        getProductDetail();
+                                    })
                             }
                         }
                     })
             }
-            var numberOfPerPage = 10;
-            var pageNo = 0;
-            $scope.replyList = []
-            $scope.infiniteFlag = true;
+
+            $scope.loadMore = function() {
+                getReplyList();
+            };
+
             function getReplyList(){
                 var data = {
                     "cmd": $config.cmds.replyList,
@@ -72,7 +78,7 @@ angular.module('controllers.shopDetail',[])
                         "productId":id,
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo,
-                        "replyType": $scope.productType
+                        "replyType": 1
                     }
                 }
 
@@ -105,9 +111,20 @@ angular.module('controllers.shopDetail',[])
             }
 
 
-            $scope.loadMore = function() {
-                getReplyList();
-            };
+            /*$scope.productType = $stateParams.type;
+            var id = $stateParams.id;
+
+
+
+
+            var numberOfPerPage = 10;
+            var pageNo = 0;
+            $scope.replyList = []
+            $scope.infiniteFlag = true;
+
+
+
+
 
 
             $scope.buyProduct = function(){
