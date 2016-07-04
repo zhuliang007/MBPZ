@@ -28,4 +28,5 @@ angular.module('starter.controllers',[
     'controllers.lookingCtrl',
     'controllers.collectionCtrl',
     'controllers.myShelvesCtrl',
-    'controllers.mySoldCtrl'])
+    'controllers.mySoldCtrl',
+    'controllers.myBoughtCtrl'])
