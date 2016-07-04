@@ -1,11 +1,5 @@
-<ion-view class="personal-setup">
-    <ion-header-bar align-title="center">
-        <div class="buttons">
-            <button class="button" ng-click="backupDown('tabs.tabsPersonal')"><span class="icon ion-ios-arrow-back">我的</span></button>
-        </div>
-        <h1 class="title">宝贝已购</h1>
-    </ion-header-bar>
-    <ion-content >
+<ion-view >
+    <ion-content has-bouncing="true" class="releasePaddingTop"  >
         <ion-list ng-repeat="item in items track by $index" class="soldList">
             <div class="item shelvesItems">
                 <a  ng-click="showProduct(item.id)">
@@ -15,10 +9,10 @@
                             <span ng-bind="item.orderCode"></span>
                         </div>
                         <div class="col-40 soldStatus">
-                            <p ng-bind="item.statusName"></p>
+                            <p ng-bind="item.refundStatusName"></p>
                         </div>
                     </div>
-                    <div class="row soldRow">
+                    <div class="row ">
                         <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
                             <div id="shelvesImg{{$parent.$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
                         </div>
@@ -39,19 +33,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row soldRow">
+                        <div class="col refundsFont">
+                            <span>交易金额:</span><span>¥&nbsp;</span><span ng-bind="item.price"></span>
+                            <span>退款金额:</span><span class="refundsMoney">¥&nbsp;</span><span ng-bind="item.price"></span>
+                        </div>
+                    </div>
                 </a>
                 <div class="row">
                     <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.product.publicUser.imUserId,item.product.publicUser.nickName,3)">联系TA</button>
+                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,4)">联系TA</button>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button "  ></button>
+                        <button class="button "></button>
                     </div>
                 </div>
             </div>
         </ion-list>
         <ion-infinite-scroll
-                on-infinite="boughtLoadMore()"
+                on-infinite="refundsSellLoadMore()"
                 ng-if="!noMoreLoad"
                 icon="ion-loading-c"
                 distance="1%">

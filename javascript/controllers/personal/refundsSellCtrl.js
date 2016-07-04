@@ -1,8 +1,9 @@
 /**
  * Created by sam on 16/7/4.
  */
-angular.module('controllers.myBoughtCtrl',[])
-    .controller('MyBoughtCtrl',[
+
+angular.module('controllers.refundsSellCtrl',[])
+    .controller('RefundsSellCtrl',[
         '$scope',
         '$console',
         '$config',
@@ -12,19 +13,20 @@ angular.module('controllers.myBoughtCtrl',[])
         '$httpService',
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+
                 var numberOfPerPage = 5;
                 var pageNo = 0;
                 $scope.noMoreLoad = false;
                 $scope.items = [];
 
-                $scope.boughtLoadMore= function () {
+                $scope.refundsSellLoadMore= function () {
                         var data = {
                                 "cmd": $config.cmds.myOrderList,
                                 "parameters":{
-                                        "orderType":$stateParams.orderType,
+                                        "orderType":"refund",
                                         "numberOfPerPage":numberOfPerPage,
                                         "pageNo":pageNo,
-                                        "saleType":$stateParams.saleType
+                                        "saleType":"sell"
                                 },
                                 "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
                         }
@@ -52,10 +54,6 @@ angular.module('controllers.myBoughtCtrl',[])
                                     }
                                     pageNo++;
                             })
-                }
-
-                $scope.releaseDetail=function(id,type){
-                        $state.go($config.controllers.publish.name,{type:type,id:id})
                 }
 
                 $scope.myContant = function(buyPhone,nickName,type){

@@ -1,8 +1,8 @@
 /**
  * Created by sam on 16/7/4.
  */
-angular.module('controllers.myBoughtCtrl',[])
-    .controller('MyBoughtCtrl',[
+angular.module('controllers.refundsBoughtCtrl',[])
+    .controller('RefundsBoughtCtrl',[
         '$scope',
         '$console',
         '$config',
@@ -17,20 +17,20 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.noMoreLoad = false;
                 $scope.items = [];
 
-                $scope.boughtLoadMore= function () {
+                $scope.refundsBoughtLoadMore= function () {
                         var data = {
                                 "cmd": $config.cmds.myOrderList,
                                 "parameters":{
-                                        "orderType":$stateParams.orderType,
-                                        "numberOfPerPage":numberOfPerPage,
-                                        "pageNo":pageNo,
-                                        "saleType":$stateParams.saleType
+                                    "orderType":"refund",
+                                    "numberOfPerPage":numberOfPerPage,
+                                    "pageNo":pageNo,
+                                    "saleType":"buy"
                                 },
                                 "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                    console.log(result)
+                                console.log(result)
                                     $scope.$broadcast('scroll.infiniteScrollComplete');
                                     if(result.data.content.length==0||result.data.content==null){
                                             $scope.noMoreLoad=true;
@@ -52,10 +52,6 @@ angular.module('controllers.myBoughtCtrl',[])
                                     }
                                     pageNo++;
                             })
-                }
-
-                $scope.releaseDetail=function(id,type){
-                        $state.go($config.controllers.publish.name,{type:type,id:id})
                 }
 
                 $scope.myContant = function(buyPhone,nickName,type){
