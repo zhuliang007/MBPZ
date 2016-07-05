@@ -26,4 +26,30 @@ angular.module('controllers.cancalOrderCtrl',[])
                     $scope.items = result.data.cancel_reason;
                 })
             //$stateParams.id
+
+
+            $scope.cancelResponse = {
+                chooseType:"",
+                textValue:""
+            }
+            $scope.submitOrder = function () {
+                var _value = $scope.cancelResponse.chooseType;
+                if($scope.cancelResponse.chooseType=='其他原因'){
+                    _value=$scope.cancelResponse.textValue;
+                }
+
+                var responseData = {
+                    "cmd":$config.cmds.cancelOrder,
+                    "parameters": {
+                        "id":$stateParams.id,
+                        "cancelReason":_value
+                    },
+                    "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),responseData)
+                    .then(function(result){
+                        alert(result.msg)
+                    })
+            }
+
         }])
