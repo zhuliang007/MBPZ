@@ -19,8 +19,18 @@ angular.module('controllers.personal',[])
                     console.log($scope.userInfo)
                     $scope.userHeaderImg =$scope.userInfo.userImg;
                     $scope.userName = $scope.userInfo.nickName;
-                    $scope.userSex = $scope.userInfo.sex==null?'未设置':$scope.userInfo.sex;
                     $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
+                    switch (parseInt($scope.userInfo.sex)){
+                        case 0:
+                            $scope.userSex='女';
+                            break;
+                        case 1:
+                            $scope.userSex='男';
+                            break;
+                        default:
+                            $scope.userSex='未设置';
+                            break;
+                    }
                     var data = {
                         "cmd":$config.cmds.personalCount,
                         "parameters":{
