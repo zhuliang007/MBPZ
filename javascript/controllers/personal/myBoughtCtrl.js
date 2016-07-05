@@ -26,7 +26,7 @@ angular.module('controllers.myBoughtCtrl',[])
                                         "pageNo":pageNo,
                                         "saleType":$stateParams.saleType
                                 },
-                                "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                                "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
@@ -70,5 +70,26 @@ angular.module('controllers.myBoughtCtrl',[])
                 //取消订单
                 $scope.cancalOrder = function(id){
                     $state.go($config.controllers.cancalOrder.name,{id:id})
+                }
+                //申请退款
+                $scope.applyRefund = function(id,price,freight){
+                    $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight});
+                }
+                //提醒发货
+                $scope.remindDelivery = function(id){
+                    var remindData = {
+                        "cmd":$config.cmds.noticOrder,
+                        "parameters":{
+                            "id":id,
+                            "orderType":"order",
+                            "saleType":"buy"
+                        },
+                        "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                    }
+
+                    $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                        .then(function(result){
+                            console.log(result.msg)
+                        })
                 }
         }])

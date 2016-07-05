@@ -2278,6 +2278,55 @@ ion-content{
     resize:none
 }
 
+.asteriskSpan{
+    color:red;
+    font-size:12px;
+}
+.serviceFont{
+    margin-right: 10px;
+}
+
+.serviceInput{
+    background-color: white !important;
+
+}
+
+.refundsPrice{
+   padding-left:15px;
+}
+
+.refundLabel{
+    margin:10px;
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.refundLabel .row{
+    margin:0px;
+    padding:0px;
+}
+
+.refundLabel textarea{
+    width:100%;
+    resize:none;
+    background: #e6e6e6 !important;
+    color:#333333 !important;
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding:5px;
+    height:120px;
+}
+
+.refusedApply{
+    background-color:#CCCCCC !important;
+}
+
+.refusedRow{
+    padding:0px !important;
+    position:fixed !important;
+    bottom:0 !important;
+}
 /*商品回复框*/
 .reply.popover{
     bottom: 0px;

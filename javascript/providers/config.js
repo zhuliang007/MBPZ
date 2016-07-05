@@ -104,6 +104,8 @@ angular.module('providers.config',[])
             myOrderList:"market/order/list",
             systemDict:"system/getMultipleDict",
             cancelOrder:"market/order/cancel",
+            noticOrder:"market/order/notice",
+            applyRefound:"market/order/applyRefund",
         }
 
         /**提示信息配置*/
@@ -385,6 +387,16 @@ angular.module('providers.config',[])
                 url:"/cancalOrder/:id?",
                 name:"cancalOrder",
                 controller:"CancalOrderCtrl",
+                cache:false
+            },
+            applyRefund:{
+                templateUrl:"templates/order/apply-refund.html",
+                url:"/applyRefund/:id&:price&:freight:&:type?",
+                name:"applyRefund",
+                params:{
+                  obj:null
+                },
+                controller:"ApplyRefundCtrl",
                 cache:false
             }
 

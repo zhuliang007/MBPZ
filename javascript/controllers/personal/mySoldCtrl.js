@@ -23,7 +23,7 @@ angular.module('controllers.mySoldCtrl',[])
                         "pageNo":pageNo,
                         "saleType":$stateParams.saleType
                     },
-                    "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                    "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
@@ -57,5 +57,10 @@ angular.module('controllers.mySoldCtrl',[])
 
             $scope.myContant = function(buyPhone,nickName,type){
                 $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+            }
+
+            //确认发货
+            $scope.submitDelivery = function(){
+
             }
         }])
