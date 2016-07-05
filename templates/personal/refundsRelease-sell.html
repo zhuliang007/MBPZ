@@ -46,8 +46,9 @@
                     </div>
                     <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" >拒绝</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" >同意</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,2)">拒绝原因</button>
                     </div>
                 </div>
             </div>

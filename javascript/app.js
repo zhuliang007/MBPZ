@@ -278,4 +278,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.applyRefund.cache,
                     params:$configProvider.controllers.applyRefund.params,
                 })
+                .state($configProvider.controllers.refusedApply.name,{
+                    url:$configProvider.controllers.refusedApply.url,
+                    templateUrl:$configProvider.controllers.refusedApply.templateUrl,
+                    controller:$configProvider.controllers.refusedApply.controller,
+                    cache:$configProvider.controllers.refusedApply.cache,
+                    params:$configProvider.controllers.refusedApply.params,
+                })
         }])

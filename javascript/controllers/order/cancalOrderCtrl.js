@@ -13,20 +13,29 @@ angular.module('controllers.cancalOrderCtrl',[])
         '$rootScope',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
 
-            //取消订单原因
-            var data = {
-                "cmd": $config.cmds.systemDict,
-                "parameters": {
-                    "typeCode":"cancel_reason"
-                },
-                "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        //取消订单原因
+                        var data = {
+                            "cmd": $config.cmds.systemDict,
+                            "parameters": {
+                                "typeCode":"cancel_reason"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $scope.items = result.data.cancel_reason;
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
             }
-            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                .then(function(result){
-                    $scope.items = result.data.cancel_reason;
-                })
-            //$stateParams.id
-
+            initToken();
 
             $scope.cancelResponse = {
                 chooseType:"",

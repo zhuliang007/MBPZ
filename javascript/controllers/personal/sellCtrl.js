@@ -22,19 +22,35 @@ angular.module('controllers.sellCtrl',[])
             $scope.noMoreLoad = false;
             $scope.items = [];
 
+            var token ='';
+
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        token=$scope.userInfo.loginToken;
+                        $scope.publicLoadMore();
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
+            }
+
             $scope.publicLoadMore = function () {
-                var data = {
-                    "cmd":$config.cmds.productPublic,
-                    "parameters":{
-                        "type":0,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":$locals.get('token','ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2')
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        console.log(result)
+                if(token!=''){
+                    var data = {
+                        "cmd":$config.cmds.productPublic,
+                        "parameters":{
+                            "type":0,
+                            "numberOfPerPage":numberOfPerPage,
+                            "pageNo":pageNo
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            console.log(result)
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             if(result.data.content.length==0||result.data.content==null){
                                 $scope.noMoreLoad=true;
@@ -55,8 +71,11 @@ angular.module('controllers.sellCtrl',[])
                                 return;
                             }
                             pageNo++;
-                    })
+                        })
 
+                }else{
+                    initToken();
+                }
             }
 
 

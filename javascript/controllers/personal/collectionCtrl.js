@@ -18,39 +18,61 @@ angular.module('controllers.collectionCtrl',[])
             $scope.productList=[];
             $scope.noMoreLoad = false;
 
+            var token ='';
+
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        token = $scope.userInfo.loginToken;
+                        $scope.collectionLoadMore();
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
+            }
+
+            initToken();
+
             $scope.collectionLoadMore = function(){
-                var data = {
-                    "cmd": $config.cmds.myProductList,
-                    "parameters":{
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":$locals.get('token','YjExZTVmNmQtODcwZS00NzQ0LWJiNjgtY2FjOWMzY2YzMDhh')
+                if(token!=''){
+                    var data = {
+                        "cmd": $config.cmds.myProductList,
+                        "parameters":{
+                            "numberOfPerPage":numberOfPerPage,
+                            "pageNo":pageNo
+                        },
+                        "token":token
+                    }
+
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            if(result.data.content.length==0||result.data.content==null){
+                                $scope.noMoreLoad=true;
+                                return;
+                            }else{
+                                var items = result.data.content;
+                                for(var item in items){
+                                    $scope.productList.push(items[item].product);
+                                }
+                                console.log(items)
+                            }
+                            if(result.data.totalPages==0){
+                                $scope.noMoreLoad=true;
+                                $scope.items=null;
+                                return;
+                            }
+                            if(pageNo==(result.data.totalPages-1)){
+                                $scope.noMoreLoad=true;
+                                return;
+                            }
+                            pageNo++;
+                        })
+                }else{
+                    initToken();
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.data.content.length==0||result.data.content==null){
-                            $scope.noMoreLoad=true;
-                            return;
-                        }else{
-                            var items = result.data.content;
-                            for(var item in items){
-                                $scope.productList.push(items[item].product);
-                            }
-                            console.log(items)
-                        }
-                        if(result.data.totalPages==0){
-                            $scope.noMoreLoad=true;
-                            $scope.items=null;
-                            return;
-                        }
-                        if(pageNo==(result.data.totalPages-1)){
-                            $scope.noMoreLoad=true;
-                            return;
-                        }
-                        pageNo++;
-                    })
             }
         }])

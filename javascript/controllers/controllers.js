@@ -34,4 +34,5 @@ angular.module('starter.controllers',[
     'controllers.postReleaseCtrl',
     'controllers.refundsReleaseCtrl',
     'controllers.cancalOrderCtrl',
-    'controllers.applyRefundCtrl'])
+    'controllers.applyRefundCtrl',
+    'controllers.refusedApplyCtrl'])

@@ -1,7 +1,8 @@
 <ion-view class="personal-setup">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back"></span></button>
+            <button class="button" ng-click="goBack()"ng-if="type!=1"><span class="icon ion-ios-arrow-back"></span></button>
+            <button class="button" ng-click="backupDown('refundsRelease.sell')"ng-if="type==1"><span class="icon ion-ios-arrow-back"></span></button>
         </div>
         <h1 class="title" ng-if="type!=1">申请退款</h1>
         <h1 class="title" ng-if="type==1">查看退款详情</h1>
@@ -28,9 +29,7 @@
                 <span ng-bind="priceValue" ng-if="type==1"></span>
             </label>
             <div class="refundsPrice" ng-if="type!=1">
-                <span >(包含邮费</span>
-                <span ng-bind="refundsFreight"></span>
-                <span>元)</span>
+                <span >(包含邮费</span><span ng-bind="refundsFreight"></span><span>元)</span>
             </div>
             <label class="item refundLabel">
                 <div class="row">
@@ -45,14 +44,14 @@
                 </div>
             </label>
             <div class="padding-normal-horizontal" ng-if="type!=1">
-                <button class="button button-block button-positive" ng-click="submitRefounds()">提交</button>
+                <button class="button button-block button-positive" ng-click="submitRefounds()" >提交</button>
             </div>
 
         </div>
     </ion-content>
-    <div class="row refusedRow">
+    <div class="bar bar-footer refusedBtn" ng-if="type==1">
         <div class="col-50 ">
-            <button class="button button-full button-stable refusedApply">拒绝</button>
+            <button class="button button-full button-stable refusedApply" ng-click="refusedApply(item.id)">拒绝</button>
         </div>
         <div class="col-50 ">
             <button class="button button-full button-assertive">同意</button>

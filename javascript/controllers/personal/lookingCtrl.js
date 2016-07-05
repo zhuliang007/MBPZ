@@ -22,39 +22,61 @@ angular.module('controllers.lookingCtrl',[])
             $scope.noMoreLoad = false;
             $scope.items = [];
 
-            $scope.lookLoadMore = function () {
-                var data = {
-                    "cmd":$config.cmds.productPublic,
-                    "parameters":{
-                        "type":1,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":$locals.get('token','ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2')
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        if(result.data.content.length==0||result.data.content==null){
-                            $scope.noMoreLoad=true;
-                            return;
-                        }else{
-                            var arry = result.data.content;
-                            arry.forEach(function(item){
-                                $scope.items.push(item);
-                            });
-                        }
-                        if(result.data.totalPages==0){
-                            $scope.noMoreLoad=true;
-                            $scope.items=null;
-                            return;
-                        }
-                        if(pageNo==(result.data.totalPages-1)){
-                            $scope.noMoreLoad=true;
-                            return;
-                        }
-                        pageNo++;
+            var token ='';
+
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        token = $scope.userInfo.loginToken;
+                        $scope.lookLoadMore();
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
                     })
+            }
+
+            initToken();
+
+            $scope.lookLoadMore = function () {
+                if(token!=''){
+                    var data = {
+                        "cmd":$config.cmds.productPublic,
+                        "parameters":{
+                            "type":1,
+                            "numberOfPerPage":numberOfPerPage,
+                            "pageNo":pageNo
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            if(result.data.content.length==0||result.data.content==null){
+                                $scope.noMoreLoad=true;
+                                return;
+                            }else{
+                                var arry = result.data.content;
+                                arry.forEach(function(item){
+                                    $scope.items.push(item);
+                                });
+                            }
+                            if(result.data.totalPages==0){
+                                $scope.noMoreLoad=true;
+                                $scope.items=null;
+                                return;
+                            }
+                            if(pageNo==(result.data.totalPages-1)){
+                                $scope.noMoreLoad=true;
+                                return;
+                            }
+                            pageNo++;
+                        })
+
+                }else{
+                    initToken();
+                }
 
             }
 

@@ -107,6 +107,7 @@ angular.module('providers.config',[])
             cancelOrder:"market/order/cancel",
             noticOrder:"market/order/notice",
             applyRefound:"market/order/applyRefund",
+            applyRefused:"market/order/refund",
         }
 
         /**提示信息配置*/
@@ -398,6 +399,16 @@ angular.module('providers.config',[])
                   obj:null
                 },
                 controller:"ApplyRefundCtrl",
+                cache:false
+            },
+            refusedApply:{
+                templateUrl:"templates/order/refused-apply.html",
+                url:"/refusedApply/:id&:type&:routers?",
+                name:"refusedApply",
+                params:{
+                    obj:null
+                },
+                controller:"RefusedApplyCtrl",
                 cache:false
             }
 
