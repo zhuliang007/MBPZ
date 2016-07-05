@@ -32,4 +32,5 @@ angular.module('starter.controllers',[
     'controllers.refundsBoughtCtrl',
     'controllers.refundsSellCtrl',
     'controllers.postReleaseCtrl',
-    'controllers.refundsReleaseCtrl'])
+    'controllers.refundsReleaseCtrl',
+    'controllers.cancalOrderCtrl'])

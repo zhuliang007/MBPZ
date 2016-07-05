@@ -45,7 +45,7 @@
                         <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.product.publicUser.imUserId,item.product.publicUser.nickName,3)">联系TA</button>
                     </div>
                     <div class="col-80 shelvesBtn" >
-                        <button class="button mbpz " ng-if="item.status =='NOT_PAID'">取消订单</button>
+                        <button class="button mbpz " ng-if="item.status =='NOT_PAID'" ng-click="cancalOrder(item.id)">取消订单</button>
                         <button class="button mbpz" ng-if="item.status =='NOT_PAID'" ng-click="openPay(item)">立即支付</button>
                         <button class="button mbpz" ng-if="item.status =='PAID'">申请退款</button>
                         <button class="button mbpz" ng-if="item.status =='PAID'">提醒发货</button>

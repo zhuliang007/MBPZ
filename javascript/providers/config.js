@@ -101,6 +101,7 @@ angular.module('providers.config',[])
             personalCount:"myself/getCount",
             myProductList:"myself/productCollect/list",
             myOrderList:"market/order/list",
+            systemDict:"system/getMultipleDict",
         }
 
         /**提示信息配置*/
@@ -375,6 +376,13 @@ angular.module('providers.config',[])
                     orderType:"order",
                     saleType:"buy"
                 },
+                cache:false
+            },
+            cancalOrder:{
+                templateUrl:"templates/order/cancal-order.html",
+                url:"/cancalOrder/:id?",
+                name:"cancalOrder",
+                controller:"CancalOrderCtrl",
                 cache:false
             }
 
