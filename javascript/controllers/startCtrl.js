@@ -287,8 +287,8 @@ angular.module('controllers.start',[])
                     $scope['provinceCityModal'] = null;
                 }
 
-                if($scope['payModal']){
-                    $scope['payModal'] = null;
+                if($rootScope['payModal']){
+                    $rootScope['payModal'] = null;
                 }
 
                 if($scope['publishModal']){

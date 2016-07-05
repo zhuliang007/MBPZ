@@ -94,7 +94,7 @@ angular.module('controllers.orderPreview',[])
                             .then(function(result){
                                 //显示支付选择
                                 $rootScope.orderPreviewObject = result.data;
-                                $scope.openModal('payModal');
+                                $scope.openPayModal('payModal');
                                 $console.show($rootScope.orderPreviewObject);
                                 //支付操作还没做
                             },function(error){
@@ -108,6 +108,7 @@ angular.module('controllers.orderPreview',[])
                                     }
                                     if(systemError.errorCode == 20){
                                         $console.show(systemError.errorInfo);
+                                        $scope.goBack();
                                         return ;
                                     }
                                 }
