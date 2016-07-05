@@ -2255,6 +2255,10 @@ ion-content{
     color:red !important;
 }
 
+.cancelOrderTitle{
+    font-size:14px;
+}
+
 
 /*商品回复框*/
 .reply{
