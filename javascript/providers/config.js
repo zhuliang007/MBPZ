@@ -6,10 +6,12 @@ angular.module('providers.config',[])
         var $config = {}
         /**debug模式*/
         $config.debug = true;
+        $config.appkeys = '23369408';
 
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
         $config.requestActionDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
+        //$config.requestActionDebug = 'http://192.168.100.64:8085/wine-market-rest/cgi/';
         $config.getRequestAction = function(){
             if(this.debug){
                 return this.requestActionDebug;
@@ -18,8 +20,8 @@ angular.module('providers.config',[])
         }
 
         $config.requestPublish = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
-        //$config.requestPublishDebug = 'http://192.168.100.109:8080/';
         $config.requestPublishDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/';
+        //$config.requestPublishDebug = 'http://192.168.100.64:8085/wine-market-rest/';
         $config.getRequestPublish = function(){
             if(this.debug){
                 return this.requestPublishDebug;
@@ -70,6 +72,7 @@ angular.module('providers.config',[])
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
             details:"product/details",
+            sendReply:"product/reply",
             replyList:"product/reply/list",
             codeInfo:"system/codeInfo/getAll",
             recommendationProduct:"market/home/recommendation",
@@ -82,6 +85,7 @@ angular.module('providers.config',[])
             login:"market/login",
             collect:"product/collect",
             spot:"product/askToBuy/spot",
+            resolve:"product/askToBuy/resolve",
             tipoffs:"system/tipoffs/getPage",
             report:"system/tipoffs/report",
             reserve:"market/order/reserve",
@@ -98,12 +102,12 @@ angular.module('providers.config',[])
             productDel:"product/delete",
             personalCount:"myself/getCount",
             myProductList:"myself/productCollect/list",
-        }
-
-        $config.types = {
-            ad:{
-                Index:"INDEX"
-            }
+            myOrderList:"market/order/list",
+            systemDict:"system/getMultipleDict",
+            cancelOrder:"market/order/cancel",
+            noticOrder:"market/order/notice",
+            applyRefound:"market/order/applyRefund",
+            applyRefused:"market/order/refund",
         }
 
         /**提示信息配置*/
@@ -216,13 +220,6 @@ angular.module('providers.config',[])
                 controller:"WalletCtrl",
                 cache:false
             },
-            myCenterRefund:{
-                templateUrl:"templates/personal/refund/personal-refund.html",
-                url:"/refund",
-                name:"myCenterRefund",
-                controller:"RefundListCtrl",
-                cache:false
-            },
             searchHome:{
                 templateUrl:"templates/home/search.html",
                 url:"/searchHome",
@@ -239,17 +236,10 @@ angular.module('providers.config',[])
             },
             messageChat:{
                 templateUrl: "templates/message/message-chat.html",
-                url: "/chat",
+                url: "/chat/:uid&:credential&:touid&:nickName&:type?",
                 name: "messageChat",
                 controller: "MessageChat",
                 cache:false,
-                params:{
-                    uid:null,
-                    credential:null,
-                    touid:null,
-                    nickName:null,
-                    appkey:null
-                }
             },
             report:{
                 templateUrl:"templates/detail/report.html",
@@ -337,6 +327,27 @@ angular.module('providers.config',[])
                 controller:"LookingCtrl",
                 cache:false
             },
+            refundsRelease:{
+                templateUrl:"templates/personal/refunds-release.html",
+                url:"/refundsRelease",
+                abstract:true,
+                controller:"RefundsReleaseCtrl",
+                name:"refundsRelease",
+            },
+            sellRefundsRelease:{
+                templateUrl:"templates/personal/refundsRelease-sell.html",
+                url:"/refundsReleaseSell",
+                name:"refundsRelease.sell",
+                controller:"RefundsSellCtrl",
+                cache:false
+            },
+            boughtRefundsRelease:{
+                templateUrl:"templates/personal/refundsRelease-bought.html",
+                url:"/bought",
+                name:"refundsRelease.bought",
+                controller:"RefundsBoughtCtrl",
+                cache:false
+            },
             myCollection:{
                 templateUrl:"templates/personal/personal-collection.html",
                 url:"/myCollection",
@@ -349,6 +360,55 @@ angular.module('providers.config',[])
                 url:"/myShelves",
                 name:"myShelves",
                 controller:"MyShelvesCtrl",
+                cache:false
+            },
+            mySold:{
+                templateUrl:"templates/personal/personal-sold.html",
+                url:"/mySold",
+                name:"mySold",
+                controller:"MySoldCtrl",
+                params:{
+                    orderType:"order",
+                    saleType:"sell"
+                },
+                cache:false
+            },
+            myBought:{
+                templateUrl:"templates/personal/personal-bought.html",
+                url:"/myBought",
+                name:"myBought",
+                controller:"MyBoughtCtrl",
+                params:{
+                    orderType:"order",
+                    saleType:"buy"
+                },
+                cache:false
+            },
+            cancalOrder:{
+                templateUrl:"templates/order/cancal-order.html",
+                url:"/cancalOrder/:id?",
+                name:"cancalOrder",
+                controller:"CancalOrderCtrl",
+                cache:false
+            },
+            applyRefund:{
+                templateUrl:"templates/order/apply-refund.html",
+                url:"/applyRefund/:id&:price&:freight:&:type?",
+                name:"applyRefund",
+                params:{
+                  obj:null
+                },
+                controller:"ApplyRefundCtrl",
+                cache:false
+            },
+            refusedApply:{
+                templateUrl:"templates/order/refused-apply.html",
+                url:"/refusedApply/:id&:type&:routers?",
+                name:"refusedApply",
+                params:{
+                    obj:null
+                },
+                controller:"RefusedApplyCtrl",
                 cache:false
             }
 
@@ -370,6 +430,9 @@ angular.module('providers.config',[])
             },
             productReport:{
                 templateUrl:"templates/popover/productReport.html"
+            },
+            reply:{
+                templateUrl:"templates/popover/reply.html"
             }
         }
 

@@ -1,0 +1,23 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBackRefund()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title" >填写拒绝原因</h1>
+    </ion-header-bar>
+    <ion-pane >
+            <div class="list refusedList">
+                <div class="item">
+                    <span>拒绝退款原因:</span>
+                </div>
+                <div class="item ">
+                    <textarea placeholder="填写拒绝原因" class="refusedText" ng-model="refused.reason" ng-if="type!=1"></textarea>
+                    <textarea readonly="readonly" class="refusedTextView" ng-bind="rejectReason" ng-if="type==1"></textarea>
+                </div>
+            </div>
+
+        <div class="bar bar-footer refusedBtn">
+            <button class="button button-full button-assertive title" ng-click="submitRefused()" ng-if="type!=1">提交</button>
+        </div>
+    </ion-pane>
+</ion-view>

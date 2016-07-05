@@ -23,8 +23,16 @@ angular.module('starter.controllers',[
     'controllers.messageChat',
     'controllers.publish',
     'controllers.messagesCtrl',
-    'controllers.postReleaseCtrl',
     'controllers.sellCtrl',
     'controllers.lookingCtrl',
     'controllers.collectionCtrl',
-    'controllers.myShelvesCtrl'])
+    'controllers.myShelvesCtrl',
+    'controllers.mySoldCtrl',
+    'controllers.myBoughtCtrl',
+    'controllers.refundsBoughtCtrl',
+    'controllers.refundsSellCtrl',
+    'controllers.postReleaseCtrl',
+    'controllers.refundsReleaseCtrl',
+    'controllers.cancalOrderCtrl',
+    'controllers.applyRefundCtrl',
+    'controllers.refusedApplyCtrl'])

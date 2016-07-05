@@ -16,6 +16,8 @@ angular.module('controllers.shop',[])
         var numberOfPerPage = 10;
         var pageNo = 0;
         $scope.infiniteFlag = true;
+
+
         function getProductShop(){
             var data = {
                 "cmd": $config.cmds.getPage,

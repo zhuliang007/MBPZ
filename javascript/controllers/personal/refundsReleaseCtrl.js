@@ -1,8 +1,8 @@
 /**
  * Created by sam on 16/7/4.
  */
-angular.module('controllers.postReleaseCtrl',[])
-    .controller('PostReleaseCtrl',[
+angular.module('controllers.refundsReleaseCtrl',[])
+    .controller('RefundsReleaseCtrl',[
         '$scope',
         '$console',
         '$config',

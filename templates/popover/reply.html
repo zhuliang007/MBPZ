@@ -1,0 +1,14 @@
+<ion-popover-view class="reply">
+    <ion-content ng-click="closeOwner()" has-bouncing="false" overflow-scroll="true">
+        <div class="inputGroup" ng-click="stopPropagation($event)">
+            <div class="item item-button-right">
+                <div class="textarea">
+                    <textarea placeholder="{{replyPlaceholder}}" ng-model="replyObject.replyContents"></textarea>
+                </div>
+                <button class="button icon-left mbpz mbpz-icon-send send" ng-click="sendReply()">
+                    发送
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-popover-view>

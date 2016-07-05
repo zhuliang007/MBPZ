@@ -22,19 +22,35 @@ angular.module('controllers.sellCtrl',[])
             $scope.noMoreLoad = false;
             $scope.items = [];
 
+            var token ='';
+
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        token=$scope.userInfo.loginToken;
+                        $scope.publicLoadMore();
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
+            }
+
             $scope.publicLoadMore = function () {
-                var data = {
-                    "cmd":$config.cmds.productPublic,
-                    "parameters":{
-                        "type":0,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":$locals.get('token','MmY1Zjk5N2MtZGY1OC00YTE4LWJhZTItZjUxMTI2NjY0YjM2')
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        console.log(result)
+                if(token!=''){
+                    var data = {
+                        "cmd":$config.cmds.productPublic,
+                        "parameters":{
+                            "type":0,
+                            "numberOfPerPage":numberOfPerPage,
+                            "pageNo":pageNo
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            console.log(result)
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             if(result.data.content.length==0||result.data.content==null){
                                 $scope.noMoreLoad=true;
@@ -55,25 +71,33 @@ angular.module('controllers.sellCtrl',[])
                                 return;
                             }
                             pageNo++;
-                    })
+                        })
 
+                }else{
+                    initToken();
+                }
             }
 
 
 
             $scope.releaseDel = function(productid){
-                var delData =  {
-                    "cmd": $config.cmds.productDel,
-                    "parameters":{
-                        "productId":productid
-                    },
-                    "token":"N2MyYThhODktNTZkNi00ZDdmLTljMTQtY2UxYzFmMjY0MTIz"
+                if(token!=''){
+                    var delData =  {
+                        "cmd": $config.cmds.productDel,
+                        "parameters":{
+                            "productId":productid
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),delData)
+                        .then(function(result){
+                            alert(result.msg);
+                            $state.reload();
+                        })
+                }else{
+                    initToken()
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),delData)
-                    .then(function(result){
-                        alert(result.msg);
-                        $state.reload();
-                    })
+
             }
 
             $scope.releaseDetail=function(id,type){

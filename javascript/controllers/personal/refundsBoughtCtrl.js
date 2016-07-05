@@ -1,28 +1,29 @@
-angular.module('controllers.messagesCtrl',[])
-    .controller('MessagesCtrl',[
+/**
+ * Created by sam on 16/7/4.
+ * 退款管理-购买
+ */
+angular.module('controllers.refundsBoughtCtrl',[])
+    .controller('RefundsBoughtCtrl',[
         '$scope',
         '$console',
         '$config',
         '$rootScope',
         '$stateParams',
         '$state',
-        '$locals',
         '$httpService',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$httpService){
-                var pageNo=0;
-                var numberOfPerPage=5;
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+                var numberOfPerPage = 5;
+                var pageNo = 0;
                 $scope.noMoreLoad = false;
-
-                //上拉刷新
-                $scope.items=[];
-
+                $scope.items = [];
                 var token ='';
 
                 initToken = function(){
                     $scope.checkLogin()
                         .then(function(){
                             token = $scope.userInfo.loginToken;
-                            $scope.loadMore();
+                            $scope.refundsBoughtLoadMore();
                         },function(){
                             $scope.autoLogin()
                                 .then(function(){
@@ -30,21 +31,20 @@ angular.module('controllers.messagesCtrl',[])
                                 })
                         })
                 }
-                initToken();
-                $scope.loadMore = function() {
+                $scope.refundsBoughtLoadMore= function () {
                     if(token!=''){
                         var data = {
-                            "cmd":$config.cmds.systemMessage,
+                            "cmd": $config.cmds.myOrderList,
                             "parameters":{
-                                "modual" :$stateParams.modual,
+                                "orderType":"refund",
                                 "numberOfPerPage":numberOfPerPage,
-                                "pageNo":pageNo
+                                "pageNo":pageNo,
+                                "saleType":"buy"
                             },
                             "token":token
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.content.length==0||result.data.content==null){
                                     $scope.noMoreLoad=true;
@@ -65,23 +65,32 @@ angular.module('controllers.messagesCtrl',[])
                                     return;
                                 }
                                 pageNo++;
-                            });
+                            },function(error){
+                                if(error.systemError){
+                                    if(error.systemError.errorCode==14||error.systemError.errorCode==15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                            })
+                                    }
+                                }
+                            })
                     }else{
-                        initToken();
+                        initToken()
                     }
-                };
-
-            $scope.messageDetails = function(id,type){
-                var params = {id:id};
-                switch (type){
-                    case 0:
-                        $state.go($config.controllers.productDetail.name,params);
-                        break;
-                    case 1:
-                        $state.go($config.controllers.shopDetail.name,params);
-                        break;
                 }
+
+                $scope.myContant = function(buyPhone,nickName,type){
+                        $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+                }
+
+            //重新申请退款
+                $scope.applyRefund = function(id,price,freight){
+                    $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight})
+                }
+
+            //拒绝
+            $scope.refusedApply = function(id,type,items,routers){
+                $state.go($config.controllers.refusedApply.name,{id:id,type:type,obj:items,routers:routers})
             }
 
-        }
-    ])
+        }])

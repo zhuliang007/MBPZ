@@ -21,12 +21,64 @@ angular.module('controllers.start',[])
         '$locals',
         function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$locals){
 
+            $scope.thirdType = 4;
+            $scope.userPhone = purl().param('userPhone');
+
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
 
-            $scope.showMsg = function(msg){
+
+            $scope.autoLogin = function(){
+                var deferred = $q.defer();
+                var data = {
+                    "cmd": $config.cmds.login,
+                    "parameters":{
+                        "loginAccount":$scope.userPhone,
+                        "thirdType":$scope.thirdType
+                    }
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.userInfo = {
+                            loginToken:result.data.loginToken,
+                            loginAccount:result.data.loginAccount,
+                            id:result.data.id,
+                            city:result.data.city,
+                            cityText:result.data.cityText,
+                            introduce:result.data.introduce,
+                            nickName:result.data.nickName,
+                            province:result.data.province,
+                            provinceText:result.data.provinceText,
+                            sex:result.data.sex,
+                            userImg:result.data.userImg,
+                            userLevel:result.data.userLevel
+                        }
+                        $console.show($scope.userInfo);
+                        deferred.resolve();
+                    },function(error){
+                        deferred.reject(error);
+                    })
+
+                return deferred.promise;
+            }
+
+            $scope.checkLogin = function(){
+                var deferred = $q.defer();
+                if($scope.userInfo){
+                    $console.show("登录成功");
+                    deferred.resolve();
+                }
+                else{
+                    $console.show("需要登录");
+                    deferred.reject();
+                }
+                return deferred.promise;
+            }
+
+            $scope.showMsg = function(msg,$event){
+                $event.stopPropagation();
                 $console.show(msg);
             }
 
@@ -108,7 +160,27 @@ angular.module('controllers.start',[])
 
             //联系卖家
             $scope.contactSeller = function (seller) {
+                $scope.checkLogin()
+                    .then(function(){
+                        if($scope.userInfo.loginAccount == seller.loginAccount){
+                            //当前是自己本人
+                            $console.show("It`s your self")
+                            return;
+                        }
 
+                        $state.go($config.controllers.messageChat.name,{
+                            uid:$scope.userInfo.loginAccount,
+                            credential:$scope.userInfo.loginAccount,
+                            touid:seller.loginAccount,
+                            nickName:seller.nickName,
+                            type:2})
+
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                $scope.contactSeller(seller);
+                            })
+                    })
             }
 
             $scope.showProductListByType = function(type){
@@ -167,6 +239,37 @@ angular.module('controllers.start',[])
                 }
                 return deferred.promise;
             };
+
+            //开启支付
+            $scope.openPayModal = function(modalName) {
+                var deferred = $q.defer();
+                if(!$scope[modalName]){
+                    $ionicModal.fromTemplateUrl($config.modals[modalName].templateUrl, {
+                        scope: $rootScope,
+                        animation: $config.modals[modalName].animation
+                    }).then(function(modal) {
+                        if(!$rootScope[modalName]){
+                            $rootScope[modalName] = modal;
+                        }
+                        if(!$rootScope[modalName].isShown()){
+                            $rootScope[modalName].show();
+                        }
+                        deferred.resolve();
+                    });
+                }
+                else{
+                    deferred.resolve();
+                }
+                return deferred.promise;
+            };
+
+            //关闭支付
+            $rootScope.closePayModal = function(modalName) {
+                $rootScope[modalName].hide().then(function(){
+                    $rootScope[modalName].remove();
+                })
+            };
+
             $scope.closeModal = function(modalName) {
                 $scope[modalName].hide().then(function(){
                     $scope[modalName].remove();
@@ -185,8 +288,8 @@ angular.module('controllers.start',[])
                     $scope['provinceCityModal'] = null;
                 }
 
-                if($scope['payModal']){
-                    $scope['payModal'] = null;
+                if($rootScope['payModal']){
+                    $rootScope['payModal'] = null;
                 }
 
                 if($scope['publishModal']){
@@ -203,12 +306,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type){
-                if(!$locals.get('token','')){
-                    $scope.openModal('loginModal');
-                }
-                else{
-                    $state.go($config.controllers.publish.name,{type:type});
-                }
+                $state.go($config.controllers.publish.name,{type:type});
                 $scope.closeModal('publishModal');
             }
 

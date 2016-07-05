@@ -1,28 +1,31 @@
-angular.module('controllers.messagesCtrl',[])
-    .controller('MessagesCtrl',[
+/**
+ * Created by sam on 16/7/4.
+ * 退款管理-出售
+ */
+
+angular.module('controllers.refundsSellCtrl',[])
+    .controller('RefundsSellCtrl',[
         '$scope',
         '$console',
         '$config',
         '$rootScope',
         '$stateParams',
         '$state',
-        '$locals',
         '$httpService',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$httpService){
-                var pageNo=0;
-                var numberOfPerPage=5;
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+
+                var numberOfPerPage = 5;
+                var pageNo = 0;
                 $scope.noMoreLoad = false;
-
-                //上拉刷新
-                $scope.items=[];
-
+                $scope.items = [];
                 var token ='';
 
                 initToken = function(){
                     $scope.checkLogin()
                         .then(function(){
                             token = $scope.userInfo.loginToken;
-                            $scope.loadMore();
+                            $scope.refundsSellLoadMore();
                         },function(){
                             $scope.autoLogin()
                                 .then(function(){
@@ -30,15 +33,16 @@ angular.module('controllers.messagesCtrl',[])
                                 })
                         })
                 }
-                initToken();
-                $scope.loadMore = function() {
+
+                $scope.refundsSellLoadMore= function () {
                     if(token!=''){
                         var data = {
-                            "cmd":$config.cmds.systemMessage,
+                            "cmd": $config.cmds.myOrderList,
                             "parameters":{
-                                "modual" :$stateParams.modual,
+                                "orderType":"refund",
                                 "numberOfPerPage":numberOfPerPage,
-                                "pageNo":pageNo
+                                "pageNo":pageNo,
+                                "saleType":"sell"
                             },
                             "token":token
                         }
@@ -65,23 +69,41 @@ angular.module('controllers.messagesCtrl',[])
                                     return;
                                 }
                                 pageNo++;
-                            });
+                            })
                     }else{
                         initToken();
                     }
-                };
 
-            $scope.messageDetails = function(id,type){
-                var params = {id:id};
-                switch (type){
-                    case 0:
-                        $state.go($config.controllers.productDetail.name,params);
-                        break;
-                    case 1:
-                        $state.go($config.controllers.shopDetail.name,params);
-                        break;
                 }
+
+                $scope.myContant = function(buyPhone,nickName,type){
+                        $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+                }
+
+            //退款详情
+            $scope.refoundsDetail = function(id,price,items){
+                $state.go($config.controllers.applyRefund.name,{id:id,price:price,obj:items,type:1})
             }
 
-        }
-    ])
+            //拒绝
+            $scope.refusedApply = function(id,type,items,routers){
+                $state.go($config.controllers.refusedApply.name,{id:id,type:type,obj:items,routers:routers})
+            }
+
+            //同意
+            $scope.agreeApply = function(id){
+                var data = {
+                    "cmd": $config.cmds.applyRefused,
+                    "parameters":{
+                        "id":id,
+                        "refundStatus":"AGREE"
+                    },
+                    "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        alert(result.msg);
+                    })
+            }
+
+        }])

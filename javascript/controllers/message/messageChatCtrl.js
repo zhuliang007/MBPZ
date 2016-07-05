@@ -16,14 +16,33 @@ angular.module('controllers.messageChat',[])
                 width: width,
                 height: height,
                 uid: $stateParams.uid,
-                appkey: $stateParams.appkey,
+                appkey: $config.appkeys,
                 credential: $stateParams.credential,
                 touid: $stateParams.touid,
                 onBack:function(){
                     WKIT.destroy();
                     var demo = document.getElementById('J_demos');
                     demo.parentNode.removeChild(demo);
-                    $state.go('messageTalking');
+                    switch (parseInt($stateParams.type)){
+                        case 0:
+                            $state.go('messageTalking');
+                            break;
+                        case 1:
+                            $state.go($config.controllers.mySold.name);
+                            break;
+                        case 2:
+                            $scope.goBack();
+                            break;
+                        case 3:
+                            $state.go($config.controllers.myBought.name);
+                            break;
+                        case 4:
+                            $state.go($config.controllers.sellRefundsRelease.name);
+                            break;
+                        case 5:
+                            $state.go($config.controllers.boughtRefundsRelease.name);
+                            break;
+                    }
                 },
                  onLoginSuccess:function(data){
                      $scope.WSDK = WKIT.Conn.sdk;

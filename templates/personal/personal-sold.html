@@ -1,0 +1,62 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="backupDown('tabs.tabsPersonal')"><span class="icon ion-ios-arrow-back">我的</span></button>
+        </div>
+        <h1 class="title">宝贝已售</h1>
+    </ion-header-bar>
+    <ion-content >
+        <ion-list ng-repeat="item in items track by $index" class="soldList">
+            <div class="item shelvesItems">
+                <a  ng-click="showProduct(item.id)">
+                    <div class="row shelvesRow">
+                        <div class="col-60 soldOrderFont">
+                            <span>订单编号:</span>
+                            <span ng-bind="item.orderCode"></span>
+                        </div>
+                        <div class="col-40 soldStatus">
+                            <p ng-bind="item.statusName"></p>
+                        </div>
+                    </div>
+                    <div class="row soldRow">
+                        <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
+                            <div id="shelvesImg{{$parent.$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        </div>
+                        <div class="col col-70">
+                            <div class="shelvesTitles">
+                                <p class="shelvesTitle" ng-bind="item.product.title"></p>
+                                <p class="shelvesStatus" ng-bind="item.product.productStatusText"></p>
+                            </div>
+                            <div class="shelvesPrice">
+                                <p class="sellFont">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.product.currentPrice"></span>
+                                </p>
+                                <p class="sellOriginalFont" ng-if="item.product.originalPrice!=null">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.product.originalPrice"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="row">
+                    <div class="col-20 shelvesBtn">
+                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,1)">联系TA</button>
+                    </div>
+                    <div class="col shelvesBtn">
+                        <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="submitDelivery(item.id)">确认发货</button>
+                        <button class="button mbpz" ng-if="item.status =='RECEIVING'" >提醒收货</button>
+                        <button class="button mbpz" ng-if="item.status =='EVALUATED'" >查看评价</button>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <ion-infinite-scroll
+                on-infinite="soldLoadMore()"
+                ng-if="!noMoreLoad"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

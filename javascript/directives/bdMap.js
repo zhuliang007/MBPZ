@@ -76,26 +76,38 @@ angular.module('directives.bdMap',[])
                         $rootScope.locationJosnStr.streetNumber = $rootScope.addComp.streetNumber;
                         $rootScope.locationJosnStr.latitude = result.points[0].lat;
                         $rootScope.locationJosnStr.longitude = result.points[0].lng;
-                        if($locals.get('token','')){
-                            var data = {
-                                "cmd":$config.cmds.saveLocationAddress,
-                                "parameters":{
-                                    "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
-                                },
-                                "token":$locals.get('token','')
-                            };
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                .then(function(result){
-                                    $console.show(result);
-                                },function(error){
-                                    $console.show(error);
-                                })
-                        }
+                        /*$scope.checkLogin()
+                            .then(function(){
+                                var data = {
+                                    "cmd":$config.cmds.saveLocationAddress,
+                                    "parameters":{
+                                        "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
+                                    },
+                                    "token":$scope.userInfo.loginToken
+                                };
+                                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                    .then(function(result){
+                                        $console.show(result);
+                                    },function(error){
+                                        if(error.systemError){
+                                            var systemError = error.systemError;
+                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                $scope.autoLogin()
+                                                    .then(function(){
+                                                        translateCallback(result)
+                                                    })
+                                            }
+                                        }
+                                    })
+                            },function(){
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        translateCallback(result)
+                                    })
+                            })*/
                     });
                 }
-
             }
-
 
             return bdMap;
         }

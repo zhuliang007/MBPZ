@@ -12,13 +12,16 @@ angular.module('controllers.productDetail',[])
         '$stateParams',
         '$timeout',
         '$ionicSlideBoxDelegate',
+        '$ionicScrollDelegate',
         '$locals',
         '$ionicPopover',
-        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals,$ionicPopover){
+        '$q',
+        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$ionicScrollDelegate,$locals,$ionicPopover,$q){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $console.show("productDetail")
+            $console.show("productDetail");
+            var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             var id = $stateParams.id;
             var numberOfPerPage = 10;
             var pageNo = 0;
@@ -31,7 +34,7 @@ angular.module('controllers.productDetail',[])
                     "parameters":{
                         "productId":id
                     },
-                    "token": $locals.get('token','')
+                    "token": $scope.userInfo?$scope.userInfo.loginToken:''
                 }
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
@@ -43,7 +46,10 @@ angular.module('controllers.productDetail',[])
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        getProductDetail();
+                                    })
                             }
                         }
                     })
@@ -94,48 +100,51 @@ angular.module('controllers.productDetail',[])
             };
 
             $scope.judgeProduct = function(){
-                if(!$locals.get('token','')){
-                    $scope.openModal('loginModal');
-                    return ;
-                }
-                var data = {
-                    "cmd":$config.cmds.collect,
-                    "parameters":{
-                        "productId": $scope.product.id,
-                        "isCollect":$scope.product.isCollect?0:1
-                    },
-                    "token":$locals.get('token','')
-                };
+                $scope.checkLogin()
+                    .then(function(){
+                        var data = {
+                            "cmd":$config.cmds.collect,
+                            "parameters":{
+                                "productId": $scope.product.id,
+                                "isCollect":$scope.product.isCollect?0:1
+                            },
+                            "token":$scope.userInfo.loginToken
+                        };
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $scope.product.isCollect = $scope.product.isCollect?0:1;
-                    },function(error){
-                        $console.show(error);
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                $scope.openModal('loginModal');
-                            }
-                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $console.show(result);
+                                $scope.product.isCollect = $scope.product.isCollect?0:1;
+                            },function(error){
+                                $console.show(error);
+                                if(error.systemError){
+                                    var systemError = error.systemError;
+                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                                getProductDetail();
+                                            })
+                                    }
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                            })
                     })
             }
 
             $scope.buyProduct = function(){
-                if(!$locals.get('token','')){
-                    $console.show("需要登录")
-                    return ;
-                }
-
-                if($locals.get('userId',0)==$scope.product.publicUser.id){
-                    $console.show("是帖子本人")
-                    return;
-                }
-
-                $console.show($scope.product);
-
-                $state.go($config.controllers.orderPreview.name,{productId:id});
+                $scope.checkLogin()
+                    .then(function(){
+                        $state.go($config.controllers.orderPreview.name,{productId:id});
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                            })
+                    })
             }
 
             $scope.openPopover = function($event,popName){
@@ -162,34 +171,110 @@ angular.module('controllers.productDetail',[])
                     $scope['productReport'].remove();
                     $scope['productReport']=null;
                 }
+
+                if($scope['reply']){
+                    $scope['reply'].remove();
+                    $scope['reply']=null;
+                }
             });
 
-            $rootScope.login = function(telNumber,codeNumber){
-                if(!telNumber){
-                    $console.show($config.messages.noTel);
-                    return;
+            $scope.$on('popover.hidden', function() {
+                if($scope['productReport']){
+                    $scope['productReport'].remove();
+                    $scope['productReport']=null;
                 }
-                if(!codeNumber){
-                    $console.show($config.messages.noCode);
-                    return;
-                }
-                var data = {
-                    "cmd": $config.cmds.login,
-                    "parameters":{
-                        "loginAccount":telNumber,
-                        "securityCode":codeNumber
-                    }
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $console.show(result);
-                        $locals.set('token',result.data.loginToken);
-                        $locals.set('userId',result.data.id);
-                        $scope.closeModal('loginModal');
-                        getProductDetail();
-                    })
+            });
 
+            $scope.replyObject = {
+                "productId":id,
+                "repUserId":0,
+                "replyContents":null
             }
 
+            $scope.productReply = function($event,userObject){
+                $scope.checkLogin()
+                    .then(function(){
+                        $console.show(userObject);
+                        $scope.openPopover($event,'reply');
+                        $scope.replyPlaceholder = '回复@'+userObject.nickName;
+                        if(!$scope.replyObject.repUserId){
+                            $scope.replyObject.repUserId = userObject.id;
+                            $scope.replyObject.replyContents = null;
+                        }
+                        else{
+                            if($scope.replyObject.repUserId != userObject.id){
+                                $scope.replyObject.repUserId = userObject.id;
+                                $scope.replyObject.replyContents = null;
+                            }
+                        }
+                        $console.show($scope.replyObject);
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                                $scope.productReply($event,userObject);
+                            })
+                    })
+            }
+
+            $scope.stopPropagation = function($event){
+                $event.stopPropagation();
+            }
+
+            $scope.closeOwner = function(){
+                $scope.closePopover('reply');
+            }
+
+            $scope.sendReply = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        if(!$scope.replyObject.replyContents){
+                            $console.show("回复内容不能为空")
+                            return;
+                        }
+
+                        var data ={
+                            "cmd": $config.cmds.sendReply,
+                            "parameters":{
+                                "replyType":0,
+                                "productId":$scope.replyObject.productId,
+                                "repUserId":$scope.replyObject.repUserId,
+                                "replyContents":$scope.replyObject.replyContents,
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $console.show(result);
+                                $scope.replyObject.repUserId = 0;
+                                $scope.replyObject.replyContents = null;
+                                $scope.closeOwner();
+                                pageNo = 0;
+                                $scope.replyList = []
+                                productHandle.resize();
+                                var element = document.getElementById('replyBody');
+                                productHandle.scrollTo(0,element.offsetTop);
+                                $scope.infiniteFlag = true;
+                            },function(error){
+                                $console.show(error);
+                                if(error.systemError){
+                                    var systemError = error.systemError;
+                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                                $scope.sendReply();
+                                            })
+                                    }
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                                $scope.sendReply();
+                            })
+                    })
+            }
 
         }])

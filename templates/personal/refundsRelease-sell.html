@@ -1,0 +1,63 @@
+<ion-view >
+    <ion-content has-bouncing="true" class="releasePaddingTop"  >
+        <ion-list ng-repeat="item in items track by $index" class="soldList">
+            <div class="item shelvesItems">
+                <a  ng-click="showProduct(item.id)">
+                    <div class="row shelvesRow">
+                        <div class="col-60 soldOrderFont">
+                            <span>订单编号:</span>
+                            <span ng-bind="item.orderCode"></span>
+                        </div>
+                        <div class="col-40 soldStatus">
+                            <p ng-bind="item.refundStatusName"></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
+                            <div id="shelvesImg{{$parent.$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        </div>
+                        <div class="col col-70">
+                            <div class="shelvesTitles">
+                                <p class="shelvesTitle" ng-bind="item.product.title"></p>
+                                <p class="shelvesStatus" ng-bind="item.product.productStatusText"></p>
+                            </div>
+                            <div class="shelvesPrice">
+                                <p class="sellFont">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.product.currentPrice"></span>
+                                </p>
+                                <p class="sellOriginalFont" ng-if="item.product.originalPrice!=null">
+                                    <span>¥&nbsp;</span>
+                                    <span ng-bind="item.product.originalPrice"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row soldRow">
+                        <div class="col refundsFont">
+                            <span>交易金额:</span><span>¥&nbsp;</span><span ng-bind="item.price"></span>
+                            <span>退款金额:</span><span class="refundsMoney">¥&nbsp;</span><span ng-bind="item.price"></span>
+                        </div>
+                    </div>
+                </a>
+                <div class="row">
+                    <div class="col-20 shelvesBtn">
+                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,4)">联系TA</button>
+                    </div>
+                    <div class="col shelvesBtn">
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,2)">拒绝原因</button>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <ion-infinite-scroll
+                on-infinite="refundsSellLoadMore()"
+                ng-if="!noMoreLoad"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

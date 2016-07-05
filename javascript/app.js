@@ -159,7 +159,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.messageChat.templateUrl,
                     controller:$configProvider.controllers.messageChat.controller,
                     cache:$configProvider.controllers.messageChat.cache,
-                    params:$configProvider.controllers.messageChat.params,
                 })
                 .state($configProvider.controllers.messageSystem.name,{
                     url:$configProvider.controllers.messageSystem.url,
@@ -191,8 +190,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                 .state($configProvider.controllers.postRelease.name,{
                     url:$configProvider.controllers.postRelease.url,
                     abstract:$configProvider.controllers.postRelease.abstract,
-                    templateUrl:$configProvider.controllers.postRelease.templateUrl,
                     controller:$configProvider.controllers.postRelease.controller,
+                    templateUrl:$configProvider.controllers.postRelease.templateUrl,
                 })
                 .state($configProvider.controllers.sellContent.name,{
                     url:$configProvider.controllers.sellContent.url,
@@ -225,5 +224,65 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     templateUrl:$configProvider.controllers.myShelves.templateUrl,
                     controller:$configProvider.controllers.myShelves.controller,
                     cache:$configProvider.controllers.myShelves.cache,
+                })
+                .state($configProvider.controllers.mySold.name,{
+                    url:$configProvider.controllers.mySold.url,
+                    templateUrl:$configProvider.controllers.mySold.templateUrl,
+                    controller:$configProvider.controllers.mySold.controller,
+                    cache:$configProvider.controllers.mySold.cache,
+                    params:$configProvider.controllers.mySold.params,
+                })
+                .state($configProvider.controllers.myBought.name,{
+                    url:$configProvider.controllers.myBought.url,
+                    templateUrl:$configProvider.controllers.myBought.templateUrl,
+                    controller:$configProvider.controllers.myBought.controller,
+                    cache:$configProvider.controllers.myBought.cache,
+                    params:$configProvider.controllers.myBought.params,
+                })
+                .state($configProvider.controllers.refundsRelease.name,{
+                    url:$configProvider.controllers.refundsRelease.url,
+                    abstract:$configProvider.controllers.refundsRelease.abstract,
+                    controller:$configProvider.controllers.refundsRelease.controller,
+                    templateUrl:$configProvider.controllers.refundsRelease.templateUrl,
+                })
+                .state($configProvider.controllers.sellRefundsRelease.name,{
+                    url:$configProvider.controllers.sellRefundsRelease.url,
+                    views:{
+                        'refundsRelease-sell':{
+                            templateUrl: $configProvider.controllers.sellRefundsRelease.templateUrl,
+                            controller:$configProvider.controllers.sellRefundsRelease.controller,
+                        }
+                    },
+                    cache:$configProvider.controllers.sellRefundsRelease.cache,
+                })
+                .state($configProvider.controllers.boughtRefundsRelease.name,{
+                    url:$configProvider.controllers.boughtRefundsRelease.url,
+                    views:{
+                        'refundsRelease-bought':{
+                            templateUrl: $configProvider.controllers.boughtRefundsRelease.templateUrl,
+                            controller:$configProvider.controllers.boughtRefundsRelease.controller,
+                        }
+                    },
+                    cache:$configProvider.controllers.boughtRefundsRelease.cache,
+                })
+                .state($configProvider.controllers.cancalOrder.name,{
+                    url:$configProvider.controllers.cancalOrder.url,
+                    templateUrl:$configProvider.controllers.cancalOrder.templateUrl,
+                    controller:$configProvider.controllers.cancalOrder.controller,
+                    cache:$configProvider.controllers.cancalOrder.cache,
+                })
+                .state($configProvider.controllers.applyRefund.name,{
+                    url:$configProvider.controllers.applyRefund.url,
+                    templateUrl:$configProvider.controllers.applyRefund.templateUrl,
+                    controller:$configProvider.controllers.applyRefund.controller,
+                    cache:$configProvider.controllers.applyRefund.cache,
+                    params:$configProvider.controllers.applyRefund.params,
+                })
+                .state($configProvider.controllers.refusedApply.name,{
+                    url:$configProvider.controllers.refusedApply.url,
+                    templateUrl:$configProvider.controllers.refusedApply.templateUrl,
+                    controller:$configProvider.controllers.refusedApply.controller,
+                    cache:$configProvider.controllers.refusedApply.cache,
+                    params:$configProvider.controllers.refusedApply.params,
                 })
         }])

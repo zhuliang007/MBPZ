@@ -20,6 +20,7 @@
     line-height: 1;
 }
 .mbpz-icon-message:before { content: "\e601"; }
+.mbpz-icon-send:before { content: "\e60c"; }
 .mbpz-icon-search:before { content: "\e605"; }
 .mbpz-icon-money:before { content: "\e60b"; }
 .mbpz-icon-jujia:before { content: "\e607"; }
@@ -66,6 +67,10 @@ ion-content{
 .mbpz-tabs .tabs .icon{
     height: 28px;
     font-size: 24px;
+}
+
+.mbpz-tabs .tab-item{
+    text-decoration: none;
 }
 
 .mbpz-tabs .tab-item.tab-item-center{
@@ -1258,9 +1263,13 @@ ion-content{
 }
 
 .text-overflow{
-    white-space: nowrap;
+    white-space : nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.white-space{
+    white-space: normal;
 }
 
 .notFoundList{
@@ -1352,7 +1361,12 @@ ion-content{
     padding-top:0px;
     padding-bottom:0px;
 }
+
+.personal-user-image p{
+    padding-left:10px;
+}
 .personal-user-image div{
+    margin-left:10px;
     margin-top:5px;
     width:60px;
     height: 60px;
@@ -2199,7 +2213,7 @@ ion-content{
     padding:0px;
 }
 .shelvesBtn .button{
-    margin-top:1%;
+    margin-top:0%;
     background: transparent;
     min-height:15% !important;
     line-height:20px !important;
@@ -2212,12 +2226,235 @@ ion-content{
 
 .shelvesStatus{
     text-align: right;
+    color:black !important;
 }
 
 .shelvesPrice{
     clear: both;
     padding-top:6% !important;
 }
+
+.soldOrderFont span{
+    color:#9e9e9e;
+    font-size:14px;
+}
+
+.soldStatus p{
+    color:red;
+    font-size:14px;
+    text-align:right;
+}
+
+.soldRow{
+    border-bottom: 1px solid #e5e5e5;
+    margin-top:1px !important;
+}
+
+.soldList .list{
+    padding-top: 6px !important;
+}
+.refundsFont{
+    text-align: right;
+}
+.refundsFont span{
+    color:#9e9e9e;
+    font-size:14px;
+}
+
+.refundsFont span:last-child,.refundsMoney{
+    color:red !important;
+}
+
+.cancelOrderTitle{
+    font-size:14px;
+}
+
+.cancelOrderText{
+    height: 150px;
+    padding:10px;
+    background: white;
+}
+
+.cancelOrderText textarea{
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border:1px solid #CCCCCC;
+    padding:5px;
+    width:100%;
+    height:100%;
+    font-size:14px;
+    resize:none
+}
+
+.asteriskSpan{
+    color:red;
+    font-size:12px;
+}
+.serviceFont{
+    margin-right: 10px;
+}
+
+.serviceInput{
+    background-color: white !important;
+
+}
+
+.refundsPrice{
+   padding-left:15px;
+}
+
+.refundLabel{
+    margin:10px;
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.refundLabel .row{
+    margin:0px;
+    padding:0px;
+}
+
+.refundLabel textarea{
+    width:100%;
+    resize:none;
+    background: #e6e6e6 !important;
+    color:#333333 !important;
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding:5px;
+    height:120px;
+}
+
+.refusedApply{
+    background-color:#CCCCCC !important;
+}
+
+.refusedRow{
+    padding:0px !important;
+    position:fixed !important;
+    bottom:0 !important;
+}
+/*商品回复框*/
+.reply.popover{
+    bottom: 0px;
+    left: 0px!important;
+    right: 0px;
+    margin: 0px;
+    width: auto;
+    height: auto;
+    top: 0px!important;
+    border-radius: 0px;
+    background-color: transparent;
+}
+.reply.popover>ion-content{
+    margin: 0px!important;
+    padding: 0px!important;
+    border-radius: 0px!important;
+    background-color: rgba(0,0,0,.3);
+}
+
+.reply.popover>ion-content>.scroll{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.reply.popover>ion-content>.scroll-bar{
+    display: none;
+}
+
+.reply.popover>.popover-arrow{
+    display: none;
+}
+
+.reply.popover .inputGroup{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 48px;
+    background-color: #FFFFFF;
+}
+
+.reply.popover .inputGroup>.item{
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0px;
+    margin: 0px;
+}
+
+.reply.popover .inputGroup .send{
+    background-color: #FF4E72;
+    color: #FFFFFF;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.reply.popover .inputGroup .send:before{
+    line-height: inherit;
+}
+
+.reply.popover .inputGroup .send:after{
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.reply.popover .inputGroup .send.activated{
+    background-color: rgba(255,78,114,.7);
+    opacity: 1;
+}
+
+.reply.popover .inputGroup .textarea{
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    bottom: 5px;
+    right: 93px;
+}
+
+.reply.popover .inputGroup .textarea>textarea{
+    border-radius: 0px!important;
+    resize: none;
+    width: 100%;
+    height: 100%;
+}
+
+.refusedText{
+    width:100%;
+    resize:none;
+    height:120px;
+}
+.refusedTextView{
+    width:100%;
+    resize:none;
+    height:120px;
+    background: white !important;
+}
+.refusedBtn .button{
+    padding:0px;
+    margin:0px;
+}
+.refusedBtn{
+    background-position:bottom !important;
+}
+
+.refusedList{
+    padding-top:44px !important;
+}
+
+
+
 
 
 

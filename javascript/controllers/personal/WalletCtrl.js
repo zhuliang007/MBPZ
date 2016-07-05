@@ -13,18 +13,32 @@ angular.module('controllers.walletCtrl',[])
         '$httpService',
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
-                var data = {
-                        "cmd":$config.cmds.walletNum,
-                        "parameters":{
-                        },
-                        "token":$locals.get('token','MmY1Zjk5N2MtZGY1OC00YTE4LWJhZTItZjUxMTI2NjY0YjM2')
+
+                initToken = function(){
+                        $scope.checkLogin()
+                            .then(function(){
+                                    var data = {
+                                            "cmd":$config.cmds.walletNum,
+                                            "parameters":{
+                                            },
+                                            "token":$scope.userInfo.loginToken
+                                    }
+                                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                        .then(function(result){
+                                                console.log(result);
+                                                $scope.balance = result.data.balance==null?0:result.data.balance;
+                                                $scope.prePayment = result.data.prePayment==null?0:result.data.prePayment;
+                                        })
+                            },function(){
+                                    $scope.autoLogin()
+                                        .then(function(){
+                                                initToken()
+                                        })
+                            })
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                            console.log(result);
-                        $scope.balance = result.data.balance==null?0:result.data.balance;
-                        $scope.prePayment = result.data.prePayment==null?0:result.data.prePayment;
-                    })
+
+                initToken();
+
 
 
         }])

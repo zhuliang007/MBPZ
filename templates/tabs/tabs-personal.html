@@ -8,9 +8,9 @@
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="list">
             <a class="item item-avatar item-icon-right personal-user-image" href="#">
-                <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
-                <p class="personal-name">name</p>
-                <p>性别 | 未设置</p>
+                <div class="bgImg border-radius-round" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg||defaultHead),'1:1')" ></div>
+                <p class="personal-name" ng-bind="userName">name</p>
+                <p><span ng-bind="userSex"></span> | <span ng-bind="cityText"></span></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">
@@ -22,7 +22,7 @@
             </a>
             <div class="item item-divider">
             </div>
-            <a class="item  item-icon-left item-icon-right" ng-click="">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('refundsRelease.sell')">
                 <i class="icon "><img src="{{mineRefunds}}" class="myCenterImg"></i>
                 <p class="personalTitles">退款管理</p>
                 <i class="icon ion-ios-arrow-forward"></i>
@@ -35,13 +35,13 @@
                 <p class="personalNum" ng-bind="productPublicCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
-            <a class="item  item-icon-left item-icon-right" href="#">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('mySold')">
                 <i class="icon "><img src="{{mineSold}}" class="myCenterImg"></i>
                 <p class="personalTitles">宝贝已售</p>
                 <p class="personalNum" ng-bind="productSoldCount"></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
-            <a class="item  item-icon-left item-icon-right" href="#">
+            <a class="item  item-icon-left item-icon-right" ng-click="myCenterSetup('myBought')">
                 <i class="icon "><img src="{{mineBuy}}" class="myCenterImg"></i>
                 <p class="personalTitles">宝贝已购</p>
                 <p class="personalNum" ng-bind="productBoughtCount"></p>

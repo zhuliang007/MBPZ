@@ -1,0 +1,24 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">取消订单</h1>
+    </ion-header-bar>
+    <ion-content >
+        <div class="list">
+            <div class="item item-divider cancelOrderTitle">
+                请选择取消订单原因
+            </div>
+            <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-repeat="item in items track by $index" ng-value="item.value" ng-model="cancelResponse.chooseType">
+                <span ng-bind="item.name"></span>
+            </ion-radio>
+            <div class="cancelOrderText">
+                <textarea placeholder="请输入取消订单原因" ng-model="cancelResponse.textValue"></textarea>
+            </div>
+            <div class="padding-normal-horizontal">
+                <button class="button button-block button-positive" ng-click="submitOrder()">提交申请</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
