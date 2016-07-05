@@ -81,18 +81,23 @@ angular.module('controllers.lookingCtrl',[])
             }
 
             $scope.releaseDel = function(productid){
-                var delData =  {
-                    "cmd": $config.cmds.productDel,
-                    "parameters":{
-                        "productId":productid
-                    },
-                    "token":"N2MyYThhODktNTZkNi00ZDdmLTljMTQtY2UxYzFmMjY0MTIz"
+                if(token!=''){
+                    var delData =  {
+                        "cmd": $config.cmds.productDel,
+                        "parameters":{
+                            "productId":productid
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),delData)
+                        .then(function(result){
+                            alert(result.msg);
+                            $state.reload();
+                        })
+                }else{
+                    initToken();
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),delData)
-                    .then(function(result){
-                        alert(result.msg);
-                        $state.reload();
-                    })
+
             }
 
             $scope.releaseDetail=function(id,type){
