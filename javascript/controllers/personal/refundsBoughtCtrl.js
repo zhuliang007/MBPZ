@@ -26,7 +26,7 @@ angular.module('controllers.refundsBoughtCtrl',[])
                                     "pageNo":pageNo,
                                     "saleType":"buy"
                                 },
-                                "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                                "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
@@ -56,5 +56,10 @@ angular.module('controllers.refundsBoughtCtrl',[])
 
                 $scope.myContant = function(buyPhone,nickName,type){
                         $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+                }
+
+            //重新申请退款
+                $scope.applyRefund = function(id,price,freight){
+                    $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight})
                 }
         }])

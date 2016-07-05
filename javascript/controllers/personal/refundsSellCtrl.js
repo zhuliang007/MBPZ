@@ -28,7 +28,7 @@ angular.module('controllers.refundsSellCtrl',[])
                                         "pageNo":pageNo,
                                         "saleType":"sell"
                                 },
-                                "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
+                                "token":"NGMwYjFlNDUtMDFkNi00YTAxLTk3NTItZWFlYzRhMDBmMDRl"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
@@ -59,4 +59,8 @@ angular.module('controllers.refundsSellCtrl',[])
                 $scope.myContant = function(buyPhone,nickName,type){
                         $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
                 }
+
+            $scope.refoundsDetail = function(id,price,items){
+                $state.go($config.controllers.applyRefund.name,{id:id,price:price,obj:items,type:1})
+            }
         }])

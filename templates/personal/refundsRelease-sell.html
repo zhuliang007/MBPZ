@@ -45,7 +45,9 @@
                         <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,4)">联系TA</button>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button "></button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" >拒绝</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" >同意</button>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ angular.module('controllers.myShelvesCtrl',[])
                                         "pageNo":pageNo,
                                         "status":1
                                 },
-                                "token":"ZGY4OGViNDItYTQ1Yy00ZjQyLTkyMGItOGI1OWMwZjlmNzJk"
+                                "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
