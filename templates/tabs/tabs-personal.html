@@ -8,9 +8,9 @@
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="list">
             <a class="item item-avatar item-icon-right personal-user-image" href="#">
-                <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
-                <p class="personal-name">name</p>
-                <p>性别 | 未设置</p>
+                <div class="bgImg border-radius-round" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg||defaultHead),'1:1')" ></div>
+                <p class="personal-name" ng-bind="userName">name</p>
+                <p><span ng-bind="userSex"></span> | <span ng-bind="cityText"></span></p>
                 <i class="icon ion-ios-arrow-forward"></i>
             </a>
             <div class="item item-divider">

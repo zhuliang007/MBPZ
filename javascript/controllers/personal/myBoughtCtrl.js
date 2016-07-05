@@ -16,42 +16,62 @@ angular.module('controllers.myBoughtCtrl',[])
                 var pageNo = 0;
                 $scope.noMoreLoad = false;
                 $scope.items = [];
+                var token ='';
 
+                initToken = function(){
+                    $scope.checkLogin()
+                        .then(function(){
+                            token = $scope.userInfo.loginToken;
+                            $scope.boughtLoadMore();
+                        },function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                    initToken()
+                                })
+                        })
+                }
+
+                initToken();
                 $scope.boughtLoadMore= function () {
+                    if(token!=''){
                         var data = {
-                                "cmd": $config.cmds.myOrderList,
-                                "parameters":{
-                                        "orderType":$stateParams.orderType,
-                                        "numberOfPerPage":numberOfPerPage,
-                                        "pageNo":pageNo,
-                                        "saleType":$stateParams.saleType
-                                },
-                                "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
+                            "cmd": $config.cmds.myOrderList,
+                            "parameters":{
+                                "orderType":$stateParams.orderType,
+                                "numberOfPerPage":numberOfPerPage,
+                                "pageNo":pageNo,
+                                "saleType":$stateParams.saleType
+                            },
+                            "token":token
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                    console.log(result)
-                                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                                    if(result.data.content.length==0||result.data.content==null){
-                                            $scope.noMoreLoad=true;
-                                            return;
-                                    }else{
-                                            var arry = result.data.content;
-                                            arry.forEach(function(item){
-                                                    $scope.items.push(item);
-                                            });
-                                    }
-                                    if(result.data.totalPages==0){
-                                            $scope.noMoreLoad=true;
-                                            $scope.items=null;
-                                            return;
-                                    }
-                                    if(pageNo==(result.data.totalPages-1)){
-                                            $scope.noMoreLoad=true;
-                                            return;
-                                    }
-                                    pageNo++;
+                                console.log(result)
+                                $scope.$broadcast('scroll.infiniteScrollComplete');
+                                if(result.data.content.length==0||result.data.content==null){
+                                    $scope.noMoreLoad=true;
+                                    return;
+                                }else{
+                                    var arry = result.data.content;
+                                    arry.forEach(function(item){
+                                        $scope.items.push(item);
+                                    });
+                                }
+                                if(result.data.totalPages==0){
+                                    $scope.noMoreLoad=true;
+                                    $scope.items=null;
+                                    return;
+                                }
+                                if(pageNo==(result.data.totalPages-1)){
+                                    $scope.noMoreLoad=true;
+                                    return;
+                                }
+                                pageNo++;
                             })
+                    }else{
+                        initToken();
+                    }
+
                 }
 
                 $scope.releaseDetail=function(id,type){

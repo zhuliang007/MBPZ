@@ -12,18 +12,37 @@ angular.module('controllers.personal',[])
     '$httpService',
     '$locals',
     function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
-        var data = {
-            "cmd":$config.cmds.personalCount,
-            "parameters":{
-            },
-            "token":$locals.get('token','ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2')
+
+        initToken = function(){
+            $scope.checkLogin()
+                .then(function(){
+                    console.log($scope.userInfo)
+                    $scope.userHeaderImg =$scope.userInfo.userImg;
+                    $scope.userName = $scope.userInfo.nickName;
+                    $scope.userSex = $scope.userInfo.sex==null?'未设置':$scope.userInfo.sex;
+                    $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
+                    var data = {
+                        "cmd":$config.cmds.personalCount,
+                        "parameters":{
+                        },
+                        "token":$scope.userInfo.loginToken
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $scope.productPublicCount=result.data.productPublicCount;
+                            $scope.productSoldCount=result.data.productSoldCount;
+                            $scope.productBoughtCount=result.data.productBoughtCount;
+                            $scope.productCollectCount=result.data.productCollectCount;
+                        })
+                },function(){
+                    $scope.autoLogin()
+                        .then(function(){
+                            initToken()
+                        })
+                })
         }
-        $httpService.getJsonFromPost($config.getRequestAction(),data)
-            .then(function(result){
-                $scope.productPublicCount=result.data.productPublicCount;
-                $scope.productSoldCount=result.data.productSoldCount;
-                $scope.productBoughtCount=result.data.productBoughtCount;
-                $scope.productCollectCount=result.data.productCollectCount;
-            })
+
+        initToken();
+
 
     }])

@@ -13,18 +13,15 @@ angular.module('controllers.messageTalking',[])
         function($scope,$console,$config,$rootScope,$stateParams,$state){
             $scope.items = [];
             $scope.WSDK = null;
-           // document.getElementById('J_demo').style.display='hidden';
-            var uid = '13818155072';
-            var credential='13818155072';
 
             $state.reload;
             WKIT.init({
                // container: document.getElementById('J_demo'),
                 width: 700,
                 height: 500,
-                uid: uid,
+                uid: $scope.userPhone,
                 appkey:$config.appkeys ,
-                credential:credential,
+                credential:$scope.userPhone,
                 touid: 'test1',
                 onBack:function(){
                     wkitDestroy();
@@ -68,7 +65,7 @@ angular.module('controllers.messageTalking',[])
 
             $scope.contactFn = function(nickName,userId,type){
                 wkitDestroy();
-                $state.go($config.controllers.messageChat.name,{uid:uid,credential:credential,touid:userId,nickName:nickName,type:type});
+                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:userId,nickName:nickName,type:type});
             }
 
             var wkitDestroy = function(){

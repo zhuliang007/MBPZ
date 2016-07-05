@@ -1,5 +1,6 @@
 /**
  * Created by sam on 16/7/5.
+ * 查看退款详情
  */
 angular.module('controllers.applyRefundCtrl',[])
     .controller('ApplyRefundCtrl',[
@@ -14,11 +15,13 @@ angular.module('controllers.applyRefundCtrl',[])
         '$ionicActionSheet',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
 
-            console.log($stateParams.obj)
-            $scope.refundServerValue = $stateParams.obj.refundServer;
-            $scope.refundReasonValue = $stateParams.obj.refundReason;
-            $scope.priceValue = $stateParams.obj.price;
-            $scope.refundMarkValue = $stateParams.obj.refundMark;
+            if($stateParams.obj!=null){
+                $scope.refundServerValue = $stateParams.obj.refundServer;
+                $scope.refundReasonValue = $stateParams.obj.refundReason;
+                $scope.priceValue = $stateParams.obj.price;
+                $scope.refundMarkValue = $stateParams.obj.refundMark;
+            }
+
 
             $scope.type = $stateParams.type;
             $scope.refund_servers=[];
@@ -33,25 +36,41 @@ angular.module('controllers.applyRefundCtrl',[])
                 name:'请选择退款原因',
                 value:''
             }
-            var refundsData={
-                "cmd": $config.cmds.systemDict,
-                "parameters": {
-                    "typeCode":"refund_server,refund_reason"
-                },
-                "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
-            }
-            $httpService.getJsonFromPost($config.getRequestAction(),refundsData)
-                .then(function(result){
-                    if(result.data.refund_server!=null&&result.data.refund_server.length>0){
-                        $scope.refunds.name = result.data.refund_server[0].name;
-                        $scope.refunds.value = result.data.refund_server[0].value;
-                        $scope.refund_servers =result.data.refund_server;
-                    }
-                    if(result.data.refund_reason!=null&&result.data.refund_reason.length>0){
-                        $scope.refund_reason = result.data.refund_reason;
-                    }
 
-                })
+            var token ='';
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        token = $scope.userInfo.loginToken;
+                        var refundsData={
+                            "cmd": $config.cmds.systemDict,
+                            "parameters": {
+                                "typeCode":"refund_server,refund_reason"
+                            },
+                            "token":token
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),refundsData)
+                            .then(function(result){
+                                if(result.data.refund_server!=null&&result.data.refund_server.length>0){
+                                    $scope.refunds.name = result.data.refund_server[0].name;
+                                    $scope.refunds.value = result.data.refund_server[0].value;
+                                    $scope.refund_servers =result.data.refund_server;
+                                }
+                                if(result.data.refund_reason!=null&&result.data.refund_reason.length>0){
+                                    $scope.refund_reason = result.data.refund_reason;
+                                }
+
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
+            }
+
+            initToken();
+
 
             //申请服务
             $scope.serviceShow = function(){
@@ -88,24 +107,32 @@ angular.module('controllers.applyRefundCtrl',[])
                     }
                 });
             }
-            
+
+            //提交
             $scope.submitRefounds = function () {
-                console.log($scope.refunds.value);
-                var data = {
-                    "cmd": $config.cmds.applyRefound,
-                    "parameters":{
-                        "id":$stateParams.id,
-                        "refundServer":$scope.refunds.value,
-                        "refundReason":$scope.reasonRef.name,
-                        "refundMark":$scope.reasonText
-                },
-                    "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
+                if(token!=''){
+                    var data = {
+                        "cmd": $config.cmds.applyRefound,
+                        "parameters":{
+                            "id":$stateParams.id,
+                            "refundServer":$scope.refunds.value,
+                            "refundReason":$scope.reasonRef.name,
+                            "refundMark":$scope.reasonText
+                        },
+                        "token":token
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            alert(result.msg);
+                        })
+                }else{
+                    initToken();
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        alert(result.msg);
-                    })
-                
+            }
+
+            //拒绝
+            $scope.refusedApply = function(id){
+                $state.go($config.controllers.refusedApply.name,{id:id,obj:$stateParams.obj})
             }
 
         }])

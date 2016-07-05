@@ -45,7 +45,7 @@
                         <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.product.publicUser.imUserId,item.product.publicUser.nickName,5)">联系TA</button>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" >拒绝原因</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,1)">拒绝原因</button>
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="applyRefund(item.id,item.price,item.freight)">重新申请退款</button>
                     </div>
                 </div>
