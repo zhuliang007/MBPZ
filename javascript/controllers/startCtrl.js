@@ -77,7 +77,8 @@ angular.module('controllers.start',[])
                 return deferred.promise;
             }
 
-            $scope.showMsg = function(msg){
+            $scope.showMsg = function(msg,$event){
+                $event.stopPropagation();
                 $console.show(msg);
             }
 

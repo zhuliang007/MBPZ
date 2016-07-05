@@ -72,6 +72,7 @@ angular.module('providers.config',[])
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
             details:"product/details",
+            sendReply:"product/reply",
             replyList:"product/reply/list",
             codeInfo:"system/codeInfo/getAll",
             recommendationProduct:"market/home/recommendation",

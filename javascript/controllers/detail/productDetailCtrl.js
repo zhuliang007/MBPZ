@@ -12,14 +12,16 @@ angular.module('controllers.productDetail',[])
         '$stateParams',
         '$timeout',
         '$ionicSlideBoxDelegate',
+        '$ionicScrollDelegate',
         '$locals',
         '$ionicPopover',
         '$q',
-        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$locals,$ionicPopover,$q){
+        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$ionicScrollDelegate,$locals,$ionicPopover,$q){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $console.show("productDetail")
+            $console.show("productDetail");
+            var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             var id = $stateParams.id;
             var numberOfPerPage = 10;
             var pageNo = 0;
@@ -152,7 +154,6 @@ angular.module('controllers.productDetail',[])
                     }).then(function(popover){
                         $scope[popName] = popover;
                         $scope[popName].show($event);
-                        $console.show($event);
                     })
                 }
                 else{
@@ -170,11 +171,109 @@ angular.module('controllers.productDetail',[])
                     $scope['productReport'].remove();
                     $scope['productReport']=null;
                 }
+
+                if($scope['reply']){
+                    $scope['reply'].remove();
+                    $scope['reply']=null;
+                }
             });
 
-            $scope.productReply = function($event,toReplyUserId){
-                $console.show($event)
-                $scope.openPopover($event,'reply');
+            $scope.$on('popover.hidden', function() {
+                if($scope['productReport']){
+                    $scope['productReport'].remove();
+                    $scope['productReport']=null;
+                }
+            });
+
+            $scope.replyObject = {
+                "productId":id,
+                "repUserId":0,
+                "replyContents":null
+            }
+
+            $scope.productReply = function($event,userObject){
+                $scope.checkLogin()
+                    .then(function(){
+                        $console.show(userObject);
+                        $scope.openPopover($event,'reply');
+                        $scope.replyPlaceholder = '回复@'+userObject.nickName;
+                        if(!$scope.replyObject.repUserId){
+                            $scope.replyObject.repUserId = userObject.id;
+                            $scope.replyObject.replyContents = null;
+                        }
+                        else{
+                            if($scope.replyObject.repUserId != userObject.id){
+                                $scope.replyObject.repUserId = userObject.id;
+                                $scope.replyObject.replyContents = null;
+                            }
+                        }
+                        $console.show($scope.replyObject);
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                                $scope.productReply($event,userObject);
+                            })
+                    })
+            }
+
+            $scope.stopPropagation = function($event){
+                $event.stopPropagation();
+            }
+
+            $scope.closeOwner = function(){
+                $scope.closePopover('reply');
+            }
+
+            $scope.sendReply = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        if(!$scope.replyObject.replyContents){
+                            $console.show("回复内容不能为空")
+                            return;
+                        }
+
+                        var data ={
+                            "cmd": $config.cmds.sendReply,
+                            "parameters":{
+                                "productId":$scope.replyObject.productId,
+                                "repUserId":$scope.replyObject.repUserId,
+                                "replyContents":$scope.replyObject.replyContents,
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $console.show(result);
+                                $scope.replyObject.repUserId = 0;
+                                $scope.replyObject.replyContents = null;
+                                $scope.closeOwner();
+                                pageNo = 0;
+                                $scope.replyList = []
+                                productHandle.resize();
+                                var element = document.getElementById('replyBody');
+                                productHandle.scrollTo(0,element.offsetTop);
+                                $scope.infiniteFlag = true;
+                            },function(error){
+                                $console.show(error);
+                                if(error.systemError){
+                                    var systemError = error.systemError;
+                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                        $scope.autoLogin()
+                                            .then(function(){
+                                                $scope.sendReply();
+                                            })
+                                    }
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                getProductDetail()
+                                $scope.sendReply();
+                            })
+                    })
             }
 
         }])
