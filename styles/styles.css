@@ -2260,6 +2260,23 @@ ion-content{
     font-size:14px;
 }
 
+.cancelOrderText{
+    height: 150px;
+    padding:10px;
+    background: white;
+}
+
+.cancelOrderText textarea{
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border:1px solid #CCCCCC;
+    padding:5px;
+    width:100%;
+    height:100%;
+    font-size:14px;
+    resize:none
+}
 
 /*商品回复框*/
 .reply.popover{
