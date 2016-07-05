@@ -66,4 +66,9 @@ angular.module('controllers.myBoughtCtrl',[])
                     $rootScope.orderPreviewObject = obj;
                     $scope.openPayModal('payModal');
                 }
+
+                //取消订单
+                $scope.cancalOrder = function(id){
+                    $state.go($config.controllers.cancalOrder.name,{id:id})
+                }
         }])

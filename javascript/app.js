@@ -265,4 +265,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     },
                     cache:$configProvider.controllers.boughtRefundsRelease.cache,
                 })
+                .state($configProvider.controllers.cancalOrder.name,{
+                    url:$configProvider.controllers.cancalOrder.url,
+                    templateUrl:$configProvider.controllers.cancalOrder.templateUrl,
+                    controller:$configProvider.controllers.cancalOrder.controller,
+                    cache:$configProvider.controllers.cancalOrder.cache,
+                })
         }])
