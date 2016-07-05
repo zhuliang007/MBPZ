@@ -85,6 +85,7 @@ angular.module('providers.config',[])
             login:"market/login",
             collect:"product/collect",
             spot:"product/askToBuy/spot",
+            resolve:"product/askToBuy/resolve",
             tipoffs:"system/tipoffs/getPage",
             report:"system/tipoffs/report",
             reserve:"market/order/reserve",

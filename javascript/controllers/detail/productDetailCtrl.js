@@ -236,6 +236,7 @@ angular.module('controllers.productDetail',[])
                         var data ={
                             "cmd": $config.cmds.sendReply,
                             "parameters":{
+                                "replyType":0,
                                 "productId":$scope.replyObject.productId,
                                 "repUserId":$scope.replyObject.repUserId,
                                 "replyContents":$scope.replyObject.replyContents,
