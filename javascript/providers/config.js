@@ -102,6 +102,7 @@ angular.module('providers.config',[])
             myProductList:"myself/productCollect/list",
             myOrderList:"market/order/list",
             systemDict:"system/getMultipleDict",
+            cancelOrder:"market/order/cancel",
         }
 
         /**提示信息配置*/
