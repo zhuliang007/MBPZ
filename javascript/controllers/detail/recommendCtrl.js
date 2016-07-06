@@ -116,12 +116,12 @@ angular.module("controllers.recommend",[])
                 $scope.checkLogin()
                     .then(function(){
                         if(!$scope.replyObject.replyContents){
-                            $console.show("回复内容不能为空");
+                            $alert.show("回复内容不能为空");
                             return;
                         }
 
                         if(!$scope.replyObject.resolveProductId){
-                            $console.show("请选择推荐商品");
+                            $alert.show("请选择推荐商品");
                             return;
                         }
 
