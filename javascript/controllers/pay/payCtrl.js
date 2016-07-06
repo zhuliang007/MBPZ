@@ -16,11 +16,12 @@ angular.module('controllers.payCtrl',[])
         '$http',
         '$ionicModal',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$http,$ionicModal) {
+
+            $scope.backImg = $scope.mineAlipay;
+            $scope.price = $stateParams.obj.price;
+
             $scope.goPay=function(obj){
-                console.log(obj)
-                if($scope.choice=='alipay'){
-                    window.location.href='http://erpuat.mengbp.com:8094/wine-market-rest/market/order/h5payOrder?orderCode='+obj.orderCode+'&token='+obj.token;
-                }
+                $state.go($config.controllers.payRouters.name,{obj:$stateParams.obj,routers:$stateParams.routers});
             }
 
             $scope.changePay = function(value){

@@ -37,4 +37,6 @@ angular.module('starter.controllers',[
     'controllers.applyRefundCtrl',
     'controllers.refusedApplyCtrl',
     'controllers.payCtrl',
+    'controllers.aliPayCtrl',
+    'controllers.orderDetailCtrl',
     'controllers.recommend'])

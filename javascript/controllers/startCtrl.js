@@ -271,7 +271,6 @@ angular.module('controllers.start',[])
                 })
             };
 
-
             $scope.closeModal = function(modalName) {
                 $scope[modalName].hide().then(function(){
                     $scope[modalName].remove();

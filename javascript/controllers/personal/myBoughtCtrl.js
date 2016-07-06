@@ -45,7 +45,6 @@ angular.module('controllers.myBoughtCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.content.length==0||result.data.content==null){
                                     $scope.noMoreLoad=true;
@@ -81,8 +80,13 @@ angular.module('controllers.myBoughtCtrl',[])
                         $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
                 }
 
+                //订单详情
+                $scope.orderDetail = function(id,type){
+                    $state.go($config.controllers.orderDetail.name,{id:id,type:type})
+                }
+
                 //立即支付
-                $scope.showPay = function(obj){
+                $scope.showPay = function(obj,value){
                     $scope.checkLogin()
                         .then(function(){
                             var userToken = "token";
@@ -90,8 +94,7 @@ angular.module('controllers.myBoughtCtrl',[])
                             var backImage = "backImg";
                             obj[backImage] = $scope.mineAlipay;
                             console.log(obj)
-                            $rootScope.orderPreviewObject = obj;
-                            $scope.openPayModal('payModal');
+                            $state.go($config.controllers.pay.name,{obj:obj,routers:value});
                         },function(){
                             $scope.autoLogin()
                                 .then(function(){

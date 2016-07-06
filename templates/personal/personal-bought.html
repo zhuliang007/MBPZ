@@ -8,7 +8,7 @@
     <ion-content >
         <ion-list ng-repeat="item in items track by $index" class="soldList">
             <div class="item shelvesItems">
-                <a  ng-click="showProduct(item.id)">
+                <a  ng-click="orderDetail(item.id,0)">
                     <div class="row shelvesRow">
                         <div class="col-60 soldOrderFont">
                             <span>订单编号:</span>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-80 shelvesBtn" >
                         <button class="button mbpz " ng-if="item.status =='NOT_PAID'" ng-click="cancalOrder(item.id)">取消订单</button>
-                        <button class="button mbpz" ng-if="item.status =='NOT_PAID'" ng-click="showPay(item)">立即支付</button>
+                        <button class="button mbpz" ng-if="item.status =='NOT_PAID'" ng-click="showPay(item,0)">立即支付</button>
                         <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="applyRefund(item.id,item.product.currentPrice,item.freight)">申请退款</button>
                         <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="remindDelivery(item.id)">提醒发货</button>
                         <button class="button mbpz" ng-if="item.status =='RECEIVING'" ng-click="applyRefund(item.id,item.product.currentPrice,item.freight)">申请退款</button>

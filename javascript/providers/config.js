@@ -109,7 +109,8 @@ angular.module('providers.config',[])
             noticOrder:"market/order/notice",
             applyRefound:"market/order/applyRefund",
             applyRefused:"market/order/refund",
-            dictList:"system/dictList"
+            dictList:"system/dictList",
+            orderDetail:"market/order/detail",
         }
 
         /**提示信息配置*/
@@ -412,6 +413,34 @@ angular.module('providers.config',[])
                 },
                 controller:"RefusedApplyCtrl",
                 cache:false
+            },
+            pay:{
+                templateUrl:"templates/pay/pay.html",
+                url:"/pay/:id?",
+                name:"pay",
+                controller:"PayCtrl",
+                params:{
+                    obj:null,
+                    routers:null
+                },
+                cache:false
+            },
+            payRouters:{
+                templateUrl:"templates/pay/pay-alipay.html",
+                url:"/payRouters/:id?",
+                params:{
+                    obj:null,
+                    routers:null
+                },
+                controller:"AliPayCtrl",
+                name:"payRouters",
+                cache:false
+            },
+            orderDetail: {
+                templateUrl: "templates/order/order-detail.html",
+                url: "/orderDetail/:id&:type?",
+                controller: "OrderDetailCtrl",
+                name: "orderDetail",
             },
             recommend:{
                 templateUrl:"templates/detail/recommend.html",
