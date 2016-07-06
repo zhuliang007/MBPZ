@@ -204,11 +204,21 @@ ion-content{
 .payModal ion-header-bar .button.activated,
 .publish ion-header-bar .button,
 .publish ion-header-bar .button.activated,
+.tabsShop ion-header-bar .button,
+.tabsShop ion-header-bar .button.activated,
 .orderAddress ion-header-bar .button,
 .orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
     color: #333333;
     border:none;
+}
+
+.tabsShop ion-header-bar .button{
+    font-size: 14px;
+}
+
+.tabsShop ion-header-bar .button.icon-left:before{
+    font-size: 16px;
 }
 
 .tabsHome ion-header-bar .button .mbpz,
@@ -2453,6 +2463,41 @@ ion-content{
     padding-top:44px !important;
 }
 
+/*求购筛选*/
+.shopSort{
+    margin-top: 15px!important;
+    background-color: transparent!important;
+    top: 40px!important;
+    height: 208px;
+    width: 150px;
+}
+
+.shopSort>ion-content{
+    margin: 0px!important;
+    background-color: rgba(0,0,0,.5);
+    padding: 10px 20px;
+}
+
+.shopSort>ion-content>.item{
+    background-color: transparent!important;
+    color: #FFFFFF!important;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+    padding: 8px 16px;
+
+}
+.shopSort>ion-content>.item+.item{
+    border-top-color: rgba(221,221,221,.7)!important;
+}
+
+.shopSort>.popover-arrow{
+    top: -19px;
+}
+
+.shopSort>.popover-arrow:after{
+    background-color: rgba(0,0,0,.5);
+}
 
 
 
