@@ -2453,6 +2453,34 @@ ion-content{
     padding-top:44px !important;
 }
 
+/**支付页面**/
+.payContent{
+    background: #e8e8e8 !important;
+}
+.payRow{
+    padding:0px !important;
+    background: white !important;
+}
+.payFont{
+    font-size:14px;
+}
+.payFontColor{
+    color:#9e9e9e !important;
+}
+.payImg{
+    padding-left:18px;
+}
+.payDiv .item-radio input:checked+.radio-content .item-content{
+    background: white !important;
+
+}
+.payDiv .item{
+    border:0 !important;
+    margin:0px !important;
+}
+.payDiv .item-content{
+    padding-left:1px !important;
+}
 
 
 
