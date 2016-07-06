@@ -2543,7 +2543,6 @@ ion-content{
     background-color: rgba(0,0,0,.5);
 }
 
-<<<<<<< HEAD
 .orderDetailUserImg{
     width:40px !important;
     height: 40px !important;
@@ -2564,7 +2563,6 @@ ion-content{
     margin-right:5px !important;
 }
 
-=======
 /*回复の推荐给TA*/
 .recommend ion-footer-bar{
     background-image: none;
@@ -2696,7 +2694,6 @@ ion-content{
     bottom: 10px;
     width: 100%;
 }
->>>>>>> master
 
 
 
