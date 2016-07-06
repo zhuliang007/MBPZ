@@ -2471,6 +2471,9 @@ ion-content{
 .payContent{
     background: #e8e8e8 !important;
 }
+.aliPayContent .scroll{
+    height: 100% !important;
+}
 .payRow{
     padding:0px !important;
     background: white !important;
@@ -2529,6 +2532,26 @@ ion-content{
 
 .shopSort>.popover-arrow:after{
     background-color: rgba(0,0,0,.5);
+}
+
+.orderDetailUserImg{
+    width:40px !important;
+    height: 40px !important;
+    margin-left: 15px !important;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+}
+
+.orderDetailT{
+    font-size:14px !important;
+}
+
+.orderDetailTDiv{
+    text-align: center;
+}
+
+.orderDetailT-icon:before{
+    margin-right:5px !important;
 }
 
 

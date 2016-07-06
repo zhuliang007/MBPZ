@@ -1,0 +1,24 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="backParent()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">订单详情</h1>
+    </ion-header-bar>
+    <ion-content >
+        <div class="list">
+                <div class="row item">
+                    <div class="col-20 ">
+                        <div class="bgImg border-radius-round orderDetailUserImg" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg||defaultHead),'1:1')" ></div>
+                    </div>
+                    <div class="col-50 col-center">
+                        <span ng-bind="nickName"></span>
+                    </div>
+                    <div class="col-40 col-center orderDetailTDiv">
+                        <span class="orderDetailT mbpz mbpz-icon-replies orderDetailT-icon">联系TA</span>
+                    </div>
+                </div>
+                <div class="row item"></div>
+        </div>
+    </ion-content>
+</ion-view>
