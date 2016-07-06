@@ -37,9 +37,6 @@ angular.module('starter.controllers',[
     'controllers.applyRefundCtrl',
     'controllers.refusedApplyCtrl',
     'controllers.payCtrl',
-<<<<<<< HEAD
     'controllers.aliPayCtrl',
-    'controllers.orderDetailCtrl'])
-=======
+    'controllers.orderDetailCtrl',
     'controllers.recommend'])
->>>>>>> master
