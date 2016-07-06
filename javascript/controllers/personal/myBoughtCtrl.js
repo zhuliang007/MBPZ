@@ -31,7 +31,6 @@ angular.module('controllers.myBoughtCtrl',[])
                         })
                 }
 
-                initToken();
                 $scope.boughtLoadMore= function () {
                     if(token!=''){
                         var data = {
