@@ -12,7 +12,7 @@
                     <img ng-src="{{orderPreviewObject.backImg}}" class="payImg">
                 </div>
                 <div class="col-80 payDiv">
-                    <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-model="choice" ng-change="changePay(response.pay)">
+                    <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-model="choice" value="alipay" ng-click="changePay('alipay')">
                         <div class="payFont">支付宝</div>
                         <div class="payFont payFontColor">推荐支付宝用户使用</div>
                     </ion-radio>
@@ -23,7 +23,7 @@
     <ion-footer-bar align-title="left">
         <h1 class="title">合计：<span class="mbpz mbpz-icon-money price"></span><span class="price" ng-bind="orderPreviewObject.price"></span></h1>
         <div class="buttons">
-            <button class="button" ng-click="goPay()">去支付</button>
+            <button class="button" ng-click="goPay(orderPreviewObject)">去支付</button>
         </div>
     </ion-footer-bar>
 </ion-modal-view>

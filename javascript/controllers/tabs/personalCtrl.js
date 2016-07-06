@@ -38,6 +38,7 @@ angular.module('controllers.personal',[])
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
+                            console.log(result)
                             $scope.productPublicCount=result.data.productPublicCount;
                             $scope.productSoldCount=result.data.productSoldCount;
                             $scope.productBoughtCount=result.data.productBoughtCount;
