@@ -94,6 +94,7 @@ angular.module('controllers.orderPreview',[])
                             .then(function(result){
                                 //显示支付选择
                                 $rootScope.orderPreviewObject = result.data;
+                                $rootScope.orderPreviewObject.backImg = $scope.mineAlipay;
                                 $scope.openPayModal('payModal');
                                 $console.show($rootScope.orderPreviewObject);
                                 //支付操作还没做

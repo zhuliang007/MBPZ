@@ -51,6 +51,9 @@ angular.module('controllers.productDetail',[])
                                         getProductDetail();
                                     })
                             }
+                            else if(systemError.errorCode == 11){
+                                $scope.goBack();
+                            }
                         }
                     })
             }

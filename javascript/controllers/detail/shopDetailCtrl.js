@@ -207,7 +207,8 @@ angular.module('controllers.shopDetail',[])
                                 })
                         }
                         else{
-                            $console.show("推荐给他")
+                            $console.show("推荐给他");
+                            $state.go($config.controllers.recommend.name,{productId:id,repUserId:$scope.product.publicUser.id});
                         }
 
                     },function(){
