@@ -81,9 +81,23 @@ angular.module('controllers.myBoughtCtrl',[])
                         $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
                 }
 
-                $scope.openPay = function(obj){
-                    $rootScope.orderPreviewObject = obj;
-                    $scope.openPayModal('payModal');
+                //立即支付
+                $scope.showPay = function(obj){
+                    $scope.checkLogin()
+                        .then(function(){
+                            var userToken = "token";
+                            obj[userToken]=$scope.userInfo.loginToken;
+                            var backImage = "backImg";
+                            obj[backImage] = $scope.mineAlipay;
+                            console.log(obj)
+                            $rootScope.orderPreviewObject = obj;
+                            $scope.openPayModal('payModal');
+                        },function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                })
+                        })
+
                 }
 
                 //取消订单

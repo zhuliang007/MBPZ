@@ -123,6 +123,7 @@ angular.module('controllers.start',[])
             $scope.mineSold=$config.getImageUrlDebug() + $config.assets.mineSold;
             $scope.mineUndercarriage=$config.getImageUrlDebug() + $config.assets.mineUndercarriage;
             $scope.mineWallet=$config.getImageUrlDebug() + $config.assets.mineWallet;
+            $scope.mineAlipay=$config.getImageUrlDebug() + $config.assets.alipay;
 
             $rootScope.provinceCityList = {
                 provinceList: [],
@@ -269,6 +270,7 @@ angular.module('controllers.start',[])
                     $rootScope[modalName].remove();
                 })
             };
+
 
             $scope.closeModal = function(modalName) {
                 $scope[modalName].hide().then(function(){
