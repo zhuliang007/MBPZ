@@ -414,7 +414,6 @@ angular.module('providers.config',[])
                 controller:"RefusedApplyCtrl",
                 cache:false
             },
-<<<<<<< HEAD
             pay:{
                 templateUrl:"templates/pay/pay.html",
                 url:"/pay/:id?",
@@ -437,18 +436,17 @@ angular.module('providers.config',[])
                 name:"payRouters",
                 cache:false
             },
-            orderDetail:{
-                templateUrl:"templates/order/order-detail.html",
-                url:"/orderDetail/:id&:type?",
-                controller:"OrderDetailCtrl",
-                name:"orderDetail",
-=======
+            orderDetail: {
+                templateUrl: "templates/order/order-detail.html",
+                url: "/orderDetail/:id&:type?",
+                controller: "OrderDetailCtrl",
+                name: "orderDetail",
+            },
             recommend:{
                 templateUrl:"templates/detail/recommend.html",
                 url:"/recommend/:productId&:repUserId",
                 name:"recommend",
                 controller:"RecommendCtrl",
->>>>>>> master
                 cache:false
             }
 
