@@ -412,6 +412,13 @@ angular.module('providers.config',[])
                 },
                 controller:"RefusedApplyCtrl",
                 cache:false
+            },
+            recommend:{
+                templateUrl:"templates/detail/recommend.html",
+                url:"/recommend/:productId&:repUserId",
+                name:"recommend",
+                controller:"RecommendCtrl",
+                cache:false
             }
 
         }

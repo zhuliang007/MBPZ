@@ -130,6 +130,7 @@ ion-content{
 .orderAddress ion-header-bar,
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
+.recommend ion-header-bar,
 .publish ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
@@ -142,6 +143,7 @@ ion-content{
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
 .publish ion-header-bar,
+.recommend ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
 }
@@ -163,6 +165,7 @@ ion-content{
 .tabsShop ion-header-bar .title,
 .report ion-header-bar .title,
 .orderPreview ion-header-bar .title,
+.recommend ion-header-bar .title,
 .orderAddress ion-header-bar .title,
 .editAddress ion-header-bar .title,
 .payModal ion-header-bar .title,
@@ -206,6 +209,8 @@ ion-content{
 .publish ion-header-bar .button.activated,
 .tabsShop ion-header-bar .button,
 .tabsShop ion-header-bar .button.activated,
+.recommend ion-header-bar .button,
+.recommend ion-header-bar .button.activated,
 .orderAddress ion-header-bar .button,
 .orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
@@ -1137,7 +1142,7 @@ ion-content{
     background-color: #FFFFFF;
 }
 
-.ba-color-white-less{
+.bg-color-white-less{
     background-color: rgba(255,255,255,.5);
 }
 
@@ -1147,6 +1152,10 @@ ion-content{
 
 .color-white{
     color: #FFFFFF;
+}
+
+.color-gray{
+    color: #999999;
 }
 
 .img-auto{
@@ -2531,6 +2540,137 @@ ion-content{
     background-color: rgba(0,0,0,.5);
 }
 
+/*回复の推荐给TA*/
+.recommend ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
+.recommend ion-footer-bar .submit{
+    background-color: #FF4E72;
+    border-radius: 0px;
+    color: #FFFFFF;
+    padding:0px 20px;
+    font-size: 16px;
+    border:none;
+}
+
+.recommend ion-footer-bar .submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
+
+.recommend .replyRecommendContents{
+    background-color: #FFFFFF;
+    padding: 15px 10px;
+    width: 100%;
+    height: calc(50% - 100px);
+    min-height: 150px;
+    max-height: 200px;
+}
+
+.recommend .borderContents{
+    width: 100%;
+    height: 100%;
+    /*padding: 10px 10px 25px;*/
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+}
+
+.recommend .borderContents>textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.recommend .borderContents>.textCount{
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+    color: #999999;
+}
+
+.recommend .recommendProductList{
+    width: 100%;
+    height: calc(50% - 100px);
+    min-height: 150px;
+    max-height: 200px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+.recommend .recommendProductList>ion-scroll{
+    width: 100%;
+    height: 100%;
+}
+
+.recommend .recommendProductList .productItem{
+    padding-left: 58px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: relative;
+}
+
+.recommend .recommendProductList .productItem>.iconTarget{
+    left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.recommend .recommendProductList .productItem>.productRow{
+    position: relative;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.unchecked{
+    color: #999999;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.checked{
+    color: #FF4E72;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.checked,
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.unchecked{
+    visibility: visible;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.unchecked,
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.checked{
+    visibility: hidden;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+}
+
+.recommend .recommendProductList .productItem .title{
+    color: #333333;
+    font-size: 16px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recommend .recommendProductList .productItem .content{
+    color: #999999;
+    font-size: 14px;
+    max-height: 40px;
+    overflow: hidden;
+    white-space: normal;
+    width: 100%;
+}
+
+.recommend .nothing{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
 
 
 

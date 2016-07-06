@@ -36,4 +36,5 @@ angular.module('starter.controllers',[
     'controllers.cancalOrderCtrl',
     'controllers.applyRefundCtrl',
     'controllers.refusedApplyCtrl',
-    'controllers.payCtrl'])
+    'controllers.payCtrl',
+    'controllers.recommend'])

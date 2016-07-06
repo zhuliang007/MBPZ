@@ -285,4 +285,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.refusedApply.cache,
                     params:$configProvider.controllers.refusedApply.params,
                 })
+                .state($configProvider.controllers.recommend.name,{
+                    url:$configProvider.controllers.recommend.url,
+                    templateUrl:$configProvider.controllers.recommend.templateUrl,
+                    controller:$configProvider.controllers.recommend.controller,
+                    cache:$configProvider.controllers.recommend.cache,
+                })
         }])
