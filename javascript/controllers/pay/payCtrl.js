@@ -13,13 +13,20 @@ angular.module('controllers.payCtrl',[])
         '$locals',
         '$rootScope',
         '$ionicActionSheet',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
-            $scope.goPay=function(){
-                console.log($scope.response.pay)
+        '$http',
+        '$ionicModal',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$http,$ionicModal) {
+            $scope.goPay=function(obj){
+                console.log(obj)
+                if($scope.choice=='alipay'){
+                    window.location.href='http://erpuat.mengbp.com:8094/wine-market-rest/market/order/h5payOrder?orderCode='+obj.orderCode+'&token='+obj.token;
+                }
             }
 
             $scope.changePay = function(value){
-console.log(value)
+                $scope.choice=value;
             }
+
+
 
         }])
