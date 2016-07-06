@@ -2467,7 +2467,6 @@ ion-content{
     padding-top:44px !important;
 }
 
-<<<<<<< HEAD
 /**支付页面**/
 .payContent{
     background: #e8e8e8 !important;
@@ -2493,9 +2492,9 @@ ion-content{
     border:0 !important;
     margin:0px !important;
 }
-.payDiv .item-content{
-    padding-left:1px !important;
-=======
+.payDiv .item-content {
+    padding-left: 1px !important;
+}
 /*求购筛选*/
 .shopSort{
     margin-top: 15px!important;
@@ -2530,7 +2529,6 @@ ion-content{
 
 .shopSort>.popover-arrow:after{
     background-color: rgba(0,0,0,.5);
->>>>>>> master
 }
 
 
