@@ -962,6 +962,10 @@ ion-content{
     margin-bottom: 48px;
 }
 
+.replyNormal.disabled.activated{
+    background-color: #FFFFFF;
+}
+
 .userCtrl{
     background: #FFFFFF;
     position: fixed;
