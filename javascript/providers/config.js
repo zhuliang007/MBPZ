@@ -109,6 +109,7 @@ angular.module('providers.config',[])
             noticOrder:"market/order/notice",
             applyRefound:"market/order/applyRefund",
             applyRefused:"market/order/refund",
+            dictList:"system/dictList"
         }
 
         /**提示信息配置*/
@@ -434,6 +435,9 @@ angular.module('providers.config',[])
             },
             reply:{
                 templateUrl:"templates/popover/reply.html"
+            },
+            shopSort:{
+                templateUrl:"templates/popover/shopSort.html"
             }
         }
 
