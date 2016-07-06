@@ -2,10 +2,6 @@
  * Created by Administrator on 2016/6/30.
  */
 
-/**
- * Created by zl_sam on 16/6/14.
- */
-
 angular.module('controllers.sellCtrl',[])
     .controller('SellCtrl',[
         '$scope',

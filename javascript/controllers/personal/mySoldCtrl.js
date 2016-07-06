@@ -28,8 +28,6 @@ angular.module('controllers.mySoldCtrl',[])
                     })
             }
 
-            initToken();
-
             $scope.soldLoadMore= function () {
                 if(token!=''){
                     var data = {
