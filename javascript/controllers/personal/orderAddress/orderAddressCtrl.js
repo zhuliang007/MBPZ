@@ -7,11 +7,11 @@ angular.module('controllers.orderAddress',[])
         '$config',
         '$state',
         '$stateParams',
-        '$locals',
+        '$alert',
         '$httpService',
         '$console',
         '$rootScope',
-        function($scope,$config,$state,$stateParams,$locals,$httpService,$console,$rootScope){
+        function($scope,$config,$state,$stateParams,$alert,$httpService,$console,$rootScope){
             var type = $stateParams.type;
             $console.show(type)
             //1订单预览设置收货地址 0或不带通过我的地址管理进入
@@ -57,21 +57,33 @@ angular.module('controllers.orderAddress',[])
                                     $scope.infiniteFlag = false;
                                     if(error.systemError){
                                         var systemError = error.systemError;
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin()
-                                                .then(function(){
-                                                    $scope.infiniteFlag = true;
-                                                    $scope.addressList = [];
-                                                    pageNo = 0;
-                                                    getAddressList();
-                                                })
-                                        }
+                                        $alert.confirm(systemError.errorInfo)
+                                            .then(function(){
+                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                    $scope.autoLogin()
+                                                        .then(function(){
+                                                            $scope.infiniteFlag = true;
+                                                            $scope.addressList = [];
+                                                            pageNo = 0;
+                                                            getAddressList();
+                                                        })
+                                                }
+                                            },function(){
+                                                $scope.goBack();
+                                            })
                                     }
                                 })
                     },function(){
-                        $scope.autoLogin().then(function(){
-                            getAddressList();
-                        })
+                        $alert.confirm('请登录')
+                            .then(function(){
+                                $scope.autoLogin()
+                                    .then(function(){
+                                    getAddressList();
+                                })
+                            },function(){
+                                $scope.goBack();
+                            })
+
                     })
             }
 
@@ -91,31 +103,39 @@ angular.module('controllers.orderAddress',[])
                 })
             }
 
-            $scope.edictAddress = function(address,slideType){
-                if(slideType){
-                    $state.go($config.controllers.editAddress.name,{id:address.id})
-                }
-                else{
-                    if(address){
-                        if(type==1){
-                            //选择订单地址
-                            $rootScope.orderAddressObject = {
-                                receiveName : address.receiveName,
-                                receivePhone : address.receivePhone,
-                                address : address.provinceText + address.cityText + address.districtText +address.address,
-                            }
-                            $scope.goBack();
-                        }
-                        else{
-                            //订单修改编辑
+            $scope.editAddress = function(address,slideType){
+                $scope.checkLogin()
+                    .then(function(){
+                        if(slideType){
                             $state.go($config.controllers.editAddress.name,{id:address.id})
                         }
-                    }
-                    else{
-                        //开启新地址编辑
-                        $state.go($config.controllers.editAddress.name)
-                    }
-                }
+                        else{
+                            if(address){
+                                if(type==1){
+                                    //选择订单地址
+                                    $rootScope.orderAddressObject = {
+                                        receiveName : address.receiveName,
+                                        receivePhone : address.receivePhone,
+                                        address : address.provinceText + address.cityText + address.districtText +address.address,
+                                    }
+                                    $scope.goBack();
+                                }
+                                else{
+                                    //订单修改编辑
+                                    $state.go($config.controllers.editAddress.name,{id:address.id})
+                                }
+                            }
+                            else{
+                                //开启新地址编辑
+                                $state.go($config.controllers.editAddress.name)
+                            }
+                        }
+                    },function(){
+                        $alert.confirm('请登录')
+                            .then(function(){
+                                $scope.autoLogin();
+                            })
+                    })
             }
 
         }

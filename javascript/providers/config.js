@@ -93,6 +93,7 @@ angular.module('providers.config',[])
             addressList:"userAddress/getPage",
             provinceCity:"provinceCity/getAll",
             userAddressSave:"userAddress/save",
+            userAddressDelete:"userAddress/delete",
             userAddressDetail:"userAddress/detail",
             orderCommit:"market/order/commit",
             addFeedback:"myself/feedback/opinion",

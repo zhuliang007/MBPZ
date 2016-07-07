@@ -9,9 +9,9 @@ angular.module('controllers.orderPreview',[])
         '$httpService',
         '$state',
         '$stateParams',
-        '$locals',
+        '$alert',
         '$rootScope',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
+        function($scope,$config,$console,$httpService,$state,$stateParams,$alert,$rootScope){
             var id = $stateParams.productId;
 
             checkOrderAddressObject();
@@ -47,24 +47,34 @@ angular.module('controllers.orderPreview',[])
                                 $console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                        $scope.autoLogin()
-                                            .then(function(){
-                                                getOrderPreview();
-                                            })
-                                        return ;
-                                    }
-                                    if(systemError.errorCode == 20){
-                                        $scope.goBack();
-                                        return ;
-                                    }
+                                    $alert.confirm(systemError.errorInfo)
+                                        .then(function(){
+                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                $scope.autoLogin()
+                                                    .then(function(){
+                                                        getOrderPreview();
+                                                    })
+                                                return ;
+                                            }
+                                            if(systemError.errorCode == 20){
+                                                $scope.goBack();
+                                                return ;
+                                            }
+                                        },function(){
+                                            $scope.goBack();
+                                        })
                                 }
                             })
                     },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getOrderPreview();
-                            })
+                        $alert.confirm('请登录').
+                            then(function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                    getOrderPreview();
+                                })
+                        },function(){
+                            $scope.goBack();
+                        })
                     })
             }
 
@@ -72,7 +82,7 @@ angular.module('controllers.orderPreview',[])
                 $scope.checkLogin()
                     .then(function(){
                         if(!$scope.order.receiveName && !$scope.order.receivePhone && !$scope.order.address){
-                            $console.show("请选择您的收货地址")
+                            $alert.show("请选择您的收货地址")
                             return ;
                         }
 
@@ -93,43 +103,48 @@ angular.module('controllers.orderPreview',[])
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
                                 //显示支付选择
-                                $rootScope.orderPreviewObject = result.data;
+                                /*$rootScope.orderPreviewObject = result.data;
                                 $rootScope.orderPreviewObject.backImg = $scope.mineAlipay;
                                 $scope.openPayModal('payModal');
-                                $console.show($rootScope.orderPreviewObject);
+                                $console.show($rootScope.orderPreviewObject);*/
                                 //支付操作还没做
+                                //将生成的订单信息传递给支付操作页面，选择支付方式
+                                $console.show("选择支付方式")
+                                $console.show(result)
+
                             },function(error){
                                 $console.show(error);
-                                $console.show($rootScope.orderPreviewObject);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                        $scope.submitOrder();
-                                        return ;
-                                    }
-                                    if(systemError.errorCode == 20){
-                                        $console.show(systemError.errorInfo);
-                                        $scope.goBack();
-                                        return ;
-                                    }
+                                    $alert.confirm(systemError.errorInfo)
+                                        .then(function(){
+                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                $scope.autoLogin()
+                                                    .then(function(){
+                                                        getOrderPreview();
+                                                    })
+                                                return ;
+                                            }
+                                            if(systemError.errorCode == 20){
+                                                $scope.goBack();
+                                                return ;
+                                            }
+                                        },function(){
+                                            $scope.goBack();
+                                        })
                                 }
                             })
 
 
                     },function(){
-                        $scope.autoLogin()
+                        $alert.confirm('请登录')
                             .then(function(){
-                                $scope.submitOrder();
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        getOrderPreview();
+                                    })
                             })
                     })
-
-                /*$scope.goBack().then(
-                 function(){
-                 $rootScope.orderAddressObject= null
-                 $rootScope.orderAddressCacheObject= null
-                 }
-                 );*/
-
             }
 
             $scope.goOwnBack = function(){
@@ -145,9 +160,12 @@ angular.module('controllers.orderPreview',[])
                     .then(function(){
                         $state.go($config.controllers.orderAddress.name,{type:1});
                     },function(){
-                        $scope.autoLogin()
+                        $alert.confirm('请登录')
                             .then(function(){
-                                $scope.setOrderAddress();
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        getOrderPreview();
+                                    })
                             })
                     })
             }
