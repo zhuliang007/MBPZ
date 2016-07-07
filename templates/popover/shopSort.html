@@ -1,0 +1,5 @@
+<ion-popover-view class="shopSort">
+    <ion-content scroll="false">
+        <ion-item class="text-center" ng-repeat="sortItem in sortObject track by $index" ng-bind="sortItem.name" ng-click="changeSort(sortItem)"></ion-item>
+    </ion-content>
+</ion-popover-view>

@@ -116,6 +116,7 @@ ion-content{
 /*页面头部*/
 .tabsHome ion-header-bar,
 .productListByType ion-header-bar,
+.orderEvaluate ion-header-bar,
 .productDetail.product ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
@@ -130,6 +131,7 @@ ion-content{
 .orderAddress ion-header-bar,
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
+.recommend ion-header-bar,
 .publish ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
@@ -142,6 +144,8 @@ ion-content{
 .editAddress ion-header-bar,
 .payModal ion-header-bar,
 .publish ion-header-bar,
+.orderEvaluate ion-header-bar,
+.recommend ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
 }
@@ -156,6 +160,7 @@ ion-content{
 }
 
 .productDetail.product ion-header-bar .title,
+.orderEvaluate ion-header-bar .title,
 .productListByType ion-header-bar .title{
     font-style: normal;
 }
@@ -163,6 +168,7 @@ ion-content{
 .tabsShop ion-header-bar .title,
 .report ion-header-bar .title,
 .orderPreview ion-header-bar .title,
+.recommend ion-header-bar .title,
 .orderAddress ion-header-bar .title,
 .editAddress ion-header-bar .title,
 .payModal ion-header-bar .title,
@@ -181,6 +187,8 @@ ion-content{
 .tabsHome ion-header-bar .button.activated,
 .productListByType ion-header-bar .button,
 .productListByType ion-header-bar .button.activated,
+.orderEvaluate ion-header-bar .button,
+.orderEvaluate ion-header-bar .button.activated,
 .productDetail.product ion-header-bar .button,
 .productDetail.product ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
@@ -204,11 +212,23 @@ ion-content{
 .payModal ion-header-bar .button.activated,
 .publish ion-header-bar .button,
 .publish ion-header-bar .button.activated,
+.tabsShop ion-header-bar .button,
+.tabsShop ion-header-bar .button.activated,
+.recommend ion-header-bar .button,
+.recommend ion-header-bar .button.activated,
 .orderAddress ion-header-bar .button,
 .orderAddress ion-header-bar .button.activated{
     background: #F5F5F5;
     color: #333333;
     border:none;
+}
+
+.tabsShop ion-header-bar .button{
+    font-size: 14px;
+}
+
+.tabsShop ion-header-bar .button.icon-left:before{
+    font-size: 16px;
 }
 
 .tabsHome ion-header-bar .button .mbpz,
@@ -789,6 +809,7 @@ ion-content{
 .productReport{
     width: 110px;
     height: 50px;
+    margin-top: 5px!important;
 }
 
 .productReport ion-content{
@@ -952,6 +973,10 @@ ion-content{
     margin-bottom: 48px;
 }
 
+.replyNormal.disabled.activated{
+    background-color: #FFFFFF;
+}
+
 .userCtrl{
     background: #FFFFFF;
     position: fixed;
@@ -1071,12 +1096,17 @@ ion-content{
     background-color: #F5F5F5;
 }
 
+.report ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
 .report .submit{
-    border: none;
     background-color: #FF4E72;
+    border: none;
     color: #FFFFFF;
-    padding: 10px;
-    margin-top: 20px;
+    font-size: 16px;
 }
 
 .report .submit.activated{
@@ -1123,7 +1153,7 @@ ion-content{
     background-color: #FFFFFF;
 }
 
-.ba-color-white-less{
+.bg-color-white-less{
     background-color: rgba(255,255,255,.5);
 }
 
@@ -1133,6 +1163,10 @@ ion-content{
 
 .color-white{
     color: #FFFFFF;
+}
+
+.color-gray{
+    color: #999999;
 }
 
 .img-auto{
@@ -1500,6 +1534,7 @@ ion-content{
 }
 
 .orderPreview ion-footer-bar .submit,
+.orderEvaluate ion-footer-bar .submit,
 .editAddress ion-footer-bar .submit,
 .orderAddress ion-footer-bar .submit{
     background-color: #FF4E72;
@@ -1508,6 +1543,9 @@ ion-content{
     font-size: 16px;
 }
 
+.editAddress ion-footer-bar .submit.activated,
+.orderEvaluate ion-footer-bar .submit.activated,
+.orderAddress ion-footer-bar .submit.activated,
 .orderPreview ion-footer-bar .submit.activated{
     background-color: rgba(255,78,114,.7);
 }
@@ -2453,8 +2491,360 @@ ion-content{
     padding-top:44px !important;
 }
 
+/**支付页面**/
+.payContent{
+    background: #e8e8e8 !important;
+}
+.aliPayContent .scroll{
+    height: 100% !important;
+}
+.payRow{
+    padding:0px !important;
+    background: white !important;
+}
+.payFont{
+    font-size:14px;
+}
+.payFontColor{
+    color:#9e9e9e !important;
+}
+.payImg{
+    padding-left:18px;
+}
+.payDiv .item-radio input:checked+.radio-content .item-content{
+    background: white !important;
 
+}
+.payDiv .item{
+    border:0 !important;
+    margin:0px !important;
+}
+.payDiv .item-content {
+    padding-left: 1px !important;
+}
+/*求购筛选*/
+.shopSort{
+    margin-top: 15px!important;
+    background-color: transparent!important;
+    top: 40px!important;
+    height: 208px;
+    width: 150px;
+}
 
+.shopSort>ion-content{
+    margin: 0px!important;
+    background-color: rgba(0,0,0,.5);
+    padding: 10px 20px;
+}
+
+.shopSort>ion-content>.item{
+    background-color: transparent!important;
+    color: #FFFFFF!important;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+    padding: 8px 16px;
+
+}
+.shopSort>ion-content>.item+.item{
+    border-top-color: rgba(221,221,221,.7)!important;
+}
+
+.shopSort>.popover-arrow{
+    top: -19px;
+}
+
+.shopSort>.popover-arrow:after{
+    background-color: rgba(0,0,0,.5);
+}
+
+.orderDetailUserImg{
+    width:40px !important;
+    height: 40px !important;
+    margin-left: 15px !important;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+}
+
+.orderDetailT{
+    font-size:14px !important;
+}
+
+.orderDetailTDiv{
+    text-align: center;
+}
+
+.orderDetailT-icon:before{
+    margin-right:5px !important;
+}
+
+/*回复の推荐给TA*/
+.recommend ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
+.recommend ion-footer-bar .submit{
+    background-color: #FF4E72;
+    border-radius: 0px;
+    color: #FFFFFF;
+    padding:0px 20px;
+    font-size: 16px;
+    border:none;
+}
+
+.recommend ion-footer-bar .submit.activated{
+    background-color: rgba(255,78,114,.7);
+}
+
+.recommend .replyRecommendContents{
+    background-color: #FFFFFF;
+    padding: 15px 10px;
+    width: 100%;
+    height: calc(50% - 100px);
+    min-height: 150px;
+    max-height: 200px;
+}
+
+.recommend .borderContents{
+    width: 100%;
+    height: 100%;
+    /*padding: 10px 10px 25px;*/
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+}
+
+.recommend .borderContents>textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.recommend .borderContents>.textCount{
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+    color: #999999;
+}
+
+.recommend .recommendProductList{
+    width: 100%;
+    height: calc(50% - 100px);
+    min-height: 150px;
+    max-height: 200px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+.recommend .recommendProductList>ion-scroll{
+    width: 100%;
+    height: 100%;
+}
+
+.recommend .recommendProductList .productItem{
+    padding-left: 58px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: relative;
+}
+
+.recommend .recommendProductList .productItem>.iconTarget{
+    left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.recommend .recommendProductList .productItem>.productRow{
+    position: relative;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.unchecked{
+    color: #999999;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.checked{
+    color: #FF4E72;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.checked,
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.unchecked{
+    visibility: visible;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct:checked + .iconTarget>i.unchecked,
+.recommend .recommendProductList .productItem>.resolveProduct + .iconTarget>i.checked{
+    visibility: hidden;
+}
+
+.recommend .recommendProductList .productItem>.resolveProduct{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+}
+
+.recommend .recommendProductList .productItem .title{
+    color: #333333;
+    font-size: 16px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recommend .recommendProductList .productItem .content{
+    color: #999999;
+    font-size: 14px;
+    max-height: 40px;
+    overflow: hidden;
+    white-space: normal;
+    width: 100%;
+}
+
+.recommend .nothing{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+/*提示框*/
+.mbpz-popup-container .popup{
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    color: #FFFFFF;
+    padding: 10px 0px;
+}
+
+.mbpz-popup-container .popup-head{
+    display: none;
+}
+
+.mbpz-popup-container .popup-body{
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+    color: #333333;
+}
+
+.mbpz-popup-container .popup-buttons{
+    display: block;
+    text-align: center;
+    min-height: 0px;
+}
+
+.mbpz-popup-container .popup-buttons .mbpz-popup-button.button{
+    display: inline;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#FFB7AB), to(#FF4E72));
+    background: -webkit-linear-gradient(top, #FFB7AB, #FF4E72);
+    color: #FFFFFF;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    min-height: 0px;
+    border:none;
+    padding: 5px 30px;
+}
+
+.orderDetailP{
+    padding-bottom:10px;
+}
+
+.orderDetailConsignee{
+    font-size:14px;
+    margin-top:3px !important;
+    margin:5px;
+}
+
+.orderDetailConsignee .receiveSpan{
+    padding:0px;
+}
+.orderBtn .button{
+    padding:0px;
+    margin:0px;
+    min-height:100% !important;
+}
+.orderBtn{
+    padding:0px !important;
+    background-position:bottom !important;
+}
+.processItem{
+    padding:0px;
+    margin:0px;
+    width:100% !important;
+}
+.processDiv{
+    width:120px !important;
+    float:left;
+    word-break: break-all;
+}
+.processFont{
+    text-align: center;
+    font-size:14px;
+}
+.processTime{
+    text-align: center;
+    font-size:0.1rem !important;
+
+}
+/*发表评价*/
+.orderEvaluate .orderEvaluateContents{
+    background-color: #FFFFFF;
+    padding: 15px 10px;
+    width: 100%;
+    height: 200px;
+}
+
+.orderEvaluate .borderContents{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+    position: relative;
+}
+
+.orderEvaluate .borderContents>textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.orderEvaluate .item-judge{
+    position: relative;
+}
+
+.orderEvaluate .judgeStars{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    left: 122px;
+    bottom: 0px;
+    padding: 12px 16px 10px 0px;
+    overflow: hidden;
+    text-overflow: clip;
+    text-align: right;
+}
+
+.orderEvaluate .judgeStars>.star{
+    font-size: 20px;
+    color: #999999;
+}
+
+.orderEvaluate .judgeStars>.star.checked{
+    color: #FFAF60;
+}
+
+.processScroll >.scroll{
+    position: relative;
+    display: inline-block;
+}
+
+.processlig{
+    color:#FF4E72 !important;
+}
 
 
 

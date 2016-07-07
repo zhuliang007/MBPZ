@@ -1,11 +1,11 @@
 <ion-view class="tabsShop">
     <ion-header-bar align-title="center">
         <h1 class="title">求购列表</h1>
-        <!--<div class="buttons">
-            <button class="button" ng-click="showMsg('搜索')"><i class="mbpz mbpz-icon-search"></i></button>
-        </div>-->
+        <div class="buttons">
+            <button class="button icon-left icon ion-arrow-down-b" ng-click="openPopover($event,'shopSort')"><span class="padding-normal-left" ng-bind="sortText"></span></button>
+        </div>
     </ion-header-bar>
-    <ion-content has-bouncing="true" overflow-scroll="false">
+    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="tabsShopHandle">
         <div class="card-group">
             <div class="card-item-normal" ng-repeat="product in productList track by $index" ng-click="showShop(product.id)">
                 <div class="row padding-none-horizontal padding-normal-vertical">

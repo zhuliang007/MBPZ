@@ -285,4 +285,42 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.refusedApply.cache,
                     params:$configProvider.controllers.refusedApply.params,
                 })
+                .state($configProvider.controllers.pay.name,{
+                    url:$configProvider.controllers.pay.url,
+                    templateUrl:$configProvider.controllers.pay.templateUrl,
+                    controller:$configProvider.controllers.pay.controller,
+                    params:$configProvider.controllers.pay.params,
+                    cache:$configProvider.controllers.pay.cache,
+                })
+                .state($configProvider.controllers.payRouters.name,{
+                    url:$configProvider.controllers.payRouters.url,
+                    templateUrl:$configProvider.controllers.payRouters.templateUrl,
+                    controller:$configProvider.controllers.payRouters.controller,
+                    cache:$configProvider.controllers.payRouters.cache,
+                    params:$configProvider.controllers.payRouters.params,
+                })
+                .state($configProvider.controllers.orderDetail.name, {
+                    url: $configProvider.controllers.orderDetail.url,
+                    templateUrl: $configProvider.controllers.orderDetail.templateUrl,
+                    controller: $configProvider.controllers.orderDetail.controller,
+                    cache: $configProvider.controllers.orderDetail.cache,
+                })
+                .state($configProvider.controllers.recommend.name,{
+                    url:$configProvider.controllers.recommend.url,
+                    templateUrl:$configProvider.controllers.recommend.templateUrl,
+                    controller:$configProvider.controllers.recommend.controller,
+                    cache:$configProvider.controllers.recommend.cache,
+                })
+                .state($configProvider.controllers.submitDelivery.name,{
+                    url:$configProvider.controllers.submitDelivery.url,
+                    templateUrl:$configProvider.controllers.submitDelivery.templateUrl,
+                    controller:$configProvider.controllers.submitDelivery.controller,
+                    cache:$configProvider.controllers.submitDelivery.cache,
+                })
+                .state($configProvider.controllers.orderEvaluate.name,{
+                    url:$configProvider.controllers.orderEvaluate.url,
+                    templateUrl:$configProvider.controllers.orderEvaluate.templateUrl,
+                    controller:$configProvider.controllers.orderEvaluate.controller,
+                    cache:$configProvider.controllers.orderEvaluate.cache,
+                })
         }])

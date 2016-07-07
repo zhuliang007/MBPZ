@@ -18,8 +18,8 @@ angular.module('controllers.start',[])
         '$ionicHistory',
         '$q',
         '$keywords',
-        '$locals',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$locals){
+        '$alert',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert){
 
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('userPhone');
@@ -56,6 +56,7 @@ angular.module('controllers.start',[])
                             userLevel:result.data.userLevel
                         }
                         $console.show($scope.userInfo);
+                        $alert.show(result.msg);
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);
@@ -123,6 +124,8 @@ angular.module('controllers.start',[])
             $scope.mineSold=$config.getImageUrlDebug() + $config.assets.mineSold;
             $scope.mineUndercarriage=$config.getImageUrlDebug() + $config.assets.mineUndercarriage;
             $scope.mineWallet=$config.getImageUrlDebug() + $config.assets.mineWallet;
+            $scope.mineAlipay=$config.getImageUrlDebug() + $config.assets.alipay;
+            $scope.progresBar = $config.getImageUrlDebug()+$config.assets.progresBar;
 
             $rootScope.provinceCityList = {
                 provinceList: [],
@@ -163,8 +166,7 @@ angular.module('controllers.start',[])
                 $scope.checkLogin()
                     .then(function(){
                         if($scope.userInfo.loginAccount == seller.loginAccount){
-                            //当前是自己本人
-                            $console.show("It`s your self")
+                            $alert.show("当前用户是您")
                             return;
                         }
 
@@ -176,9 +178,12 @@ angular.module('controllers.start',[])
                             type:2})
 
                     },function(){
-                        $scope.autoLogin()
+                        $alert.confirm('请登录')
                             .then(function(){
-                                $scope.contactSeller(seller);
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        $scope.contactSeller(seller);
+                                    })
                             })
                     })
             }
@@ -288,10 +293,6 @@ angular.module('controllers.start',[])
                     $scope['provinceCityModal'] = null;
                 }
 
-                if($rootScope['payModal']){
-                    $rootScope['payModal'] = null;
-                }
-
                 if($scope['publishModal']){
                     $scope['publishModal'] = null;
                 }
@@ -305,9 +306,28 @@ angular.module('controllers.start',[])
                 $scope.$$childTail.$$childTail.$$childTail.codeNumber = '';
             }
 
-            $scope.goPublish = function(type){
-                $state.go($config.controllers.publish.name,{type:type});
-                $scope.closeModal('publishModal');
+            $scope.goPublish = function(type,id){
+                $scope.checkLogin()
+                    .then(function(){
+                        if(id){
+                            $state.go($config.controllers.publish.name,{type:type,id:id});
+                        }
+                        else{
+                            $state.go($config.controllers.publish.name,{type:type});
+                            $scope.closeModal('publishModal');
+                        }
+                    },function(){
+                        $alert.confirm('请登录')
+                            .then(function(){
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        $scope.goPublish(type);
+                                    })
+                            },function(){
+                                $scope.closeModal('publishModal');
+                            })
+                    })
+
             }
 
             $scope.codeTarget = '获取验证码';

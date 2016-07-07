@@ -76,6 +76,14 @@ angular.module('services.keywords',[])
                             "token":token
                         }
                         break;
+                    case 'dictList':
+                        data = {
+                            "cmd": $config.cmds.dictList,
+                            "parameters": {
+                                "typeCode":"product_filtrate_ask_to_buy"
+                            }
+                        }
+                        break;
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){

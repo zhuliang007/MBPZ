@@ -33,8 +33,6 @@ angular.module('controllers.collectionCtrl',[])
                     })
             }
 
-            initToken();
-
             $scope.collectionLoadMore = function(){
                 if(token!=''){
                     var data = {

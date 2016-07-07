@@ -35,4 +35,10 @@ angular.module('starter.controllers',[
     'controllers.refundsReleaseCtrl',
     'controllers.cancalOrderCtrl',
     'controllers.applyRefundCtrl',
-    'controllers.refusedApplyCtrl'])
+    'controllers.refusedApplyCtrl',
+    'controllers.payCtrl',
+    'controllers.aliPayCtrl',
+    'controllers.orderDetailCtrl',
+    'controllers.recommend',
+    'controllers.deliveryCtrl',
+    'controllers.orderEvaluate'])

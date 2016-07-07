@@ -64,6 +64,8 @@ angular.module('providers.config',[])
             mineSold:"mine/icon_mine_sold.png",
             mineUndercarriage:"mine/icon_mine_undercarriage.png",
             mineWallet:"mine/icon_mine_wallet.png",
+            alipay:"alipay.png",
+            progresBar:"progress-bar.png",
         }
 
 
@@ -92,6 +94,7 @@ angular.module('providers.config',[])
             addressList:"userAddress/getPage",
             provinceCity:"provinceCity/getAll",
             userAddressSave:"userAddress/save",
+            userAddressDelete:"userAddress/delete",
             userAddressDetail:"userAddress/detail",
             orderCommit:"market/order/commit",
             addFeedback:"myself/feedback/opinion",
@@ -108,6 +111,12 @@ angular.module('providers.config',[])
             noticOrder:"market/order/notice",
             applyRefound:"market/order/applyRefund",
             applyRefused:"market/order/refund",
+            dictList:"system/dictList",
+            orderDetail:"market/order/detail",
+            orderSend:"market/order/buyerSend",
+            sellerSend:"market/order/sellerSend",
+            orderReceive:"market/order/buyerReceive",
+            evaluateSave:"market/evaluate/save",
         }
 
         /**提示信息配置*/
@@ -410,6 +419,55 @@ angular.module('providers.config',[])
                 },
                 controller:"RefusedApplyCtrl",
                 cache:false
+            },
+            pay:{
+                templateUrl:"templates/pay/pay.html",
+                url:"/pay/:id?",
+                name:"pay",
+                controller:"PayCtrl",
+                params:{
+                    obj:null,
+                    routers:null
+                },
+                cache:false
+            },
+            payRouters:{
+                templateUrl:"templates/pay/pay-alipay.html",
+                url:"/payRouters/:id?",
+                params:{
+                    obj:null,
+                    routers:null
+                },
+                controller:"AliPayCtrl",
+                name:"payRouters",
+                cache:false
+            },
+            orderDetail: {
+                templateUrl: "templates/order/order-detail.html",
+                url: "/orderDetail/:id&:type?",
+                controller: "OrderDetailCtrl",
+                name: "orderDetail",
+            },
+            recommend:{
+                templateUrl:"templates/detail/recommend.html",
+                url:"/recommend/:productId&:repUserId",
+                name:"recommend",
+                controller:"RecommendCtrl",
+                cache:false
+            },
+            submitDelivery:{
+                templateUrl:"templates/order/order-delivery.html",
+                url:"/delivery/:id&:type?",
+                name:"submitDelivery",
+                controller:"DeliveryCtrl",
+                cache:false
+            },
+            orderEvaluate:{
+                templateUrl:"templates/order/orderEvaluate.html",
+                url:"/orderEvaluate/:orderId?",
+                name:"orderEvaluate",
+                controller:"OrderEvaluateCtrl",
+                cache:false
             }
 
         }
@@ -433,6 +491,9 @@ angular.module('providers.config',[])
             },
             reply:{
                 templateUrl:"templates/popover/reply.html"
+            },
+            shopSort:{
+                templateUrl:"templates/popover/shopSort.html"
             }
         }
 
@@ -448,10 +509,6 @@ angular.module('providers.config',[])
             },
             provinceCityModal:{
                 templateUrl:"templates/modal/provinceCity.html",
-                animation:"slide-in-up"
-            },
-            payModal: {
-                templateUrl:"templates/modal/pay.html",
                 animation:"slide-in-up"
             },
             publishModal: {

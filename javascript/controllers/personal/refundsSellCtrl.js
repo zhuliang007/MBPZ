@@ -48,7 +48,6 @@ angular.module('controllers.refundsSellCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.content.length==0||result.data.content==null){
                                     $scope.noMoreLoad=true;
@@ -92,18 +91,33 @@ angular.module('controllers.refundsSellCtrl',[])
 
             //同意
             $scope.agreeApply = function(id){
-                var data = {
-                    "cmd": $config.cmds.applyRefused,
-                    "parameters":{
-                        "id":id,
-                        "refundStatus":"AGREE"
-                    },
-                    "token":"YjMyZTA5YzktMWJlMC00OThkLWIyNzUtMjM5Y2ZiY2VmOThm"
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        alert(result.msg);
-                    })
+                    $scope.checkLogin()
+                        .then(function(){
+                            var data = {
+                                "cmd": $config.cmds.applyRefused,
+                                "parameters":{
+                                    "id":id,
+                                    "refundStatus":"AGREE"
+                                },
+                                "token":$scope.userInfo.loginToken
+                            }
+                            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                .then(function(result){
+                                    if(result.data.msg=='操作成功'){
+                                        $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
+                                    }
+                                })
+                        },function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                })
+                        })
+
+            }
+
+            //订单详情
+            $scope.orderDetail=function(id,type){
+                $state.go($config.controllers.orderDetail.name,{id:id,type:type})
             }
 
         }])

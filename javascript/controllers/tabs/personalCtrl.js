@@ -16,7 +16,6 @@ angular.module('controllers.personal',[])
         initToken = function(){
             $scope.checkLogin()
                 .then(function(){
-                    console.log($scope.userInfo)
                     $scope.userHeaderImg =$scope.userInfo.userImg;
                     $scope.userName = $scope.userInfo.nickName;
                     $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
@@ -39,6 +38,7 @@ angular.module('controllers.personal',[])
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
+                            console.log(result)
                             $scope.productPublicCount=result.data.productPublicCount;
                             $scope.productSoldCount=result.data.productSoldCount;
                             $scope.productBoughtCount=result.data.productBoughtCount;

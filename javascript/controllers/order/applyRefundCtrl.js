@@ -15,6 +15,7 @@ angular.module('controllers.applyRefundCtrl',[])
         '$ionicActionSheet',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
 
+            console.log($stateParams.obj)
             if($stateParams.obj!=null){
                 $scope.refundServerValue = $stateParams.obj.refundServer;
                 $scope.refundReasonValue = $stateParams.obj.refundReason;
@@ -108,6 +109,10 @@ angular.module('controllers.applyRefundCtrl',[])
                 });
             }
 
+            $scope.reasonText={
+                text:''
+            }
+
             //提交
             $scope.submitRefounds = function () {
                 if(token!=''){
@@ -117,7 +122,7 @@ angular.module('controllers.applyRefundCtrl',[])
                             "id":$stateParams.id,
                             "refundServer":$scope.refunds.value,
                             "refundReason":$scope.reasonRef.name,
-                            "refundMark":$scope.reasonText
+                            "refundMark":$scope.reasonText.text
                         },
                         "token":token
                     }

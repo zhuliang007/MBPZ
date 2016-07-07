@@ -1,0 +1,47 @@
+<ion-view class="recommend">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+        <h1 class="title">选择推荐商品</h1>
+    </ion-header-bar>
+    <ion-content scroll="false">
+        <div class="replyRecommendContents">
+            <div class="borderContents">
+                <textarea placeholder="请对推荐商品进行描述(最多200字)" ng-model="replyObject.replyContents" maxlength="200"></textarea>
+                <!--<span class="textCount"><span ng-bind="replyObject.replyContents?replyObject.replyContents.length:0"></span>/200</span>-->
+            </div>
+        </div>
+        <div class="padding-normal-horizontal padding-normal-vertical margin-normal-top color-gray">请选择推荐商品</div>
+        <div class="recommendProductList">
+            <ion-scroll delegate-handle="productHandle" has-bouncing="true" overflow-scroll="false">
+                <ion-list>
+                    <ion-item ng-repeat="product in productList track by $index" class="item-icon-left item-avatar productItem">
+                        <input type="radio" name="resolveProductId" ng-model="replyObject.resolveProductId" ng-value="product.id" class="resolveProduct">
+                        <i class="iconTarget"><i class="icon ion-ios-circle-outline unchecked"></i><i class="icon ion-ios-checkmark-outline checked"></i></i>
+                        <div class="row row-no-padding productRow">
+                            <div class="col col-25">
+                                <div class="col col-80 padding-none-horizontal padding-none-vertical">
+                                    <div class="bgImg" id="productImage+{{$index}}" ng-style="resizeImage('productImage+{{$index}}',product.productImageList[0].location)"></div>
+                                </div>
+                            </div>
+                            <div class="col col-75">
+                                <div class="title" ng-bind="product.title"></div>
+                                <div class="content" ng-bind="product.content"></div>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <ion-infinite-scroll
+                        on-infinite="loadMore()"
+                        distance="1%"
+                        ng-if="infiniteFlag">
+                </ion-infinite-scroll>
+            </ion-scroll>
+        </div>
+        <div class="nothing text-center color-gray">没有选到您要的？<span class="color-red" ng-click="goPublish(0)">点击去发布</span></div>
+    </ion-content>
+    <ion-footer-bar align-title="center">
+        <button type="button" class="button-block submit" ng-click="submit()">确定推荐</button>
+    </ion-footer-bar>
+</ion-view>

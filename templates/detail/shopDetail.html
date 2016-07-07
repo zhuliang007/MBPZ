@@ -81,7 +81,7 @@
                     <div ng-if="reply.recommonedProductImageList != null" class="bgImg" id="officialImage{{$index}}" ng-style="resizeImage('officialImage{{$index}}',reply.recommonedProductImageList[0].location)"></div>
                 </div>
             </ion-item>
-            <ion-item ng-if="reply.isRecommoned == null" class="row row-no-padding replyNormal" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
+            <ion-item ng-if="reply.isRecommoned == null" class="row row-no-padding replyNormal" ng-class="{true:'',false:'disabled'}[userInfo?userInfo.id==product.publicUser.id:true]" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
                 <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
                     <div class="bgImg border-radius-round" ng-style="resizeImage('userHead_type1_{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead_type1_{{$index}}"></div>
                 </div>

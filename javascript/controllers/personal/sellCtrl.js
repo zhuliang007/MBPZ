@@ -2,10 +2,6 @@
  * Created by Administrator on 2016/6/30.
  */
 
-/**
- * Created by zl_sam on 16/6/14.
- */
-
 angular.module('controllers.sellCtrl',[])
     .controller('SellCtrl',[
         '$scope',
@@ -16,7 +12,8 @@ angular.module('controllers.sellCtrl',[])
         '$state',
         '$httpService',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        '$ionicPopup',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$ionicPopup){
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.noMoreLoad = false;
@@ -81,27 +78,42 @@ angular.module('controllers.sellCtrl',[])
 
 
             $scope.releaseDel = function(productid){
-                if(token!=''){
-                    var delData =  {
-                        "cmd": $config.cmds.productDel,
-                        "parameters":{
-                            "productId":productid
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),delData)
-                        .then(function(result){
-                            alert(result.msg);
-                            $state.reload();
-                        })
-                }else{
-                    initToken()
-                }
+
 
             }
 
             $scope.releaseDetail=function(id,type){
                 $state.go($config.controllers.publish.name,{type:type,id:id})
             }
+
+            $scope.showConfirm = function(productid) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '提示',
+                    template: '是否确定删除?',
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        if(token!=''){
+                            var delData =  {
+                                "cmd": $config.cmds.productDel,
+                                "parameters":{
+                                    "productId":productid
+                                },
+                                "token":token
+                            }
+                            $httpService.getJsonFromPost($config.getRequestAction(),delData)
+                                .then(function(result){
+                                    alert(result.msg);
+                                    $state.reload();
+                                })
+                        }else{
+                            initToken()
+                        }
+                    } else {
+                        return;
+                    }
+                });
+            };
+
 
         }])

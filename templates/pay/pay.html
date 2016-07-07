@@ -1,0 +1,29 @@
+<ion-view class="payModal">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><span class="icon ion-close"></span></button>
+        </div>
+        <h1 class="title">选择支付方式</h1>
+    </ion-header-bar>
+    <ion-content class="payContent">
+        <div class="list">
+            <div class="row payRow">
+                <div class="col-20 col-center">
+                    <img ng-src="{{backImg}}" class="payImg">
+                </div>
+                <div class="col-80 payDiv">
+                    <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-model="choice" value="alipay" ng-click="changePay('alipay')">
+                        <div class="payFont">支付宝</div>
+                        <div class="payFont payFontColor">推荐支付宝用户使用</div>
+                    </ion-radio>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="left">
+        <h1 class="title">合计：<span class="mbpz mbpz-icon-money price"></span><span class="price" ng-bind="price"></span></h1>
+        <div class="buttons">
+            <button class="button" ng-click="goPay()">去支付</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

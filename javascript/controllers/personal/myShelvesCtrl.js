@@ -29,8 +29,6 @@ angular.module('controllers.myShelvesCtrl',[])
                                 })
                         })
                 }
-
-                initToken();
                 
                 $scope.shelvesLoadMore= function () {
                     if(token!=''){

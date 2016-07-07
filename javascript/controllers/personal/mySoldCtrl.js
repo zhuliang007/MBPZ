@@ -28,8 +28,6 @@ angular.module('controllers.mySoldCtrl',[])
                     })
             }
 
-            initToken();
-
             $scope.soldLoadMore= function () {
                 if(token!=''){
                     var data = {
@@ -81,7 +79,38 @@ angular.module('controllers.mySoldCtrl',[])
             }
 
             //确认发货
-            $scope.submitDelivery = function(){
+            $scope.submitDelivery = function(id){
+                $state.go($config.controllers.submitDelivery.name,{id:id})
+            }
 
+            //提醒收货
+            $scope.remindDeliverySell =function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":id,
+                                "orderType":"order",
+                                "saleType":"sell"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                console.log(result.msg)
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
+            }
+
+            //订单详情
+            $scope.orderDetail=function(id,type){
+                $state.go($config.controllers.orderDetail.name,{id:id,type:type})
             }
         }])
