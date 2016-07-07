@@ -12,7 +12,8 @@ angular.module('controllers.report',[])
     '$stateParams',
     '$keywords',
     '$rootScope',
-    function($scope,$console,$config,$httpService,$locals,$state,$stateParams,$keywords,$rootScope){
+    '$alert',
+    function($scope,$console,$config,$httpService,$locals,$state,$stateParams,$keywords,$rootScope,$alert){
         var productId = $stateParams.productId;
         $console.show(productId);
 
@@ -27,18 +28,27 @@ angular.module('controllers.report',[])
                         },function(error){
                             if(error.systemError){
                                 var systemError = error.systemError;
-                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                    $scope.autoLogin()
-                                        .then(function(){
-                                            getKeyWords();
-                                        })
-                                }
+                                $alert.confirm(systemError.errorInfo)
+                                    .then(function(){
+                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                            $scope.autoLogin()
+                                                .then(function(){
+                                                    getKeyWords();
+                                                })
+                                        }
+                                        else if(systemError.errorCode == 11){
+                                            $scope.goBack();
+                                        }
+                                    })
                             }
                         })
                 },function(){
-                    $scope.autoLogin()
+                    $alert.confirm('请登录')
                         .then(function(){
-                            getKeyWords();
+                            $scope.autoLogin()
+                                .then(function(){
+                                    getKeyWords();
+                                })
                         })
                 })
 
@@ -55,13 +65,13 @@ angular.module('controllers.report',[])
                 .then(function(){
                     $console.show(chooseType);
                     if(!chooseType){
-                        $console.show("请选择举报原因");
+                        $alert.show("请选择举报原因");
                         return;
                     }
 
                     if(chooseType==4){
                         if(!reasonText){
-                            $console.show("请输入其他举报原因");
+                            $alert.show("请输入其他举报原因");
                             return;
                         }
                     }
@@ -79,27 +89,35 @@ angular.module('controllers.report',[])
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
                             $console.show(result.msg);
-                            $scope.goBack();
+                            $alert.show(result.msg)
+                                .then(function(){
+                                    $scope.goBack();
+                                })
                         },function(error){
                             $console.show(error);
                             if(error.systemError){
                                 var systemError = error.systemError;
-                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                    $scope.autoLogin()
-                                        .then(function(){
-                                            $scope.submitReport(chooseType,reasonText);
-                                        })
-                                }
-                                else if(systemError.errorCode == 11){
-                                    $console.show(systemError.errorInfo);
-                                    $scope.goBack();
-                                }
+                                $alert.confirm(systemError.errorInfo)
+                                    .then(function(){
+                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                            $scope.autoLogin()
+                                                .then(function(){
+                                                    $scope.submitReport(chooseType,reasonText);
+                                                })
+                                        }
+                                        else if(systemError.errorCode == 11){
+                                            $scope.goBack();
+                                        }
+                                    })
                             }
                         })
                 },function(){
-                    $scope.autoLogin()
+                    $alert.confirm('请登录')
                         .then(function(){
-                            $scope.submitReport(chooseType,reasonText);
+                            $scope.autoLogin()
+                                .then(function(){
+                                    getKeyWords();
+                                })
                         })
                 })
         }

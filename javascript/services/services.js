@@ -7,4 +7,5 @@ angular.module('starter.services',[
     'services.productType',
     'services.city',
     'services.locals',
-    'services.keywords'])
+    'services.keywords',
+    'services.alert'])

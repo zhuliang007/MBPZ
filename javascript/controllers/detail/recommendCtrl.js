@@ -10,7 +10,8 @@ angular.module("controllers.recommend",[])
         '$state',
         '$stateParams',
         '$ionicScrollDelegate',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$ionicScrollDelegate){
+        '$alert',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$ionicScrollDelegate,$alert){
 
             $console.show($stateParams);
             $scope.productList = [];
@@ -70,29 +71,35 @@ angular.module("controllers.recommend",[])
                                     $console.show(error);
                                     if(error.systemError){
                                         var systemError = error.systemError;
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin()
-                                                .then(function(){
-                                                    $scope.productList = [];
-                                                    pageNo = 0;
-                                                    $scope.infiniteFlag = true;
-                                                    productHandle.resize();
-                                                    productHandle.scrollTop();
-                                                    getMyProductList();
-                                                })
-                                        }
+                                        $alert.confirm(systemError.errorInfo)
+                                            .then(function(){
+                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                    $scope.autoLogin()
+                                                        .then(function(){
+                                                            $scope.productList = [];
+                                                            pageNo = 0;
+                                                            $scope.infiniteFlag = true;
+                                                            productHandle.resize();
+                                                            productHandle.scrollTop();
+                                                            getMyProductList();
+                                                        })
+                                                }
+                                            })
                                     }
                                 })
 
                     },function(){
-                        $scope.autoLogin()
+                        $alert.confirm('请登录')
                             .then(function(){
-                                $scope.productList = [];
-                                pageNo = 0;
-                                $scope.infiniteFlag = true;
-                                productHandle.resize();
-                                productHandle.scrollTop();
-                                getMyProductList();
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        $scope.productList = [];
+                                        pageNo = 0;
+                                        $scope.infiniteFlag = true;
+                                        productHandle.resize();
+                                        productHandle.scrollTop();
+                                        getMyProductList();
+                                    })
                             })
                     })
             }
@@ -109,12 +116,12 @@ angular.module("controllers.recommend",[])
                 $scope.checkLogin()
                     .then(function(){
                         if(!$scope.replyObject.replyContents){
-                            $console.show("回复内容不能为空");
+                            $alert.show("回复内容不能为空");
                             return;
                         }
 
                         if(!$scope.replyObject.resolveProductId){
-                            $console.show("请选择推荐商品");
+                            $alert.show("请选择推荐商品");
                             return;
                         }
 
@@ -132,26 +139,44 @@ angular.module("controllers.recommend",[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
-                                $scope.goBack();
+                                $alert.show(result.msg)
+                                    .then(function(){
+                                        $scope.goBack();
+                                    })
                             },function(error){
                                 $console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                        $scope.autoLogin()
-                                            .then(function(){
-                                                $scope.submit();
-                                            })
-                                    }
+                                    $alert.confirm(systemError.errorInfo)
+                                        .then(function(){
+                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
+                                                $scope.autoLogin()
+                                                    .then(function(){
+                                                        $scope.productList = [];
+                                                        pageNo = 0;
+                                                        $scope.infiniteFlag = true;
+                                                        productHandle.resize();
+                                                        productHandle.scrollTop();
+                                                        getMyProductList();
+                                                    })
+                                            }
+                                        })
                                 }
                             })
 
 
                     },function(){
-                        $scope.autoLogin()
+                        $alert.confirm('请登录')
                             .then(function(){
-                                $scope.submit();
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        $scope.productList = [];
+                                        pageNo = 0;
+                                        $scope.infiniteFlag = true;
+                                        productHandle.resize();
+                                        productHandle.scrollTop();
+                                        getMyProductList();
+                                    })
                             })
                     })
             }

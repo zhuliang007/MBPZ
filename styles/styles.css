@@ -804,6 +804,7 @@ ion-content{
 .productReport{
     width: 110px;
     height: 50px;
+    margin-top: 5px!important;
 }
 
 .productReport ion-content{
@@ -1090,12 +1091,17 @@ ion-content{
     background-color: #F5F5F5;
 }
 
+.report ion-footer-bar{
+    background-image: none;
+    border-top: 1px solid #DDDDDD;
+    padding: 0px;
+}
+
 .report .submit{
-    border: none;
     background-color: #FF4E72;
+    border: none;
     color: #FFFFFF;
-    padding: 10px;
-    margin-top: 20px;
+    font-size: 16px;
 }
 
 .report .submit.activated{
@@ -2693,6 +2699,44 @@ ion-content{
     position: absolute;
     bottom: 10px;
     width: 100%;
+}
+
+/*提示框*/
+.mbpz-popup-container .popup{
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    color: #FFFFFF;
+    padding: 10px 0px;
+}
+
+.mbpz-popup-container .popup-head{
+    display: none;
+}
+
+.mbpz-popup-container .popup-body{
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+    color: #333333;
+}
+
+.mbpz-popup-container .popup-buttons{
+    display: block;
+    text-align: center;
+    min-height: 0px;
+}
+
+.mbpz-popup-container .popup-buttons .mbpz-popup-button.button{
+    display: inline;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#FFB7AB), to(#FF4E72));
+    background: -webkit-linear-gradient(top, #FFB7AB, #FF4E72);
+    color: #FFFFFF;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    min-height: 0px;
+    border:none;
+    padding: 5px 30px;
 }
 
 
