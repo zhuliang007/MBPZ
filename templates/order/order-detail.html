@@ -6,7 +6,7 @@
         <h1 class="title">订单详情</h1>
     </ion-header-bar>
     <ion-content >
-        <div class="list">
+        <ion-list>
                 <div class="row item">
                     <div class="col-20 ">
                         <div class="bgImg border-radius-round orderDetailUserImg" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg||defaultHead),'1:1')" ></div>
@@ -18,7 +18,7 @@
                         <span class="orderDetailT mbpz mbpz-icon-replies orderDetailT-icon">联系TA</span>
                     </div>
                 </div>
-                <div class="item">
+                <ion-item>
                     <div class="row">
                         <div class="col col-20 col-center" ng-if="items.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(items.product.productImageList) track by $index">
                             <div id="orderDetailImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('orderDetailImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
@@ -73,19 +73,30 @@
                             <span ng-bind="items.payDate"></span>
                         </div>
                     </div>
-                </div>
-        </div>
-                <div class="item processItem" ng-if="items.process.length>0" >
-                    <ion-scroll direction="x" style="width:1000px;">
-                        <div class="processDiv" ng-repeat="processItem in items.process track by $index">
+                </ion-item>
+                <ion-item class="processItem"  >
+                    <ion-scroll id="processScrolls" class="processScroll" direction="x" >
+                        <div class="processDiv" ng-repeat="processItem in items.process track by $index" ng-if="items.process.length>0">
                             <p class="processFont" ng-bind="processItem.statusName"></p>
                             <p>
                                 <img src="{{progresBar}}" width="100%" height="100%">
                             </p>
-                            <p class="processFont" ng-bind="processItem.statusDate"></p>
+                            <p class="processTime" ng-bind="processItem.statusDate"></p>
                         </div>
                     </ion-scroll>
-                </div>
+                </ion-item>
+                <ion-item class="processItem" ng-if="items.logistics.length>0">
+                    <div class="row" ng-repeat="processligs in items.logistics track by $index">
+                        <div class="col10 col-center">
+                            <i class="icon ion-record processlig"></i>
+                        </div>
+                        <div class="col col-center">
+                            <p ng-bind="processligs.logistics.info"></p>
+                            <p ng-bind="processligs.logistics.data"></p>
+                        </div>
+                    </div>
+                </ion-item>
+        </ion-list>
 
     </ion-content>
     <div class="bar bar-footer orderBtn" ng-if="items.status!=null">
@@ -95,8 +106,22 @@
         <div class="col-50 " ng-if="items.status=='NOT_PAID'">
             <button class="button button-full button-assertive">立即支付</button>
         </div>
+        <div class="col" ng-if="items.status=='EVALUATING'">
+            <button class="button button-full button-assertive">立即评价</button>
+        </div>
         <div class="col" ng-if="items.status=='EVALUATED'">
             <button class="button button-full button-assertive">查看评价</button>
+        </div>
+    </div>
+    <div class="bar bar-footer orderBtn" ng-if="items.refundStatus!=null">
+        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
+            <button class="button button-full button-stable refusedApply" >拒绝原因</button>
+        </div>
+        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
+            <button class="button button-full button-assertive">重新申请退款</button>
+        </div>
+        <div class="col" ng-if="items.refundStatus=='SENDING'">
+            <button class="button button-full button-assertive" ng-click="submitDelivery(item.id,2)">申请退货</button>
         </div>
     </div>
 </ion-view>

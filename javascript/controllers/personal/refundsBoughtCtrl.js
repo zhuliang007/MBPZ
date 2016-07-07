@@ -92,5 +92,15 @@ angular.module('controllers.refundsBoughtCtrl',[])
             $scope.refusedApply = function(id,type,items,routers){
                 $state.go($config.controllers.refusedApply.name,{id:id,type:type,obj:items,routers:routers})
             }
+            //订单详情
+            $scope.orderDetail=function(id,type){
+                $state.go($config.controllers.orderDetail.name,{id:id,type:type})
+            }
+
+
+            //申请退货
+            $scope.submitBoughtDelivery = function(id,type){
+                $state.go($config.controllers.submitDelivery.name,{id:id,type:type})
+            }
 
         }])

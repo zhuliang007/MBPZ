@@ -87,4 +87,18 @@ angular.module('controllers.deliveryCtrl',[])
                             })
 
                 }
+
+            //跳转上一页
+            $scope.goBackPage = function(){
+                switch (parseInt($stateParams.type)){
+                    case 0:
+                        break;
+                    case 1:
+                        $state.go($config.controllers.boughtRefundsRelease.name)
+                        break;
+                    case 2:
+                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id})
+                        break;
+                }
+            }
         }])

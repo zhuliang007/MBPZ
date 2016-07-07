@@ -170,4 +170,5 @@ angular.module('controllers.myBoughtCtrl',[])
             $scope.evaluationShow = function(id){
 
             }
+
         }])

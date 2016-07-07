@@ -47,6 +47,7 @@
                     <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="submitDelivery(item.id)">确认发货</button>
                         <button class="button mbpz" ng-if="item.status =='RECEIVING'" ng-click="remindDeliverySell(item.id)">提醒收货</button>
+                        <button class="button mbpz" ng-if="item.status =='EVALUATING'" >立即评价</button>
                         <button class="button mbpz" ng-if="item.status =='EVALUATED'" >查看评价</button>
                     </div>
                 </div>

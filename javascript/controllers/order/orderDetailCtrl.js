@@ -31,6 +31,10 @@ angular.module('controllers.orderDetailCtrl',[])
                                 $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                 $scope.nickName = result.data.product.publicUser.nickName;
                                 $scope.items=result.data;
+
+                                var processScroll = document.getElementById('processScrolls')
+                                var $element = angular.element(processScroll);
+                                $element.children('.scroll').css({'width':(120*result.data.process.length)+"px"});
                             })
                     },function(){
                         $scope.autoLogin()
@@ -51,7 +55,18 @@ angular.module('controllers.orderDetailCtrl',[])
                     case 1:
                         $state.go($config.controllers.mySold.name);
                         break;
+                    case 2:
+                        $state.go($config.controllers.boughtRefundsRelease.name);
+                        break;
+                    case 3:
+                        $state.go($config.controllers.sellRefundsRelease.name);
+                        break;
                 }
+            }
+
+            //申请退货
+            $scope.submitDelivery = function(id,type){
+                $state.go($config.controllers.submitDelivery.name,{id:id,type:type})
             }
 
 

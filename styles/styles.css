@@ -2773,14 +2773,21 @@ ion-content{
 .processItem{
     padding:0px;
     margin:0px;
+    width:100% !important;
 }
 .processDiv{
-    width:100px !important;
+    width:120px !important;
     float:left;
+    word-break: break-all;
 }
 .processFont{
     text-align: center;
     font-size:14px;
+}
+.processTime{
+    text-align: center;
+    font-size:0.1rem !important;
+
 }
 /*发表评价*/
 .orderEvaluate .orderEvaluateContents{
@@ -2828,6 +2835,15 @@ ion-content{
 
 .orderEvaluate .judgeStars>.star.checked{
     color: #FFAF60;
+}
+
+.processScroll >.scroll{
+    position: relative;
+    display: inline-block;
+}
+
+.processlig{
+    color:#FF4E72 !important;
 }
 
 

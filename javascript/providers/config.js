@@ -457,7 +457,7 @@ angular.module('providers.config',[])
             },
             submitDelivery:{
                 templateUrl:"templates/order/order-delivery.html",
-                url:"/delivery/:id?",
+                url:"/delivery/:id&:type?",
                 name:"submitDelivery",
                 controller:"DeliveryCtrl",
                 cache:false
