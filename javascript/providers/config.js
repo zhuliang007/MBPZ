@@ -115,11 +115,8 @@ angular.module('providers.config',[])
             orderDetail:"market/order/detail",
             orderSend:"market/order/buyerSend",
             sellerSend:"market/order/sellerSend",
-<<<<<<< HEAD
             orderReceive:"market/order/buyerReceive",
-=======
             evaluateSave:"market/evaluate/save",
->>>>>>> master
         }
 
         /**提示信息配置*/

@@ -2770,8 +2770,6 @@ ion-content{
     padding:0px !important;
     background-position:bottom !important;
 }
-
-<<<<<<< HEAD
 .processItem{
     padding:0px;
     margin:0px;
@@ -2784,8 +2782,6 @@ ion-content{
     text-align: center;
     font-size:14px;
 }
-
-=======
 /*发表评价*/
 .orderEvaluate .orderEvaluateContents{
     background-color: #FFFFFF;
@@ -2833,7 +2829,6 @@ ion-content{
 .orderEvaluate .judgeStars>.star.checked{
     color: #FFAF60;
 }
->>>>>>> master
 
 
 
