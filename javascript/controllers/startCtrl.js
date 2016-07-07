@@ -125,6 +125,7 @@ angular.module('controllers.start',[])
             $scope.mineUndercarriage=$config.getImageUrlDebug() + $config.assets.mineUndercarriage;
             $scope.mineWallet=$config.getImageUrlDebug() + $config.assets.mineWallet;
             $scope.mineAlipay=$config.getImageUrlDebug() + $config.assets.alipay;
+            $scope.progresBar = $config.getImageUrlDebug()+$config.assets.progresBar;
 
             $rootScope.provinceCityList = {
                 provinceList: [],

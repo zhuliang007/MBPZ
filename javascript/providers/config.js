@@ -65,6 +65,7 @@ angular.module('providers.config',[])
             mineUndercarriage:"mine/icon_mine_undercarriage.png",
             mineWallet:"mine/icon_mine_wallet.png",
             alipay:"alipay.png",
+            progresBar:"progress-bar.png",
         }
 
 
@@ -114,6 +115,7 @@ angular.module('providers.config',[])
             orderDetail:"market/order/detail",
             orderSend:"market/order/buyerSend",
             sellerSend:"market/order/sellerSend",
+            orderReceive:"market/order/buyerReceive",
             evaluateSave:"market/evaluate/save",
         }
 

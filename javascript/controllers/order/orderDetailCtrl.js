@@ -48,6 +48,9 @@ angular.module('controllers.orderDetailCtrl',[])
                     case 0:
                         $state.go($config.controllers.myBought.name);
                         break;
+                    case 1:
+                        $state.go($config.controllers.mySold.name);
+                        break;
                 }
             }
 

@@ -76,7 +76,9 @@ angular.module('controllers.deliveryCtrl',[])
                                     }
                                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                                         .then(function(result){
-                                                alert(result.msg)
+                                                if(result.msg=='发货成功'){
+                                                        $state.go($config.controllers.mySold.name);
+                                                }
                                         })
                             },function(){
                                     $scope.autoLogin()

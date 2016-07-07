@@ -113,19 +113,61 @@ angular.module('controllers.myBoughtCtrl',[])
                 }
                 //提醒发货
                 $scope.remindDelivery = function(id){
-                    var remindData = {
-                        "cmd":$config.cmds.noticOrder,
-                        "parameters":{
-                            "id":id,
-                            "orderType":"order",
-                            "saleType":"buy"
-                        },
-                        "token":"ODkxOGJjZTItNDhiMy00NTVjLTlmNTAtMjVlYzI2MmQyMGI2"
-                    }
+                    $scope.checkLogin()
+                        .then(function(){
+                            var remindData = {
+                                "cmd":$config.cmds.noticOrder,
+                                "parameters":{
+                                    "id":id,
+                                    "orderType":"order",
+                                    "saleType":"buy"
+                                },
+                                "token":$scope.userInfo.loginToken
+                            }
 
-                    $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                        .then(function(result){
-                            console.log(result.msg)
+                            $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                                .then(function(result){
+                                    console.log(result.msg)
+                                })
+                        },function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                })
                         })
                 }
+            //确认收货
+            $scope.submitBuyer = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.orderReceive,
+                            "parameters":{
+                                "id":id
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                //提示收货成功
+
+                                if(result.msg=='确认收货成功'){
+                                    $state.go($config.controllers.myBought.name,null,{reload:true});
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+            }
+
+            //立即评价
+            $scope.evaluation = function (id) {
+            }
+
+            //查看评价
+            $scope.evaluationShow = function(id){
+
+            }
         }])
