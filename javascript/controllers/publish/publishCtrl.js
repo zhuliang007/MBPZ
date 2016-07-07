@@ -59,8 +59,10 @@ angular.module('controllers.publish',[])
                                             width:productImage.imageWidth
                                         }
                                         $scope.publishObject.publishImageList.push(publishImage);
-
                                     }
+                                    var element = document.getElementById('publishImageHandle');
+                                    var $element = angular.element(element);
+                                    $element.children('.scroll').css({'width': (98 * ($scope.publishObject.publishImageList.length+1)) + 'px'});
                                     $productType.setTypeCodes()
                                         .then(function(){
                                             $scope.typeCodes = $productType.typeCodes;
