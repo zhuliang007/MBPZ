@@ -74,9 +74,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="item" ng-if="items.process.length>0">
-                </div>
         </div>
+                <div class="item processItem" ng-if="items.process.length>0" >
+                    <ion-scroll direction="x" style="width:1000px;">
+                        <div class="processDiv" ng-repeat="processItem in items.process track by $index">
+                            <p class="processFont" ng-bind="processItem.statusName"></p>
+                            <p>
+                                <img src="{{progresBar}}" width="100%" height="100%">
+                            </p>
+                            <p class="processFont" ng-bind="processItem.statusDate"></p>
+                        </div>
+                    </ion-scroll>
+                </div>
+
     </ion-content>
     <div class="bar bar-footer orderBtn" ng-if="items.status!=null">
         <div class="col-50 " ng-if="items.status=='NOT_PAID'">

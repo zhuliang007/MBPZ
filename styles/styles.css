@@ -2762,6 +2762,19 @@ ion-content{
     background-position:bottom !important;
 }
 
+.processItem{
+    padding:0px;
+    margin:0px;
+}
+.processDiv{
+    width:100px !important;
+    float:left;
+}
+.processFont{
+    text-align: center;
+    font-size:14px;
+}
+
 
 
 

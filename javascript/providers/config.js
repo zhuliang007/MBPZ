@@ -65,6 +65,7 @@ angular.module('providers.config',[])
             mineUndercarriage:"mine/icon_mine_undercarriage.png",
             mineWallet:"mine/icon_mine_wallet.png",
             alipay:"alipay.png",
+            progresBar:"progress-bar.png",
         }
 
 
