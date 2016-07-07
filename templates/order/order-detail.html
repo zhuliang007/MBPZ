@@ -18,7 +18,73 @@
                         <span class="orderDetailT mbpz mbpz-icon-replies orderDetailT-icon">联系TA</span>
                     </div>
                 </div>
-                <div class="row item"></div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col col-20 col-center" ng-if="items.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(items.product.productImageList) track by $index">
+                            <div id="orderDetailImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('orderDetailImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        </div>
+                        <div class="col col-center">
+                            <p class="orderDetailP" ng-bind="items.product.title"></p>
+                            <p >
+                                <span>¥&nbsp;</span>
+                                <span ng-bind="items.price"></span>
+                                <span>(包含快递费)</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row orderDetailConsignee">
+                        <div class="col-20 col-center">
+                            <span>收货人</span>
+                        </div>
+                        <div class="col col-center receiveSpan">
+                            <span ng-bind="items.receiveName"></span>
+                            <span ng-bind="items.receivePhone"></span>
+                        </div>
+                    </div>
+                    <div class="row orderDetailConsignee">
+                        <div class="col-20 col-center">
+                            <span>收货地址</span>
+                        </div>
+                        <div class="col col-center receiveSpan">
+                            <span ng-bind="items.address"></span>
+                        </div>
+                    </div>
+                    <div class="row orderDetailConsignee">
+                        <div class="col-20 col-center">
+                            <span>卖家昵称</span>
+                        </div>
+                        <div class="col col-center receiveSpan">
+                            <span ng-bind="items.product.publicUser.nickName"></span>
+                        </div>
+                    </div>
+                    <div class="row orderDetailConsignee">
+                        <div class="col-20 col-center">
+                            <span>订单编号</span>
+                        </div>
+                        <div class="col col-center receiveSpan">
+                            <span ng-bind="items.orderCode"></span>
+                        </div>
+                    </div>
+                    <div class="row orderDetailConsignee">
+                        <div class="col-20 col-center">
+                            <span>成交时间</span>
+                        </div>
+                        <div class="col col-center receiveSpan">
+                            <span ng-bind="items.payDate"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" ng-if="items.process.length>0">
+                </div>
         </div>
     </ion-content>
+    <div class="bar bar-footer orderBtn">
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'">
+            <button class="button button-full button-stable refusedApply" >取消订单</button>
+        </div>
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'">
+            <button class="button button-full button-assertive">立即支付</button>
+        </div>
+
+    </div>
 </ion-view>

@@ -30,6 +30,7 @@ angular.module('controllers.orderDetailCtrl',[])
                                 console.log(result)
                                 $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                 $scope.nickName = result.data.product.publicUser.nickName;
+                                $scope.items=result.data;
                             })
                     },function(){
                         $scope.autoLogin()
@@ -49,5 +50,6 @@ angular.module('controllers.orderDetailCtrl',[])
                         break;
                 }
             }
+
 
         }])

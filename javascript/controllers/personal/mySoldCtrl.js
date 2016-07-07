@@ -79,7 +79,7 @@ angular.module('controllers.mySoldCtrl',[])
             }
 
             //确认发货
-            $scope.submitDelivery = function(){
-
+            $scope.submitDelivery = function(id){
+                $state.go($config.controllers.submitDelivery.name,{id:id})
             }
         }])

@@ -2,7 +2,7 @@
     <ion-content has-bouncing="true" class="releasePaddingTop"  >
         <ion-list ng-repeat="item in items track by $index" class="soldList">
             <div class="item shelvesItems">
-                <a  ng-click="showProduct(item.id)">
+                <a  ng-click="showProduct(item.product.id)">
                     <div class="row shelvesRow">
                         <div class="col-60 soldOrderFont">
                             <span>订单编号:</span>
