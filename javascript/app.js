@@ -285,7 +285,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.refusedApply.cache,
                     params:$configProvider.controllers.refusedApply.params,
                 })
-<<<<<<< HEAD
                 .state($configProvider.controllers.pay.name,{
                     url:$configProvider.controllers.pay.url,
                     templateUrl:$configProvider.controllers.pay.templateUrl,
@@ -300,17 +299,16 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     cache:$configProvider.controllers.payRouters.cache,
                     params:$configProvider.controllers.payRouters.params,
                 })
-                .state($configProvider.controllers.orderDetail.name,{
-                    url:$configProvider.controllers.orderDetail.url,
-                    templateUrl:$configProvider.controllers.orderDetail.templateUrl,
-                    controller:$configProvider.controllers.orderDetail.controller,
-                    cache:$configProvider.controllers.orderDetail.cache,
-=======
+                .state($configProvider.controllers.orderDetail.name, {
+                    url: $configProvider.controllers.orderDetail.url,
+                    templateUrl: $configProvider.controllers.orderDetail.templateUrl,
+                    controller: $configProvider.controllers.orderDetail.controller,
+                    cache: $configProvider.controllers.orderDetail.cache,
+                })
                 .state($configProvider.controllers.recommend.name,{
                     url:$configProvider.controllers.recommend.url,
                     templateUrl:$configProvider.controllers.recommend.templateUrl,
                     controller:$configProvider.controllers.recommend.controller,
                     cache:$configProvider.controllers.recommend.cache,
->>>>>>> master
                 })
         }])
