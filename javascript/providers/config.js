@@ -501,10 +501,6 @@ angular.module('providers.config',[])
                 templateUrl:"templates/modal/provinceCity.html",
                 animation:"slide-in-up"
             },
-            payModal: {
-                templateUrl:"templates/modal/pay.html",
-                animation:"slide-in-up"
-            },
             publishModal: {
                 templateUrl:"templates/modal/publish.html",
                 animation:null

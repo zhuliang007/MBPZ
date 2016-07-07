@@ -103,15 +103,12 @@ angular.module('controllers.orderPreview',[])
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
                                 //显示支付选择
-                                /*$rootScope.orderPreviewObject = result.data;
-                                $rootScope.orderPreviewObject.backImg = $scope.mineAlipay;
-                                $scope.openPayModal('payModal');
-                                $console.show($rootScope.orderPreviewObject);*/
-                                //支付操作还没做
                                 //将生成的订单信息传递给支付操作页面，选择支付方式
                                 $console.show("选择支付方式")
                                 $console.show(result)
-
+                                var userToken = 'token';
+                                result.data[userToken]=$scope.userInfo.loginToken;
+                                $state.go($config.controllers.pay.name,{id:id,obj:result.data,routers:1});
                             },function(error){
                                 $console.show(error);
                                 if(error.systemError){

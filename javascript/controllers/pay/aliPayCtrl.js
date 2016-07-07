@@ -16,7 +16,7 @@ angular.module('controllers.aliPayCtrl',[])
         '$http',
         '$ionicModal',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$http,$ionicModal) {
-
+            $scope.routers = $stateParams.routers;
         }])
 .directive('pay', function(){
     return {
