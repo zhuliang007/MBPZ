@@ -5,7 +5,7 @@
         </div>
         <h1 class="title" ng-bind="title"></h1>
         <div class="buttons">
-            <button class="button" ng-if="addressId"><span>删除</span></button>
+            <button class="button" ng-if="addressId" ng-click="deleteAddress()"><span>删除</span></button>
         </div>
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
@@ -43,6 +43,6 @@
         </ion-list>
     </ion-content>
     <ion-footer-bar align-title="center">
-        <button type="button" class="button-block submit" ng-click="edictAddress()">确定保存</button>
+        <button type="button" class="button-block submit" ng-click="editAddress()">确定保存</button>
     </ion-footer-bar>
 </ion-view>

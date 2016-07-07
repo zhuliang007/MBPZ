@@ -7,11 +7,11 @@
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
         <ion-list>
-            <ion-item class="item-icon-right" ng-click="edictAddress(address)" ng-repeat="address in addressList track by $index">
+            <ion-item class="item-icon-right" ng-click="editAddress(address)" ng-repeat="address in addressList track by $index">
                 <span class="icon ion-checkmark-circled isDefault" ng-if="address.isDefault"></span>
                 <div class="userTitle" ng-bind="address.receiveName + '&nbsp;&nbsp;&nbsp;&nbsp;' + address.receivePhone"></div>
                 <div class="userAddress" style="white-space: normal" ng-bind="address.address"></div>
-                <ion-option-button class="button-positive" ng-click="edictAddress(address,1)">编辑</ion-option-button>
+                <ion-option-button class="button-positive" ng-click="editAddress(address,1)">编辑</ion-option-button>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll
@@ -22,6 +22,6 @@
         </ion-infinite-scroll>
     </ion-content>
     <ion-footer-bar align-title="center">
-        <button type="button" class="button-block submit" ng-click="edictAddress()">添加新地址</button>
+        <button type="button" class="button-block submit" ng-click="editAddress()">添加新地址</button>
     </ion-footer-bar>
 </ion-view>
