@@ -111,6 +111,7 @@ angular.module('providers.config',[])
             applyRefused:"market/order/refund",
             dictList:"system/dictList",
             orderDetail:"market/order/detail",
+            orderSend:"market/order/buyerSend",
         }
 
         /**提示信息配置*/
@@ -447,6 +448,13 @@ angular.module('providers.config',[])
                 url:"/recommend/:productId&:repUserId",
                 name:"recommend",
                 controller:"RecommendCtrl",
+                cache:false
+            },
+            submitDelivery:{
+                templateUrl:"templates/order/order-delivery.html",
+                url:"/delivery/:id?",
+                name:"submitDelivery",
+                controller:"DeliveryCtrl",
                 cache:false
             }
 

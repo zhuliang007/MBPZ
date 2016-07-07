@@ -311,4 +311,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.recommend.controller,
                     cache:$configProvider.controllers.recommend.cache,
                 })
+                .state($configProvider.controllers.submitDelivery.name,{
+                    url:$configProvider.controllers.submitDelivery.url,
+                    templateUrl:$configProvider.controllers.submitDelivery.templateUrl,
+                    controller:$configProvider.controllers.submitDelivery.controller,
+                    cache:$configProvider.controllers.submitDelivery.cache,
+                })
         }])

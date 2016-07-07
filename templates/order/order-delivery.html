@@ -1,0 +1,25 @@
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title" >物流信息</h1>
+    </ion-header-bar>
+    <ion-content >
+        <div class="list">
+            <label class="item item-input item-select refundLabel">
+                <span class="ion-asterisk asteriskSpan"></span>
+                <span class="serviceFont">请选择快递公司</span>
+                <input type="text" placeholder="请选择快递公司" ng-click="courierComShow()" readonly="readonly" class="serviceInput" ng-model="delivery.name" >
+            </label>
+            <label class="item item-input refundLabel">
+                <span class="ion-asterisk asteriskSpan"></span>
+                <span class="serviceFont">请输入快递单号</span>
+                <input type="text" placeholder="请输入快递单号" class="serviceInput" ng-model="orderCode" >
+            </label>
+        </div>
+        <div class="padding-normal-horizontal" >
+            <button class="button button-block button-positive" ng-click="submitDelivery()" >提交</button>
+        </div>
+    </ion-content>
+</ion-view>
