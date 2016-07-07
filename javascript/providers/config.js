@@ -113,6 +113,7 @@ angular.module('providers.config',[])
             dictList:"system/dictList",
             orderDetail:"market/order/detail",
             orderSend:"market/order/buyerSend",
+            sellerSend:"market/order/sellerSend",
         }
 
         /**提示信息配置*/

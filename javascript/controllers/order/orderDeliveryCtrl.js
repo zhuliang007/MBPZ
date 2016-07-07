@@ -62,30 +62,27 @@ angular.module('controllers.deliveryCtrl',[])
                 }
 
                 //提交快递
-                $scope.orderCode='';
-                $scope.submitDelivery=function(){
-                        console.log($scope.delivery.value)
-                        console.log($scope.orderCode)
-                        //$scope.checkLogin()
-                        //    .then(function(){
-                        //            var data={
-                        //                    "cmd": $config.cmds.orderSend,
-                        //                    "parameters": {
-                        //                            "id":$stateParams.id,
-                        //                            "express":"ems",
-                        //                            "expressNum":"1030486038880"
-                        //                    },
-                        //                    "token":$scope.userInfo.loginToken
-                        //            }
-                        //            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        //                .then(function(result){
-                        //                        alert(result.msg)
-                        //                })
-                        //    },function(){
-                        //            $scope.autoLogin()
-                        //                .then(function(){
-                        //                })
-                        //    })
+                $scope.submitDelivery=function(orderCodes){
+                        $scope.checkLogin()
+                            .then(function(){
+                                    var data={
+                                            "cmd": $config.cmds.orderSend,
+                                            "parameters": {
+                                                    "id":$stateParams.id,
+                                                    "express":$scope.delivery.value,
+                                                    "expressNum":orderCodes
+                                            },
+                                            "token":$scope.userInfo.loginToken
+                                    }
+                                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                        .then(function(result){
+                                                alert(result.msg)
+                                        })
+                            },function(){
+                                    $scope.autoLogin()
+                                        .then(function(){
+                                        })
+                            })
 
                 }
         }])
