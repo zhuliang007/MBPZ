@@ -163,8 +163,6 @@ angular.module("controllers.recommend",[])
                                         })
                                 }
                             })
-
-
                     },function(){
                         $alert.confirm('请登录')
                             .then(function(){
