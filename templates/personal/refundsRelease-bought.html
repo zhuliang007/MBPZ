@@ -1,8 +1,8 @@
 <ion-view >
-    <ion-content has-bouncing="true" class="releasePaddingTop"  >
+    <ion-content   >
         <ion-list ng-repeat="item in items track by $index" class="soldList">
             <div class="item shelvesItems">
-                <a  ng-click="showProduct(item.product.id)">
+                <a  ng-click="orderDetail(item.id,2)">
                     <div class="row shelvesRow">
                         <div class="col-60 soldOrderFont">
                             <span>订单编号:</span>
@@ -48,6 +48,10 @@
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,1)">拒绝原因</button>
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="applyRefund(item.id,item.price,item.freight)">重新申请退款</button>
                     </div>
+                    <div class="col shelvesBtn">
+                        <button class="button mbpz" ng-if="item.refundStatus =='SENDING'" ng-click="submitBoughtDelivery(item.id,1)">退货</button>
+                    </div>
+
                 </div>
             </div>
         </ion-list>

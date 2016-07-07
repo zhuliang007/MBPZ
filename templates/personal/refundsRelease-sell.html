@@ -1,8 +1,8 @@
 <ion-view >
-    <ion-content has-bouncing="true" class="releasePaddingTop"  >
+    <ion-content >
         <ion-list ng-repeat="item in items track by $index" class="soldList">
             <div class="item shelvesItems">
-                <a  ng-click="showProduct(item.id)">
+                <a  ng-click="orderDetail(item.id,3)">
                     <div class="row shelvesRow">
                         <div class="col-60 soldOrderFont">
                             <span>订单编号:</span>
