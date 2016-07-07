@@ -292,10 +292,6 @@ angular.module('controllers.start',[])
                     $scope['provinceCityModal'] = null;
                 }
 
-                if($rootScope['payModal']){
-                    $rootScope['payModal'] = null;
-                }
-
                 if($scope['publishModal']){
                     $scope['publishModal'] = null;
                 }

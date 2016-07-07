@@ -31,8 +31,8 @@
                 <i class="icon ion-chevron-right"></i>
                 收货地址
                 <div class="address text-right">
-                    <div><span ng-bind="order.receiveName + '&nbsp;&nbsp;&nbsp;&nbsp;' + order.receivePhone"></span></div>
-                    <div><span ng-bind="order.address"></span></div>
+                    <div><span ng-bind="(order.receiveName||'') + '&nbsp;&nbsp;&nbsp;&nbsp;' +(order.receivePhone||'')"></span></div>
+                    <div><span ng-bind="(order.address||'')"></span></div>
                 </div>
             </ion-item>
             <ion-item>
