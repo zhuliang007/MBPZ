@@ -309,9 +309,28 @@ angular.module('controllers.start',[])
                 $scope.$$childTail.$$childTail.$$childTail.codeNumber = '';
             }
 
-            $scope.goPublish = function(type){
-                $state.go($config.controllers.publish.name,{type:type});
-                $scope.closeModal('publishModal');
+            $scope.goPublish = function(type,id){
+                $scope.checkLogin()
+                    .then(function(){
+                        if(id){
+                            $state.go($config.controllers.publish.name,{type:type,id:id});
+                        }
+                        else{
+                            $state.go($config.controllers.publish.name,{type:type});
+                            $scope.closeModal('publishModal');
+                        }
+                    },function(){
+                        $alert.confirm('请登录')
+                            .then(function(){
+                                $scope.autoLogin()
+                                    .then(function(){
+                                        $scope.goPublish(type);
+                                    })
+                            },function(){
+                                $scope.closeModal('publishModal');
+                            })
+                    })
+
             }
 
             $scope.codeTarget = '获取验证码';
