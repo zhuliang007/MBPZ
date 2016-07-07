@@ -40,4 +40,5 @@ angular.module('starter.controllers',[
     'controllers.aliPayCtrl',
     'controllers.orderDetailCtrl',
     'controllers.recommend',
-    'controllers.deliveryCtrl'])
+    'controllers.deliveryCtrl',
+    'controllers.orderEvaluate'])
