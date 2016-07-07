@@ -114,6 +114,7 @@ angular.module('providers.config',[])
             orderDetail:"market/order/detail",
             orderSend:"market/order/buyerSend",
             sellerSend:"market/order/sellerSend",
+            orderReceive:"market/order/buyerReceive",
         }
 
         /**提示信息配置*/

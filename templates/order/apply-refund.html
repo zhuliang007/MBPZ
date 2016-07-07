@@ -1,31 +1,26 @@
-
+<ion-view class="personal-setup">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"ng-if="type!=1"><span class="icon ion-ios-arrow-back"></span></button>
+            <button class="button" ng-click="backupDown('refundsRelease.sell')"ng-if="type==1"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title" ng-if="type!=1">申请退款</h1>
+        <h1 class="title" ng-if="type==1">查看退款详情</h1>
+    </ion-header-bar>
+    <ion-content >
+        <div class="list">
             <label class="item item-input refundLabel">
                 <span class="ion-asterisk asteriskSpan"></span>
-                <span class="serviceFont">退款金额</span>
-                <span ng-if="currentPrice!=null||price!=null">¥</span>
-                <input type="text"  readonly=<ion-view class="personal-setup">
-                <ion-header-bar align-title="center">
-                    <div class="buttons">
-                        <button class="button" ng-click="goBack()"ng-if="type!=1"><span class="icon ion-ios-arrow-back"></span></button>
-                        <button class="button" ng-click="backupDown('refundsRelease.sell')"ng-if="type==1"><span class="icon ion-ios-arrow-back"></span></button>
-                    </div>
-                    <h1 class="title" ng-if="type!=1">申请退款</h1>
-                    <h1 class="title" ng-if="type==1">查看退款详情</h1>
-                </ion-header-bar>
-                <ion-content >
-                    <div class="list">
-                        <label class="item item-input refundLabel">
-                            <span class="ion-asterisk asteriskSpan"></span>
-                            <span class="serviceFont">申请服务</span>
-                            <input type="text" ng-click="serviceShow()" readonly="readonly" class="serviceInput" ng-model="refunds.name" ng-if="type !=1">
-                            <span  ng-bind="refundServerValue" ng-if="type == 1"></span>
-                        </label>
-                        <label class="item item-input refundLabel">
-                            <span class="ion-asterisk asteriskSpan"></span>
-                            <span class="serviceFont">退款原因</span>
-                            <input type="text" ng-click="reasonShow()" readonly="readonly" class="serviceInput" ng-model="reasonRef.name" ng-if="type !=1">
-                            <span ng-bind="refundReasonValue" ng-if="type ==1"></span>
-                        </label>"readonly" class="serviceInput" ng-model="currentPrice" ng-if="type!=1">
+                <span class="serviceFont">申请服务</span>
+                <input type="text" ng-click="serviceShow()" readonly="readonly" class="serviceInput" ng-model="refunds.name" ng-if="type !=1">
+                <span  ng-bind="refundServerValue" ng-if="type == 1"></span>
+            </label>
+            <label class="item item-input refundLabel">
+                <span class="ion-asterisk asteriskSpan"></span>
+                <span class="serviceFont">退款原因</span>
+                <input type="text" ng-click="reasonShow()" readonly="readonly" class="serviceInput" ng-model="reasonRef.name" ng-if="type !=1">
+                <span ng-bind="refundReasonValue" ng-if="type ==1"></span>
+            </label>"readonly" class="serviceInput" ng-model="currentPrice" ng-if="type!=1">
                 <span ng-bind="priceValue" ng-if="type==1"></span>
             </label>
             <div class="refundsPrice" ng-if="type!=1">
