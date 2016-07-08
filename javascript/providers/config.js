@@ -465,16 +465,23 @@ angular.module('providers.config',[])
             },
             orderEvaluate:{
                 templateUrl:"templates/order/orderEvaluate.html",
-                url:"/orderEvaluate/:orderId?",
+                url:"/orderEvaluate/:orderId",
                 name:"orderEvaluate",
                 controller:"OrderEvaluateCtrl",
                 cache:false
             },
             evaluateDetail:{
                 templateUrl:"templates/order/evaluateDetail.html",
-                url:"/evaluateDetail/:orderId?",
+                url:"/evaluateDetail/:orderId",
                 name:"evaluateDetail",
                 controller:"EvaluateDetailCtrl",
+                cache:false
+            },
+            personalCenter:{
+                templateUrl:"templates/personal/personal-center.html",
+                url:"/personalCenter/:userId",
+                name:"personalCenter",
+                controller:"PersonalCenterCtrl",
                 cache:false
             }
 

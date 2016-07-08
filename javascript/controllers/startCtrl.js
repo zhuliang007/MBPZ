@@ -378,5 +378,10 @@ angular.module('controllers.start',[])
                 }
                 return productImageList.slice(0,3);
             }
+
+            $scope.showPersonalCenter = function($event,userId){
+                $event.stopPropagation();
+                $state.go($config.controllers.personalCenter.name,{userId:userId});
+            }
         }
     ])
