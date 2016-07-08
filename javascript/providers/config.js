@@ -117,6 +117,7 @@ angular.module('providers.config',[])
             sellerSend:"market/order/sellerSend",
             orderReceive:"market/order/buyerReceive",
             evaluateSave:"market/evaluate/save",
+            evaluateDetail:"market/evaluate/detail"
         }
 
         /**提示信息配置*/
@@ -467,6 +468,13 @@ angular.module('providers.config',[])
                 url:"/orderEvaluate/:orderId?",
                 name:"orderEvaluate",
                 controller:"OrderEvaluateCtrl",
+                cache:false
+            },
+            evaluateDetail:{
+                templateUrl:"templates/order/evaluateDetail.html",
+                url:"/evaluateDetail/:orderId?",
+                name:"evaluateDetail",
+                controller:"EvaluateDetailCtrl",
                 cache:false
             }
 

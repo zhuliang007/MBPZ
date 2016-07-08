@@ -323,4 +323,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.orderEvaluate.controller,
                     cache:$configProvider.controllers.orderEvaluate.cache,
                 })
+                .state($configProvider.controllers.evaluateDetail.name,{
+                    url:$configProvider.controllers.evaluateDetail.url,
+                    templateUrl:$configProvider.controllers.evaluateDetail.templateUrl,
+                    controller:$configProvider.controllers.evaluateDetail.controller,
+                    cache:$configProvider.controllers.evaluateDetail.cache,
+                })
         }])

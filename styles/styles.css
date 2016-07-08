@@ -117,6 +117,7 @@ ion-content{
 .tabsHome ion-header-bar,
 .productListByType ion-header-bar,
 .orderEvaluate ion-header-bar,
+.evaluateDetail ion-header-bar,
 .productDetail.product ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
@@ -145,6 +146,7 @@ ion-content{
 .payModal ion-header-bar,
 .publish ion-header-bar,
 .orderEvaluate ion-header-bar,
+.evaluateDetail ion-header-bar,
 .recommend ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
@@ -189,6 +191,8 @@ ion-content{
 .productListByType ion-header-bar .button.activated,
 .orderEvaluate ion-header-bar .button,
 .orderEvaluate ion-header-bar .button.activated,
+.evaluateDetail ion-header-bar .button,
+.evaluateDetail ion-header-bar .button.activated,
 .productDetail.product ion-header-bar .button,
 .productDetail.product ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
@@ -1281,6 +1285,10 @@ ion-content{
 
 .border-bottom{
     border-bottom: 1px solid #DDDDDD;
+}
+
+.border-top{
+    border-top: 1px solid #DDDDDD;
 }
 
 .border-radius-round{
@@ -2773,21 +2781,14 @@ ion-content{
 .processItem{
     padding:0px;
     margin:0px;
-    width:100% !important;
 }
 .processDiv{
-    width:120px !important;
+    width:100px !important;
     float:left;
-    word-break: break-all;
 }
 .processFont{
     text-align: center;
     font-size:14px;
-}
-.processTime{
-    text-align: center;
-    font-size:0.1rem !important;
-
 }
 /*发表评价*/
 .orderEvaluate .orderEvaluateContents{
@@ -2816,6 +2817,7 @@ ion-content{
     position: relative;
 }
 
+.evaluateDetail .judgeStars,
 .orderEvaluate .judgeStars{
     position: absolute;
     right: 0px;
@@ -2828,11 +2830,13 @@ ion-content{
     text-align: right;
 }
 
+.evaluateDetail .judgeStars>.star,
 .orderEvaluate .judgeStars>.star{
     font-size: 20px;
     color: #999999;
 }
 
+.evaluateDetail .judgeStars>.star.checked,
 .orderEvaluate .judgeStars>.star.checked{
     color: #FFAF60;
 }
@@ -2844,6 +2848,55 @@ ion-content{
 
 .processlig{
     color:#FF4E72 !important;
+}
+
+/*评价详情*/
+.evaluateDetail .nickName,
+.evaluateDetail .productTitle{
+    font-size: 16px;
+    color: #333333;
+}
+
+.evaluateDetail .time{
+    font-size: 12px;
+    color: #999999;
+}
+
+.evaluateDetail .content{
+    font-size: 14px;
+    color: #666666;
+}
+
+.evaluateDetail .sellerEvaluateToBuyer{
+    position: relative;
+    padding: 10px 10px 15px;
+}
+
+.evaluateDetail .sellerEvaluateToBuyer>div.arrow{
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 10px;
+    top: 0px;
+    left: 10px;
+    overflow: hidden;
+}
+
+.evaluateDetail .sellerEvaluateToBuyer .arrow::after{
+    display: block;
+    width: 20px;
+    height: 20px;
+    content: '';
+    background-color: #F5F5F5;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.evaluateDetail .sellerEvaluateToBuyer>.item-judge{
+    border: none;
 }
 
 

@@ -164,11 +164,12 @@ angular.module('controllers.myBoughtCtrl',[])
 
             //立即评价
             $scope.evaluation = function (id) {
+                $state.go($config.controllers.orderEvaluate.name,{orderId:id})
             }
 
             //查看评价
             $scope.evaluationShow = function(id){
-
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id})
             }
 
         }])
