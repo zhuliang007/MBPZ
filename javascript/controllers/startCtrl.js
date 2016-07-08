@@ -22,7 +22,7 @@ angular.module('controllers.start',[])
         function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert){
 
             $scope.thirdType = 4;
-            $scope.userPhone = purl().param('userPhone');
+            $scope.userPhone = purl().param('loginAccount');
 
             var url = $location.url();
             if(!url){

@@ -71,6 +71,14 @@ angular.module('controllers.cancalOrderCtrl',[])
 
             }
 
+            $scope.goBackUp = function () {
+                switch (parseInt($stateParams.type)){
+                    case 0:
+                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.orderType});
+                        break;
+                }
+            }
+
 
 
         }])

@@ -397,7 +397,7 @@ angular.module('providers.config',[])
             },
             cancalOrder:{
                 templateUrl:"templates/order/cancal-order.html",
-                url:"/cancalOrder/:id?",
+                url:"/cancalOrder/:id&:orderType&:type?",
                 name:"cancalOrder",
                 controller:"CancalOrderCtrl",
                 cache:false
