@@ -332,7 +332,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                 .state($configProvider.controllers.personalCenter.name,{
                     url:$configProvider.controllers.personalCenter.url,
                     templateUrl:$configProvider.controllers.personalCenter.templateUrl,
+                    cache:$configProvider.controllers.personalCenter.abstract,
                     controller:$configProvider.controllers.personalCenter.controller,
-                    cache:$configProvider.controllers.personalCenter.cache,
                 })
         }])

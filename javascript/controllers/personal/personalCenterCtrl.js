@@ -11,5 +11,22 @@ angular.module('controllers.personalCenter',[])
         '$stateParams',
         '$httpService',
         function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
-            $console.show($stateParams)
+            $console.show($stateParams);
+            getPersonalInfo();
+            function getPersonalInfo(){
+                var data = {
+                    "cmd": $config.cmds.personCenterInfo,
+                    "parameters":{
+                        "userId":$stateParams.userId
+                    }
+
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $console.show(result);
+                        $scope.personalCenterInfo = result.data;
+                    })
+            }
+
         }])

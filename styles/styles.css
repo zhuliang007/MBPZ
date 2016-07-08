@@ -32,6 +32,7 @@
 .mbpz-icon-report:before { content: "\e60f"; }
 .mbpz-icon-muying:before { content: "\e609"; }
 .mbpz-icon-arrow-down:before { content: "\e606"; }
+.mbpz-icon-chat:before { content: "\e616"; }
 .mbpz-icon-replies:before { content: "\e615"; }
 .mbpz-icon-personal:before { content: "\e603"; }
 .mbpz-icon-plus:before { content: "\e604"; }
@@ -2943,6 +2944,58 @@ ion-content{
 .processTime{
     font-size:0.1rem !important;
 }
+
+/*个人中心*/
+.personalCenter .personalCenterTop{
+    width: 100%;
+    padding-bottom: calc(60%);
+    padding-bottom: -webkit-calc(60%);
+    position: fixed;
+    z-index:999;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    -webkit-background-size: cover;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+}
+
+.personalCenter .personalCenterOperation{
+    position: absolute;
+    z-index:999;
+    width: 100%;
+    display: inline-block;
+}
+
+.personalCenter .personalCenterOperation>.back{
+    display: block;
+    color: #333333;
+    font-size:  24px;
+    padding: 10px;
+    float: left;
+}
+
+.personalCenter .personalCenterOperation>.chat{
+    display: block;
+    color: #333333;
+    font-size: 24px;
+    padding: 10px;
+    float: right;
+}
+
+.personalCenter .personalCenterGroup{
+    position: absolute;
+    width: 100%;
+    z-index: 500;
+    padding-bottom: calc(60% + 44px);
+    padding-bottom: -webkit-calc(60% + 44px);
+}
+
+.personalCenter ion-content{
+    margin-top: calc(60% + 44px);
+    margin-top: -webkit-calc(60% + 44px);
+}
+
 
 
 
