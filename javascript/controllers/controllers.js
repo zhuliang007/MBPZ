@@ -41,4 +41,5 @@ angular.module('starter.controllers',[
     'controllers.orderDetailCtrl',
     'controllers.recommend',
     'controllers.deliveryCtrl',
-    'controllers.orderEvaluate'])
+    'controllers.orderEvaluate',
+    'controllers.evaluateDetail'])

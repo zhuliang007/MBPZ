@@ -113,4 +113,9 @@ angular.module('controllers.mySoldCtrl',[])
             $scope.orderDetail=function(id,type){
                 $state.go($config.controllers.orderDetail.name,{id:id,type:type})
             }
+
+            //查看评价
+            $scope.evaluationShow = function(id){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id})
+            }
         }])

@@ -1,0 +1,69 @@
+<!--订单详情-->
+<ion-view class="evaluateDetail">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back"></span></button>
+        </div>
+        <h1 class="title">查看评价</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="bg-color-white">
+            <div class="row row-no-padding padding-big-vertical padding-normal-horizontal">
+                <div class="col col-center col-10">
+                    <div class="bgImg border-radius-round" id="buyerImage" ng-style="resizeImage('buyerImage',(detailObject.evaluateUser.userImg||defaultHead))"></div>
+                </div>
+                <div class="col col-center padding-normal-left">
+                    <span ng-bind="detailObject.evaluateUser.nickName" class="nickName"></span>
+                </div>
+                <div class="col col-20 col-center text-right padding-normal-left">
+                    <span ng-bind="parseTime(detailObject.evaluateDate)" class="time"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding padding-big-bottom padding-normal-horizontal">
+                <div class="col">
+                    <span ng-bind="detailObject.content" class="content"></span>
+                </div>
+            </div>
+            <div class="padding-normal-bottom padding-normal-horizontal">
+                <div class="row bg-color-main-gray">
+                    <div class="col col-20 col-center">
+                        <div class="bgImg" id="productImage" ng-style="resizeImage('productImage',(detailObject.product.productImageList[0].location))"></div>
+                    </div>
+                    <div class="col col-center padding-normal-left">
+                        <span ng-bind="detailObject.product.title" class="productTitle"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="sellerEvaluateToBuyer" ng-if="userInfo&&detailObject&&userInfo.id==detailObject.evaluateUser.id&&detailObject.childEvaluate">
+                <div class="arrow"></div>
+                <div class="bg-color-main-gray padding-normal-vertical padding-normal-horizontal color-dark font-size-small">
+                    卖家回复:<span class="color-normal" ng-bind="detailObject.childEvaluate.content"></span>
+                </div>
+            </div>
+            <div class="sellerEvaluateToBuyer border-top" ng-if="userInfo&&detailObject&&!detailObject.childEvaluate&&userInfo.id==detailObject.product.publicUser.id">
+                <ion-item class="item-input item-judge">
+                    <span class="input-label">描述相符</span>
+                    <div class="judgeStars">
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.productMatche>=1]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.productMatche>=2]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.productMatche>=3]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.productMatche>=4]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.productMatche>=5]"></i>
+                    </div>
+                </ion-item>
+                <ion-item class="item-input item-judge">
+                    <span class="input-label">物流速度</span>
+                    <div class="judgeStars">
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.expressSpeed>=1]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.expressSpeed>=2]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.expressSpeed>=3]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.expressSpeed>=4]"></i>
+                        <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[detailObject.expressSpeed>=5]"></i>
+                    </div>
+                </ion-item>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
