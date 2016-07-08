@@ -63,7 +63,35 @@
                 </ion-item>
             </div>
         </div>
-
+        <div class="bg-color-white margin-normal-top" ng-if="userInfo&&detailObject&&!detailObject.childEvaluate&&userInfo.id==detailObject.product.publicUser.id">
+            <div class="orderEvaluateContents">
+                <div class="borderContents">
+                    <textarea placeholder="评价买家限200字以内" ng-model="childEvaluateObject.content" maxlength="200"></textarea>
+                </div>
+            </div>
+            <div class="text-right padding-normal-horizontal padding-big-bottom"><button class="submit" ng-click="submit()">回复</button></div>
+        </div>
+        <div class="bg-color-white margin-normal-top" ng-if="userInfo&&detailObject&&detailObject.childEvaluate&&userInfo.id==detailObject.childEvaluate.evaluateUser.id">
+            <div class="padding-normal-horizontal padding-big-vertical font-size-big border-bottom">
+                追评(1)
+            </div>
+            <div class="row row-no-padding padding-big-vertical padding-normal-horizontal">
+                <div class="col col-center col-10">
+                    <div class="bgImg border-radius-round" id="sellerImage" ng-style="resizeImage('sellerImage',(detailObject.childEvaluate.evaluateUser.userImg||defaultHead))"></div>
+                </div>
+                <div class="col col-center padding-normal-left">
+                    <span ng-bind="detailObject.childEvaluate.evaluateUser.nickName" class="nickName"></span>
+                </div>
+                <div class="col col-20 col-center text-right padding-normal-left">
+                    <span ng-bind="parseTime(detailObject.childEvaluate.evaluateDate)" class="time"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding padding-big-bottom padding-normal-horizontal">
+                <div class="col">
+                    <span ng-bind="detailObject.childEvaluate.content" class="content"></span>
+                </div>
+            </div>
+        </div>
 
     </ion-content>
 </ion-view>
