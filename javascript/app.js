@@ -329,4 +329,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                     controller:$configProvider.controllers.evaluateDetail.controller,
                     cache:$configProvider.controllers.evaluateDetail.cache,
                 })
+                .state($configProvider.controllers.personalCenter.name,{
+                    url:$configProvider.controllers.personalCenter.url,
+                    templateUrl:$configProvider.controllers.personalCenter.templateUrl,
+                    controller:$configProvider.controllers.personalCenter.controller,
+                    cache:$configProvider.controllers.personalCenter.cache,
+                })
         }])

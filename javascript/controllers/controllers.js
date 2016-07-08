@@ -42,4 +42,5 @@ angular.module('starter.controllers',[
     'controllers.recommend',
     'controllers.deliveryCtrl',
     'controllers.orderEvaluate',
-    'controllers.evaluateDetail'])
+    'controllers.evaluateDetail',
+    'controllers.personalCenter'])

@@ -24,7 +24,7 @@
                     <span ng-bind="detailObject.content" class="content"></span>
                 </div>
             </div>
-            <div class="padding-normal-bottom padding-normal-horizontal">
+            <div class="padding-normal-bottom padding-normal-horizontal" ng-click="showProduct(detailObject.product.id)">
                 <div class="row bg-color-main-gray">
                     <div class="col col-20 col-center">
                         <div class="bgImg" id="productImage" ng-style="resizeImage('productImage',(detailObject.product.productImageList[0].location))"></div>
