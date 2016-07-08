@@ -2801,13 +2801,14 @@ ion-content{
 .orderBtn{
     padding:0px !important;
     background-position:bottom !important;
+    background: rgba(242,242,242,0.1);
 }
 .processItem{
     padding:0px;
     margin:0px;
 }
 .processDiv{
-    width:100px !important;
+    width:120px !important;
     float:left;
 }
 .processFont{
@@ -2939,6 +2940,9 @@ ion-content{
     background-color: rgba(255,78,114,.7);
 }
 
+.processTime{
+    font-size:0.1rem !important;
+}
 
 
 

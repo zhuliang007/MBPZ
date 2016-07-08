@@ -30,6 +30,7 @@ angular.module('controllers.orderDetailCtrl',[])
                                 console.log(result)
                                 $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                 $scope.nickName = result.data.product.publicUser.nickName;
+                                $scope.currentUserId = result.data.product.publicUserId;
                                 $scope.items=result.data;
 
                                 var processScroll = document.getElementById('processScrolls')
@@ -65,8 +66,52 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             //申请退货
-            $scope.submitDelivery = function(id,type){
-                $state.go($config.controllers.submitDelivery.name,{id:id,type:type})
+            $scope.submitDelivery = function(){
+                $state.go($config.controllers.submitDelivery.name,{id:$stateParams.id,type:$stateParams.type})
+            }
+
+
+            $scope.displayRef = function(status){
+                if(status=='REFUNDING'){
+                    return false;
+                }
+                return true;
+            }
+
+            //查看评价
+            $scope.evaluationShow = function(id){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:2,orderDetail:$stateParams.type})
+            }
+
+            //提醒收货
+            $scope.remindDeliverySell =function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":id,
+                                "orderType":"order",
+                                "saleType":"sell"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                console.log(result.msg)
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
+            }
+
+            //取消订单
+            $scope.cancalOrder = function(id){
+                $state.go($config.controllers.cancalOrder.name,{id:id})
             }
 
 

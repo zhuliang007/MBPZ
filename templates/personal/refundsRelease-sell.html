@@ -49,6 +49,7 @@
                         <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</button>
                         <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</button>
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,2)">拒绝原因</button>
+                        <button class="button mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</button>
                     </div>
                 </div>
             </div>

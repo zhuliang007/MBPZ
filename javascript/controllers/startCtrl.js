@@ -379,6 +379,13 @@ angular.module('controllers.start',[])
                 return productImageList.slice(0,3);
             }
 
+            //是否当前登陆用户,判断按钮权限
+            $scope.isCurrentUser = function (currentUserId,userId) {
+                if (currentUserId == userId) {
+                    return false;
+                }
+                return true;
+            }
             $scope.showPersonalCenter = function($event,userId){
                 $event.stopPropagation();
                 $state.go($config.controllers.personalCenter.name,{userId:userId});

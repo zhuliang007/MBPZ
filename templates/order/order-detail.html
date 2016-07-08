@@ -91,29 +91,29 @@
                             <i class="icon ion-record processlig"></i>
                         </div>
                         <div class="col col-center">
-                            <p ng-bind="processligs.logistics.info"></p>
-                            <p ng-bind="processligs.logistics.data"></p>
+                            <p ng-bind="processligs.info"></p>
+                            <p ng-bind="processligs.date"></p>
                         </div>
                     </div>
                 </ion-item>
         </ion-list>
 
     </ion-content>
-    <div class="bar bar-footer orderBtn" ng-if="items.status!=null">
-        <div class="col-50 " ng-if="items.status=='NOT_PAID'">
-            <button class="button button-full button-stable refusedApply" >取消订单</button>
+    <div class="orderBtn bar bar-footer " ng-if="items.status!=null&&displayRef(items.refundStatus)">
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
+            <button class="button button-full button-stable refusedApply" ng-click="cancalOrder()">取消订单</button>
         </div>
-        <div class="col-50 " ng-if="items.status=='NOT_PAID'">
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
             <button class="button button-full button-assertive">立即支付</button>
         </div>
-        <div class="col" ng-if="items.status=='EVALUATING'">
-            <button class="button button-full button-assertive">立即评价</button>
-        </div>
-        <div class="col" ng-if="items.status=='EVALUATED'">
-            <button class="button button-full button-assertive">查看评价</button>
+        <div class="col" >
+            <button class="button button-full button-assertive" ng-if="items.status=='EVALUATING'">立即评价</button>
+            <button class="button button-full button-assertive" ng-click="evaluationShow(items.id)" ng-if="items.status=='EVALUATED'">查看评价</button>
+            <button class="button button-full button-assertive" ng-if="items.status =='RECEIVING'" ng-click="remindDeliverySell(items.id)">提醒收货</button>
+
         </div>
     </div>
-    <div class="bar bar-footer orderBtn" ng-if="items.refundStatus!=null">
+    <div class="orderBtn bar bar-footer " ng-if="items.refundStatus!=null&&displayRef(items.refundStatus)">
         <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
             <button class="button button-full button-stable refusedApply" >拒绝原因</button>
         </div>
@@ -121,7 +121,7 @@
             <button class="button button-full button-assertive">重新申请退款</button>
         </div>
         <div class="col" ng-if="items.refundStatus=='SENDING'">
-            <button class="button button-full button-assertive" ng-click="submitDelivery(item.id,2)">申请退货</button>
+            <button class="button button-full button-assertive" ng-click="submitDelivery()">申请退货</button>
         </div>
     </div>
 </ion-view>
