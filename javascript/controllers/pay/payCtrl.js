@@ -29,6 +29,17 @@ angular.module('controllers.payCtrl',[])
                 $scope.choice=value;
             }
 
+            $scope.goBackUp = function(){
+                switch (parseInt($stateParams.routers)){
+                    case 0:
+                        $state.go($config.controllers.myBought.name);
+                        break;
+                    case 1:
+                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.obj.id,type:0});
+                        break;
+
+                }
+            }
 
 
         }])

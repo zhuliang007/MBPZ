@@ -104,7 +104,7 @@
             <button class="button button-full button-stable refusedApply" ng-click="cancalOrder()">取消订单</button>
         </div>
         <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
-            <button class="button button-full button-assertive">立即支付</button>
+            <button class="button button-full button-assertive" ng-click="showPay(items,1)">立即支付</button>
         </div>
         <div class="col" >
             <button class="button button-full button-assertive" ng-if="items.status=='EVALUATING'">立即评价</button>

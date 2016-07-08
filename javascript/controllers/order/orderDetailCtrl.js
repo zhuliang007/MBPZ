@@ -110,8 +110,25 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             //取消订单
-            $scope.cancalOrder = function(id){
-                $state.go($config.controllers.cancalOrder.name,{id:id})
+            $scope.cancalOrder = function(){
+                $state.go($config.controllers.cancalOrder.name,{id:$stateParams.id,orderType:$stateParams.type,type:0})
+            }
+
+            //立即支付
+            $scope.showPay = function(obj,value){
+                $scope.checkLogin()
+                    .then(function(){
+                        var userToken = "token";
+                        obj[userToken]=$scope.userInfo.loginToken;
+                        var backImage = "backImg";
+                        obj[backImage] = $scope.mineAlipay;
+                        $state.go($config.controllers.pay.name,{obj:obj,routers:value});
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
             }
 
 
