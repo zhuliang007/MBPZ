@@ -473,11 +473,8 @@ angular.module('providers.config',[])
             },
             evaluateDetail:{
                 templateUrl:"templates/order/evaluateDetail.html",
-<<<<<<< HEAD
                 url:"/evaluateDetail/:orderId&:type&:orderDetail?",
-=======
                 url:"/evaluateDetail/:orderId",
->>>>>>> master
                 name:"evaluateDetail",
                 controller:"EvaluateDetailCtrl",
                 cache:false
