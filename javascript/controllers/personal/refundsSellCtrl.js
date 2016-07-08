@@ -48,6 +48,7 @@ angular.module('controllers.refundsSellCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
+                                console.log(result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.content.length==0||result.data.content==null){
                                     $scope.noMoreLoad=true;
@@ -118,6 +119,31 @@ angular.module('controllers.refundsSellCtrl',[])
             //订单详情
             $scope.orderDetail=function(id,type){
                 $state.go($config.controllers.orderDetail.name,{id:id,type:type})
+            }
+
+            //确认收货
+            $scope.submitGoods = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var data =  {
+                            "cmd":$config.cmds.sellerReceive,
+                            "parameters":{
+                                "id":id
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                if(result.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
             }
 
         }])

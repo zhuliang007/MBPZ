@@ -111,5 +111,20 @@ angular.module('controllers.evaluateDetail',[])
 
         }
 
+        //返回上一级页面
+        $scope.goBackUp = function () {
+            switch (parseInt($stateParams.type)){
+                case 0:
+                    $state.go($config.controllers.mySold.name);
+                    break;
+                case 1:
+                    $state.go($config.controllers.myBought.name);
+                    break;
+                case 2:
+                    $state.go($config.controllers.orderDetail.name,{id:$stateParams.orderId,type:$stateParams.orderDetail});
+                    break;
+            }
+        }
+
     }
 ])

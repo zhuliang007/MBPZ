@@ -97,7 +97,7 @@ angular.module('controllers.deliveryCtrl',[])
                         $state.go($config.controllers.boughtRefundsRelease.name)
                         break;
                     case 2:
-                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id})
+                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.type})
                         break;
                 }
             }

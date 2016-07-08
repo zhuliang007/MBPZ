@@ -107,6 +107,7 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.cancalOrder = function(id){
                     $state.go($config.controllers.cancalOrder.name,{id:id})
                 }
+
                 //申请退款
                 $scope.applyRefund = function(id,price,freight){
                     $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight});
@@ -169,7 +170,7 @@ angular.module('controllers.myBoughtCtrl',[])
 
             //查看评价
             $scope.evaluationShow = function(id){
-                $state.go($config.controllers.evaluateDetail.name,{orderId:id})
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:1})
             }
 
         }])
