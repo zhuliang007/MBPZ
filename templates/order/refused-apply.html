@@ -3,7 +3,8 @@
         <div class="buttons">
             <button class="button" ng-click="goBackRefund()"><span class="icon ion-ios-arrow-back"></span></button>
         </div>
-        <h1 class="title" >填写拒绝原因</h1>
+        <h1 class="title" ng-if="type!=1">填写拒绝原因</h1>
+        <h1 class="title" ng-if="type==1">查看拒绝原因</h1>
     </ion-header-bar>
     <ion-pane >
             <div class="list refusedList">

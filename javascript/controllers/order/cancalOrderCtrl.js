@@ -76,6 +76,9 @@ angular.module('controllers.cancalOrderCtrl',[])
                     case 0:
                         $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.orderType});
                         break;
+                    case 1:
+                        $state.go($config.controllers.myBought.name);
+                        break;
                 }
             }
 

@@ -105,7 +105,7 @@ angular.module('controllers.myBoughtCtrl',[])
 
                 //取消订单
                 $scope.cancalOrder = function(id){
-                    $state.go($config.controllers.cancalOrder.name,{id:id})
+                    $state.go($config.controllers.cancalOrder.name,{id:id,type:1})
                 }
 
                 //申请退款

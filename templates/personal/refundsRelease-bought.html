@@ -47,8 +47,6 @@
                     <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,1)">拒绝原因</button>
                         <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="applyRefund(item.id,item.price,item.freight)">重新申请退款</button>
-                    </div>
-                    <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.refundStatus =='SENDING'" ng-click="submitBoughtDelivery(item.id,1)">退货</button>
                     </div>
 

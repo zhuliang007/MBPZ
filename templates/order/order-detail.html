@@ -103,25 +103,45 @@
         <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
             <button class="button button-full button-stable refusedApply" ng-click="cancalOrder()">取消订单</button>
         </div>
+        <div class="col-50 " ng-if="items.status=='PAID'&&isCurrentUser(userInfo.id,currentUserId)
+        &&(items.saleType=='buy'&&items.status =='RECEIVING')
+        &&!items.refundStatus=='APPLY'">
+            <button class="button button-full button-stable refusedApply" ng-click="applyRefund(items.id,items.product.currentPrice,items.freight)">申请退款</button>
+        </div>
         <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
             <button class="button button-full button-assertive" ng-click="showPay(items,1)">立即支付</button>
+        </div>
+        <div class="col-50 " ng-if="items.status=='PAID'&&isCurrentUser(userInfo.id,currentUserId)&&!items.refundStatus=='APPLY'">
+            <button class="button button-full button-assertive" ng-click="remindDelivery(items.id)">提醒发货</button>
+        </div>
+        <div class="col-50 " ng-if="items.status=='RECEIVING'&&items.saleType=='buy'">
+            <button class="button button-full button-assertive" ng-click="submitBuyer(items.id)">确认收货</button>
         </div>
         <div class="col" >
             <button class="button button-full button-assertive" ng-if="items.status=='EVALUATING'">立即评价</button>
             <button class="button button-full button-assertive" ng-click="evaluationShow(items.id)" ng-if="items.status=='EVALUATED'">查看评价</button>
-            <button class="button button-full button-assertive" ng-if="items.status =='RECEIVING'" ng-click="remindDeliverySell(items.id)">提醒收货</button>
+            <button class="button button-full button-assertive" ng-if="items.status =='RECEIVING'&&items.saleType=='sell'" ng-click="remindDeliverySell(items.id)">提醒收货</button>
 
         </div>
     </div>
     <div class="orderBtn bar bar-footer " ng-if="items.refundStatus!=null&&displayRef(items.refundStatus)">
-        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
-            <button class="button button-full button-stable refusedApply" >拒绝原因</button>
+        <div class="col-50 " ng-if="items.refundServer=='TKTH'&&items.refundStatus=='APPLY'">
+            <button class="button button-full button-stable refusedApply" ng-click="refusedApply(items.id,0,items,4)">拒绝</button>
+        </div>
+        <div class="col-50 " ng-if="items.refundServer=='TKTH'&&items.refundStatus=='APPLY'">
+            <button class="button button-full button-assertive" ng-click="agreeApplys(items.id)">同意</button>
         </div>
         <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
-            <button class="button button-full button-assertive">重新申请退款</button>
+            <button class="button button-full button-stable refusedApply" ng-click="refusedApply(items.id,1,items,2)">拒绝原因</button>
+        </div>
+        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
+            <button class="button button-full button-assertive" ng-click="applyRefund(items.id,items.price,items.freight)">重新申请退款</button>
         </div>
         <div class="col" ng-if="items.refundStatus=='SENDING'">
             <button class="button button-full button-assertive" ng-click="submitDelivery()">申请退货</button>
+        </div>
+        <div class="col" ng-if="items.refundStatus=='WAIT_RECEIVE'">
+            <button class="button button-full button-assertive" ng-click="submitGoods(items.id)">确认收货</button>
         </div>
     </div>
 </ion-view>

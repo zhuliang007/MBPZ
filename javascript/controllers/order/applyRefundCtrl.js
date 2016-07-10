@@ -13,9 +13,9 @@ angular.module('controllers.applyRefundCtrl',[])
         '$locals',
         '$rootScope',
         '$ionicActionSheet',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
+        '$alert',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$alert) {
 
-            console.log($stateParams.obj)
             if($stateParams.obj!=null){
                 $scope.refundServerValue = $stateParams.obj.refundServer;
                 $scope.refundReasonValue = $stateParams.obj.refundReason;
@@ -116,20 +116,26 @@ angular.module('controllers.applyRefundCtrl',[])
             //提交
             $scope.submitRefounds = function () {
                 if(token!=''){
-                    var data = {
-                        "cmd": $config.cmds.applyRefound,
-                        "parameters":{
-                            "id":$stateParams.id,
-                            "refundServer":$scope.refunds.value,
-                            "refundReason":$scope.reasonRef.name,
-                            "refundMark":$scope.reasonText.text
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            alert(result.msg);
-                        })
+                    $alert.confirm('是否确定申请退款?')
+                        .then(function() {
+                            var data = {
+                                "cmd": $config.cmds.applyRefound,
+                                "parameters":{
+                                    "id":$stateParams.id,
+                                    "refundServer":$scope.refunds.value,
+                                    "refundReason":$scope.reasonRef.name,
+                                    "refundMark":$scope.reasonText.text
+                                },
+                                "token":token
+                            }
+                            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                .then(function(result){
+                                    $alert.show(result.msg);
+                                    if(result.msg=='申请退款成功，等待处理'){
+                                        $state.go($config.controllers.myBought.name,null,{reload:true});
+                                    }
+                            })
+                    });
                 }else{
                     initToken();
                 }
