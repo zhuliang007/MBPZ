@@ -13,7 +13,8 @@ angular.module('controllers.orderDetailCtrl',[])
         '$locals',
         '$rootScope',
         '$ionicActionSheet',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
+        '$alert',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$alert) {
 
             initToken = function(){
                 $scope.checkLogin()
@@ -123,6 +124,131 @@ angular.module('controllers.orderDetailCtrl',[])
                         var backImage = "backImg";
                         obj[backImage] = $scope.mineAlipay;
                         $state.go($config.controllers.pay.name,{obj:obj,routers:value});
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
+            }
+
+            //提醒发货
+            $scope.remindDelivery = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":id,
+                                "orderType":"order",
+                                "saleType":"buy"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+            }
+            //申请退款
+            $scope.applyRefund = function(id,price,freight){
+                $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight});
+            }
+
+            //确认收货
+            $scope.submitBuyer = function(id){
+                console.log(id)
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.orderReceive,
+                            "parameters":{
+                                "id":id
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                                //提示收货成功
+                                if(result.msg=='确认收货成功'){
+                                    $state.go($config.controllers.myBought.name,null,{reload:true});
+                                }
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+            }
+            //拒绝
+            $scope.refusedApply = function(id,type,items,routers){
+                $state.go($config.controllers.refusedApply.name,{id:id,type:type,obj:items,routers:routers})
+            }
+
+            //重新申请退款
+            $scope.applyRefund = function(id,price,freight){
+                $state.go($config.controllers.applyRefund.name,{id:id,price:price,freight:freight,type:5})
+            }
+
+            //同意
+            $scope.agreeApplys = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        $alert.confirm("是否同意退款?")
+                            .then(function(){
+                                var data = {
+                                    "cmd": $config.cmds.applyRefused,
+                                    "parameters":{
+                                        "id":id,
+                                        "refundStatus":"AGREE"
+                                    },
+                                    "token":$scope.userInfo.loginToken
+                                }
+                                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                    .then(function(result){
+                                        $alert.show(result.msg)
+                                        if(result.msg=='操作成功'){
+                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
+                                        }
+                                    })
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
+            }
+
+            //确认收货
+            $scope.submitGoods = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        $alert.confirm('是否确认收货')
+                            .then(function(){
+                                var data =  {
+                                    "cmd":$config.cmds.sellerReceive,
+                                    "parameters":{
+                                        "id":id
+                                    },
+                                    "token":$scope.userInfo.loginToken
+                                }
+                                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                    .then(function(result){
+                                        $alert.show(result.msg);
+                                        if(result.msg=='操作成功'){
+                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
+                                        }
+                                    })
+                            })
                     },function(){
                         $scope.autoLogin()
                             .then(function(){

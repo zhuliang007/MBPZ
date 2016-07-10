@@ -12,7 +12,8 @@ angular.module('controllers.deliveryCtrl',[])
         '$locals',
         '$rootScope',
         '$ionicActionSheet',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet) {
+        '$alert',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$alert) {
 
                 $scope.delivery={
                         name : '',
@@ -65,21 +66,29 @@ angular.module('controllers.deliveryCtrl',[])
                 $scope.submitDelivery=function(orderCodes){
                         $scope.checkLogin()
                             .then(function(){
-                                    var data={
+                                $alert.confirm('是否提交物流信息')
+                                    .then(function () {
+                                        var data={
                                             "cmd": $config.cmds.orderSend,
                                             "parameters": {
-                                                    "id":$stateParams.id,
-                                                    "express":$scope.delivery.value,
-                                                    "expressNum":orderCodes
+                                                "id":$stateParams.id,
+                                                "express":$scope.delivery.value,
+                                                "expressNum":orderCodes
                                             },
                                             "token":$scope.userInfo.loginToken
-                                    }
-                                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                        .then(function(result){
-                                                if(result.msg=='发货成功'){
+                                        }
+                                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                            .then(function(result){
+                                                $alert.show(result.msg)
+                                                if(result.msg=='操作成功'){
+                                                    if($stateParams.type==1){
+                                                        $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
+                                                    }else{
                                                         $state.go($config.controllers.mySold.name);
+                                                    }
                                                 }
-                                        })
+                                            })
+                                    })
                             },function(){
                                     $scope.autoLogin()
                                         .then(function(){
@@ -92,12 +101,13 @@ angular.module('controllers.deliveryCtrl',[])
             $scope.goBackPage = function(){
                 switch (parseInt($stateParams.type)){
                     case 0:
+                        $state.go($config.controllers.mySold.name);
                         break;
                     case 1:
-                        $state.go($config.controllers.boughtRefundsRelease.name)
+                        $state.go($config.controllers.boughtRefundsRelease.name);
                         break;
                     case 2:
-                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.type})
+                        $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.type});
                         break;
                 }
             }

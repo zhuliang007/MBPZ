@@ -3,6 +3,7 @@
         <div class="buttons">
             <button class="button" ng-click="goBack()"ng-if="type!=1"><span class="icon ion-ios-arrow-back"></span></button>
             <button class="button" ng-click="backupDown('refundsRelease.sell')"ng-if="type==1"><span class="icon ion-ios-arrow-back"></span></button>
+            <button class="button" ng-click="backupDown('refundsRelease.bought')"ng-if="type==5"><span class="icon ion-ios-arrow-back"></span></button>
         </div>
         <h1 class="title" ng-if="type!=1">申请退款</h1>
         <h1 class="title" ng-if="type==1">查看退款详情</h1>
