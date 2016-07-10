@@ -120,6 +120,7 @@ angular.module('providers.config',[])
             evaluateDetail:"market/evaluate/detail",
             sellerReceive:"market/order/sellerReceive",
             personCenterInfo:"market/center/personCenterInfo",
+            selectProduct:"market/center/selectProductList",
         }
 
         /**提示信息配置*/

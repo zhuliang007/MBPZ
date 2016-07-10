@@ -1195,8 +1195,8 @@ ion-content{
 }
 
 .font-size-big{
-    font-size: 16px;
-}
+     font-size: 16px;
+ }
 
 .img-auto{
     display: block;
@@ -2951,7 +2951,7 @@ ion-content{
     padding-bottom: calc(60%);
     padding-bottom: -webkit-calc(60%);
     position: fixed;
-    z-index:999;
+    z-index:200;
     background-repeat: no-repeat;
     background-size:cover;
     background-position:center;
@@ -2987,13 +2987,83 @@ ion-content{
     position: absolute;
     width: 100%;
     z-index: 500;
-    padding-bottom: calc(60% + 44px);
-    padding-bottom: -webkit-calc(60% + 44px);
+    padding-bottom: calc(60% + 41px);
+    padding-bottom: -webkit-calc(60% + 41px);
+}
+
+
+.personalCenter .personalCenterGroup>.selectGroup{
+    position: absolute;
+    width: 100%;
+    background-color: #FFFFFF;
+    bottom: 0px;
+}
+
+.personalCenter .personalCenterGroup>.selectGroup>.item{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-size: 16px;
+    color: #666666;
+    padding: 10px 5px;
+    border-bottom-color: transparent;
+    background-color: #FFFFFF;
+}
+
+.personalCenterGroup>.selectGroup>.item.active{
+    border-bottom-color: #FF4E72;
+    color: #FF4E72;
+    opacity: 1;
+}
+
+.personalCenterGroup>.countsGroup{
+    position: absolute;
+    width: 100%;
+    bottom: 41px;
+    padding: 10px 0px;
+}
+
+.personalCenterGroup>.countsGroup>.item{
+    border: none;
+    background-color: transparent;
+}
+
+.personalCenterGroup>.countsGroup>.item+.item:before{
+    content: '';
+    border-left: 1px solid #666666;
+    position: absolute;
+    background-color: #666666;
+    left: 0px;
+    top: calc(50% - 10px);
+    bottom: calc(50% - 10px);
+}
+.personalCenterGroup>.headGroup{
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+}
+
+.personalCenterGroup>.headGroup>.headImg{
+    width: 20%;
+    margin:0 auto;
+}
+
+.personalCenterGroup>.headGroup>.judgeStars{
+    padding-bottom: 10px;
+}
+
+.personalCenterGroup>.headGroup>.judgeStars>.star{
+    font-size: 12px;
+    color: #DDDDDD;
+}
+
+.personalCenterGroup>.headGroup>.judgeStars>.star.checked{
+    color: #FFAF60;
 }
 
 .personalCenter ion-content{
-    margin-top: calc(60% + 44px);
-    margin-top: -webkit-calc(60% + 44px);
+    margin-top: calc(60% + 41px);
+    margin-top: -webkit-calc(60% + 41px);
 }
 
 
