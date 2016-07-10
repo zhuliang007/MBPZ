@@ -119,6 +119,7 @@ angular.module('providers.config',[])
             evaluateSave:"market/evaluate/save",
             evaluateDetail:"market/evaluate/detail",
             sellerReceive:"market/order/sellerReceive",
+            personCenterInfo:"market/center/personCenterInfo",
         }
 
         /**提示信息配置*/
@@ -474,7 +475,6 @@ angular.module('providers.config',[])
             evaluateDetail:{
                 templateUrl:"templates/order/evaluateDetail.html",
                 url:"/evaluateDetail/:orderId&:type&:orderDetail?",
-                url:"/evaluateDetail/:orderId",
                 name:"evaluateDetail",
                 controller:"EvaluateDetailCtrl",
                 cache:false
@@ -486,7 +486,6 @@ angular.module('providers.config',[])
                 controller:"PersonalCenterCtrl",
                 cache:false
             }
-
         }
 
         /*popover配置*/

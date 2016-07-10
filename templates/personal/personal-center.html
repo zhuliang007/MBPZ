@@ -1,6 +1,11 @@
 <!--个人中心-->
 <ion-view class="personalCenter">
-    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="personalCenterHandle">
-        个人中心
-    </ion-content>
+    <div class="personalCenterTop" ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg||defaultHead)"></div>
+    <div class="personalCenterOperation">
+        <span class="icon ion-ios-arrow-back back" ng-click="goBack()"></span>
+        <span class="icon mbpz mbpz-icon-chat chat"></span>
+    </div>
+    <div class="personalCenterGroup">
+        <div class="selectGroup"></div>
+    </div>
 </ion-view>
