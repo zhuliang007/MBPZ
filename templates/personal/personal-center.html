@@ -6,6 +6,116 @@
         <span class="icon mbpz mbpz-icon-chat chat"></span>
     </div>
     <div class="personalCenterGroup">
-        <div class="selectGroup"></div>
+        <div class="selectGroup row row-no-padding">
+            <div class="col text-center item" ng-class="{true:'active',false:''}[selectFlag]" ng-click="changeSelect(true,0)">
+                在售商品
+            </div>
+            <div class="col text-center item" ng-class="{true:'',false:'active'}[selectFlag]" ng-click="changeSelect(false,1)">
+                求购商品
+            </div>
+        </div>
+        <div class="countsGroup row row-no-padding">
+            <div class="col text-center item">
+                <div class="font-size-small"><span class="color-dark font-size-big" ng-bind="personalCenterInfo.collectCount"></span>个</div>
+                <div class="color-normal font-size-small">被收藏</div>
+            </div>
+            <div class="col text-center item">
+                <div class="font-size-small"><span class="color-dark font-size-big" ng-bind="personalCenterInfo.tradeCount"></span>个</div>
+                <div class="color-normal font-size-small">成功交易</div>
+            </div>
+            <div class="col text-center item">
+                <div class="color-red font-size-small"><span class="font-size-big" ng-bind="personalCenterInfo.evaluteCount"></span>次</div>
+                <div class="color-normal font-size-small">评价</div>
+            </div>
+        </div>
+        <div class="headGroup">
+            <div class="headImg padding-normal-bottom">
+                <div class="bgImg border-radius-round" id="userImg" ng-style="resizeImage('userImg',(personalCenterInfo.userInfo.userImg||defaultHead))"></div>
+            </div>
+            <div class="text-center font-size-big color-dark" ng-bind="personalCenterInfo.userInfo.nickName">
+            </div>
+            <div class="judgeStars text-center">
+                <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[personalCenterInfo.userInfo.userLevel>=1]"></i>
+                <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[personalCenterInfo.userInfo.userLevel>=2]"></i>
+                <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[personalCenterInfo.userInfo.userLevel>=3]"></i>
+                <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[personalCenterInfo.userInfo.userLevel>=4]"></i>
+                <i class="icon ion-ios-star star" ng-class="{true:'checked',false:''}[personalCenterInfo.userInfo.userLevel>=5]"></i>
+            </div>
+        </div>
     </div>
+    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
+        <div class="card-group" ng-if="productType==1">
+            <div class="card-item-normal" ng-repeat="product in productList track by $index" ng-click="showShop(product.id)">
+                <div class="row padding-none-horizontal padding-normal-vertical">
+                    <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
+                        <div class="col col-75 col-offset-10 padding-none-vertical">
+                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                        </div>
+                    </div>
+                    <div class="col col-center padding-none-vertical padding-normal-horizontal">
+                        <div ng-bind="product.publicUser.nickName" class="userNick"></div>
+                        <div ng-bind="parseTime(product.publicDate)" class="publicTime"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal" ng-if="product.productImageList.length>1">
+                    <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
+                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal" ng-if="product.productImageList.length==1">
+                    <div class="col col-66 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
+                        <div id="productImage{{$parent.$index+'_normal'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_normal'+$index}}',productImage.location,'2:1')" ></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal">
+                    <div class="col col-center padding-none-vertical">
+                        <div class="productTitle" ng-bind="product.title"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal">
+                    <div class="col col-center padding-none-vertical">
+                        <div class="productContent" ng-bind="product.content"></div>
+                    </div>
+                </div>
+                <div class="row padding-small-horizontal padding-none-vertical publishLocationGroup">
+                    <div class="col col-center padding-normal-vertical">
+                        <span class="mbpz mbpz-icon-position address"></span>
+                        <span ng-if="product.userLocation==null" class="address">未知</span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
+                    </div>
+                    <div class="col col-center padding-normal-vertical text-right">
+                        <span class="mbpz mbpz-icon-readers counts"></span>
+                        <span ng-bind="(product.browseNumber||0)" class="counts"></span>
+                        <span class="mbpz mbpz-icon-replies counts"></span>
+                        <span ng-bind="(product.replyNumber||0)" class="counts"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-group card-per" ng-if="productType==0">
+            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
+                <div class="card-item-per-body">
+                    <div class="bgImg" id="productImage{{$index}}" ng-style="resizeImage('productImage{{$index}}',product.productImageList[0].location,'1:1')"></div>
+                    <div class="title" ng-bind="product.title"></div>
+                    <div><span class="mbpz mbpz-icon-money price"></span><span class="price padding-small-right" ng-bind="product.currentPrice"></span><span class="originalPrice" ng-bind="product.originalPrice"></span></div>
+                    <div class="row row-no-padding">
+                        <div class="col col-60 text-left padding-small-horizontal padding-small-vertical text-overflow">
+                            <span class="address" ng-bind="product.userLocation.city"></span>
+                            <span class="address" ng-bind="product.userLocation.district"></span>
+                        </div>
+                        <div class="col text-right padding-small-horizontal padding-small-vertical text-overflow">
+                            <span class="publicTime" ng-bind="parseTime(product.publicDate)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
 </ion-view>
