@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sellerEvaluateToBuyer" ng-if="userInfo&&detailObject&&userInfo.id==detailObject.evaluateUser.id&&detailObject.childEvaluate">
+            <div class="sellerEvaluateToBuyer" ng-if="userInfo&&detailObject&&userInfo.id==detailObject.evaluateUser.id&&detailObject.childEvaluate&&showType==0">
                 <div class="arrow"></div>
                 <div class="bg-color-main-gray padding-normal-vertical padding-normal-horizontal color-dark font-size-small">
                     卖家回复:<span class="color-normal" ng-bind="detailObject.childEvaluate.content"></span>
@@ -71,7 +71,7 @@
             </div>
             <div class="text-right padding-normal-horizontal padding-big-bottom"><button class="submit" ng-click="submit()">回复</button></div>
         </div>
-        <div class="bg-color-white margin-normal-top" ng-if="userInfo&&detailObject&&detailObject.childEvaluate&&userInfo.id==detailObject.childEvaluate.evaluateUser.id">
+        <div class="bg-color-white margin-normal-top" ng-if="userInfo&&detailObject&&detailObject.childEvaluate&&(showType==1||(showType==0&&userInfo.id==detailObject.childEvaluate.evaluateUser.id))">
             <div class="padding-normal-horizontal padding-big-vertical font-size-big border-bottom">
                 追评(1)
             </div>

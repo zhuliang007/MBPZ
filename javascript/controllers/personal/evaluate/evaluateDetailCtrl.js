@@ -12,6 +12,7 @@ angular.module('controllers.evaluateDetail',[])
     '$httpService',
     function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
         $console.show($stateParams);
+        $scope.showType = $stateParams.showType?$stateParams.showType:0;
         $scope.childEvaluateObject = {
             parentId:0,
             content:''
@@ -122,6 +123,9 @@ angular.module('controllers.evaluateDetail',[])
                     break;
                 case 2:
                     $state.go($config.controllers.orderDetail.name,{id:$stateParams.orderId,type:$stateParams.orderDetail});
+                    break;
+                default:
+                    $scope.goBack();
                     break;
             }
         }

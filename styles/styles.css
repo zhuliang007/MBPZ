@@ -119,6 +119,7 @@ ion-content{
 .productListByType ion-header-bar,
 .orderEvaluate ion-header-bar,
 .evaluateDetail ion-header-bar,
+.evaluateList ion-header-bar,
 .productDetail.product ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
@@ -148,6 +149,7 @@ ion-content{
 .publish ion-header-bar,
 .orderEvaluate ion-header-bar,
 .evaluateDetail ion-header-bar,
+.evaluateList ion-header-bar,
 .recommend ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
@@ -194,6 +196,8 @@ ion-content{
 .orderEvaluate ion-header-bar .button.activated,
 .evaluateDetail ion-header-bar .button,
 .evaluateDetail ion-header-bar .button.activated,
+.evaluateList ion-header-bar .button,
+.evaluateList ion-header-bar .button.activated,
 .productDetail.product ion-header-bar .button,
 .productDetail.product ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
@@ -3066,6 +3070,7 @@ ion-content{
     margin-top: -webkit-calc(60% + 41px);
 }
 
+/*评价列表*/
 
 
 

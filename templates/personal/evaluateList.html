@@ -1,0 +1,19 @@
+<!--评论列表-->
+<ion-view class="evaluateList">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+        <h1 class="title">评价列表</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <ion-item class="evaluateItem" ng-repeat="evaluateItem in evaluateList track by $index" ng-click="evaluationShow(evaluateItem.orderId)">
+        </ion-item>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -43,4 +43,5 @@ angular.module('starter.controllers',[
     'controllers.deliveryCtrl',
     'controllers.orderEvaluate',
     'controllers.evaluateDetail',
-    'controllers.personalCenter'])
+    'controllers.personalCenter',
+    'controllers.evaluateList'])
