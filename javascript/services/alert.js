@@ -5,12 +5,12 @@ angular.module("services.alert",[])
     .service("$alert",["$ionicPopup","$q",function($ionicPopup,$q){
         var $alert = {}
 
-        $alert.show = function(msg){
+        $alert.show = function(msg,okText){
             var deferred = $q.defer();
             $ionicPopup.alert({
                 cssClass:"mbpz-popup-container",
                 template:msg,
-                okText:"确定",
+                okText:okText||"确定",
                 okType:"mbpz-popup-button"
             }).then(function(){
                 deferred.resolve();
@@ -18,14 +18,14 @@ angular.module("services.alert",[])
             return deferred.promise
         }
 
-        $alert.confirm = function(msg){
+        $alert.confirm = function(msg,okText,cancelText){
             var deferred = $q.defer();
             $ionicPopup.confirm({
                 cssClass:"mbpz-popup-container",
                 template:msg,
-                cancelText: '取消',
+                cancelText: cancelText||'取消',
                 cancelType: 'mbpz-popup-button',
-                okText:"确定",
+                okText:okText||"确定",
                 okType:"mbpz-popup-button"
             }).then(function(res){
                 if(res){
