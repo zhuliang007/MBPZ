@@ -61,10 +61,11 @@ angular.module('directives.bdMap',[])
 
                 function translateCallback(result){
                     var geoc = new BMap.Geocoder();
-                    $console.show("Hello")
                     geoc.getLocation(result.points[0], function(rs){
+                        $console.show(rs);
                         $rootScope.addComp = rs.addressComponents;
-                        $rootScope.currentCity = addComp.city.split("市")[0];
+                        $rootScope.currentCity = $rootScope.addComp.city.split("市")[0];
+                        $console.show($rootScope.currentCity);
                         $rootScope.locationJosnStr = {}
                         $rootScope.locationJosnStr.address = $rootScope.addComp.city + $rootScope.addComp.district +$rootScope.addComp.street + $rootScope.addComp.streetNumber;
                         $rootScope.locationJosnStr.city = $rootScope.addComp.city;
