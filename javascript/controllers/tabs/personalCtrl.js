@@ -13,8 +13,6 @@ angular.module('controllers.personal',[])
     '$locals',
     function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
 
-        var obj = $locals.getObject($config.USER_INFO_NAME);
-        //console.log('token',obj.loginToken);
         initToken = function(){
             $scope.checkLogin()
                 .then(function(){

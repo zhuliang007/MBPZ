@@ -8,5 +8,4 @@ angular.module('starter.services',[
     'services.city',
     'services.locals',
     'services.keywords',
-    'services.alert',
-    'service.interceptor'])
+    'services.alert'])
