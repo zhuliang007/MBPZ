@@ -10,7 +10,7 @@ angular.module('providers.config',[])
         $config.userPhone = '';
 
         /**debug模式*/
-        $config.debug = true;
+        $config.debug = false;
         $config.appkeys = '23369408';
 
         /**请求地址配置*/
@@ -41,7 +41,7 @@ angular.module('providers.config',[])
             edit:"product/v1.1/edit"
         }
 
-        $config.imageUrl = '';
+        $config.imageUrl = 'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/';
         $config.imageUrlDebug = 'assets/';
         $config.getImageUrlDebug = function(){
             if(this.debug){
