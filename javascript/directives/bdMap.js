@@ -9,7 +9,7 @@ angular.module('directives.bdMap',[])
 
             bdMap.restrict = 'E';
             bdMap.template = '<div id="map"></div>';
-            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals,$interval){
+            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals,$interval,$alert){
 
                 var latitude ;//纬度
                 var longitude ; //经度
@@ -21,7 +21,7 @@ angular.module('directives.bdMap',[])
                         navigator.geolocation.getCurrentPosition(showPosition,showError);
                     }
                     else{
-
+                        $alert.show('您当前设备不支持定位功能');
                     }
                 }
 
@@ -44,7 +44,7 @@ angular.module('directives.bdMap',[])
                     switch(error.code)
                     {
                         case error.PERMISSION_DENIED:
-                            //提示当前gps未开启或不可用
+                            $alert.show('当前定位功能已关闭');
                             $rootScope.currentCity = '';
                             break;
                         case error.POSITION_UNAVAILABLE:
