@@ -119,6 +119,7 @@ ion-content{
 .productListByType ion-header-bar,
 .orderEvaluate ion-header-bar,
 .evaluateDetail ion-header-bar,
+.evaluateList ion-header-bar,
 .productDetail.product ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
@@ -148,6 +149,7 @@ ion-content{
 .publish ion-header-bar,
 .orderEvaluate ion-header-bar,
 .evaluateDetail ion-header-bar,
+.evaluateList ion-header-bar,
 .recommend ion-header-bar,
 .orderAddress ion-header-bar{
     border-bottom: 1px solid #DDDDDD;
@@ -194,6 +196,8 @@ ion-content{
 .orderEvaluate ion-header-bar .button.activated,
 .evaluateDetail ion-header-bar .button,
 .evaluateDetail ion-header-bar .button.activated,
+.evaluateList ion-header-bar .button,
+.evaluateList ion-header-bar .button.activated,
 .productDetail.product ion-header-bar .button,
 .productDetail.product ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
@@ -3066,6 +3070,34 @@ ion-content{
     margin-top: -webkit-calc(60% + 41px);
 }
 
+/*评价列表*/
+.evaluateList .evaluateItem{
+    background-color: #FFFFFF;
+}
 
+.evaluateList .evaluateItem + .evaluateItem{
+    margin-top: 10px;
+}
+
+.evaluateList .evaluateItem .nickName{
+    font-size: 16px;
+    color: #333333;
+}
+
+.evaluateList .evaluateItem .content{
+    font-size: 14px;
+    color: #666666;
+}
+
+.evaluateList .evaluateItem .time{
+    font-size: 12px;
+    color: #999999;
+}
+.evaluateList .evaluateItem .target{
+    font-size: 12px;
+    background-color: #DDDDDD;
+    color: #999999;
+    padding: 2px 5px;
+}
 
 

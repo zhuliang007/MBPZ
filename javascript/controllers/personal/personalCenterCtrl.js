@@ -93,7 +93,24 @@ angular.module('controllers.personalCenter',[])
                 }
             }
 
-            $scope.openChatRoom = function(){
+            $scope.showEvaluateList = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        $console.show("showEvaluateList")
+
+                        if($scope.userInfo.loginAccount == $scope.personalCenterInfo.userInfo.loginAccount){
+                            $state.go($config.controllers.evaluateList.name)
+                        }
+                        else{
+                            $state.go($config.controllers.evaluateList.name,{userId:$stateParams.userId});
+                        }
+
+                    },function(){
+                        $alert.confirm('请登录')
+                            .then(function(){
+                                $scope.autoLogin();
+                            })
+                    })
 
             }
 

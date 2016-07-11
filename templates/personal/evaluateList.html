@@ -1,0 +1,40 @@
+<!--评论列表-->
+<ion-view class="evaluateList">
+    <ion-header-bar align-title="center">
+        <div class="buttons">
+            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+        </div>
+        <h1 class="title">评价列表</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
+        <div class="evaluateItem" ng-repeat="evaluateItem in evaluateList track by $index" ng-click="evaluationShow(evaluateItem.orderId)">
+            <div class="row row-no-padding padding-normal-vertical padding-normal-horizontal">
+                <div class="col col-center col-10">
+                    <div class="bgImg border-radius-round" id="buyerImage_{{$index}}" ng-style="resizeImage('buyerImage_{{$index}}',(evaluateItem.evaluateUser.userImg||defaultHead))"></div>
+                </div>
+                <div class="col col-center padding-normal-left">
+                    <span ng-bind="evaluateItem.evaluateUser.nickName" class="nickName"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding padding-normal-bottom padding-normal-horizontal">
+                <div class="col">
+                    <span ng-bind="evaluateItem.content" class="content"></span>
+                </div>
+            </div>
+            <div class="row row-no-padding padding-normal-bottom padding-normal-horizontal">
+                <div class="col text-left">
+                    <span ng-bind="parseTime(evaluateItem.evaluateDate)" class="time"></span>
+                </div>
+                <div class="col text-right">
+                    <span class="target"><span ng-bind="evaluateItem.childCount||0"></span>追评</span>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                class="tabsInfinite"
+                ng-if="infiniteFlag">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

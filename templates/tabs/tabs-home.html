@@ -58,7 +58,7 @@
         <div class="card-group">
             <div class="card-item-normal" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
                 <div class="row padding-none-horizontal padding-normal-vertical">
-                    <div class="col col-25 col-center padding-none-horizontal padding-none-vertical" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                    <div class="col col-20 col-center padding-none-horizontal padding-none-vertical" ng-click="showPersonalCenter($event,product.publicUser.id)">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
                             <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
                         </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length==1">
                     <div class="col col-66 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_normal'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_normal'+$index}}',productImage.location,'2:1')" ></div>
+                        <div id="productImage{{$parent.$index+'_normal'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_normal'+$index}}',productImage.location,'3:2')" ></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">
@@ -88,7 +88,7 @@
                        <div class="priceGroup">
                            <span class="mbpz mbpz-icon-money price"></span>
                            <span ng-bind="product.currentPrice" class="price"></span>
-                           <span ng-bind="product.originalPrice" class="price originalPrice"></span></div>
+                           <span ng-bind="product.originalPrice" class="price originalPrice" ng-if="product.originalPrice"></span></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal padding-none-vertical publishLocationGroup">

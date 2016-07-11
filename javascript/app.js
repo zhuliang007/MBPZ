@@ -335,7 +335,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
                 .state($configProvider.controllers.personalCenter.name,{
                     url:$configProvider.controllers.personalCenter.url,
                     templateUrl:$configProvider.controllers.personalCenter.templateUrl,
-                    cache:$configProvider.controllers.personalCenter.abstract,
+                    cache:$configProvider.controllers.personalCenter.cache,
                     controller:$configProvider.controllers.personalCenter.controller,
+                })
+                .state($configProvider.controllers.evaluateList.name,{
+                    url:$configProvider.controllers.evaluateList.url,
+                    templateUrl:$configProvider.controllers.evaluateList.templateUrl,
+                    cache:$configProvider.controllers.evaluateList.cache,
+                    controller:$configProvider.controllers.evaluateList.controller,
                 })
         }])
