@@ -3071,6 +3071,33 @@ ion-content{
 }
 
 /*评价列表*/
+.evaluateList .evaluateItem{
+    background-color: #FFFFFF;
+}
 
+.evaluateList .evaluateItem + .evaluateItem{
+    margin-top: 10px;
+}
+
+.evaluateList .evaluateItem .nickName{
+    font-size: 16px;
+    color: #333333;
+}
+
+.evaluateList .evaluateItem .content{
+    font-size: 14px;
+    color: #666666;
+}
+
+.evaluateList .evaluateItem .time{
+    font-size: 12px;
+    color: #999999;
+}
+.evaluateList .evaluateItem .target{
+    font-size: 12px;
+    background-color: #DDDDDD;
+    color: #999999;
+    padding: 2px 5px;
+}
 
 
