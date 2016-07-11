@@ -11,11 +11,10 @@ angular.module('service.interceptor',[])
         },
         'response' : function(response) {
             console.log('response1',response)
-            var rootScope=$injector.get('$rootScope');
             var http=$injector.get('$http');
-            //if($config.userPhone==null&&$config.userPhone==''){
-            //
-            //}
+            var $ionicPopup = $injector.get('$ionicPopup');
+            var $state = $injector.get('$state');
+
            if(response.data.statusCode==403){
                 var data={
                     "cmd": $config.cmds.login,
@@ -26,19 +25,44 @@ angular.module('service.interceptor',[])
                 }
                 http.post($config.getRequestAction(),data)
                     .success(function (result) {
-
-                        //rootScope.$state.go();
+                        var userInfo = {
+                            loginToken:result.response.data.loginToken,
+                            loginAccount:result.response.data.loginAccount,
+                            id:result.response.data.id,
+                            city:result.response.data.city,
+                            cityText:result.response.data.cityText,
+                            introduce:result.response.data.introduce,
+                            nickName:result.response.data.nickName,
+                            province:result.response.data.province,
+                            provinceText:result.response.data.provinceText,
+                            sex:result.response.data.sex,
+                            userImg:result.response.data.userImg,
+                            userLevel:result.response.data.userLevel
+                        }
+                        $locals.setObject($config.USER_INFO_NAME,userInfo);
+                        return $q.reject(response);
                     })
                     .error(function (error) {
                         console.log('error',error)
                     })
+
             }
+            if(response.data.hasOwnProperty('error')){
+                var error = response.data.error;
+                if(error!=null&&error.hasOwnProperty('errorCode')
+                    &&error.errorCode==15||$config.userPhone==''){
+                    $ionicPopup.alert({
+                        cssClass:"mbpz-popup-container",
+                        template:'请登录萌宝派',
+                        okText:"确定",
+                        okType:"mbpz-popup-button"
+                    })
+                }
+            }
+
             return response;
         },
         'request' : function(config) {
-            var obj = $locals.getObject($config.USER_INFO_NAME);
-            if(!obj.hasOwnProperty(obj.loginToken)){
-            }
             return config;
         },
         'requestError' : function(config){

@@ -65,7 +65,10 @@ angular.module('controllers.start',[])
                             userImg:result.data.userImg,
                             userLevel:result.data.userLevel
                         }
-                        $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
+                        var obj = $locals.getObject($config.USER_INFO_NAME);
+                        if(obj==null){
+                            $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
+                        }
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);
