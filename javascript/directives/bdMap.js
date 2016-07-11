@@ -44,7 +44,7 @@ angular.module('directives.bdMap',[])
                     switch(error.code)
                     {
                         case error.PERMISSION_DENIED:
-                            $alert.show('当前定位功能已关闭');
+                            $alert.show('当前定位功能不可用');
                             $rootScope.currentCity = '';
                             break;
                         case error.POSITION_UNAVAILABLE:
