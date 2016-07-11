@@ -116,26 +116,25 @@ ion-content{
 
 /*页面头部*/
 .tabsHome ion-header-bar,
+.tabsShop ion-header-bar,
 .productListByType ion-header-bar,
 .orderEvaluate ion-header-bar,
 .evaluateDetail ion-header-bar,
 .evaluateList ion-header-bar,
-.productDetail.product ion-header-bar,
+.productDetail ion-header-bar,
+.orderPreview ion-header-bar,
+.publish ion-header-bar,
+.report ion-header-bar,
+.orderAddress ion-header-bar,
+.editAddress ion-header-bar,
+.recommend ion-header-bar,
 .searchHome ion-header-bar{
     background-color: #FF4E72;
     color: #FFFFFF;
     background-image:none;
 }
 
-.tabsShop ion-header-bar,
-.productDetail ion-header-bar,
-.report ion-header-bar,
-.orderPreview ion-header-bar,
-.orderAddress ion-header-bar,
-.editAddress ion-header-bar,
 .payModal ion-header-bar,
-.recommend ion-header-bar,
-.publish ion-header-bar,
 .cityModal ion-header-bar{
     background-color: #F5F5F5;
     background-image:none;
@@ -156,7 +155,14 @@ ion-content{
 }
 
 .tabsHome ion-header-bar .title,
-.productDetail.product ion-header-bar .title,
+.tabsShop ion-header-bar .title,
+.productDetail ion-header-bar .title,
+.orderPreview ion-header-bar .title,
+.publish ion-header-bar .title,
+.report ion-header-bar .title,
+.editAddress ion-header-bar .title,
+.orderAddress ion-header-bar .title,
+.recommend ion-header-bar .title,
 .productListByType ion-header-bar .title{
     color: #FFFFFF;
     font-style: italic;
@@ -164,32 +170,33 @@ ion-content{
     font-size: 18px;
 }
 
-.productDetail.product ion-header-bar .title,
+.productDetail ion-header-bar .title,
 .orderEvaluate ion-header-bar .title,
+.publish ion-header-bar .title,
+.orderPreview ion-header-bar .title,
+.tabsShop ion-header-bar .title,
+.orderAddress ion-header-bar .title,
+.editAddress ion-header-bar .title,
+.report ion-header-bar .title,
+.recommend ion-header-bar .title,
 .productListByType ion-header-bar .title{
     font-style: normal;
 }
 
-.tabsShop ion-header-bar .title,
-.report ion-header-bar .title,
-.orderPreview ion-header-bar .title,
-.recommend ion-header-bar .title,
-.orderAddress ion-header-bar .title,
-.editAddress ion-header-bar .title,
-.payModal ion-header-bar .title,
-.publish ion-header-bar .title,
-.productDetail ion-header-bar .title{
+.payModal ion-header-bar .title{
     color: #333333;
     font-weight: 700;
     font-size: 18px;
 }
 
-.productDetail.product ion-header-bar .button>.mbpz{
+.productDetail ion-header-bar .button>.mbpz{
     font-size: 20px;
 }
 
 .tabsHome ion-header-bar .button,
 .tabsHome ion-header-bar .button.activated,
+.tabsShop ion-header-bar .button,
+.tabsShop ion-header-bar .button.activated,
 .productListByType ion-header-bar .button,
 .productListByType ion-header-bar .button.activated,
 .orderEvaluate ion-header-bar .button,
@@ -198,8 +205,20 @@ ion-content{
 .evaluateDetail ion-header-bar .button.activated,
 .evaluateList ion-header-bar .button,
 .evaluateList ion-header-bar .button.activated,
-.productDetail.product ion-header-bar .button,
-.productDetail.product ion-header-bar .button.activated,
+.productDetail ion-header-bar .button,
+.productDetail ion-header-bar .button.activated,
+.publish ion-header-bar .button,
+.publish ion-header-bar .button.activated,
+.orderPreview ion-header-bar .button,
+.orderPreview ion-header-bar .button.activated,
+.report ion-header-bar .button,
+.report ion-header-bar .button.activated,
+.orderAddress ion-header-bar .button,
+.orderAddress ion-header-bar .button.activated,
+.editAddress ion-header-bar .button,
+.editAddress ion-header-bar .button.activated,
+.recommend ion-header-bar .button,
+.recommend ion-header-bar .button.activated,
 .searchHome ion-header-bar .button,
 .searchHome ion-header-bar .button.activated{
     background: #FF4E72;
@@ -211,22 +230,8 @@ ion-content{
 
 .cityModal ion-header-bar .button,
 .cityModal ion-header-bar .button.activated,
-.report ion-header-bar .button,
-.report ion-header-bar .button.activated,
-.orderPreview ion-header-bar .button,
-.orderPreview ion-header-bar .button.activated,
-.editAddress ion-header-bar .button,
-.editAddress ion-header-bar .button.activated,
 .payModal ion-header-bar .button,
-.payModal ion-header-bar .button.activated,
-.publish ion-header-bar .button,
-.publish ion-header-bar .button.activated,
-.tabsShop ion-header-bar .button,
-.tabsShop ion-header-bar .button.activated,
-.recommend ion-header-bar .button,
-.recommend ion-header-bar .button.activated,
-.orderAddress ion-header-bar .button,
-.orderAddress ion-header-bar .button.activated{
+.payModal ion-header-bar .button.activated{
     background: #F5F5F5;
     color: #333333;
     border:none;
@@ -1654,6 +1659,16 @@ ion-content{
 .orderAddress .userAddress{
     font-size: 14px;
     color: #666666;
+}
+
+.orderAddress .button-edit{
+    background-color: #FF4E72;
+    color: #FFFFFF;
+}
+
+
+.orderAddress .button-edit.activated{
+    background-color: rgba(255,78,114,.7);
 }
 
 .editAddress ion-content ion-list ion-item .address{
