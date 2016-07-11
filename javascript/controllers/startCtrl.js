@@ -25,22 +25,13 @@ angular.module('controllers.start',[])
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
 
-            $config.thirdType = 4;
-            $config.userPhone = purl().param('loginAccount');
-
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
 
-            window.onload = function () {
-                $scope.autoLogin()
-                    .then(function (result) {
-
-                    })
-            }
-
             $scope.autoLogin = function(){
+                console.log($scope.userPhone)
                 var deferred = $q.defer();
                 var data = {
                     "cmd": $config.cmds.login,
@@ -65,10 +56,10 @@ angular.module('controllers.start',[])
                             userImg:result.data.userImg,
                             userLevel:result.data.userLevel
                         }
-                        var obj = $locals.getObject($config.USER_INFO_NAME);
-                        if(obj==null){
-                            $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
-                        }
+                        //var obj = $locals.getObject($config.USER_INFO_NAME);
+                        //if(obj==null){
+                        //    $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
+                        //}
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);

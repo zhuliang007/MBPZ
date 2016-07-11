@@ -1,6 +1,6 @@
 /**
  * Created by sam on 16/7/11.
- */
+
 angular.module('service.interceptor',[])
 .factory('httpInterceptor',['$q','$locals','$config','$injector', function ($q,$locals,$config,$injector) {
 
@@ -71,4 +71,4 @@ angular.module('service.interceptor',[])
     };
 
     return httpInterceptor;
-}])
+}]) */
