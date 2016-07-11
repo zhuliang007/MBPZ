@@ -10,7 +10,7 @@ angular.module('providers.config',[])
         $config.userPhone = '';
 
         /**debug模式*/
-        $config.debug = false;
+        $config.debug = true;
         $config.appkeys = '23369408';
 
         /**请求地址配置*/
