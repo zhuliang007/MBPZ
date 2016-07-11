@@ -3,7 +3,11 @@
  */
 angular.module('providers.config',[])
     .provider('$config',[function(){
+
         var $config = {}
+        $config.USER_INFO_NAME = 'userInfo';
+        $config.thirdType = '';
+        $config.userPhone = '';
         /**debug模式*/
         $config.debug = true;
         $config.appkeys = '23369408';

@@ -19,16 +19,26 @@ angular.module('controllers.start',[])
         '$q',
         '$keywords',
         '$alert',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert){
+        '$locals',
+        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert,$locals){
 
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
+
+            $config.thirdType = 4;
+            $config.userPhone = purl().param('loginAccount');
 
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
 
+            window.onload = function () {
+                $scope.autoLogin()
+                    .then(function (result) {
+
+                    })
+            }
 
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
@@ -55,8 +65,7 @@ angular.module('controllers.start',[])
                             userImg:result.data.userImg,
                             userLevel:result.data.userLevel
                         }
-                        $console.show($scope.userInfo);
-                        $alert.show(result.msg);
+                        $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
                         deferred.resolve();
                     },function(error){
                         deferred.reject(error);
