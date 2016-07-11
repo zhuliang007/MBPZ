@@ -6,7 +6,6 @@ angular.module('controllers.start',[])
         '$scope',
         '$console',
         '$config',
-        '$state',
         '$rootScope',
         '$state',
         '$stateParams',
@@ -20,7 +19,7 @@ angular.module('controllers.start',[])
         '$keywords',
         '$alert',
         '$locals',
-        function($scope,$console,$config,$state,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert,$locals){
+        function($scope,$console,$config,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert,$locals){
 
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
