@@ -9,7 +9,7 @@ angular.module('directives.bdMap',[])
 
             bdMap.restrict = 'E';
             bdMap.template = '<div id="map"></div>';
-            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals,$interval,$alert){
+            bdMap.controller = ['$scope','$rootScope','$console','$config','$httpService','$locals','$interval','$alert',function($scope,$rootScope,$console,$config,$httpService,$locals,$interval,$alert){
 
                 var latitude ;//纬度
                 var longitude ; //经度
@@ -102,7 +102,7 @@ angular.module('directives.bdMap',[])
                         },5000);
                     });
                 }
-            }
+            }]
 
             return bdMap;
         }
