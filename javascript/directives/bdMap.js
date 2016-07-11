@@ -5,10 +5,11 @@ angular.module('directives.bdMap',[])
     .directive('bdMap',[
         function(){
             var bdMap = {}
+            var timeFlag = true;
 
             bdMap.restrict = 'E';
             bdMap.template = '<div id="map"></div>';
-            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals){
+            bdMap.controller = function($scope,$rootScope,$console,$config,$httpService,$locals,$interval){
 
                 var latitude ;//纬度
                 var longitude ; //经度
@@ -76,35 +77,28 @@ angular.module('directives.bdMap',[])
                         $rootScope.locationJosnStr.streetNumber = $rootScope.addComp.streetNumber;
                         $rootScope.locationJosnStr.latitude = result.points[0].lat;
                         $rootScope.locationJosnStr.longitude = result.points[0].lng;
-                        /*$scope.checkLogin()
-                            .then(function(){
-                                var data = {
-                                    "cmd":$config.cmds.saveLocationAddress,
-                                    "parameters":{
-                                        "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
-                                    },
-                                    "token":$scope.userInfo.loginToken
-                                };
-                                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                    .then(function(result){
-                                        $console.show(result);
-                                    },function(error){
-                                        if(error.systemError){
-                                            var systemError = error.systemError;
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        translateCallback(result)
-                                                    })
-                                            }
-                                        }
-                                    })
-                            },function(){
-                                $scope.autoLogin()
+                        var timer = $interval(function(){
+                            if(timeFlag) {
+                                $scope.checkLogin()
                                     .then(function(){
-                                        translateCallback(result)
+                                        var data = {
+                                            "cmd":$config.cmds.saveLocationAddress,
+                                            "parameters":{
+                                                "locationJosnStr":angular.toJson($rootScope.locationJosnStr)
+                                            },
+                                            "token":$scope.userInfo.loginToken
+                                        };
+                                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                            .then(function(result){
+                                                $console.show(result);
+                                                timeFlag = false;
+                                            })
                                     })
-                            })*/
+                            }
+                            else{
+                                $interval.cancel(timer);
+                            }
+                        },5000);
                     });
                 }
             }
