@@ -93,6 +93,10 @@ angular.module('controllers.personalCenter',[])
                 }
             }
 
+            $scope.openChatRoom = function(){
+
+            }
+
 
 
 

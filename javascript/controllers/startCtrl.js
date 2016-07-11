@@ -181,9 +181,6 @@ angular.module('controllers.start',[])
                         $alert.confirm('请登录')
                             .then(function(){
                                 $scope.autoLogin()
-                                    .then(function(){
-                                        $scope.contactSeller(seller);
-                                    })
                             })
                     })
             }
