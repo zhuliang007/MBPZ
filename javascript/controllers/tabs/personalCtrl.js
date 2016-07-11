@@ -16,6 +16,8 @@ angular.module('controllers.personal',[])
         var obj = $locals.getObject($config.USER_INFO_NAME);
         //console.log('token',obj.loginToken);
         initToken = function(){
+            $scope.checkLogin()
+                .then(function(){
                     $scope.userHeaderImg =$scope.userInfo.userImg;
                     $scope.userName = $scope.userInfo.nickName;
                     $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
