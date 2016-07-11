@@ -58,7 +58,7 @@
         <div class="card-group">
             <div class="card-item-normal" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
                 <div class="row padding-none-horizontal padding-normal-vertical">
-                    <div class="col col-25 col-center padding-none-horizontal padding-none-vertical" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                    <div class="col col-20 col-center padding-none-horizontal padding-none-vertical" ng-click="showPersonalCenter($event,product.publicUser.id)">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
                             <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
                         </div>
@@ -88,7 +88,7 @@
                        <div class="priceGroup">
                            <span class="mbpz mbpz-icon-money price"></span>
                            <span ng-bind="product.currentPrice" class="price"></span>
-                           <span ng-bind="product.originalPrice" class="price originalPrice"></span></div>
+                           <span ng-bind="product.originalPrice" class="price originalPrice" ng-if="product.originalPrice"></span></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal padding-none-vertical publishLocationGroup">
