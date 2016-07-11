@@ -8,6 +8,7 @@ angular.module('providers.config',[])
         $config.USER_INFO_NAME = 'userInfo';
         $config.thirdType = '';
         $config.userPhone = '';
+
         /**debug模式*/
         $config.debug = true;
         $config.appkeys = '23369408';
@@ -127,6 +128,8 @@ angular.module('providers.config',[])
             selectProduct:"market/center/selectProductList",
             evaluateList:"market/evaluate/list",
         }
+
+
 
         /**提示信息配置*/
         $config.messages = {
