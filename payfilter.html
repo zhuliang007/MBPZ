@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript">
-
+       var userPhone =  window.localStorage.getItem('userPhone');
+       console.log(userPhone);
+        window.location.href = 'http://120.26.88.135:8085/smartMBPZ/index.html?loginAccount='+userPhone+'#/tabs/tabsHome';
     </script>
 </head>
 <body>

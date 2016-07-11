@@ -24,13 +24,14 @@ angular.module('controllers.start',[])
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
 
+            window.localStorage.setItem('userPhone',$scope.userPhone);
+
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
 
             $scope.autoLogin = function(){
-                console.log($scope.userPhone)
                 var deferred = $q.defer();
                 var data = {
                     "cmd": $config.cmds.login,
