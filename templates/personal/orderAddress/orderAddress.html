@@ -11,7 +11,7 @@
                 <span class="icon ion-checkmark-circled isDefault" ng-if="address.isDefault"></span>
                 <div class="userTitle" ng-bind="address.receiveName + '&nbsp;&nbsp;&nbsp;&nbsp;' + address.receivePhone"></div>
                 <div class="userAddress" style="white-space: normal" ng-bind="address.address"></div>
-                <ion-option-button class="button-positive" ng-click="editAddress(address,1)">编辑</ion-option-button>
+                <ion-option-button class="button-edit" ng-click="editAddress(address,1)">编辑</ion-option-button>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll
