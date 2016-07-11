@@ -13,13 +13,13 @@ angular.module('controllers.personal',[])
     '$locals',
     function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
 
+        var obj = $locals.getObject($config.USER_INFO_NAME);
+        console.log('token',obj.loginToken);
         initToken = function(){
-            $scope.checkLogin()
-                .then(function(){
-                    $scope.userHeaderImg =$scope.userInfo.userImg;
-                    $scope.userName = $scope.userInfo.nickName;
-                    $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
-                    switch (parseInt($scope.userInfo.sex)){
+                    $scope.userHeaderImg =obj.userImg;
+                    $scope.userName = obj.nickName;
+                    $scope.cityText = obj.cityText==null?'未设置':obj.cityText;
+                    switch (parseInt(obj.sex)){
                         case 0:
                             $scope.userSex='女';
                             break;
@@ -34,22 +34,21 @@ angular.module('controllers.personal',[])
                         "cmd":$config.cmds.personalCount,
                         "parameters":{
                         },
-                        "token":$scope.userInfo.loginToken
+                        "token":''
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            console.log(result)
                             $scope.productPublicCount=result.data.productPublicCount;
                             $scope.productSoldCount=result.data.productSoldCount;
                             $scope.productBoughtCount=result.data.productBoughtCount;
                             $scope.productCollectCount=result.data.productCollectCount;
                         })
-                },function(){
-                    $scope.autoLogin()
-                        .then(function(){
-                            initToken()
-                        })
-                })
+                //},function(){
+                //    $scope.autoLogin()
+                //        .then(function(){
+                //            initToken()
+                //        })
+                //})
         }
 
         initToken();

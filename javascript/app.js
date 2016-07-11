@@ -8,12 +8,15 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
         '$consoleProvider',
         '$ionicConfigProvider',
         '$urlRouterProvider',
-        function($stateProvider,$configProvider,$consoleProvider,$ionicConfigProvider,$urlRouterProvider){
+        '$httpProvider',
+        function($stateProvider,$configProvider,$consoleProvider,$ionicConfigProvider,$urlRouterProvider,$httpProvider){
             $ionicConfigProvider.platform.ios.tabs.style('standard');
             $ionicConfigProvider.platform.ios.tabs.position('bottom');
             $ionicConfigProvider.platform.android.tabs.style('standard');
             $ionicConfigProvider.platform.android.tabs.position('standard');
 
+            //请求拦截
+            $httpProvider.interceptors.push('httpInterceptor');
 
             $stateProvider
                 .state($configProvider.controllers.tabs.name,{
