@@ -30,7 +30,7 @@ angular.module('controllers.start',[])
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
-
+            $scope.autoLogin();
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
