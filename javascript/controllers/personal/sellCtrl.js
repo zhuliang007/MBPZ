@@ -13,7 +13,8 @@ angular.module('controllers.sellCtrl',[])
         '$httpService',
         '$locals',
         '$ionicPopup',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$ionicPopup){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$ionicPopup,$alert){
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.noMoreLoad = false;
@@ -104,13 +105,10 @@ angular.module('controllers.sellCtrl',[])
                 $state.go($config.controllers.publish.name,{type:type,id:id})
             }
 
+
             $scope.showConfirm = function(productid) {
-                var confirmPopup = $ionicPopup.confirm({
-                    title: '提示',
-                    template: '是否确定删除?',
-                });
-                confirmPopup.then(function(res) {
-                    if(res) {
+                $alert.confirm('是否确定删除?')
+                    .then(function () {
                         if(token!=''){
                             var delData =  {
                                 "cmd": $config.cmds.productDel,
@@ -121,16 +119,13 @@ angular.module('controllers.sellCtrl',[])
                             }
                             $httpService.getJsonFromPost($config.getRequestAction(),delData)
                                 .then(function(result){
-                                    alert(result.msg);
+                                    $alert.show(result.msg);
                                     $state.reload();
                                 })
                         }else{
                             initToken()
                         }
-                    } else {
-                        return;
-                    }
-                });
+                    })
             };
 
 
