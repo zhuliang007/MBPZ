@@ -1,6 +1,6 @@
 <!--个人中心-->
 <ion-view class="personalCenter">
-    <div class="personalCenterTop" ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg||defaultHead)"></div>
+    <div class="bgImg bgImg-5-3 personalCenterTop" ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg||defaultHead)"></div>
     <div class="personalCenterOperation">
         <span class="icon ion-ios-arrow-back back" ng-click="goBack()"></span>
         <span class="icon mbpz mbpz-icon-chat chat" ng-click="contactSeller(personalCenterInfo.userInfo)"></span>
@@ -30,7 +30,7 @@
         </div>
         <div class="headGroup">
             <div class="headImg padding-normal-bottom">
-                <div class="bgImg border-radius-round" id="userImg" ng-style="resizeImage('userImg',(personalCenterInfo.userInfo.userImg||defaultHead))"></div>
+                <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((personalCenterInfo.userInfo.userImg||defaultHead))"></div>
             </div>
             <div class="text-center font-size-big color-dark" ng-bind="personalCenterInfo.userInfo.nickName">
             </div>
@@ -49,7 +49,7 @@
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead)')"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -59,12 +59,12 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length>1">
                     <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length==1">
                     <div class="col col-66 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_normal'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_normal'+$index}}',productImage.location,'2:1')" ></div>
+                        <div class="bgImg bgImg-3-2" ng-style="setBackGroundImage(productImage.location)" ></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">
@@ -96,7 +96,7 @@
         <div class="card-group card-per" ng-if="productType==0">
             <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
                 <div class="card-item-per-body">
-                    <div class="bgImg" id="productImage{{$index}}" ng-style="resizeImage('productImage{{$index}}',product.productImageList[0].location,'1:1')"></div>
+                    <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(product.productImageList[0].location)"></div>
                     <div class="title" ng-bind="product.title"></div>
                     <div><span class="mbpz mbpz-icon-money price"></span><span class="price padding-small-right" ng-bind="product.currentPrice"></span><span class="originalPrice" ng-bind="product.originalPrice"></span></div>
                     <div class="row row-no-padding">

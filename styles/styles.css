@@ -1162,6 +1162,11 @@ ion-content{
     padding-bottom: -webkit-calc(66.6667%);
 }
 
+.bgImg-5-3{
+    padding-bottom: calc(60%);
+    padding-bottom: -webkit-calc(60%);
+}
+
 .bg-color-yellow{
     background-color: #FDDA5E;
 }
@@ -2981,15 +2986,8 @@ ion-content{
 
 /*个人中心*/
 .personalCenter .personalCenterTop{
-    width: 100%;
-    padding-bottom: calc(60%);
-    padding-bottom: -webkit-calc(60%);
     position: fixed;
     z-index:200;
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-position:center;
-    -webkit-background-size: cover;
     -webkit-filter: blur(20px);
     filter: blur(20px);
 }
