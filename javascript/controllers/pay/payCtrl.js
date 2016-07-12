@@ -22,7 +22,8 @@ angular.module('controllers.payCtrl',[])
             $scope.price = $stateParams.obj.price;
 
             $scope.goPay=function(obj){
-                $state.go($config.controllers.payRouters.name,{id:$stateParams.id,obj:$stateParams.obj,routers:$stateParams.routers});
+                window.location.href = 'http://erpuat.mengbp.com:8094/wine-market-rest/market/order/h5payOrder?orderCode='+$stateParams.obj.orderCode+'&token='+$stateParams.obj.token;
+                //$state.go($config.controllers.payRouters.name,{id:$stateParams.id,obj:$stateParams.obj,routers:$stateParams.routers});
             }
 
             $scope.changePay = function(value){

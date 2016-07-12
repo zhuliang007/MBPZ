@@ -18,6 +18,10 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.items = [];
                 var token ='';
 
+                if($stateParams.type=='1'){
+                    $state.go($config.controllers.myBought.name,null,{reload:true});
+                }
+
                 initToken = function(){
                     $scope.checkLogin()
                         .then(function(){
