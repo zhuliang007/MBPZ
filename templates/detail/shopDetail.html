@@ -21,7 +21,7 @@
                        does-continue="false"
                        auto-play="true" slide-interval="2000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="productImage in product.productImageList track by $index">
-                <div id="productImage{{$index}}" class="bgImg" ng-style="resizeImage('productImage{{$index}}',productImage.location,'1:1')"></div>
+                <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage((productImage.location))"></div>
             </ion-slide>
         </ion-slide-box>
 
@@ -40,7 +40,7 @@
             <div class="row row-no-padding border-bottom">
                 <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
                     <div class="col padding-none-horizontal">
-                        <div class="bgImg border-radius-round" id="publicUserImage_type1_{{$index}}" ng-style="resizeImage('publicUserImage_type1_{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                        <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
                     </div>
                 </div>
                 <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
@@ -78,19 +78,19 @@
                     <div class="margin-normal-top white-space">推荐理由：<span ng-bind="reply.contents"></span></div>
                 </div>
                 <div class="col padding-normal-horizontal padding-normal-vertical">
-                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg" id="officialImage{{$index}}" ng-style="resizeImage('officialImage{{$index}}',reply.recommonedProductImageList[0].location)"></div>
+                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg bgImg-1-1" ng-style="setBackGroundImage(reply.recommonedProductImageList[0].location)" ng-click="showResolveProduct($event,reply.resolveProductId)"></div>
                 </div>
             </ion-item>
             <ion-item ng-if="reply.isRecommoned == null" class="row row-no-padding replyNormal" ng-class="{true:'',false:'disabled'}[userInfo?userInfo.id==product.publicUser.id:true]" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
                 <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical" ng-click="showPersonalCenter($event,reply.createUser.id)">
-                    <div class="bgImg border-radius-round" ng-style="resizeImage('userHead_type1_{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead_type1_{{$index}}"></div>
+                    <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((reply.createUser.userImg||defaultHead))"></div>
                 </div>
                 <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
                     <div><span class="userNick" ng-bind="reply.createUser.nickName" ng-click="showPersonalCenter($event,reply.createUser.id)"></span><span class="publicTime padding-normal-left" ng-bind="parseTime(reply.createDate)"></span><span class="publicTime">回复</span></div>
                     <div class="margin-normal-top"><span class="content" ng-bind="reply.contents"></span></div>
                 </div>
                 <div class="col padding-normal-horizontal padding-normal-vertical">
-                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg" id="replyImage{{$index}}" ng-style="resizeImage('replyImage{{$index}}',reply.recommonedProductImageList[0].location)" ng-click="showResolveProduct($event,reply.resolveProductId)"></div>
+                    <div ng-if="reply.recommonedProductImageList != null" class="bgImg bgImg-1-1" ng-style="setBackGroundImage(reply.recommonedProductImageList[0].location)" ng-click="showResolveProduct($event,reply.resolveProductId)"></div>
                 </div>
             </ion-item>
         </ion-list>

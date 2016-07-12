@@ -1147,6 +1147,21 @@ ion-content{
     -webkit-background-size: cover;
 }
 
+.bgImg-3-1{
+    padding-bottom: calc(33.3333%);
+    padding-bottom: -webkit-calc(33.3333%);
+}
+
+.bgImg-1-1{
+    padding-bottom: calc(100%);
+    padding-bottom: -webkit-calc(100%);
+}
+
+.bgImg-3-2{
+    padding-bottom: calc(66.6667%);
+    padding-bottom: -webkit-calc(66.6667%);
+}
+
 .bg-color-yellow{
     background-color: #FDDA5E;
 }
