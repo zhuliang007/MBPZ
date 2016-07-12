@@ -3139,5 +3139,7 @@ ion-content{
 a:active{
     text-decoration: none;
 }
-
+.wkit-msg-wrap .wkit-avatar-wrap img{
+    height: 100%;
+}
 

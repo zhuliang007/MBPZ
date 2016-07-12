@@ -267,10 +267,15 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             $scope.clickChat = function () {
+                console.log($scope.items)
                 if(parseInt($stateParams.type)==0){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2});
+                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                        touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
+                        userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2});
+                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                     touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
+                     userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }
 
             }

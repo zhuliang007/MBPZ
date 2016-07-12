@@ -14,43 +14,57 @@ angular.module('controllers.messageTalking',[])
             $scope.items = [];
             $scope.WSDK = null;
 
-            $state.reload
+            initToken = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        $state.reload;
 
-            WKIT.init({
-               // container: document.getElementById('J_demo'),
-               // width: 700,
-               // height: 500,
-                uid: $scope.userPhone,
-                appkey:$config.appkeys ,
-                credential:$scope.userPhone,
-                touid: 'test1',
-                onBack:function(){
-                    wkitDestroy();
-                    $state.go('tabs.tabsMessage')
-                },
-                onLoginSuccess:function(data){
-                    console.log(data)
-                    $scope.WSDK = WKIT.Conn.sdk;
-                    loginIn( $scope.WSDK);
-                }
-            });
+                        WKIT.init({
+                            container: document.getElementById('user_list'),
+                            width: 700,
+                            height: 500,
+                            uid: $scope.userPhone,
+                            appkey:$config.appkeys ,
+                            credential:$scope.userPhone,
+                            touid: '15901718791',
+                            onBack:function(){
+                                wkitDestroy();
+                                $state.go('tabs.tabsMessage')
+                            },
+                            onLoginSuccess:function(data){
+                                $scope.WSDK = WKIT.Conn.sdk;
+                                loginIn( $scope.WSDK,$scope.userInfo);
+                            }
+                        });
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                                initToken()
+                            })
+                    })
+            }
+            initToken();
 
-            function loginIn(sdk){
+
+            function loginIn(sdk,userInfo){
                 sdk.Base.getRecentContact({
                     count:30,
                     success: function (data) {
                         var list = data.data.cnts;
+                        console.log(list)
                         list.forEach(function(item){
                             var param={
                                 nickname:'',
                                 avator:'',
                                 emot:'',
-                                uid:''
+                                uid:'',
+                                userImage:''
                             }
                             param.nickname=item.nickname;
                             param.avators = item.avator;
                             param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
                             param.uid = sdk.Base.getNick(item.uid);
+                            param.userImage = userInfo.userImg;
                             $scope.items.push(param);
                         })
                     },
@@ -65,15 +79,16 @@ angular.module('controllers.messageTalking',[])
                 $state.go('tabs.tabsMessage');
             }
 
-            $scope.contactFn = function(nickName,userId,type){
+            $scope.contactFn = function(item,type){
                 wkitDestroy();
-                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:userId,nickName:nickName,type:type});
+                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:item.uid,nickName:item.nickname,type:type,
+                    userImage:item.userImage,toUserImage:item.avators});
             }
 
             var wkitDestroy = function(){
-               // var demo = document.getElementById('J_demo');
-             //   demo.parentNode.removeChild(demo);
                 WKIT.destroy();
+                var demo = document.getElementById('user_list');
+                demo.parentNode.removeChild(demo);
             }
 
         }])
