@@ -12,7 +12,8 @@ angular.module('controllers.feedbackCtrl',[])
         '$state',
         '$locals',
         '$http',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$http){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$http,$alert){
 
                 var token ='';
 
@@ -30,9 +31,17 @@ angular.module('controllers.feedbackCtrl',[])
 
                 initToken();
 
+                $scope.feedbacks={
+                        text:''
+                }
                 $scope.submitFeedback = function () {
                         if(token!=''){
-                                var val = $scope.feedback;
+                                var val = $scope.feedbacks.text;
+                                if(val.length<10){
+                                        $alert.show('不得少于10个字');
+                                        return;
+                                }
+
                                 var data = {
                                         "cmd":$config.cmds.addFeedback,
                                         "parameters":{
@@ -43,7 +52,7 @@ angular.module('controllers.feedbackCtrl',[])
                                 $http.post($config.getRequestAction(),data).success(function(data){
                                         console.log(data)
                                         if(data.statusCode=='200'){
-                                                alert('提交成功')
+                                                $alert.show('提交成功')
                                                 $state.go('myCenterSetup');
                                         }
                                 })

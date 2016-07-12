@@ -457,6 +457,7 @@ angular.module('providers.config',[])
                 url: "/orderDetail/:id&:type?",
                 controller: "OrderDetailCtrl",
                 name: "orderDetail",
+                cache:false
             },
             recommend:{
                 templateUrl:"templates/detail/recommend.html",

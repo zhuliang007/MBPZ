@@ -12,5 +12,8 @@ angular.module('controllers.myCenterSetupCtrl',[])
             '$state',
             function($scope,$console,$config,$rootScope,$stateParams,$state){
 
+                $scope.goBackMyCenter = function () {
+                    $state.go($config.controllers.tabsPersonal.name)
+                }
 
             }])

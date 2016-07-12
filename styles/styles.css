@@ -3136,4 +3136,8 @@ ion-content{
     width:50px !important;
 }
 
+a:active{
+    text-decoration: none;
+}
+
 

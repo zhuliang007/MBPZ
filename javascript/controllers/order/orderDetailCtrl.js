@@ -28,13 +28,19 @@ angular.module('controllers.orderDetailCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
-                                $scope.userHeaderImg=result.data.product.publicUser.userImg;
-                                $scope.nickName = result.data.product.publicUser.nickName;
-                                $scope.currentUserId = result.data.product.publicUserId;
+                                console.log($stateParams.type)
+                                if(parseInt($stateParams.type)==0){
+                                    $scope.userHeaderImg=result.data.product.publicUser.userImg;
+                                    $scope.nickName = result.data.product.publicUser.nickName;
+                                    $scope.currentUserId = result.data.product.publicUserId;
+                                }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3) {
+                                    $scope.userHeaderImg=result.data.buyUser.userImg;
+                                    $scope.nickName = result.data.buyUser.nickName;
+                                    $scope.currentUserId = result.data.buyUser.id;
+                                 }
                                 $scope.items=result.data;
 
-                                var processScroll = document.getElementById('processScrolls')
+                                var processScroll = document.getElementById('processScrolls');
                                 var $element = angular.element(processScroll);
                                 $element.children('.scroll').css({'width':(120*result.data.process.length)+"px"});
                             })
@@ -257,6 +263,15 @@ angular.module('controllers.orderDetailCtrl',[])
                             .then(function(){
                             })
                     })
+
+            }
+
+            $scope.clickChat = function () {
+                if(parseInt($stateParams.type)==0){
+                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2});
+                }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3){
+                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2});
+                }
 
             }
 
