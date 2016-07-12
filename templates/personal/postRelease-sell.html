@@ -11,7 +11,7 @@
                 <a ng-click="showProduct(item.id)">
                     <div class="row" ng-if="item.productImageList.length!=0" >
                         <div class="col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index" >
-                            <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
                         </div>
                     </div>
                     <div class="row">
