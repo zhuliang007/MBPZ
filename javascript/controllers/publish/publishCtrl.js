@@ -70,18 +70,7 @@ angular.module('controllers.publish',[])
                                             $scope.childCodes = checkParentType();
                                         })
                                 },function(error){
-                                    if(error.systemError){
-                                        var systemError = error.systemError;
-                                        $alert.confirm(systemError.errorInfo)
-                                            .then(function(){
-                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                    $scope.autoLogin()
-                                                        .then(function(){
-                                                            getPublishDetail();
-                                                        })
-                                                }
-                                            })
-                                    }
+                                    $console.show(error);
                                 })
                         }
                         else{
@@ -93,14 +82,9 @@ angular.module('controllers.publish',[])
                                 })
                         }
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        getPublishDetail();
-                                    })
-                            },function(){
-                                $scope.goBack();
+                                getPublishDetail();
                             })
                     })
             }
@@ -170,20 +154,11 @@ angular.module('controllers.publish',[])
                                 $scope.publishObject.publishImageList.splice(index,1);
                             },function(error){
                                 $console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                            }
-                                        })
-                                }
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                $scope.deletePublishImage();
                             })
                     })
             }
@@ -211,24 +186,6 @@ angular.module('controllers.publish',[])
                                 },function(error){
                                     $console.show(error);
                                     $scope.publishObject.publishImageList[index].isFailed = true;
-                                    if(error.systemError) {
-                                        var systemError = error.systemError;
-                                        if(!hasShowAlert){
-                                            hasShowAlert = true
-                                            $alert.confirm(systemError.errorInfo)
-                                                .then(function(){
-                                                    if (systemError.errorCode == 14 || systemError.errorCode == 15) {
-                                                        $scope.autoLogin()
-                                                            .then(function(){
-                                                                hasShowAlert = false;
-                                                            })
-                                                    }
-                                                },function(){
-                                                    hasShowAlert = false;
-                                                })
-                                        }
-
-                                    }
                                 },function(progressEvent){
                                     $console.show(progressEvent)
                                     $scope.publishObject.publishImageList[index].isProgress = true;
@@ -245,15 +202,10 @@ angular.module('controllers.publish',[])
                     },function(){
                         if(!hasShowAlert){
                             hasShowAlert = true
-                            $alert.confirm('请登录')
+                            $scope.autoLogin()
                                 .then(function(){
-                                    $scope.autoLogin()
-                                        .then(function(){
-                                            hasShowAlert = false;
-                                            $scope.updateFile(index);
-                                        })
-                                },function(){
                                     hasShowAlert = false;
+                                    $scope.updateFile(index);
                                 })
                         }
                     })
@@ -342,20 +294,12 @@ angular.module('controllers.publish',[])
                                         })
                                 },
                                 function(error){
-                                    if(error.systemError) {
-                                        var systemError = error.systemError;
-                                        $alert.confirm(systemError.errorInfo)
-                                            .then(function(){
-                                                if (systemError.errorCode == 14 || systemError.errorCode == 15) {
-                                                    $scope.autoLogin();
-                                                }
-                                            })
-                                    }
+                                    $console.show(error);
                                 })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin();
+                                $scope.submitPublish();
                             })
                     })
             }
