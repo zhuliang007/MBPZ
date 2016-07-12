@@ -394,7 +394,7 @@ angular.module('providers.config',[])
             },
             myBought:{
                 templateUrl:"templates/personal/personal-bought.html",
-                url:"/myBought",
+                url:"/myBought/:type?",
                 name:"myBought",
                 controller:"MyBoughtCtrl",
                 params:{
