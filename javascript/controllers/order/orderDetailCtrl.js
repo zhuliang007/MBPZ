@@ -63,6 +63,9 @@ angular.module('controllers.orderDetailCtrl',[])
                     case 3:
                         $state.go($config.controllers.sellRefundsRelease.name);
                         break;
+                    case 10:
+                        $scope.goBack();
+                        break;
                 }
             }
 

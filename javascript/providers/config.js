@@ -250,7 +250,7 @@ angular.module('providers.config',[])
                 templateUrl: "templates/message/message-list.html",
                 url: "/talking",
                 name: "messageTalking",
-                controller: "MessageTalking",
+                controller: "MessageTalkingCtrl",
                 cache:false
             },
             messageChat:{

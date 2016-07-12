@@ -7,7 +7,7 @@
     </ion-header-bar>
     <ion-content  >
         <ion-list ng-repeat="item in items track by $index">
-            <a class="item message-order">
+            <a class="item message-order" ng-click="messagesOrder(item)">
                 <div class="row">
                     <div class="col-20 col-center">
                         <img ng-src="{{item.img}}" />
