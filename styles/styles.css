@@ -744,6 +744,14 @@ ion-content{
     border-radius: 0px!important;
 }
 
+.filterPopover.filterPrice{
+    height: 120px;
+}
+
+.filterPopover.filterOrder{
+    height: 150px;
+}
+
 .chooseSearchType{
     top: 32px!important;
     border-radius: 0px!important;

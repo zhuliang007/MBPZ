@@ -1,4 +1,4 @@
-<ion-popover-view class="filterPopover">
+<ion-popover-view class="filterPopover filterOrder">
     <ion-content class="padding-normal-horizontal" has-bouncing="true" overflow-scroll="false">
         <ion-list>
             <ion-radio ng-model="filterObject.sortType" icon="hidden" ng-value="intelligentClassify.value" ng-change="showFilterOrder(intelligentClassify)" ng-repeat="intelligentClassify in intelligentClassifyList"><span ng-bind="intelligentClassify.name"></span></ion-radio>
