@@ -33,38 +33,43 @@ angular.module('controllers.start',[])
 
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
-                var data = {
-                    "cmd": $config.cmds.login,
-                    "parameters":{
-                        "loginAccount":$scope.userPhone,
-                        "thirdType":$scope.thirdType
-                    }
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                    .then(function(result){
-                        $scope.userInfo = {
-                            loginToken:result.data.loginToken,
-                            loginAccount:result.data.loginAccount,
-                            id:result.data.id,
-                            city:result.data.city,
-                            cityText:result.data.cityText,
-                            introduce:result.data.introduce,
-                            nickName:result.data.nickName,
-                            province:result.data.province,
-                            provinceText:result.data.provinceText,
-                            sex:result.data.sex,
-                            userImg:result.data.userImg,
-                            userLevel:result.data.userLevel
+                if($scope.userPhone){
+                    var data = {
+                        "cmd": $config.cmds.login,
+                        "parameters":{
+                            "loginAccount":$scope.userPhone,
+                            "thirdType":$scope.thirdType
                         }
-                        //var obj = $locals.getObject($config.USER_INFO_NAME);
-                        //if(obj==null){
-                        //    $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
-                        //}
-                        deferred.resolve();
-                    },function(error){
-                        deferred.reject(error);
-                    })
-
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $scope.userInfo = {
+                                loginToken:result.data.loginToken,
+                                loginAccount:result.data.loginAccount,
+                                id:result.data.id,
+                                city:result.data.city,
+                                cityText:result.data.cityText,
+                                introduce:result.data.introduce,
+                                nickName:result.data.nickName,
+                                province:result.data.province,
+                                provinceText:result.data.provinceText,
+                                sex:result.data.sex,
+                                userImg:result.data.userImg,
+                                userLevel:result.data.userLevel
+                            }
+                            //var obj = $locals.getObject($config.USER_INFO_NAME);
+                            //if(obj==null){
+                            //    $locals.setObject($config.USER_INFO_NAME,$scope.userInfo);
+                            //}
+                            deferred.resolve();
+                        },function(error){
+                            deferred.reject(error);
+                        })
+                }
+                else{
+                    $alert.show('请先登录萌宝派');
+                    deferred.reject();
+                }
                 return deferred.promise;
             }
 
