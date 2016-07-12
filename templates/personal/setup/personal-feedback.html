@@ -6,15 +6,13 @@
         <h1 class="title">意见与反馈</h1>
     </ion-header-bar>
     <ion-content class="feedback-content">
-        <form>
-            <div class="row">
-                <textarea placeholder="请输入意见反馈内容(不超过200字,不少于10个字)" class="feedback-input" ng-model="$parent.feedback"></textarea>
-            </div>
-            <div class="row">
-                <button class="button button-block button-positive" ng-click="submitFeedback()">
-                    提交
-                </button>
-            </div>
-        </form>
+        <div class="row">
+            <textarea placeholder="请输入意见反馈内容(不超过200字,不少于10个字)" class="feedback-input" ng-model="feedbacks.text" maxlength="200" ></textarea>
+        </div>
+        <div class="row">
+            <button class="button button-block button-positive" ng-click="submitFeedback()">
+                提交
+            </button>
+        </div>
     </ion-content>
 </ion-view>

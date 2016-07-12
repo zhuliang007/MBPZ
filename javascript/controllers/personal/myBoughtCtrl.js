@@ -18,10 +18,7 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.items = [];
                 var token ='';
 
-                if($stateParams.type=='1'){
-                    $state.go($config.controllers.myBought.name,null,{reload:true});
-                    window.localStorage.removeItem('userPhone');
-                }
+                window.localStorage.removeItem('userPhone');
 
                 initToken = function(){
                     $scope.checkLogin()
