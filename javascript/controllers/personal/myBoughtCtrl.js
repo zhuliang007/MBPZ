@@ -20,6 +20,7 @@ angular.module('controllers.myBoughtCtrl',[])
 
                 if($stateParams.type=='1'){
                     $state.go($config.controllers.myBought.name,null,{reload:true});
+                    window.localStorage.removeItem('userPhone');
                 }
 
                 initToken = function(){
