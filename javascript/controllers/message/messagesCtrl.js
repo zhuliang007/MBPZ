@@ -44,7 +44,7 @@ angular.module('controllers.messagesCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
+                                console.log('result',result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.content.length==0||result.data.content==null){
                                     $scope.noMoreLoad=true;
@@ -81,6 +81,10 @@ angular.module('controllers.messagesCtrl',[])
                         $state.go($config.controllers.shopDetail.name,params);
                         break;
                 }
+            }
+            
+            $scope.messagesOrder = function (item) {
+                $state.go($config.controllers.orderDetail.name,{id:item.relateField,type:10})
             }
 
         }
