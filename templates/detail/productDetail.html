@@ -14,7 +14,7 @@
             <div class="row row-no-padding">
                 <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
                     <div class="col padding-none-horizontal padding-none-vertical">
-                        <div class="bgImg border-radius-round" id="publicUserImage_{{$index}}" ng-style="resizeImage('publicUserImage_{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                        <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
                     </div>
                 </div>
                 <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
@@ -64,14 +64,14 @@
             </div>
             <div class="row row-no-padding margin-normal-top" ng-repeat="productImage in product.productImageList track by $index">
                 <div class="col">
-                    <img class="bgImg" ng-src="{{productImage.location}}">
+                    <img class="img-auto" ng-src="{{productImage.location}}">
                 </div>
             </div>
         </div>
         <ion-list class="replyBody" id="replyBody">
             <ion-item class="row row-no-padding" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
                 <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical"  ng-click="showPersonalCenter($event,reply.createUser.id)">
-                    <div class="bgImg border-radius-round" ng-style="resizeImage('userHead{{$index}}',(reply.createUser.userImg||defaultHead))" id="userHead{{$index}}"></div>
+                    <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((reply.createUser.userImg||defaultHead))"></div>
                 </div>
                 <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
                     <div ng-bind="reply.createUser.nickName" class="userNick" ng-click="showPersonalCenter($event,reply.createUser.id)"></div>

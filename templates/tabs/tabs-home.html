@@ -12,7 +12,7 @@
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHomeHandle">
         <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="ad in adList track by $index">
-                <div id="adHead{{$index}}" class="bgImg" ng-style="resizeImage('adHead{{$index}}',ad.adImg,'3:1')"></div>
+                <div class="bgImg bgImg-3-1" ng-style="setBackGroundImage(ad.adImg)"></div>
             </ion-slide>
         </ion-slide-box>
 
@@ -38,7 +38,7 @@
             <div class="row padding-none-horizontal" ui-sref="tabs.tabsShop()">
                 <div class="col col-25 padding-none-horizontal padding-small-vertical border-right">
                     <div class="col-75 col-offset-10">
-                        <img class="img-auto" ng-src="{{homeQGXX}}">
+                        <img class="bgImg bgImg-1-1" ng-style="setBackGroundImage(homeQGXX)">
                     </div>
                 </div>
                 <div class="col padding-small-vertical padding-none-right padding-normal-left col-center overflow-hidden">
@@ -60,7 +60,7 @@
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-20 col-center padding-none-horizontal padding-none-vertical" ng-click="showPersonalCenter($event,product.publicUser.id)">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -70,12 +70,12 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length>1">
                     <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)"></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length==1">
                     <div class="col col-66 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_normal'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_normal'+$index}}',productImage.location,'3:2')" ></div>
+                        <div class="bgImg bgImg-3-2" ng-style="setBackGroundImage(productImage.location)"></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">
