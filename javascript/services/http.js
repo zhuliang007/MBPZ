@@ -13,7 +13,7 @@ angular.module("services.http",[])
                     .success(function(result){
                         if(result.error){
                             var systemError;
-                            if(result.error.errorCode == 14 || result.error.errorCode == 15){
+                            if(result.error.errorCode == 14 || result.error.errorCode == 15 || result.error.errorCode == 20){
                                 $alert.show('请重新登录萌宝派');
                             }
                             else{
@@ -35,7 +35,7 @@ angular.module("services.http",[])
                     })
                 return deferred.promise;
             }
-
+            $httpService.fileUploadFlag = false;
             $httpService.uploadImage = function(action,data){
                 var deferred = $q.defer();
                 Upload.upload({
@@ -43,8 +43,20 @@ angular.module("services.http",[])
                     data:data
                 }).then(function(result){
                     if(result.data.error){
-                        var systemError = {
-                            systemError: result.error
+                        var systemError;
+                        if(result.data.error.errorCode == 14 ||result.data.error.errorCode == 15 || result.data.error.errorCode == 20){
+                            if(!$httpService.fileUploadFlag){
+                                $httpService.fileUploadFlag = true;
+                                $alert.show('请重新登录萌宝派')
+                                    .then(function(){
+                                        $httpService.fileUploadFlag = false;
+                                    })
+                            }
+                        }
+                        else{
+                            systemError = {
+                                systemError: result.data.error
+                            }
                         }
                         deferred.reject(systemError);
                     }
