@@ -21,7 +21,7 @@
                 <ion-item>
                     <div class="row">
                         <div class="col col-20 col-center" ng-if="items.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(items.product.productImageList) track by $index">
-                            <div id="orderDetailImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('orderDetailImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
                         </div>
                         <div class="col col-center">
                             <p class="orderDetailP" ng-bind="items.product.title"></p>

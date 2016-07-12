@@ -10,8 +10,8 @@
             <div class="item shelvesItems">
                 <a  ng-click="showProduct(item.id)">
                     <div class="row shelvesRow">
-                        <div class="col col-20 col-center" ng-if="item.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index">
-                            <div id="shelvesImg{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('shelvesImg{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        <div class="col col-20 col-center" ng-if="item.productImageList.length!=0">
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(item.productImageList[0].location)" ></div>
                         </div>
                         <div class="col col-70">
                             <div class="shelvesTitles">

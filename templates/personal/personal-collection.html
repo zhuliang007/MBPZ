@@ -11,7 +11,7 @@
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg border-radius-round" id="publicUserImage{{$index}}" ng-style="resizeImage('publicUserImage{{$index}}',(product.publicUser.userImg||defaultHead),'1:1')"></div>
+                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="checkProductImages(product.productImageList).length !=0">
                     <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div id="productImage{{$parent.$index+'_'+$index}}" class="bgImg" ng-style="resizeImage('productImage{{$parent.$index+'_'+$index}}',productImage.location,'1:1')" ></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">
