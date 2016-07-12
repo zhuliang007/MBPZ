@@ -4,7 +4,8 @@ angular.module("services.http",[])
         "$http",
         "$q",
         "Upload",
-        function($http,$q,Upload){
+        '$alert',
+        function($http,$q,Upload,$alert){
             var $httpService = {}
             $httpService.getJsonFromPost = function(action,data,config){
                 var deferred = $q.defer();
@@ -12,8 +13,14 @@ angular.module("services.http",[])
                     .success(function(result){
                         console.log(result)
                         if(result.error){
-                            var systemError = {
-                                systemError: result.error
+                            var systemError;
+                            if(result.error.errorCode == 14 || result.error.errorCode == 15){
+                                $alert.show('请重新登录萌宝派');
+                            }
+                            else{
+                                systemError = {
+                                    systemError: result.error
+                                }
                             }
                             deferred.reject(systemError);
                         }

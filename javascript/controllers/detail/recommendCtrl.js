@@ -69,37 +69,17 @@ angular.module("controllers.recommend",[])
                                 },
                                 function(error){
                                     $console.show(error);
-                                    if(error.systemError){
-                                        var systemError = error.systemError;
-                                        $alert.confirm(systemError.errorInfo)
-                                            .then(function(){
-                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                    $scope.autoLogin()
-                                                        .then(function(){
-                                                            $scope.productList = [];
-                                                            pageNo = 0;
-                                                            $scope.infiniteFlag = true;
-                                                            productHandle.resize();
-                                                            productHandle.scrollTop();
-                                                            getMyProductList();
-                                                        })
-                                                }
-                                            })
-                                    }
                                 })
 
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        $scope.productList = [];
-                                        pageNo = 0;
-                                        $scope.infiniteFlag = true;
-                                        productHandle.resize();
-                                        productHandle.scrollTop();
-                                        getMyProductList();
-                                    })
+                                $scope.productList = [];
+                                pageNo = 0;
+                                $scope.infiniteFlag = true;
+                                productHandle.resize();
+                                productHandle.scrollTop();
+                                getMyProductList();
                             })
                     })
             }
@@ -145,36 +125,16 @@ angular.module("controllers.recommend",[])
                                     })
                             },function(error){
                                 $console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        $scope.productList = [];
-                                                        pageNo = 0;
-                                                        $scope.infiniteFlag = true;
-                                                        productHandle.resize();
-                                                        productHandle.scrollTop();
-                                                        getMyProductList();
-                                                    })
-                                            }
-                                        })
-                                }
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        $scope.productList = [];
-                                        pageNo = 0;
-                                        $scope.infiniteFlag = true;
-                                        productHandle.resize();
-                                        productHandle.scrollTop();
-                                        getMyProductList();
-                                    })
+                                $scope.productList = [];
+                                pageNo = 0;
+                                $scope.infiniteFlag = true;
+                                productHandle.resize();
+                                productHandle.scrollTop();
+                                getMyProductList();
                             })
                     })
             }

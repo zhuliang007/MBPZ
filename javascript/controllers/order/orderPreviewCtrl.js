@@ -47,34 +47,16 @@ angular.module('controllers.orderPreview',[])
                                 $console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        getOrderPreview();
-                                                    })
-                                                return ;
-                                            }
-                                            if(systemError.errorCode == 20){
-                                                $scope.goBack();
-                                                return ;
-                                            }
-                                        },function(){
-                                            $scope.goBack();
-                                        })
+                                    if(systemError.errorCode == 20){
+                                        $scope.goBack();
+                                    }
                                 }
                             })
                     },function(){
-                        $alert.confirm('请登录').
-                            then(function(){
-                            $scope.autoLogin()
-                                .then(function(){
-                                    getOrderPreview();
-                                })
-                        },function(){
-                            $scope.goBack();
-                        })
+                        $scope.autoLogin()
+                            .then(function(){
+                                getOrderPreview();
+                            })
                     })
             }
 
@@ -113,33 +95,17 @@ angular.module('controllers.orderPreview',[])
                                 $console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        getOrderPreview();
-                                                    })
-                                                return ;
-                                            }
-                                            if(systemError.errorCode == 20){
-                                                $scope.goBack();
-                                                return ;
-                                            }
-                                        },function(){
-                                            $scope.goBack();
-                                        })
+                                    if(systemError.errorCode == 20){
+                                        $scope.goBack();
+                                    }
                                 }
                             })
 
 
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        getOrderPreview();
-                                    })
+                                $scope.submitOrder();
                             })
                     })
             }
@@ -157,12 +123,9 @@ angular.module('controllers.orderPreview',[])
                     .then(function(){
                         $state.go($config.controllers.orderAddress.name,{type:1});
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        getOrderPreview();
-                                    })
+                                $scope.setOrderAddress();
                             })
                     })
             }

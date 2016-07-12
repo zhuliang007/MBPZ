@@ -29,6 +29,7 @@ angular.module('controllers.productDetail',[])
             $scope.infiniteFlag = true;
             getProductDetail();
             function getProductDetail(){
+                var deferred = $q.defer();
                 var data = {
                     "cmd": $config.cmds.details,
                     "parameters":{
@@ -41,24 +42,18 @@ angular.module('controllers.productDetail',[])
                     .then(function(result){
                         $console.show(result);
                         $scope.product = result.data;
+                        deferred.resolve();
                     },function(error){
                         $console.show(error);
                         if(error.systemError){
                             var systemError = error.systemError;
-                            $alert.confirm(systemError.errorInfo)
-                                .then(function(){
-                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                        $scope.autoLogin()
-                                            .then(function(){
-                                                getProductDetail();
-                                            })
-                                    }
-                                    else if(systemError.errorCode == 11){
-                                        $scope.goBack();
-                                    }
-                                })
+                            if(systemError.errorCode == 11){
+                                $scope.goBack();
+                            }
                         }
                     })
+
+                return deferred.promise;
             }
 
             function getReplyList(){
@@ -126,26 +121,17 @@ angular.module('controllers.productDetail',[])
                                 $console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        getProductDetail();
-                                                    })
-                                            }
-                                            else if(systemError.errorCode == 11){
-                                                $scope.goBack();
-                                            }
-                                        })
+                                    if(systemError.errorCode == 11){
+                                        $scope.goBack();
+                                    }
                                 }
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                getProductDetail()
                                     .then(function(){
-                                        getProductDetail()
+                                        $scope.judgeProduct();
                                     })
                             })
                     })
@@ -156,11 +142,11 @@ angular.module('controllers.productDetail',[])
                     .then(function(){
                         $state.go($config.controllers.orderPreview.name,{productId:id});
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                getProductDetail()
                                     .then(function(){
-                                        getProductDetail()
+                                        $scope.buyProduct()
                                     })
                             })
                     })
@@ -202,11 +188,11 @@ angular.module('controllers.productDetail',[])
                     .then(function(){
                         $state.go($config.controllers.report.name,{productId:productId});
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                getProductDetail()
                                     .then(function(){
-                                        getProductDetail()
+                                        $scope.report();
                                     })
                             })
                     })
@@ -244,11 +230,11 @@ angular.module('controllers.productDetail',[])
                         }
                         $console.show($scope.replyObject);
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                getProductDetail()
                                     .then(function(){
-                                        getProductDetail();
+                                        $scope.productReply($event,userObject)
                                     })
                             })
                     })
@@ -296,25 +282,13 @@ angular.module('controllers.productDetail',[])
                                 $scope.infiniteFlag = true;
                             },function(error){
                                 $console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin()
-                                                    .then(function(){
-                                                        $scope.sendReply();
-                                                    })
-                                            }
-                                        })
-                                }
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                getProductDetail()
                                     .then(function(){
-                                        getProductDetail()
+                                        $scope.sendReply();
                                     })
                             })
                     })
