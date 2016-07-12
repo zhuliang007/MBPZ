@@ -30,7 +30,6 @@ angular.module('controllers.start',[])
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
-
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
@@ -186,9 +185,9 @@ angular.module('controllers.start',[])
                             type:2})
 
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
+                                $scope.contactSeller(seller);
                             })
                     })
             }
@@ -322,14 +321,9 @@ angular.module('controllers.start',[])
                             $scope.closeModal('publishModal');
                         }
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        $scope.goPublish(type);
-                                    })
-                            },function(){
-                                $scope.closeModal('publishModal');
+                                $scope.goPublish(type);
                             })
                     })
 

@@ -36,30 +36,11 @@ angular.module('controllers.evaluateDetail',[])
                             $scope.childEvaluateObject.parentId = $scope.detailObject.id
                         },function(error){
                             $console.show(error)
-                            if(error.systemError){
-                                var systemError = error.systemError;
-                                $alert.confirm(systemError.errorInfo)
-                                    .then(function(){
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin()
-                                                .then(function(){
-                                                    getEvaluateDetail();
-                                                })
-                                        }
-                                    },function(){
-                                        $scope.goBack();
-                                    })
-                            }
                         })
                 },function(){
-                    $alert.confirm('请登录')
+                    $scope.autoLogin()
                         .then(function(){
-                            $scope.autoLogin()
-                                .then(function(){
-                                    getEvaluateDetail();
-                                })
-                        },function(){
-                            $scope.goBack();
+                            getEvaluateDetail();
                         })
                 })
 
@@ -92,21 +73,12 @@ angular.module('controllers.evaluateDetail',[])
                                 })
                         },function(error){
                             $console.show(error)
-                            if(error.systemError){
-                                var systemError = error.systemError;
-                                $alert.confirm(systemError.errorInfo)
-                                    .then(function(){
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin();
-                                        }
-                                    })
-                            }
                         })
 
                 },function(){
-                    $alert.confirm('请登录')
+                    $scope.autoLogin()
                         .then(function(){
-                            $scope.autoLogin();
+                            $scope.submit();
                         })
                 })
 

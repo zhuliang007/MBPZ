@@ -35,10 +35,7 @@ angular.module('controllers.orderEvaluate',[])
         $scope.checkLogin()
             .then(function(){
             },function(){
-                $alert.confirm('请登录')
-                    .then(function(){
-                        $scope.autoLogin();
-                    })
+                $scope.autoLogin()
             })
 
 
@@ -80,21 +77,12 @@ angular.module('controllers.orderEvaluate',[])
                                 })
                         },function(error){
                             $console.show(error)
-                            if(error.systemError){
-                                var systemError = error.systemError;
-                                $alert.confirm(systemError.errorInfo)
-                                    .then(function(){
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin();
-                                        }
-                                    })
-                            }
                         })
 
                 },function(){
-                    $alert.confirm('请登录')
+                    $scope.autoLogin()
                         .then(function(){
-                            $scope.autoLogin();
+                            $scope.submit();
                         })
                 })
         }

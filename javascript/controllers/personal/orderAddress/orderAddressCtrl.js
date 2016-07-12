@@ -54,36 +54,14 @@ angular.module('controllers.orderAddress',[])
                                     pageNo++;
                                 },
                                 function(error){
+                                    $console.show(error);
                                     $scope.infiniteFlag = false;
-                                    if(error.systemError){
-                                        var systemError = error.systemError;
-                                        $alert.confirm(systemError.errorInfo)
-                                            .then(function(){
-                                                if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                    $scope.autoLogin()
-                                                        .then(function(){
-                                                            $scope.infiniteFlag = true;
-                                                            $scope.addressList = [];
-                                                            pageNo = 0;
-                                                            getAddressList();
-                                                        })
-                                                }
-                                            },function(){
-                                                $scope.goBack();
-                                            })
-                                    }
                                 })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                    getAddressList();
-                                })
-                            },function(){
-                                $scope.goBack();
+                                getAddressList();
                             })
-
                     })
             }
 
@@ -131,9 +109,9 @@ angular.module('controllers.orderAddress',[])
                             }
                         }
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin();
+                                $scope.editAddress(address,slideType);
                             })
                     })
             }

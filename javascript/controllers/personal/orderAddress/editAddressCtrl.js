@@ -80,20 +80,7 @@ angular.module('controllers.editAddress',[])
                                                 districtCode : result.data.district,
                                             }
                                         },function(error){
-                                            if(error.systemError){
-                                                var systemError = error.systemError;
-                                                $alert.confirm(systemError.errorInfo)
-                                                    .then(function(){
-                                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                            $scope.autoLogin()
-                                                                .then(function(){
-                                                                    getAddressObject();
-                                                                })
-                                                        }
-                                                    },function(){
-                                                        $scope.goBack();
-                                                    })
-                                            }
+                                            $console.show(error);
                                         })
                                 })
                         }
@@ -106,14 +93,9 @@ angular.module('controllers.editAddress',[])
                                 })
                         }
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        getAddressObject();
-                                    })
-                            },function(){
-                                $scope.goBack();
+                                getAddressObject();
                             })
                     })
             }
@@ -138,21 +120,12 @@ angular.module('controllers.editAddress',[])
                                             })
                                     },function(error){
                                         $console.show(error)
-                                        if(error.systemError){
-                                            var systemError = error.systemError;
-                                            $alert.confirm(systemError.errorInfo)
-                                                .then(function(){
-                                                    if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                        $scope.autoLogin();
-                                                    }
-                                                })
-                                        }
                                     })
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin();
+                                $scope.deleteAddress();
                             })
                     })
             }
@@ -283,23 +256,11 @@ angular.module('controllers.editAddress',[])
                                     })
                             },function(error){
                                 $console.show(error)
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    $alert.confirm(systemError.errorInfo)
-                                        .then(function(){
-                                            if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                                $scope.autoLogin();
-                                            }
-                                        })
-                                }
                             })
                     },function(){
-                        $alert.confirm('请登录')
+                        $scope.autoLogin()
                             .then(function(){
-                                $scope.autoLogin()
-                                    .then(function(){
-                                        getAddressObject();
-                                    })
+                                $scope.editAddress();
                             })
 
                     })

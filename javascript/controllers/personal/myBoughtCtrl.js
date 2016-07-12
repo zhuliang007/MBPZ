@@ -18,8 +18,6 @@ angular.module('controllers.myBoughtCtrl',[])
                 $scope.items = [];
                 var token ='';
 
-                window.localStorage.removeItem('userPhone');
-
                 initToken = function(){
                     $scope.checkLogin()
                         .then(function(){

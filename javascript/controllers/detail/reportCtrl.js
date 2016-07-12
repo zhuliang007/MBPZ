@@ -28,27 +28,15 @@ angular.module('controllers.report',[])
                         },function(error){
                             if(error.systemError){
                                 var systemError = error.systemError;
-                                $alert.confirm(systemError.errorInfo)
-                                    .then(function(){
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin()
-                                                .then(function(){
-                                                    getKeyWords();
-                                                })
-                                        }
-                                        else if(systemError.errorCode == 11){
-                                            $scope.goBack();
-                                        }
-                                    })
+                                if(systemError.errorCode == 11){
+                                    $scope.goBack();
+                                }
                             }
                         })
                 },function(){
-                    $alert.confirm('请登录')
+                    $scope.autoLogin()
                         .then(function(){
-                            $scope.autoLogin()
-                                .then(function(){
-                                    getKeyWords();
-                                })
+                            getKeyWords();
                         })
                 })
 
@@ -97,27 +85,15 @@ angular.module('controllers.report',[])
                             $console.show(error);
                             if(error.systemError){
                                 var systemError = error.systemError;
-                                $alert.confirm(systemError.errorInfo)
-                                    .then(function(){
-                                        if(systemError.errorCode == 14 || systemError.errorCode == 15){
-                                            $scope.autoLogin()
-                                                .then(function(){
-                                                    $scope.submitReport(chooseType,reasonText);
-                                                })
-                                        }
-                                        else if(systemError.errorCode == 11){
-                                            $scope.goBack();
-                                        }
-                                    })
+                                if(systemError.errorCode == 11){
+                                    $scope.goBack();
+                                }
                             }
                         })
                 },function(){
-                    $alert.confirm('请登录')
+                    $scope.autoLogin()
                         .then(function(){
-                            $scope.autoLogin()
-                                .then(function(){
-                                    getKeyWords();
-                                })
+                            getKeyWords();
                         })
                 })
         }
