@@ -637,6 +637,7 @@ ion-content{
 .card-item-normal span.originalPrice{
     font-size: 14px;
     text-decoration: line-through;
+    color: #999999;
 }
 
 .card-item-normal span.address{
