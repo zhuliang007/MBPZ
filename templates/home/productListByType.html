@@ -26,7 +26,7 @@
         <div ng-if="productList !=null && productList.length != 0" class="card-group card-per">
             <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
                 <div class="card-item-per-body">
-                    <div class="bgImg" id="productImage{{$index}}" ng-style="resizeImage('productImage{{$index}}',product.productImageList[0].location,'1:1')"></div>
+                    <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(product.productImageList[0].location)"></div>
                     <div class="title" ng-bind="product.title"></div>
                     <div><span class="mbpz mbpz-icon-money price"></span><span class="price padding-small-right" ng-bind="product.currentPrice"></span><span class="originalPrice" ng-bind="product.originalPrice"></span></div>
                     <div class="row row-no-padding">
