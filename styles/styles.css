@@ -1404,6 +1404,7 @@ ion-content{
     padding: 5px;
     border-radius: 5px;
     width: 100%;
+    resize:none;
 }
 .help-content li{
     list-style-type: none;
