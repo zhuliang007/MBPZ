@@ -19,6 +19,8 @@ angular.module('controllers.messageChat',[])
                 appkey: $config.appkeys,
                 credential: $stateParams.credential,
                 touid: $stateParams.touid,
+                avatar:$stateParams.userImage,
+                toAvatar:$stateParams.toUserImage,
                 onBack:function(){
                     WKIT.destroy();
                     var demo = document.getElementById('J_demos');

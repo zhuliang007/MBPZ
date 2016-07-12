@@ -255,7 +255,7 @@ angular.module('providers.config',[])
             },
             messageChat:{
                 templateUrl: "templates/message/message-chat.html",
-                url: "/chat/:uid&:credential&:touid&:nickName&:type?",
+                url: "/chat/:uid&:credential&:touid&:nickName&:type&:userImage&:toUserImage?",
                 name: "messageChat",
                 controller: "MessageChat",
                 cache:false,

@@ -6,9 +6,9 @@
         <h1 class="title">即时聊天</h1>
     </ion-header-bar>
     <ion-content >
-        <!--<div id="J_demo" class="message-chat" ></div>-->
+        <div id="user_list" style="display: none;" ></div>
         <ion-list class="message-list" ng-repeat="item in items track by $index">
-            <a class="item item-avatar" ng-click="contactFn(item.nickname,item.uid,0)">
+            <a class="item item-avatar" ng-click="contactFn(item,0)">
                 <img ng-src="{{item.avators}}">
                 <h2 >{{item.nickname}}</h2>
                 <p ng-bind-html="item.emot"></p>

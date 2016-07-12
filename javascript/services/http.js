@@ -11,7 +11,6 @@ angular.module("services.http",[])
                 var deferred = $q.defer();
                 $http.post(action,data,config)
                     .success(function(result){
-                        console.log(result)
                         if(result.error){
                             var systemError;
                             if(result.error.errorCode == 14 || result.error.errorCode == 15){
