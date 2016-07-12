@@ -11,7 +11,7 @@ angular.module('controllers.messageChat',[])
             var width = window.screen.width;
             document.getElementById('J_demos').style.height = height+'px';
 
-             WKIT.init({
+            WKIT.init({
                 container: document.getElementById('J_demos'),
                 width: width,
                 height: height,
@@ -44,10 +44,13 @@ angular.module('controllers.messageChat',[])
                             break;
                     }
                 },
-                 onLoginSuccess:function(data){
-                     $scope.WSDK = WKIT.Conn.sdk;
-                     document.getElementById('J_wkitTitle').innerHTML= $stateParams.nickName;
-                 }
+                onLoginSuccess:function(data){
+                    $scope.WSDK = WKIT.Conn.sdk;
+                    document.getElementById('J_wkitTitle').innerHTML= $stateParams.nickName;
+                },
+                onMsgReceived: function (msg) {
+                    console.log(msg)
+                }
             });
 
         }

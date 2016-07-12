@@ -3,7 +3,7 @@
  */
 
 angular.module('controllers.messageTalking',[])
-    .controller('MessageTalking',[
+    .controller('MessageTalkingCtrl',[
         '$scope',
         '$console',
         '$config',
@@ -14,11 +14,12 @@ angular.module('controllers.messageTalking',[])
             $scope.items = [];
             $scope.WSDK = null;
 
-            $state.reload;
+            $state.reload
+
             WKIT.init({
                // container: document.getElementById('J_demo'),
-                width: 700,
-                height: 500,
+               // width: 700,
+               // height: 500,
                 uid: $scope.userPhone,
                 appkey:$config.appkeys ,
                 credential:$scope.userPhone,
@@ -28,6 +29,7 @@ angular.module('controllers.messageTalking',[])
                     $state.go('tabs.tabsMessage')
                 },
                 onLoginSuccess:function(data){
+                    console.log(data)
                     $scope.WSDK = WKIT.Conn.sdk;
                     loginIn( $scope.WSDK);
                 }

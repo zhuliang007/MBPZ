@@ -34,6 +34,7 @@ angular.module('controllers.sellCtrl',[])
                     })
             }
 
+            $scope.items = [];
             $scope.publicLoadMore = function () {
                 if(token!=''){
                     var data = {
@@ -47,7 +48,6 @@ angular.module('controllers.sellCtrl',[])
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            console.log(result)
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             if(result.data.content.length==0||result.data.content==null){
                                 $scope.noMoreLoad=true;
@@ -75,12 +75,30 @@ angular.module('controllers.sellCtrl',[])
                 }
             }
 
-
-
-            $scope.releaseDel = function(productid){
-
-
-            }
+            //$scope.doRefresh = function () {
+            //    if(token!=''){
+            //        var data = {
+            //            "cmd":$config.cmds.productPublic,
+            //            "parameters":{
+            //                "type":0,
+            //                "numberOfPerPage":1,
+            //                "pageNo":0
+            //            },
+            //            "token":token
+            //        }
+            //        $httpService.getJsonFromPost($config.getRequestAction(),data)
+            //            .then(function(result){
+            //                console.log(result)
+            //                $scope.$broadcast('scroll.refreshComplete');
+            //                    var arry = result.data.content;
+            //                    $scope.items.concat(arry);
+            //            })
+            //
+            //    }else{
+            //        initToken();
+            //    }
+            //    $scope.$broadcast('scroll.refreshComplete');
+            //}
 
             $scope.releaseDetail=function(id,type){
                 $state.go($config.controllers.publish.name,{type:type,id:id})
