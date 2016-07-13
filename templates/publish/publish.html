@@ -13,7 +13,7 @@
             <textarea placeholder="{{publishContentPlaceHold}}" maxlength="1000" ng-model="publishObject.content"></textarea>
         </ion-item>
         <ion-item class="publishImage">
-            <ion-scroll has-bouncing="true" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle" id="publishImageHandle">
+            <ion-scroll has-bouncing="false" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle" id="publishImageHandle">
                 <div class="photoGroup" ng-repeat="publishImage in publishObject.publishImageList track by $index" ngf-background="publishImage.url||(publishImage | ngfDataUrl)" ng-init="updateFile($index)">
                     <span class="icon ion-android-cancel cancel" ng-click="deletePublishImage($index)" ng-class="{true:'success',false:''}[publishImage.isSuccess]"></span>
                     <div class="progress" ng-class="{true:'success',false:''}[publishImage.isProgress && !publishImage.isFailed]" ng-if="!publishImage.isFailed">
@@ -52,7 +52,7 @@
         <ion-item class="address">
             <span class="mbpz mbpz-icon-position"></span>
             <span ng-if="addComp" ng-bind="addComp.province + ' '+addComp.city + ' ' +addComp.district"></span>
-            <span ng-if="!addComp">未知</span>
+            <span ng-if="!addComp" ng-click="openModal('cityModal')" ng-bind="publishCity||'请选择所在城市'"></span>
         </ion-item>
         <ion-list class="priceGroup" ng-if="publishType==0">
             <ion-item class="price">

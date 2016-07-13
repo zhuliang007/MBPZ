@@ -19,8 +19,8 @@ angular.module('controllers.publish',[])
                 '描述一下您出售的宝贝,字数不超过1000字(尽可能的描述详尽，如买入时间、用过几次、现在如何等)':
                 '描述一下您求购的宝贝,字数不超过1000字(尽可能的描述详尽，如相关功能、价位等)';
             $scope.selectType = {
-                selectParent:'',
-                selectChild:''
+                selectParent:'MMYP',
+                selectChild:'MMYP_FZ'
             }
             $scope.publishObject = {
                 publishImageList : []
@@ -269,6 +269,19 @@ angular.module('controllers.publish',[])
                             return;
                         }
 
+                        $rootScope.locationJosnStr = {}
+                        $rootScope.locationJosnStr.address = $scope.publishCity;
+                        $rootScope.locationJosnStr.city = $scope.publishCity;
+                        $rootScope.locationJosnStr.cityCode = '';
+                        $rootScope.locationJosnStr.country = '';
+                        $rootScope.locationJosnStr.countryCode = '';
+                        $rootScope.locationJosnStr.district = '';
+                        $rootScope.locationJosnStr.province = '';
+                        $rootScope.locationJosnStr.street = '';
+                        $rootScope.locationJosnStr.streetNumber = '';
+                        $rootScope.locationJosnStr.latitude = 0;
+                        $rootScope.locationJosnStr.longitude = 0;
+
                         var action = $stateParams.id?$config.getRequestPublish()+$config.publish.edit:$config.getRequestPublish()+$config.publish.create;
                         var formData = new FormData();
                         formData.append("title",$scope.publishObject.title);
@@ -320,5 +333,10 @@ angular.module('controllers.publish',[])
                     }
                 }
                 return true;
+            }
+
+            $rootScope.changeCity = function(city){
+                $scope.publishCity = city.name;
+                $scope.closeModal('cityModal');
             }
         }])
