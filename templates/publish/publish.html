@@ -51,8 +51,7 @@
         </ion-item>
         <ion-item class="address">
             <span class="mbpz mbpz-icon-position"></span>
-            <span ng-if="addComp" ng-bind="addComp.province + ' '+addComp.city + ' ' +addComp.district"></span>
-            <span ng-if="!addComp" ng-click="openModal('cityModal')" ng-bind="publishCity||'请选择所在城市'"></span>
+            <span ng-click="openModal('cityModal')" ng-bind="publishCity||'请选择城市'"></span>
         </ion-item>
         <ion-list class="priceGroup" ng-if="publishType==0">
             <ion-item class="price">
