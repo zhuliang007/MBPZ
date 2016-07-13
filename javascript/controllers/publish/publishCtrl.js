@@ -269,6 +269,19 @@ angular.module('controllers.publish',[])
                             return;
                         }
 
+                        $rootScope.locationJosnStr = {}
+                        $rootScope.locationJosnStr.address = $scope.publishCity;
+                        $rootScope.locationJosnStr.city = $scope.publishCity;
+                        $rootScope.locationJosnStr.cityCode = '';
+                        $rootScope.locationJosnStr.country = '';
+                        $rootScope.locationJosnStr.countryCode = '';
+                        $rootScope.locationJosnStr.district = '';
+                        $rootScope.locationJosnStr.province = '';
+                        $rootScope.locationJosnStr.street = '';
+                        $rootScope.locationJosnStr.streetNumber = '';
+                        $rootScope.locationJosnStr.latitude = 0;
+                        $rootScope.locationJosnStr.longitude = 0;
+
                         var action = $stateParams.id?$config.getRequestPublish()+$config.publish.edit:$config.getRequestPublish()+$config.publish.create;
                         var formData = new FormData();
                         formData.append("title",$scope.publishObject.title);
