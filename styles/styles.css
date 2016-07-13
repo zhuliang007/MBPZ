@@ -123,7 +123,7 @@ ion-content{
 .evaluateList ion-header-bar,
 .productDetail ion-header-bar,
 .orderPreview ion-header-bar,
-.publish ion-header-bar,
+.publish .bar.bar-header,
 .report ion-header-bar,
 .orderAddress ion-header-bar,
 .editAddress ion-header-bar,
@@ -158,7 +158,7 @@ ion-content{
 .tabsShop ion-header-bar .title,
 .productDetail ion-header-bar .title,
 .orderPreview ion-header-bar .title,
-.publish ion-header-bar .title,
+.publish .bar.bar-header .title,
 .report ion-header-bar .title,
 .editAddress ion-header-bar .title,
 .orderAddress ion-header-bar .title,
@@ -171,7 +171,7 @@ ion-content{
 }
 
 .productDetail ion-header-bar .title,
-.orderEvaluate ion-header-bar .title,
+.publish .bar.bar-header .title,
 .publish ion-header-bar .title,
 .orderPreview ion-header-bar .title,
 .tabsShop ion-header-bar .title,
@@ -207,8 +207,8 @@ ion-content{
 .evaluateList ion-header-bar .button.activated,
 .productDetail ion-header-bar .button,
 .productDetail ion-header-bar .button.activated,
-.publish ion-header-bar .button,
-.publish ion-header-bar .button.activated,
+.publish .bar.bar-header .button,
+.publish .bar.bar-header .button.activated,
 .orderPreview ion-header-bar .button,
 .orderPreview ion-header-bar .button.activated,
 .report ion-header-bar .button,
@@ -1842,6 +1842,7 @@ ion-content{
     background-color: #FF4E72;
     color: #FFFFFF;
     border:none;
+    font-size: 16px;
 }
 
 .publish ion-footer-bar .submit.activated{
