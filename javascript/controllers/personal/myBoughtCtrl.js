@@ -95,7 +95,6 @@ angular.module('controllers.myBoughtCtrl',[])
                             obj[userToken]=$scope.userInfo.loginToken;
                             var backImage = "backImg";
                             obj[backImage] = $scope.mineAlipay;
-                            console.log(obj)
                             $state.go($config.controllers.pay.name,{obj:obj,routers:value});
                         },function(){
                             $scope.autoLogin()
@@ -130,7 +129,6 @@ angular.module('controllers.myBoughtCtrl',[])
 
                             $httpService.getJsonFromPost($config.getRequestAction(),remindData)
                                 .then(function(result){
-                                    console.log(result.msg)
                                 })
                         },function(){
                             $scope.autoLogin()

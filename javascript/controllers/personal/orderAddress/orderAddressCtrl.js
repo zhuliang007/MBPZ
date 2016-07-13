@@ -13,7 +13,7 @@ angular.module('controllers.orderAddress',[])
         '$rootScope',
         function($scope,$config,$state,$stateParams,$alert,$httpService,$console,$rootScope){
             var type = $stateParams.type;
-            $console.show(type)
+            //$console.show(type)
             //1订单预览设置收货地址 0或不带通过我的地址管理进入
             $scope.addressList = []
             var numberOfPerPage = 10;
@@ -35,7 +35,7 @@ angular.module('controllers.orderAddress',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                    $console.show(result)
+                                    //$console.show(result)
                                     $scope.$broadcast('scroll.infiniteScrollComplete');
                                     if(result.data.total == 0){
                                         $scope.infiniteFlag = false;
@@ -54,7 +54,7 @@ angular.module('controllers.orderAddress',[])
                                     pageNo++;
                                 },
                                 function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                     $scope.infiniteFlag = false;
                                 })
                     },function(){

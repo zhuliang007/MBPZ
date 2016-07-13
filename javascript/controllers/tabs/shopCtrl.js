@@ -72,7 +72,7 @@ angular.module('controllers.shop',[])
             }
             $httpService.getJsonFromPost($config.getRequestAction(),data)
                 .then(function(result){
-                    $console.show(result)
+                    //$console.show(result)
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     if(result.data.totalPages == 0){
                         $scope.infiniteFlag = false;
@@ -145,7 +145,7 @@ angular.module('controllers.shop',[])
         });
 
         $scope.changeSort = function(sortItem){
-            $console.show(sortItem);
+            //$console.show(sortItem);
             $scope.closePopover('shopSort');
             $scope.sortText = sortItem.name;
             sortSelect = sortItem;

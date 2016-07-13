@@ -34,7 +34,7 @@ angular.module('controllers.productDetail',[])
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $console.show("productDetail");
+            //$console.show("productDetail");
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             var id = $stateParams.id;
             var numberOfPerPage = 10;
@@ -54,11 +54,11 @@ angular.module('controllers.productDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.product = result.data;
                         deferred.resolve();
                     },function(error){
-                        $console.show(error);
+                        //$console.show(error);
                         if(error.systemError){
                             var systemError = error.systemError;
                             if(systemError.errorCode == 11){
@@ -83,7 +83,7 @@ angular.module('controllers.productDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
@@ -128,11 +128,11 @@ angular.module('controllers.productDetail',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $scope.product.isCollect = $scope.product.isCollect?0:1;
                                 $alert.show(result.msg)
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
                                     if(systemError.errorCode == 11){
@@ -229,7 +229,7 @@ angular.module('controllers.productDetail',[])
             $scope.productReply = function($event,userObject){
                 $scope.checkLogin()
                     .then(function(){
-                        $console.show(userObject);
+                        //$console.show(userObject);
                         $scope.openPopover($event,'reply');
                         $scope.replyPlaceholder = '回复@'+userObject.nickName;
                         if(!$scope.replyObject.repUserId){
@@ -242,7 +242,7 @@ angular.module('controllers.productDetail',[])
                                 $scope.replyObject.replyContents = null;
                             }
                         }
-                        $console.show($scope.replyObject);
+                        //$console.show($scope.replyObject);
                     },function(){
                         $scope.autoLogin()
                             .then(function(){
@@ -283,7 +283,7 @@ angular.module('controllers.productDetail',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $alert.show(result.msg);
                                 $scope.replyObject.repUserId = 0;
                                 $scope.replyObject.replyContents = null;
@@ -295,7 +295,7 @@ angular.module('controllers.productDetail',[])
                                 productHandle.scrollTo(0,element.offsetTop);
                                 $scope.infiniteFlag = true;
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()

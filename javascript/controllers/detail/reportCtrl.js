@@ -15,7 +15,7 @@ angular.module('controllers.report',[])
     '$alert',
     function($scope,$console,$config,$httpService,$locals,$state,$stateParams,$keywords,$rootScope,$alert){
         var productId = $stateParams.productId;
-        $console.show(productId);
+        //$console.show(productId);
 
         getKeyWords();
         function getKeyWords(){
@@ -24,7 +24,7 @@ angular.module('controllers.report',[])
                     $keywords.setKeyWords('report',$scope.userInfo.loginToken)
                         .then(function(result){
                             $scope.reportTypeList = result;
-                            $console.show(result)
+                            //$console.show(result)
                         },function(error){
                             if(error.systemError){
                                 var systemError = error.systemError;
@@ -51,7 +51,7 @@ angular.module('controllers.report',[])
 
             $scope.checkLogin()
                 .then(function(){
-                    $console.show(chooseType);
+                    //$console.show(chooseType);
                     if(!chooseType){
                         $alert.show("请选择举报原因");
                         return;
@@ -76,13 +76,13 @@ angular.module('controllers.report',[])
 
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            $console.show(result.msg);
+                            //$console.show(result.msg);
                             $alert.show(result.msg)
                                 .then(function(){
                                     $scope.goBack();
                                 })
                         },function(error){
-                            $console.show(error);
+                            //$console.show(error);
                             if(error.systemError){
                                 var systemError = error.systemError;
                                 if(systemError.errorCode == 11){

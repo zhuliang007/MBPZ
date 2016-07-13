@@ -75,11 +75,11 @@ angular.module('controllers.start',[])
             $scope.checkLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userInfo){
-                    $console.show("登录成功");
+                    //$console.show("登录成功");
                     deferred.resolve();
                 }
                 else{
-                    $console.show("需要登录");
+                    //$console.show("需要登录");
                     deferred.reject();
                 }
                 return deferred.promise;
@@ -87,7 +87,7 @@ angular.module('controllers.start',[])
 
             $scope.showMsg = function(msg,$event){
                 $event.stopPropagation();
-                $console.show(msg);
+                //$console.show(msg);
             }
 
             $scope.resizeImage = function(id,imgUrl,scale){
@@ -338,7 +338,7 @@ angular.module('controllers.start',[])
             $scope.getCode = function(telNumber){
 
                 if(!telNumber){
-                    $console.show($config.messages.noTel);
+                    //$console.show($config.messages.noTel);
                     return;
                 }
 
@@ -354,7 +354,7 @@ angular.module('controllers.start',[])
 
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            $console.show(result)
+                            //$console.show(result)
                         })
 
 

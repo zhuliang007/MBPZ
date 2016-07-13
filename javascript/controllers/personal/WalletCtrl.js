@@ -25,7 +25,6 @@ angular.module('controllers.walletCtrl',[])
                                     }
                                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                                         .then(function(result){
-                                                console.log(result);
                                                 $scope.balance = result.data.balance==null?0:result.data.balance;
                                                 $scope.prePayment = result.data.prePayment==null?0:result.data.prePayment;
                                         })

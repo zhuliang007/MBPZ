@@ -34,7 +34,7 @@ angular.module('controllers.shopDetail',[])
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
-            $console.show("shopDetail")
+            //$console.show("shopDetail")
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             var id = $stateParams.id;
             var numberOfPerPage = 10;
@@ -55,7 +55,7 @@ angular.module('controllers.shopDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.product = result.data;
                         $timeout(function(){
                             if(productSlideBox){
@@ -73,7 +73,7 @@ angular.module('controllers.shopDetail',[])
                         })
                         deferred.resolve();
                     },function(error){
-                        $console.show(error);
+                        //$console.show(error);
                     })
 
                 return deferred.promise;
@@ -96,7 +96,7 @@ angular.module('controllers.shopDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
@@ -175,10 +175,10 @@ angular.module('controllers.shopDetail',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $scope.product.isSpot = $scope.product.isSpot?0:1;
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()
@@ -195,7 +195,7 @@ angular.module('controllers.shopDetail',[])
                 $scope.checkLogin()
                     .then(function(){
                         if($scope.userInfo.loginAccount == $scope.product.publicUser.loginAccount){
-                            $console.show("确认解决")
+                            //$console.show("确认解决")
                             var data = {
                                 "cmd": $config.cmds.resolve,
                                 "parameters":{
@@ -209,11 +209,11 @@ angular.module('controllers.shopDetail',[])
                                     $alert.show(result.msg)
                                     getProductDetail();
                                 },function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                 })
                         }
                         else{
-                            $console.show("推荐给他");
+                            //$console.show("推荐给他");
                             $state.go($config.controllers.recommend.name,{productId:id,repUserId:$scope.product.publicUser.id});
                         }
                     },function(){
@@ -237,7 +237,7 @@ angular.module('controllers.shopDetail',[])
                 $scope.checkLogin()
                     .then(function(){
                         if(type==0){
-                            $console.show("楼主回复楼主，其他人回复楼主")
+                            //$console.show("楼主回复楼主，其他人回复楼主")
                             $scope.openPopover($event,'reply');
                             if($scope.userInfo.id==userObject.id){
                                 $scope.replyPlaceholder = '回复';
@@ -255,12 +255,12 @@ angular.module('controllers.shopDetail',[])
                                     $scope.replyObject.replyContents = null;
                                 }
                             }
-                            $console.show($scope.replyObject);
+                            //$console.show($scope.replyObject);
                         }
                         else{
                             if($scope.userInfo.id==$scope.product.publicUser.id){
                                 $scope.openPopover($event,'reply');
-                                $console.show("楼主回复其他人")
+                                //$console.show("楼主回复其他人")
                                 if($scope.userInfo.id==userObject.id){
                                     $scope.replyPlaceholder = '回复';
                                 }
@@ -277,7 +277,7 @@ angular.module('controllers.shopDetail',[])
                                         $scope.replyObject.replyContents = null;
                                     }
                                 }
-                                $console.show($scope.replyObject);
+                                //$console.show($scope.replyObject);
                             }
                         }
                     },function(){
@@ -342,7 +342,7 @@ angular.module('controllers.shopDetail',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $alert.show(result.msg);
                                 $scope.replyObject.repUserId = 0;
                                 $scope.replyObject.replyContents = null;
@@ -354,7 +354,7 @@ angular.module('controllers.shopDetail',[])
                                 productHandle.scrollTo(0,element.offsetTop);
                                 $scope.infiniteFlag = true;
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()

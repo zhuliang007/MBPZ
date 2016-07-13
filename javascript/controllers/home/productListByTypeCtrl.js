@@ -123,10 +123,10 @@ angular.module('controllers.productListByTypeCtrl',[])
                         "type":0
                     }
                 }
-                $console.show(data);
+                //$console.show(data);
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
@@ -181,7 +181,7 @@ angular.module('controllers.productListByTypeCtrl',[])
             };
 
             $scope.openPopover = function($event,popName){
-                $console.show($scope[popName])
+                //$console.show($scope[popName])
                 if(!$scope[popName]){
                     $ionicPopover.fromTemplateUrl($config.popovers[popName].templateUrl,{
                         scope:$scope

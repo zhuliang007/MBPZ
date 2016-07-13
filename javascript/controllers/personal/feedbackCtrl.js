@@ -50,7 +50,6 @@ angular.module('controllers.feedbackCtrl',[])
                                         "token":token
                                 }
                                 $http.post($config.getRequestAction(),data).success(function(data){
-                                        console.log(data)
                                         if(data.statusCode=='200'){
                                                 $alert.show('提交成功')
                                                 $state.go('myCenterSetup');

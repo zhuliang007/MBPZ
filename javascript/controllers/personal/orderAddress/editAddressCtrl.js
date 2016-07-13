@@ -14,7 +14,7 @@ angular.module('controllers.editAddress',[])
         '$alert',
         '$httpService',
         function($scope,$state,$stateParams,$config,$console,$rootScope,$keywords,$ionicScrollDelegate,$alert,$httpService){
-            $console.show($stateParams.id);
+            //$console.show($stateParams.id);
             var cityHandle = $ionicScrollDelegate.$getByHandle('cityHandle');
             var districtHandle = $ionicScrollDelegate.$getByHandle('districtHandle');
             $scope.addressId = $stateParams.id;
@@ -58,7 +58,7 @@ angular.module('controllers.editAddress',[])
                                     $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
                                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                                         .then(function(result){
-                                            $console.show(result);
+                                            //$console.show(result);
                                             $rootScope.provinceCityList.cityList = provinceCityList[result.data.province];
                                             $rootScope.provinceCityList.districtList = provinceCityList[result.data.city];
                                             $scope.addressObject = {
@@ -80,7 +80,7 @@ angular.module('controllers.editAddress',[])
                                                 districtCode : result.data.district,
                                             }
                                         },function(error){
-                                            $console.show(error);
+                                            //$console.show(error);
                                         })
                                 })
                         }
@@ -119,7 +119,7 @@ angular.module('controllers.editAddress',[])
                                                 $scope.goBack();
                                             })
                                     },function(error){
-                                        $console.show(error)
+                                        //$console.show(error)
                                     })
                             })
                     },function(){
@@ -198,7 +198,7 @@ angular.module('controllers.editAddress',[])
             $scope.editAddress = function(){
                 $scope.checkLogin()
                     .then(function(){
-                        $console.show($scope.addressObject);
+                        //$console.show($scope.addressObject);
                         if(!$scope.addressObject.receiveName){
                             $alert.show("姓名不能为空")
                             return ;
@@ -230,7 +230,7 @@ angular.module('controllers.editAddress',[])
                                 return;
                             }
                         }
-                        $console.show("保存中");
+                        //$console.show("保存中");
                         var data = {
                             "cmd":$config.cmds.userAddressSave,
                             "parameters":{
@@ -249,13 +249,13 @@ angular.module('controllers.editAddress',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $alert.show(result.msg)
                                     .then(function(){
                                         $scope.goBack();
                                     })
                             },function(error){
-                                $console.show(error)
+                                //$console.show(error)
                             })
                     },function(){
                         $scope.autoLogin()

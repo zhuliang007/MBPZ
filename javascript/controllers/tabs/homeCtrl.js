@@ -106,7 +106,7 @@ angular.module('controllers.home',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result)
+                        //$console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
