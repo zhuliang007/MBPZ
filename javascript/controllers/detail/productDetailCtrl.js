@@ -59,11 +59,8 @@ angular.module('controllers.productDetail',[])
                         deferred.resolve();
                     },function(error){
                         //$console.show(error);
-                        if(error.systemError){
-                            var systemError = error.systemError;
-                            if(systemError.errorCode == 11){
-                                $scope.goBack();
-                            }
+                        if(!error){
+                            $scope.goBack();
                         }
                     })
 
@@ -133,11 +130,8 @@ angular.module('controllers.productDetail',[])
                                 $alert.show(result.msg)
                             },function(error){
                                 //$console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    if(systemError.errorCode == 11){
-                                        $scope.goBack();
-                                    }
+                                if(!error){
+                                    $scope.goBack();
                                 }
                             })
                     },function(){
@@ -296,6 +290,9 @@ angular.module('controllers.productDetail',[])
                                 $scope.infiniteFlag = true;
                             },function(error){
                                 //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()

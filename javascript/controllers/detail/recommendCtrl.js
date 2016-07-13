@@ -69,6 +69,9 @@ angular.module("controllers.recommend",[])
                                 },
                                 function(error){
                                     //$console.show(error);
+                                    if(!error){
+                                        $scope.goBack()
+                                    }
                                 })
 
                     },function(){
@@ -125,6 +128,9 @@ angular.module("controllers.recommend",[])
                                     })
                             },function(error){
                                 //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()

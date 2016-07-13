@@ -19,6 +19,7 @@ angular.module("services.http",[])
                                     $alert.show('请重新登录萌宝派');
                                     break;
                                 case 20:
+                                case 11:
                                     $alert.show(result.error.errorInfo);
                                     break;
                                 default:

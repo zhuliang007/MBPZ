@@ -55,6 +55,9 @@ angular.module('controllers.orderAddress',[])
                                 },
                                 function(error){
                                     //$console.show(error);
+                                    if(!error){
+                                        $scope.goBack()
+                                    }
                                     $scope.infiniteFlag = false;
                                 })
                     },function(){
