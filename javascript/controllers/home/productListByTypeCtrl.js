@@ -114,7 +114,7 @@ angular.module('controllers.productListByTypeCtrl',[])
                     "parameters":{
                         "parentClassify":$scope.filterObject.parentClassify,
                         "secondClassify": $scope.filterObject.secondClassify==$scope.childCode?'':$scope.filterObject.secondClassify,
-                        "city":$scope.filterObject.city||$rootScope.currentCity||"",
+                        "city":$scope.filterObject.city&&$scope.filterObject.city!='城市'?$scope.filterObject.city:'',
                         "beginPrice":$scope.checkPrice()?null:$scope.priceObject.beginPrice,
                         "endPrice": $scope.checkPrice()?null:$scope.priceObject.endPrice,
                         "sortType": $scope.filterObject.sortType,
@@ -273,16 +273,15 @@ angular.module('controllers.productListByTypeCtrl',[])
             }
 
             $rootScope.changeCity = function(city){
-                $scope.filterObject.city = city.name;
-                pageNo = 0;
-                $scope.infiniteFlag = true;
-                $scope.productList = [];
+                if($scope.filterObject.city != city.name){
+                    $scope.filterObject.city = city.name;
+                    pageNo = 0;
+                    $scope.infiniteFlag = true;
+                    $scope.productList = [];
+                    productListByTypeHandle.resize();
+                    productListByTypeHandle.scrollTop();
+                }
                 $scope.closeModal('cityModal');
-                productListByTypeHandle.resize();
-                productListByTypeHandle.scrollTop();
             }
-
-
-            //遗留城市选择
         }
     ])

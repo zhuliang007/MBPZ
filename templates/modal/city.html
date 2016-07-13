@@ -12,10 +12,11 @@
         </div>
     </ion-header-bar>
     <ion-content has-bouncing="true" overflow-scroll="false">
-        <!--<div class="cityItem" ng-if="citySearch==''">
-            <ion-spinner icon="ios" ng-if="!currentCity"></ion-spinner><span class="padding-normal-left" ng-if="!currentCity">正在定位</span>
-            <span class="city" ng-bind="currentCity" ng-if="currentCity"></span><span ng-if="currentCity">当前定位</span>
-        </div>-->
+        <div class="cityItem" ng-if="citySearch==''" ng-click="changeCity({name:'城市'})">
+            <!--<ion-spinner icon="ios" ng-if="!currentCity"></ion-spinner><span class="padding-normal-left" ng-if="!currentCity">正在定位</span>
+            <span class="city" ng-bind="currentCity" ng-if="currentCity"></span><span ng-if="currentCity">当前定位</span>-->
+            <span class="city">全部</span>
+        </div>
         <ion-list>
             <ion-item class="cityItem cityTarget" ng-if="citySearch==''">
                 <span class="city">热门城市</span>

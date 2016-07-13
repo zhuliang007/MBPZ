@@ -95,7 +95,7 @@
                     <div class="col col-center padding-normal-vertical">
                         <span class="mbpz mbpz-icon-position address"></span>
                         <span ng-if="product.userLocation==null" class="address">未知</span>
-                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city"></span>
+                        <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.city||'未知'"></span>
                         <span ng-if="product.userLocation!=null" class="address" ng-bind="product.userLocation.district"></span>
                     </div>
                     <div class="col col-center padding-normal-vertical text-right">

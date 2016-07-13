@@ -98,7 +98,7 @@ angular.module('controllers.home',[])
                     "cmd": $config.cmds.getPage,
                     "parameters":{
                         "numberOfPerPage":numberOfPerPage,
-                        "city":$rootScope.currentCity,
+                        "city":$rootScope.currentCity&&$rootScope.currentCity!='城市'?$rootScope.currentCity:'',
                         "pageNo":pageNo,
                         "type":0
                     }
@@ -134,13 +134,16 @@ angular.module('controllers.home',[])
             }
 
             $rootScope.changeCity = function(city){
-                $rootScope.currentCity = city.name;
-                pageNo = 0;
-                $scope.infiniteFlag = true;
-                $scope.productList = [];
+                if($rootScope.currentCity != city.name){
+                    $rootScope.currentCity = city.name;
+                    pageNo = 0;
+                    $scope.infiniteFlag = true;
+                    $scope.productList = [];
+                    productHomeHandle.resize();
+                    productHomeHandle.scrollTop();
+                }
                 $scope.closeModal('cityModal');
-                productHomeHandle.resize();
-                productHomeHandle.scrollTop();
+
             }
 
         }])

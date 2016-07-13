@@ -47,6 +47,7 @@ angular.module('controllers.publish',[])
                                     $scope.publishObject.freight = result.data.freight;
                                     $scope.selectType.selectParent = result.data.parentClassify;
                                     $scope.selectType.selectChild = result.data.secondClassify;
+                                    $scope.userLocation = result.data.userLocation;
                                     for(var i in result.data.productImageList){
                                         var productImage = result.data.productImageList[i];
                                         var publishImage = {
@@ -59,6 +60,9 @@ angular.module('controllers.publish',[])
                                             width:productImage.imageWidth
                                         }
                                         $scope.publishObject.publishImageList.push(publishImage);
+                                    }
+                                    if($scope.userLocation){
+                                        $scope.publishCity = $scope.userLocation.city;
                                     }
                                     var element = document.getElementById('publishImageHandle');
                                     var $element = angular.element(element);
@@ -269,6 +273,11 @@ angular.module('controllers.publish',[])
                             return;
                         }
 
+                        if(!$scope.publishCity || $scope.publishCity=='城市'){
+                            $alert.show("请选择所在城市")
+                            return;
+                        }
+
                         $rootScope.locationJosnStr = {}
                         $rootScope.locationJosnStr.address = $scope.publishCity;
                         $rootScope.locationJosnStr.city = $scope.publishCity;
@@ -336,7 +345,10 @@ angular.module('controllers.publish',[])
             }
 
             $rootScope.changeCity = function(city){
-                $scope.publishCity = city.name;
+                if($scope.publishCity != city.name){
+                    $scope.publishCity = city.name;
+                }
+
                 $scope.closeModal('cityModal');
             }
         }])
