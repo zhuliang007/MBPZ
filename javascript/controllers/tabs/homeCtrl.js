@@ -23,7 +23,7 @@ angular.module('controllers.home',[])
             var QGXXListCache = [];
             var QGXXListCacheIndex = 0;
             $scope.productList = []
-            var numberOfPerPage = 10;
+            var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.infiniteFlag = true;
 
