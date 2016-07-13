@@ -1,11 +1,11 @@
 <ion-view class="publish">
-    <div class="bar bar-header">
+    <ion-header-bar align-title="center">
         <div class="buttons">
             <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title" ng-bind="publishTitle"></h1>
-    </div>
-    <ion-content has-bouncing="true" overflow-scroll="false" has-header="false">
+    </ion-header-bar>
+    <ion-content has-bouncing="true" overflow-scroll="false">
         <ion-item class="title">
             <input type="text" placeholder="标题最多不超过20个字" maxlength="20" ng-model="publishObject.title">
         </ion-item>
@@ -52,7 +52,7 @@
         <ion-item class="address">
             <span class="mbpz mbpz-icon-position"></span>
             <span ng-if="addComp" ng-bind="addComp.province + ' '+addComp.city + ' ' +addComp.district"></span>
-            <span ng-if="!addComp">未知</span>
+            <span ng-if="!addComp" ng-click="openModal('cityModal')" ng-bind="publishCity||'请选择所在城市'"></span>
         </ion-item>
         <ion-list class="priceGroup" ng-if="publishType==0">
             <ion-item class="price">

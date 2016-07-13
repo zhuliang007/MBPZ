@@ -321,4 +321,9 @@ angular.module('controllers.publish',[])
                 }
                 return true;
             }
+
+            $rootScope.changeCity = function(city){
+                $scope.publishCity = city.name;
+                $scope.closeModal('cityModal');
+            }
         }])
