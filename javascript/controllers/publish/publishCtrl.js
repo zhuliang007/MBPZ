@@ -269,6 +269,11 @@ angular.module('controllers.publish',[])
                             return;
                         }
 
+                        if(!$scope.publishCity){
+                            $alert.show("请选择所在城市")
+                            return;
+                        }
+
                         $rootScope.locationJosnStr = {}
                         $rootScope.locationJosnStr.address = $scope.publishCity;
                         $rootScope.locationJosnStr.city = $scope.publishCity;
