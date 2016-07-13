@@ -13,7 +13,11 @@ angular.module("services.http",[])
                     .success(function(result){
                         if(result.error){
                             var systemError;
-                            if(result.error.errorCode == 14 || result.error.errorCode == 15 || result.error.errorCode == 20){
+                            if(result.error.errorCode == 20){
+                                $alert.show(result.error.errorInfo);
+                                return;
+                            }
+                            if(result.error.errorCode == 14 || result.error.errorCode == 15){
                                 $alert.show('请重新登录萌宝派');
                             }
                             else{

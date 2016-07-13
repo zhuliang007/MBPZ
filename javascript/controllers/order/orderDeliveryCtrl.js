@@ -64,6 +64,15 @@ angular.module('controllers.deliveryCtrl',[])
 
                 //提交快递
                 $scope.submitDelivery=function(orderCodes){
+                    if($scope.delivery.name==''){
+                        $alert.show('请选择快递公司');
+                        return;
+                    }
+                    console.log(orderCodes)
+                    if(orderCodes=='undefined'||orderCodes==undefined){
+                        $alert.show('请输入快递单号');
+                        return;
+                    }
                         $scope.checkLogin()
                             .then(function(){
                                 $alert.confirm('是否提交物流信息')

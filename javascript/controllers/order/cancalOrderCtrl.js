@@ -43,6 +43,10 @@ angular.module('controllers.cancalOrderCtrl',[])
             }
 
             $scope.submitOrder = function () {
+                if($scope.cancelResponse.chooseType==''){
+                    $alert('请选择取消订单原因')
+                    return;
+                }
                 var _value = $scope.cancelResponse.chooseType;
                 if($scope.cancelResponse.chooseType=='其他原因'){
                     _value=$scope.cancelResponse.textValue;

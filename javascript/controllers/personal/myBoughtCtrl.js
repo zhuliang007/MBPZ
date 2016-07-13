@@ -129,6 +129,7 @@ angular.module('controllers.myBoughtCtrl',[])
 
                             $httpService.getJsonFromPost($config.getRequestAction(),remindData)
                                 .then(function(result){
+                                    //console.log(result)
                                 })
                         },function(){
                             $scope.autoLogin()
