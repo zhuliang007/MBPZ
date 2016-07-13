@@ -637,6 +637,7 @@ ion-content{
 .card-item-normal span.originalPrice{
     font-size: 14px;
     text-decoration: line-through;
+    color: #999999;
 }
 
 .card-item-normal span.address{
@@ -741,6 +742,14 @@ ion-content{
     width: 100%;
     left: 0px!important;
     border-radius: 0px!important;
+}
+
+.filterPopover.filterPrice{
+    height: 120px;
+}
+
+.filterPopover.filterOrder{
+    height: 150px;
 }
 
 .chooseSearchType{
