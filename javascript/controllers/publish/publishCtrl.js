@@ -19,8 +19,8 @@ angular.module('controllers.publish',[])
                 '描述一下您出售的宝贝,字数不超过1000字(尽可能的描述详尽，如买入时间、用过几次、现在如何等)':
                 '描述一下您求购的宝贝,字数不超过1000字(尽可能的描述详尽，如相关功能、价位等)';
             $scope.selectType = {
-                selectParent:'',
-                selectChild:''
+                selectParent:'MMYP',
+                selectChild:'MMYP_FZ'
             }
             $scope.publishObject = {
                 publishImageList : []
