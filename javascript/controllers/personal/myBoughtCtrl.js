@@ -76,8 +76,10 @@ angular.module('controllers.myBoughtCtrl',[])
                         $state.go($config.controllers.publish.name,{type:type,id:id})
                 }
 
-                $scope.myContant = function(buyPhone,nickName,type){
-                        $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
+                $scope.myContant = function(item,type){
+                        $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                            touid:item.product.publicUser.imUserId,nickName:item.product.publicUser.nickName,type:type,
+                            userImage:item.buyUser.userImg,toUserImage:item.product.publicUser.userImg})
                 }
 
                 //订单详情

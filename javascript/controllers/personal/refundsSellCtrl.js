@@ -77,9 +77,11 @@ angular.module('controllers.refundsSellCtrl',[])
 
                 }
 
-                $scope.myContant = function(buyPhone,nickName,type){
-                        $state.go($config.controllers.messageChat.name,{uid:'13524183387',credential:'13524183387',touid:buyPhone,nickName:nickName,type:type})
-                }
+            $scope.myContant = function(item,type){
+                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    touid:item.buyUser.imUserId,nickName:item.buyUser.nickName,type:type,
+                    userImage:item.product.publicUser.userImg,toUserImage:item.buyUser.userImg})
+            }
 
             //退款详情
             $scope.refoundsDetail = function(id,price,items){

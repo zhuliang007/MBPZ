@@ -23,9 +23,8 @@
                                     <span>¥&nbsp;</span>
                                     <span ng-bind="item.currentPrice"></span>
                                 </p>
-                                <p class="sellOriginalFont" ng-if="item.originalPrice!=null">
-                                    <span>¥&nbsp;</span>
-                                    <span ng-bind="item.originalPrice"></span>
+                                <p class="sellOriginalFont" ng-if="item.product.originalPrice!=null">
+                                    <span >¥&nbsp;<span ng-bind="item.product.originalPrice"></span></span>
                                 </p>
                             </div>
                         </div>

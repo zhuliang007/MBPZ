@@ -27,8 +27,7 @@
                                     <span ng-bind="item.product.currentPrice"></span>
                                 </p>
                                 <p class="sellOriginalFont" ng-if="item.product.originalPrice!=null">
-                                    <span>¥&nbsp;</span>
-                                    <span ng-bind="item.product.originalPrice"></span>
+                                    <span >¥&nbsp;<span ng-bind="item.product.originalPrice"></span></span>
                                 </p>
                             </div>
                         </div>
@@ -42,7 +41,7 @@
                 </a>
                 <div class="row">
                     <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,4)">联系TA</button>
+                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,4)">联系TA</button>
                     </div>
                     <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
