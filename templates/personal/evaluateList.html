@@ -10,7 +10,7 @@
         <div class="evaluateItem" ng-repeat="evaluateItem in evaluateList track by $index" ng-click="evaluationShow(evaluateItem.orderId)">
             <div class="row row-no-padding padding-normal-vertical padding-normal-horizontal">
                 <div class="col col-center col-10">
-                    <div class="bgImg border-radius-round" id="buyerImage_{{$index}}" ng-style="resizeImage('buyerImage_{{$index}}',(evaluateItem.evaluateUser.userImg||defaultHead))"></div>
+                    <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(evaluateItem.evaluateUser.userImg?evaluateItem.evaluateUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-center padding-normal-left">
                     <span ng-bind="evaluateItem.evaluateUser.nickName" class="nickName"></span>

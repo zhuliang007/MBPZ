@@ -26,11 +26,9 @@ angular.module('controllers.report',[])
                             $scope.reportTypeList = result;
                             //$console.show(result)
                         },function(error){
-                            if(error.systemError){
-                                var systemError = error.systemError;
-                                if(systemError.errorCode == 11){
-                                    $scope.goBack();
-                                }
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
                             }
                         })
                 },function(){
@@ -83,11 +81,8 @@ angular.module('controllers.report',[])
                                 })
                         },function(error){
                             //$console.show(error);
-                            if(error.systemError){
-                                var systemError = error.systemError;
-                                if(systemError.errorCode == 11){
-                                    $scope.goBack();
-                                }
+                            if(!error){
+                                $scope.goBack()
                             }
                         })
                 },function(){
