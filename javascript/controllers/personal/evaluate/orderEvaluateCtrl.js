@@ -76,7 +76,10 @@ angular.module('controllers.orderEvaluate',[])
                                     $scope.goBack();
                                 })
                         },function(error){
-                            //$console.show(error)
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
+                            }
                         })
 
                 },function(){

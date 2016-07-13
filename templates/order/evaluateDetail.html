@@ -10,7 +10,7 @@
         <div class="bg-color-white">
             <div class="row row-no-padding padding-big-vertical padding-normal-horizontal">
                 <div class="col col-center col-10">
-                    <div class="bgImg border-radius-round" id="buyerImage" ng-style="resizeImage('buyerImage',(detailObject.evaluateUser.userImg||defaultHead))"></div>
+                    <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(detailObject.evaluateUser.userImg?detailObject.evaluateUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-center padding-normal-left">
                     <span ng-bind="detailObject.evaluateUser.nickName" class="nickName"></span>
@@ -27,7 +27,7 @@
             <div class="padding-normal-bottom padding-normal-horizontal" ng-click="showProduct(detailObject.product.id)">
                 <div class="row bg-color-main-gray">
                     <div class="col col-20 col-center">
-                        <div class="bgImg" id="productImage" ng-style="resizeImage('productImage',(detailObject.product.productImageList[0].location))"></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage((detailObject.product.productImageList[0].location)+'@414w')"></div>
                     </div>
                     <div class="col col-center padding-normal-left">
                         <span ng-bind="detailObject.product.title" class="productTitle"></span>
@@ -77,7 +77,7 @@
             </div>
             <div class="row row-no-padding padding-big-vertical padding-normal-horizontal">
                 <div class="col col-center col-10">
-                    <div class="bgImg border-radius-round" id="sellerImage" ng-style="resizeImage('sellerImage',(detailObject.childEvaluate.evaluateUser.userImg||defaultHead))"></div>
+                    <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(detailObject.childEvaluate.evaluateUser.userImg?detailObject.childEvaluate.evaluateUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-center padding-normal-left">
                     <span ng-bind="detailObject.childEvaluate.evaluateUser.nickName" class="nickName"></span>

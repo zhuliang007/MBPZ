@@ -35,7 +35,10 @@ angular.module('controllers.evaluateDetail',[])
                             $scope.detailObject = result.data;
                             $scope.childEvaluateObject.parentId = $scope.detailObject.id
                         },function(error){
-                            //$console.show(error)
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
+                            }
                         })
                 },function(){
                     $scope.autoLogin()
@@ -72,7 +75,10 @@ angular.module('controllers.evaluateDetail',[])
                                     getEvaluateDetail();
                                 })
                         },function(error){
-                            //$console.show(error)
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
+                            }
                         })
 
                 },function(){

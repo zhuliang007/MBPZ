@@ -81,6 +81,9 @@ angular.module('controllers.editAddress',[])
                                             }
                                         },function(error){
                                             //$console.show(error);
+                                            if(!error){
+                                                $scope.goBack()
+                                            }
                                         })
                                 })
                         }
@@ -119,7 +122,10 @@ angular.module('controllers.editAddress',[])
                                                 $scope.goBack();
                                             })
                                     },function(error){
-                                        //$console.show(error)
+                                        //$console.show(error);
+                                        if(!error){
+                                            $scope.goBack()
+                                        }
                                     })
                             })
                     },function(){
@@ -255,7 +261,10 @@ angular.module('controllers.editAddress',[])
                                         $scope.goBack();
                                     })
                             },function(error){
-                                //$console.show(error)
+                                //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()

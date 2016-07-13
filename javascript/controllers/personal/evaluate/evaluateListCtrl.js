@@ -53,6 +53,9 @@ angular.module('controllers.evaluateList',[])
                                 pageNo++;
                             },function(error){
                                 //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()

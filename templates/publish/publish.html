@@ -44,6 +44,8 @@
                      ngf-capture="'camera'"
                      ngf-change="getChangFile($files)"
                      multiple="multiple"
+                     ngf-resize="{width: 500, height: 500, quality: '1',centerCrop: true, restoreExif: true}"
+                     ngf-resize-if="$width > 1000 || $height > 1000"
                      ng-if="publishObject.publishImageList.length<5">
                     <img ng-src="{{icAddPhoto}}">
                 </div>

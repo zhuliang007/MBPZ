@@ -74,6 +74,9 @@ angular.module('controllers.shopDetail',[])
                         deferred.resolve();
                     },function(error){
                         //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
 
                 return deferred.promise;
@@ -179,6 +182,9 @@ angular.module('controllers.shopDetail',[])
                                 $scope.product.isSpot = $scope.product.isSpot?0:1;
                             },function(error){
                                 //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()
@@ -210,6 +216,9 @@ angular.module('controllers.shopDetail',[])
                                     getProductDetail();
                                 },function(error){
                                     //$console.show(error);
+                                    if(!error){
+                                        $scope.goBack()
+                                    }
                                 })
                         }
                         else{
@@ -355,6 +364,9 @@ angular.module('controllers.shopDetail',[])
                                 $scope.infiniteFlag = true;
                             },function(error){
                                 //$console.show(error);
+                                if(!error){
+                                    $scope.goBack()
+                                }
                             })
                     },function(){
                         $scope.autoLogin()
