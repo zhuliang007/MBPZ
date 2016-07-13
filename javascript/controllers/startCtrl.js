@@ -181,7 +181,7 @@ angular.module('controllers.start',[])
                             uid:$scope.userInfo.loginAccount,
                             credential:$scope.userInfo.loginAccount,
                             touid:seller.loginAccount,
-                            nickName:seller.nickName,
+                            nickName:seller.nickName?seller.nickName+'@414w':'',
                             type:2,
                             userImage:$scope.userInfo.userImg,
                             toUserImage:seller.userImg})
