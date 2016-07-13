@@ -28,8 +28,8 @@ angular.module('controllers.orderDetailCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log($stateParams.type)
-                                if(parseInt($stateParams.type)==0){
+                                console.log($stateParams.id)
+                                if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
                                     $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                     $scope.nickName = result.data.product.publicUser.nickName;
                                     $scope.currentUserId = result.data.product.publicUserId;
@@ -267,7 +267,6 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             $scope.clickChat = function () {
-                console.log($scope.items)
                 if(parseInt($stateParams.type)==0){
                     $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
                         touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
@@ -276,6 +275,10 @@ angular.module('controllers.orderDetailCtrl',[])
                     $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
                      touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
                      userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                }else if(parseInt($stateParams.type)==2){
+                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                        touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
+                        userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
                 }
 
             }

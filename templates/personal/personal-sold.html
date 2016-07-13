@@ -33,8 +33,7 @@
                                     <span ng-bind="item.product.currentPrice"></span>
                                 </p>
                                 <p class="sellOriginalFont" ng-if="item.product.originalPrice!=null">
-                                    <span>¥&nbsp;</span>
-                                    <span ng-bind="item.product.originalPrice"></span>
+                                    <span >¥&nbsp;<span ng-bind="item.product.originalPrice"></span></span>
                                 </p>
                             </div>
                         </div>
@@ -42,7 +41,7 @@
                 </a>
                 <div class="row">
                     <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item.buyUser.imUserId,item.buyUser.nickName,1)">联系TA</button>
+                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,1)">联系TA</button>
                     </div>
                     <div class="col shelvesBtn">
                         <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="submitDelivery(item.id)">确认发货</button>
