@@ -112,6 +112,7 @@ angular.module('controllers.publish',[])
             }
 
             $scope.getChangFile = function($files){
+                //$console.show($files);
                 if($scope.publishObject.publishImageList.length<5 && $files.length>0){
                     if($files.length>(5-$scope.publishObject.publishImageList.length)){
                         $alert.show('您最多还可以选择'+(5-$scope.publishObject.publishImageList.length)+'张图片');
