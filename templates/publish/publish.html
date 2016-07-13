@@ -13,7 +13,7 @@
             <textarea placeholder="{{publishContentPlaceHold}}" maxlength="1000" ng-model="publishObject.content"></textarea>
         </ion-item>
         <ion-item class="publishImage">
-            <ion-scroll has-bouncing="true" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle" id="publishImageHandle">
+            <ion-scroll has-bouncing="false" overflow-scroll="false" direction="x" scrollbar-y="false" scrollbar-x="false" delegate-handle="publishImageHandle" id="publishImageHandle">
                 <div class="photoGroup" ng-repeat="publishImage in publishObject.publishImageList track by $index" ngf-background="publishImage.url||(publishImage | ngfDataUrl)" ng-init="updateFile($index)">
                     <span class="icon ion-android-cancel cancel" ng-click="deletePublishImage($index)" ng-class="{true:'success',false:''}[publishImage.isSuccess]"></span>
                     <div class="progress" ng-class="{true:'success',false:''}[publishImage.isProgress && !publishImage.isFailed]" ng-if="!publishImage.isFailed">
