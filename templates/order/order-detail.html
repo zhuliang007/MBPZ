@@ -124,17 +124,17 @@
 
         </div>
     </div>
-    <div class="orderBtn bar bar-footer " ng-if="items.refundStatus!=null&&displayRef(items.refundStatus)">
+    <div class="orderBtn bar bar-footer " ng-if="items.refundStatus!=null&&displayRef(items.refundStatus)&&items.saleType!='buy'">
         <div class="col-50 " ng-if="items.refundServer=='TKTH'&&items.refundStatus=='APPLY'">
             <button class="button button-full button-stable refusedApply" ng-click="refusedApply(items.id,0,items,4)">拒绝</button>
         </div>
-        <div class="col-50 " ng-if="items.refundServer=='TKTH'&&items.refundStatus=='APPLY'">
+        <div class="col-50 " ng-if="items.refundServer=='TKTH'&&items.refundStatus=='APPLY'&&items.saleType!='buy'">
             <button class="button button-full button-assertive" ng-click="agreeApplys(items.id)">同意</button>
         </div>
-        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
+        <div class="col-50 " ng-if="items.refundStatus=='REJECT'&&items.saleType=='buy'">
             <button class="button button-full button-stable refusedApply" ng-click="refusedApply(items.id,1,items,2)">拒绝原因</button>
         </div>
-        <div class="col-50 " ng-if="items.refundStatus=='REJECT'">
+        <div class="col-50 " ng-if="items.refundStatus=='REJECT'&&items.saleType=='buy'">
             <button class="button button-full button-assertive" ng-click="applyRefund(items.id,items.price,items.freight)">重新申请退款</button>
         </div>
         <div class="col" ng-if="items.refundStatus=='SENDING'">

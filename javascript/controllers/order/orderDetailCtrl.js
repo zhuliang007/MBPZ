@@ -28,6 +28,7 @@ angular.module('controllers.orderDetailCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
+                                console.log(result)
                                 if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
                                     $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                     $scope.nickName = result.data.product.publicUser.nickName;

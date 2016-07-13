@@ -115,6 +115,16 @@ angular.module('controllers.applyRefundCtrl',[])
 
             //提交
             $scope.submitRefounds = function () {
+                if($scope.reasonRef.name=='请选择退款原因'){
+                    $alert.show('请选择退款原因');
+                    return ;
+                }
+
+                if($scope.reasonText.text==''){
+                    $alert.show('请输入退款原因');
+                    return;
+                }
+
                 if(token!=''){
                     $alert.confirm('是否确定申请退款?')
                         .then(function() {
@@ -132,7 +142,7 @@ angular.module('controllers.applyRefundCtrl',[])
                                 .then(function(result){
                                     $alert.show(result.msg);
                                     if(result.msg=='申请退款成功，等待处理'){
-                                        $state.go($config.controllers.myBought.name,null,{reload:true});
+                                        $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
                                     }
                             })
                     });
@@ -144,6 +154,36 @@ angular.module('controllers.applyRefundCtrl',[])
             //拒绝
             $scope.refusedApply = function(id){
                 $state.go($config.controllers.refusedApply.name,{id:id,obj:$stateParams.obj})
+            }
+
+            //同意
+            $scope.agreeApply = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        $alert.confirm("是否同意退款?")
+                            .then(function(){
+                                var data = {
+                                    "cmd": $config.cmds.applyRefused,
+                                    "parameters":{
+                                        "id":id,
+                                        "refundStatus":"AGREE"
+                                    },
+                                    "token":$scope.userInfo.loginToken
+                                }
+                                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                                    .then(function(result){
+                                        $alert.show(result.data.msg)
+                                        if(result.data.msg=='操作成功'){
+                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
+                                        }
+                                    })
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
             }
 
         }])
