@@ -8,7 +8,7 @@ angular.module('providers.config',[])
         //$config.USER_INFO_NAME = 'userInfo';
 
         /**debug模式*/
-        $config.debug = true;
+        $config.debug = false;
         $config.appkeys = '23369408';
 
         /**请求地址配置*/

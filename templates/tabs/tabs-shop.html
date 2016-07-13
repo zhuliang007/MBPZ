@@ -11,7 +11,7 @@
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-20 col-center padding-none-horizontal padding-none-vertical"  ng-click="showPersonalCenter($event,product.publicUser.id)">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
+                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -21,12 +21,12 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length>1">
                     <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)"></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')"></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal" ng-if="product.productImageList.length==1">
                     <div class="col col-66 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div class="bgImg bgImg-3-2" ng-style="setBackGroundImage(productImage.location)"></div>
+                        <div class="bgImg bgImg-3-2" ng-style="setBackGroundImage(productImage.location+'@414w')"></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">
