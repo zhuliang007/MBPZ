@@ -45,11 +45,8 @@ angular.module('controllers.orderPreview',[])
                                 }
                             },function(error){
                                 //$console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    if(systemError.errorCode == 20){
-                                        $scope.goBack();
-                                    }
+                                if(!error){
+                                    $scope.goBack();
                                 }
                             })
                     },function(){
@@ -93,11 +90,8 @@ angular.module('controllers.orderPreview',[])
                                 $state.go($config.controllers.pay.name,{id:id,obj:result.data,routers:1});
                             },function(error){
                                 //$console.show(error);
-                                if(error.systemError){
-                                    var systemError = error.systemError;
-                                    if(systemError.errorCode == 20){
-                                        $scope.goBack();
-                                    }
+                                if(!error){
+                                    $scope.goBack();
                                 }
                             })
 
