@@ -28,7 +28,6 @@ angular.module('controllers.orderDetailCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log($stateParams.id)
                                 if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
                                     $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                     $scope.nickName = result.data.product.publicUser.nickName;
@@ -109,7 +108,6 @@ angular.module('controllers.orderDetailCtrl',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),remindData)
                             .then(function(result){
-                                console.log(result.msg)
                             })
                     },function(){
                         $scope.autoLogin()
@@ -172,7 +170,6 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //确认收货
             $scope.submitBuyer = function(id){
-                console.log(id)
                 $scope.checkLogin()
                     .then(function(){
                         var remindData = {

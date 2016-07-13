@@ -10,7 +10,7 @@ angular.module('providers.console',[])
 
         $console.show = function(msg){
             if($configProvider.debug){
-                console.log(msg);
+                //console.log(msg)
             }
         }
 

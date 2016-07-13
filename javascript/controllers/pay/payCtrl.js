@@ -18,7 +18,7 @@ angular.module('controllers.payCtrl',[])
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$http,$ionicModal) {
 
             $scope.backImg = $scope.mineAlipay;
-            $console.show($stateParams);
+            //$console.show($stateParams);
             $scope.price = $stateParams.obj.price;
 
             $scope.goPay=function(obj){

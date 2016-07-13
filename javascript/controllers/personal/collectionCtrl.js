@@ -55,7 +55,6 @@ angular.module('controllers.collectionCtrl',[])
                                 for(var item in items){
                                     $scope.productList.push(items[item].product);
                                 }
-                                console.log(items)
                             }
                             if(result.data.totalPages==0){
                                 $scope.noMoreLoad=true;

@@ -13,7 +13,7 @@ angular.module("controllers.recommend",[])
         '$alert',
         function($scope,$config,$console,$httpService,$state,$stateParams,$ionicScrollDelegate,$alert){
 
-            $console.show($stateParams);
+            //$console.show($stateParams);
             $scope.productList = [];
             var numberOfPerPage = 3;
             var pageNo = 0;
@@ -48,7 +48,7 @@ angular.module("controllers.recommend",[])
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(
                                 function(result){
-                                    $console.show(result);
+                                    //$console.show(result);
                                     $scope.$broadcast('scroll.infiniteScrollComplete');
                                     if(result.data.totalPages == 0){
                                         $scope.infiniteFlag = false;
@@ -68,7 +68,7 @@ angular.module("controllers.recommend",[])
                                     pageNo++;
                                 },
                                 function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                 })
 
                     },function(){
@@ -92,7 +92,7 @@ angular.module("controllers.recommend",[])
 
 
             $scope.submit = function(){
-                $console.show($scope.replyObject);
+                //$console.show($scope.replyObject);
                 $scope.checkLogin()
                     .then(function(){
                         if(!$scope.replyObject.replyContents){
@@ -124,7 +124,7 @@ angular.module("controllers.recommend",[])
                                         $scope.goBack();
                                     })
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()

@@ -26,7 +26,7 @@ angular.module('controllers.personalCenter',[])
             }
 
 
-            $console.show($stateParams);
+            //$console.show($stateParams);
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             getPersonalInfo();
             function getPersonalInfo(){
@@ -40,7 +40,7 @@ angular.module('controllers.personalCenter',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result);
+                        //$console.show(result);
                         $scope.personalCenterInfo = result.data;
                     })
             }
@@ -80,7 +80,7 @@ angular.module('controllers.personalCenter',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        $console.show(result)
+                        //$console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
@@ -110,7 +110,7 @@ angular.module('controllers.personalCenter',[])
             $scope.showEvaluateList = function(){
                 $scope.checkLogin()
                     .then(function(){
-                        $console.show("showEvaluateList")
+                        //$console.show("showEvaluateList")
 
                         if($scope.userInfo.loginAccount == $scope.personalCenterInfo.userInfo.loginAccount){
                             $state.go($config.controllers.evaluateList.name)

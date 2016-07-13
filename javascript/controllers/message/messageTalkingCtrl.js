@@ -51,7 +51,6 @@ angular.module('controllers.messageTalking',[])
                     count:30,
                     success: function (data) {
                         var list = data.data.cnts;
-                        console.log(list)
                         list.forEach(function(item){
                             var param={
                                 nickname:'',
@@ -69,7 +68,6 @@ angular.module('controllers.messageTalking',[])
                         })
                     },
                     error:function(error){
-                        console.log('error',error);
                     }
                 });
             }

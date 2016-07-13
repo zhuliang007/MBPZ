@@ -11,7 +11,7 @@ angular.module('controllers.orderEvaluate',[])
     '$stateParams',
     '$httpService',
     function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
-        $console.show($stateParams);
+        //$console.show($stateParams);
 
         $scope.orderEvaluateObject = {
             content:'',
@@ -70,13 +70,13 @@ angular.module('controllers.orderEvaluate',[])
 
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            $console.show(result);
+                            //$console.show(result);
                             $alert.show(result.msg)
                                 .then(function(){
                                     $scope.goBack();
                                 })
                         },function(error){
-                            $console.show(error)
+                            //$console.show(error)
                         })
 
                 },function(){

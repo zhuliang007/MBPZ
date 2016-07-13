@@ -62,10 +62,10 @@ angular.module('directives.bdMap',[])
                 function translateCallback(result){
                     var geoc = new BMap.Geocoder();
                     geoc.getLocation(result.points[0], function(rs){
-                        $console.show(rs);
+                        //$console.show(rs);
                         $rootScope.addComp = rs.addressComponents;
                         $rootScope.currentCity = $rootScope.addComp.city.split("市")[0];
-                        $console.show($rootScope.currentCity);
+                        //$console.show($rootScope.currentCity);
                         $rootScope.locationJosnStr = {}
                         $rootScope.locationJosnStr.address = $rootScope.addComp.city + $rootScope.addComp.district +$rootScope.addComp.street + $rootScope.addComp.streetNumber;
                         $rootScope.locationJosnStr.city = $rootScope.addComp.city;
@@ -91,7 +91,7 @@ angular.module('directives.bdMap',[])
                                         };
                                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                                             .then(function(result){
-                                                $console.show(result);
+                                                //$console.show(result);
                                                 timeFlag = false;
                                             })
                                     })

@@ -35,7 +35,7 @@ angular.module('controllers.orderPreview',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 $scope.product = result.data.product;
                                 $scope.order = result.data;
                                 if($rootScope.orderAddressCacheObject){
@@ -44,7 +44,7 @@ angular.module('controllers.orderPreview',[])
                                     $scope.order.address = $rootScope.orderAddressCacheObject.address;
                                 }
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
                                     if(systemError.errorCode == 20){
@@ -86,13 +86,13 @@ angular.module('controllers.orderPreview',[])
                             .then(function(result){
                                 //显示支付选择
                                 //将生成的订单信息传递给支付操作页面，选择支付方式
-                                $console.show("选择支付方式")
-                                $console.show(result)
+                                //$console.show("选择支付方式")
+                                //$console.show(result)
                                 var userToken = 'token';
                                 result.data[userToken]=$scope.userInfo.loginToken;
                                 $state.go($config.controllers.pay.name,{id:id,obj:result.data,routers:1});
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                                 if(error.systemError){
                                     var systemError = error.systemError;
                                     if(systemError.errorCode == 20){
@@ -118,7 +118,7 @@ angular.module('controllers.orderPreview',[])
             }
 
             $scope.setOrderAddress = function(){
-                $console.show("设置收货地址")
+                //$console.show("设置收货地址")
                 $scope.checkLogin()
                     .then(function(){
                         $state.go($config.controllers.orderAddress.name,{type:1});

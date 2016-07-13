@@ -11,7 +11,7 @@ angular.module('controllers.evaluateDetail',[])
     '$stateParams',
     '$httpService',
     function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
-        $console.show($stateParams);
+        //$console.show($stateParams);
         $scope.showType = $stateParams.showType?$stateParams.showType:0;
         $scope.childEvaluateObject = {
             parentId:0,
@@ -31,11 +31,11 @@ angular.module('controllers.evaluateDetail',[])
 
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            $console.show(result);
+                            //$console.show(result);
                             $scope.detailObject = result.data;
                             $scope.childEvaluateObject.parentId = $scope.detailObject.id
                         },function(error){
-                            $console.show(error)
+                            //$console.show(error)
                         })
                 },function(){
                     $scope.autoLogin()
@@ -66,13 +66,13 @@ angular.module('controllers.evaluateDetail',[])
 
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            $console.show(result);
+                            //$console.show(result);
                             $alert.show(result.msg)
                                 .then(function(){
                                     getEvaluateDetail();
                                 })
                         },function(error){
-                            $console.show(error)
+                            //$console.show(error)
                         })
 
                 },function(){

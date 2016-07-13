@@ -11,7 +11,7 @@ angular.module('controllers.evaluateList',[])
         '$stateParams',
         '$httpService',
         function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
-            $console.show($stateParams);
+            //$console.show($stateParams);
             $scope.evaluateList = []
             var numberOfPerPage = 10;
             var pageNo = 0;
@@ -33,7 +33,7 @@ angular.module('controllers.evaluateList',[])
 
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                $console.show(result)
+                                //$console.show(result)
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
                                 if(result.data.totalPages == 0){
                                     $scope.infiniteFlag = false;
@@ -52,7 +52,7 @@ angular.module('controllers.evaluateList',[])
                                 }
                                 pageNo++;
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()

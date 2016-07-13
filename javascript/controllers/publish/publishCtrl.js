@@ -39,7 +39,7 @@ angular.module('controllers.publish',[])
                             }
                             $httpService.getJsonFromPost($config.getRequestAction(),data)
                                 .then(function(result){
-                                    $console.show(result);
+                                    //$console.show(result);
                                     $scope.publishObject.title = result.data.title;
                                     $scope.publishObject.content = result.data.content;
                                     $scope.publishObject.currentPrice = result.data.currentPrice;
@@ -66,18 +66,18 @@ angular.module('controllers.publish',[])
                                     $productType.setTypeCodes()
                                         .then(function(){
                                             $scope.typeCodes = $productType.typeCodes;
-                                            $console.show($scope.typeCodes)
+                                            //$console.show($scope.typeCodes)
                                             $scope.childCodes = checkParentType();
                                         })
                                 },function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                 })
                         }
                         else{
                             $productType.setTypeCodes()
                                 .then(function(){
                                     $scope.typeCodes = $productType.typeCodes;
-                                    $console.show($scope.typeCodes)
+                                    //$console.show($scope.typeCodes)
                                     $scope.childCodes = checkParentType();
                                 })
                         }
@@ -95,7 +95,7 @@ angular.module('controllers.publish',[])
             }
 
             $scope.changeChild = function(){
-                $console.show($scope.selectType)
+                //$console.show($scope.selectType)
             }
 
             function checkParentType(){
@@ -147,13 +147,13 @@ angular.module('controllers.publish',[])
 
                         $httpService.getJsonFromPost($config.getRequestPublish()+$config.publish.delete,formData,{headers:{'Content-Type': undefined}})
                             .then(function(result){
-                                $console.show(result);
+                                //$console.show(result);
                                 var element = document.getElementById('publishImageHandle');
                                 var $element = angular.element(element);
                                 $element.children('.scroll').css({'width': (98 * ($scope.publishObject.publishImageList.length+1)) + 'px'});
                                 $scope.publishObject.publishImageList.splice(index,1);
                             },function(error){
-                                $console.show(error);
+                                //$console.show(error);
                             })
                     },function(){
                         $scope.autoLogin()
@@ -181,13 +181,13 @@ angular.module('controllers.publish',[])
                                     $scope.publishObject.publishImageList[index].height = publishImage.height;
                                     $scope.publishObject.publishImageList[index].width = publishImage.width;
                                     $scope.publishObject.publishImageList[index].url = publishImage.url;
-                                    $console.show($scope.publishObject.publishImageList[index]);
+                                    //$console.show($scope.publishObject.publishImageList[index]);
                                     $scope.publishObject.publishImageList[index].isFailed = false;
                                 },function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                     $scope.publishObject.publishImageList[index].isFailed = true;
                                 },function(progressEvent){
-                                    $console.show(progressEvent)
+                                    //$console.show(progressEvent)
                                     $scope.publishObject.publishImageList[index].isProgress = true;
                                     var total = Math.round(progressEvent.total);
                                     var progress = Math.round(progressEvent.loaded);
@@ -231,7 +231,7 @@ angular.module('controllers.publish',[])
                             }
 
                             var priceReg = /^(-?\d+)(\.\d+)?$/;
-                            $console.show($scope.publishObject.currentPrice)
+                            //$console.show($scope.publishObject.currentPrice)
 
                             if($scope.publishObject.currentPrice==null){
                                 $alert.show("价格不能为空或格式错误")
@@ -300,14 +300,14 @@ angular.module('controllers.publish',[])
                         }
                         $httpService.getJsonFromPost(action,formData,{headers:{'Content-Type': undefined}})
                             .then(function(result){
-                                    $console.show(result);
+                                    //$console.show(result);
                                     $alert.show(result.msg)
                                         .then(function(){
                                             $scope.goBack();
                                         })
                                 },
                                 function(error){
-                                    $console.show(error);
+                                    //$console.show(error);
                                 })
                     },function(){
                         $scope.autoLogin()
