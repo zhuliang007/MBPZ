@@ -273,7 +273,7 @@ angular.module('controllers.publish',[])
                             return;
                         }
 
-                        if(!$scope.publishCity){
+                        if(!$scope.publishCity || $scope.publishCity=='城市'){
                             $alert.show("请选择所在城市")
                             return;
                         }
@@ -345,7 +345,10 @@ angular.module('controllers.publish',[])
             }
 
             $rootScope.changeCity = function(city){
-                $scope.publishCity = city.name;
+                if($scope.publishCity != city.name){
+                    $scope.publishCity = city.name;
+                }
+
                 $scope.closeModal('cityModal');
             }
         }])
