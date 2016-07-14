@@ -40,15 +40,15 @@
                     </div>
                 </a>
                 <div class="row">
-                    <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,5)">联系TA</button>
+                    <div class="col-20 shelvesBtn" ng-click="myContant(item,5)">
+                        <span class=" mbpz mbpz-icon-replies soldBtn" >联系TA</span>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,1)">拒绝原因</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="applyRefund(item.id,item.price,item.freight)">重新申请退款</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='SENDING'" ng-click="submitBoughtDelivery(item.id,1)">退货</button>
+                        <span class=" mbpz soldBtn" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,1)">拒绝原因</span>
+                        <span class=" mbpz soldBtn" ng-if="item.refundStatus =='REJECT'" ng-click="applyRefund(item.id,item.price,item.freight)">重新申请退款</span>
+                        <span class=" mbpz soldBtn" ng-if="item.refundStatus =='SENDING'" ng-click="submitBoughtDelivery(item.id,1)">退货</span>
+                        <span class=" mbpz soldBtn" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="warnSubmit(item.id)">提醒收货</span>
                     </div>
-
                 </div>
             </div>
         </ion-list>

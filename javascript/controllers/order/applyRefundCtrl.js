@@ -152,12 +152,12 @@ angular.module('controllers.applyRefundCtrl',[])
             }
 
             //拒绝
-            $scope.refusedApply = function(id){
-                $state.go($config.controllers.refusedApply.name,{id:id,obj:$stateParams.obj})
+            $scope.refusedApply = function(){
+                $state.go($config.controllers.refusedApply.name,{id:$stateParams.obj.id,obj:$stateParams.obj})
             }
 
             //同意
-            $scope.agreeApply = function(id){
+            $scope.agreeApply = function(){
                 $scope.checkLogin()
                     .then(function(){
                         $alert.confirm("是否同意退款?")
@@ -165,7 +165,7 @@ angular.module('controllers.applyRefundCtrl',[])
                                 var data = {
                                     "cmd": $config.cmds.applyRefused,
                                     "parameters":{
-                                        "id":id,
+                                        "id":$stateParams.obj.id,
                                         "refundStatus":"AGREE"
                                     },
                                     "token":$scope.userInfo.loginToken
