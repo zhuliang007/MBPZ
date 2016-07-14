@@ -10,82 +10,70 @@ angular.module('controllers.evaluateDetail',[])
         '$state',
         '$stateParams',
         '$httpService',
-        function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
+        '$locals',
+        function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$locals){
             //$console.show($stateParams);
             $scope.showType = $stateParams.showType?$stateParams.showType:0;
             $scope.childEvaluateObject = {
                 parentId:0,
                 content:''
             }
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
             getEvaluateDetail();
             function getEvaluateDetail(){
-                $scope.checkLogin()
-                    .then(function(){
-                        var data = {
-                            "cmd":$config.cmds.evaluateDetail,
-                            "parameters":{
-                                "orderId":$stateParams.orderId
-                            },
-                            "token":$scope.userInfo.loginToken
+                var data = {
+                    "cmd":$config.cmds.evaluateDetail,
+                    "parameters":{
+                        "orderId":$stateParams.orderId
+                    },
+                    "token":userInfo.loginToken
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        //$console.show(result);
+                        $scope.detailObject = result.data;
+                        $scope.childEvaluateObject.parentId = $scope.detailObject.id
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
                         }
-
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                //$console.show(result);
-                                $scope.detailObject = result.data;
-                                $scope.childEvaluateObject.parentId = $scope.detailObject.id
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getEvaluateDetail();
-                            })
                     })
-
             }
 
             $scope.submit = function(){
 
                 $scope.checkLogin()
-                    .then(function(){
-                        if(!$scope.childEvaluateObject.content){
-                            $alert.show('追评内容不能为空')
-                            return;
-                        }
+                if(!$scope.childEvaluateObject.content){
+                    $alert.show('追评内容不能为空')
+                    return;
+                }
 
-                        var data = {
-                            "cmd":$config.cmds.evaluateSave,
-                            "parameters":{
-                                "parentId":$scope.childEvaluateObject.parentId,
-                                "content":$scope.childEvaluateObject.content
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var data = {
+                    "cmd":$config.cmds.evaluateSave,
+                    "parameters":{
+                        "parentId":$scope.childEvaluateObject.parentId,
+                        "content":$scope.childEvaluateObject.content
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                //$console.show(result);
-                                $alert.show(result.msg)
-                                    .then(function(){
-                                        getEvaluateDetail();
-                                    })
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-
-                    },function(){
-                        $scope.autoLogin()
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        //$console.show(result);
+                        $alert.show(result.msg)
                             .then(function(){
-                                $scope.submit();
+                                getEvaluateDetail();
                             })
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
 
             }

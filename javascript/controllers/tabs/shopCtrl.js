@@ -40,7 +40,8 @@ angular.module('controllers.shop',[])
                         "parameters":{
                             "numberOfPerPage":numberOfPerPage,
                             "pageNo":pageNo,
-                            "type":1
+                            "type":1,
+                            "sortType":'new_publish'
                         }
                     }
                 }

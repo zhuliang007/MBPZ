@@ -90,8 +90,12 @@ angular.module('controllers.home',[])
             }
 
             $scope.loadMore = function() {
+                //console.log('loadMore')
                 getProductHome();
             };
+
+            $scope.$on('$stateChangeSuccess', function() {
+            });
 
             function getProductHome(){
                 var data = {
@@ -107,6 +111,7 @@ angular.module('controllers.home',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result)
+                        //console.log("home",result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;
