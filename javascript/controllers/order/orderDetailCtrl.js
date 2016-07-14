@@ -27,7 +27,7 @@ angular.module('controllers.orderDetailCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                //console.log(result)
+                                console.log(result)
                                 if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
                                     $scope.userHeaderImg=result.data.product.publicUser.userImg;
                                     $scope.nickName = result.data.product.publicUser.nickName;
@@ -279,6 +279,31 @@ angular.module('controllers.orderDetailCtrl',[])
                 }
 
             }
+            //提醒发货
+            $scope.remindDelivery = function(){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":$stateParams.id,
+                                "orderType":"refund",
+                                "saleType":"sell"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+            }
+
 
 
         }])

@@ -12,7 +12,8 @@ angular.module('controllers.refundsBoughtCtrl',[])
         '$state',
         '$httpService',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$alert){
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.noMoreLoad = false;

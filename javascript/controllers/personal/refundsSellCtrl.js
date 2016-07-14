@@ -48,6 +48,7 @@ angular.module('controllers.refundsSellCtrl',[])
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
+                            console.log(result)
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             if(result.data.content.length==0||result.data.content==null){
                                 $scope.noMoreLoad=true;
@@ -153,6 +154,31 @@ angular.module('controllers.refundsSellCtrl',[])
                             })
                     })
 
+            }
+
+            //提醒发货
+            $scope.remindDelivery = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":id,
+                                "orderType":"refund",
+                                "saleType":"sell"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
             }
 
         }])
