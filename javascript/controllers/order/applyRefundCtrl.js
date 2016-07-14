@@ -16,6 +16,11 @@ angular.module('controllers.applyRefundCtrl',[])
         '$alert',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$alert) {
 
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
+
             if($stateParams.obj!=null){
                 $scope.refundServerValue = $stateParams.obj.refundServer;
                 $scope.refundReasonValue = $stateParams.obj.refundReason;
@@ -38,39 +43,29 @@ angular.module('controllers.applyRefundCtrl',[])
                 value:''
             }
 
-            var token ='';
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                        var refundsData={
-                            "cmd": $config.cmds.systemDict,
-                            "parameters": {
-                                "typeCode":"refund_server,refund_reason"
-                            },
-                            "token":token
+            init = function(){
+                var refundsData={
+                    "cmd": $config.cmds.systemDict,
+                    "parameters": {
+                        "typeCode":"refund_server,refund_reason"
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),refundsData)
+                    .then(function(result){
+                        if(result.data.refund_server!=null&&result.data.refund_server.length>0){
+                            $scope.refunds.name = result.data.refund_server[0].name;
+                            $scope.refunds.value = result.data.refund_server[0].value;
+                            $scope.refund_servers =result.data.refund_server;
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),refundsData)
-                            .then(function(result){
-                                if(result.data.refund_server!=null&&result.data.refund_server.length>0){
-                                    $scope.refunds.name = result.data.refund_server[0].name;
-                                    $scope.refunds.value = result.data.refund_server[0].value;
-                                    $scope.refund_servers =result.data.refund_server;
-                                }
-                                if(result.data.refund_reason!=null&&result.data.refund_reason.length>0){
-                                    $scope.refund_reason = result.data.refund_reason;
-                                }
+                        if(result.data.refund_reason!=null&&result.data.refund_reason.length>0){
+                            $scope.refund_reason = result.data.refund_reason;
+                        }
 
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
                     })
             }
 
-            initToken();
+            init();
 
 
             //申请服务
@@ -125,30 +120,26 @@ angular.module('controllers.applyRefundCtrl',[])
                     return;
                 }
 
-                if(token!=''){
-                    $alert.confirm('是否确定申请退款?')
-                        .then(function() {
-                            var data = {
-                                "cmd": $config.cmds.applyRefound,
-                                "parameters":{
-                                    "id":$stateParams.id,
-                                    "refundServer":$scope.refunds.value,
-                                    "refundReason":$scope.reasonRef.name,
-                                    "refundMark":$scope.reasonText.text
-                                },
-                                "token":token
-                            }
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                .then(function(result){
-                                    $alert.show(result.msg);
-                                    if(result.msg=='申请退款成功，等待处理'){
-                                        $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
-                                    }
-                                })
-                        });
-                }else{
-                    initToken();
-                }
+                $alert.confirm('是否确定申请退款?')
+                    .then(function() {
+                        var data = {
+                            "cmd": $config.cmds.applyRefound,
+                            "parameters":{
+                                "id":$stateParams.id,
+                                "refundServer":$scope.refunds.value,
+                                "refundReason":$scope.reasonRef.name,
+                                "refundMark":$scope.reasonText.text
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                                if(result.msg=='申请退款成功，等待处理'){
+                                    $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
+                                }
+                            })
+                    });
             }
 
             //拒绝
@@ -158,29 +149,22 @@ angular.module('controllers.applyRefundCtrl',[])
 
             //同意
             $scope.agreeApply = function(){
-                $scope.checkLogin()
+                $alert.confirm("是否同意退款?")
                     .then(function(){
-                        $alert.confirm("是否同意退款?")
-                            .then(function(){
-                                var data = {
-                                    "cmd": $config.cmds.applyRefused,
-                                    "parameters":{
-                                        "id":$stateParams.obj.id,
-                                        "refundStatus":"AGREE"
-                                    },
-                                    "token":$scope.userInfo.loginToken
+                        var data = {
+                            "cmd": $config.cmds.applyRefused,
+                            "parameters":{
+                                "id":$stateParams.obj.id,
+                                "refundStatus":"AGREE"
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.data.msg)
+                                if(result.data.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
                                 }
-                                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                    .then(function(result){
-                                        $alert.show(result.data.msg)
-                                        if(result.data.msg=='操作成功'){
-                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
-                                        }
-                                    })
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
                             })
                     })
 

@@ -25,7 +25,7 @@ angular.module('controllers.deliveryCtrl',[])
                 userInfo =  $locals.getObject($config.user_local_info);
             }
 
-            initToken = function(){
+            init = function(){
                 var data={
                     "cmd": $config.cmds.dictList,
                     "parameters": {
@@ -39,7 +39,7 @@ angular.module('controllers.deliveryCtrl',[])
                     })
             }
 
-            initToken();
+            init();
 
             //选择快递公司
             $scope.courierComShow = function(){
