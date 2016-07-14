@@ -2852,6 +2852,9 @@ ion-content{
 .orderDetailConsignee .receiveSpan{
     padding:0px;
 }
+.receiveSpan span{
+    word-wrap: break-word;
+}
 .orderBtn .button{
     padding:0px;
     margin:0px;

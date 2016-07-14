@@ -49,6 +49,7 @@
                         <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</span>
                         <span class=" mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,3)">拒绝原因</span>
                         <span class=" mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='SENDING'" ng-click="remindDelivery(item.id)">提醒退货</span>
                     </div>
                 </div>
             </div>
