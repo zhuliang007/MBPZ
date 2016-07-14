@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/6.
  */
-
 angular.module('controllers.orderDetailCtrl',[])
     .controller('OrderDetailCtrl',[
         '$scope',
@@ -37,7 +36,7 @@ angular.module('controllers.orderDetailCtrl',[])
                                     $scope.userHeaderImg=result.data.buyUser.userImg;
                                     $scope.nickName = result.data.buyUser.nickName;
                                     $scope.currentUserId = result.data.buyUser.id;
-                                 }
+                                }
                                 $scope.items=result.data;
 
                                 var processScroll = document.getElementById('processScrolls');
@@ -271,8 +270,8 @@ angular.module('controllers.orderDetailCtrl',[])
                         userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3){
                     $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                     touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
-                     userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                        touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
+                        userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==2){
                     $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
                         touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,

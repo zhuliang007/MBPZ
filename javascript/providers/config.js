@@ -415,7 +415,7 @@ angular.module('providers.config',[])
                 url:"/applyRefund/:id&:price&:freight:&:type?",
                 name:"applyRefund",
                 params:{
-                  obj:null
+                    obj:null
                 },
                 controller:"ApplyRefundCtrl",
                 cache:false

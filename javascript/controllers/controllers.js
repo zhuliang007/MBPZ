@@ -45,3 +45,4 @@ angular.module('starter.controllers',[
     'controllers.evaluateDetail',
     'controllers.personalCenter',
     'controllers.evaluateList'])
+

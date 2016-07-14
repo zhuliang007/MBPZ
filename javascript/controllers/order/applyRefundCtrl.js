@@ -144,8 +144,8 @@ angular.module('controllers.applyRefundCtrl',[])
                                     if(result.msg=='申请退款成功，等待处理'){
                                         $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
                                     }
-                            })
-                    });
+                                })
+                        });
                 }else{
                     initToken();
                 }
