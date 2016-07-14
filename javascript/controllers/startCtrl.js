@@ -30,7 +30,6 @@ angular.module('controllers.start',[])
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
-
             //登录获取token
             if($scope.userPhone!=null){
                 var data = {
@@ -56,12 +55,11 @@ angular.module('controllers.start',[])
                             userImg:result.data.userImg,
                             userLevel:result.data.userLevel
                         }
-                        $locals.setObject($config.userObj,userInfo);
+                        $locals.setObject($config.user_local_info,userInfo);
                     })
             }else{
-                $locals.clearObject($config.userObj);
+                $locals.clearObject($config.user_local_info);
             }
-
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
