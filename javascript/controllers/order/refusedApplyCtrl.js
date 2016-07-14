@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/5.
  */
-
 angular.module('controllers.refusedApplyCtrl',[])
     .controller('RefusedApplyCtrl',[
         '$scope',
@@ -75,3 +74,4 @@ angular.module('controllers.refusedApplyCtrl',[])
             }
 
         }])
+

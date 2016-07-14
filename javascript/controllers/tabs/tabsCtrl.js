@@ -11,4 +11,4 @@ angular.module('controllers.tabs',[])
         '$locals',
         function($rootScope,$console,$scope,$config,$httpService,$locals){
 
-    }])
+        }])

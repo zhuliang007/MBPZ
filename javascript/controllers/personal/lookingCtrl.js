@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/6/30.
  */
-
 angular.module('controllers.lookingCtrl',[])
     .controller('LookingCtrl',[
         '$scope',

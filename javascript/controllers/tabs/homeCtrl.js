@@ -38,18 +38,18 @@ angular.module('controllers.home',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                            $scope.adList = result.data;
-                            adSlideBox.update();
-                            $timeout(function(){
-                                if(adSlideBox.slidesCount()>1){
-                                    $scope.showPager = true;
-                                    adSlideBox.loop(true);
-                                }
-                                else{
-                                    $scope.showPager = false;
-                                }
-                            })
+                        $scope.adList = result.data;
+                        adSlideBox.update();
+                        $timeout(function(){
+                            if(adSlideBox.slidesCount()>1){
+                                $scope.showPager = true;
+                                adSlideBox.loop(true);
+                            }
+                            else{
+                                $scope.showPager = false;
+                            }
                         })
+                    })
             }
             function getQGXX(){
                 var data = {

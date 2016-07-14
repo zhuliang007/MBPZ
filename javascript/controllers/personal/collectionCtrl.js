@@ -1,7 +1,6 @@
 /**
  * Created by zl_sam on 16/6/13.
  */
-
 angular.module('controllers.collectionCtrl',[])
     .controller('CollectionCtrl',[
         '$scope',
