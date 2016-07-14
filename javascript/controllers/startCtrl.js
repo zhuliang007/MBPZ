@@ -41,7 +41,7 @@ angular.module('controllers.start',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        var userInfo = {
+                        $scope.userInfo = {
                             loginToken:result.data.loginToken,
                             loginAccount:result.data.loginAccount,
                             id:result.data.id,
@@ -55,7 +55,7 @@ angular.module('controllers.start',[])
                             userImg:result.data.userImg,
                             userLevel:result.data.userLevel
                         }
-                        $locals.setObject($config.user_local_info,userInfo);
+                        $locals.setObject($config.user_local_info,$scope.userInfo);
                     })
             }else if($scope.userPhone==null||$scope.userPhone==''||$scope.userPhone==undefined){
                 $locals.clearObject($config.user_local_info);
@@ -211,28 +211,25 @@ angular.module('controllers.start',[])
 
             //联系卖家
             $scope.contactSeller = function (seller) {
-                $scope.checkLogin()
-                    .then(function(){
-                        if($scope.userInfo.loginAccount == seller.loginAccount){
-                            $alert.show("当前用户是您")
-                            return;
-                        }
+                if(!$scope.userInfo){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
 
-                        $state.go($config.controllers.messageChat.name,{
-                            uid:$scope.userInfo.loginAccount,
-                            credential:$scope.userInfo.loginAccount,
-                            touid:seller.loginAccount,
-                            nickName:seller.nickName,
-                            type:2,
-                            userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
-                            toUserImage:seller.userImg?seller.userImg+'@414w':''})
+                if($scope.userInfo.loginAccount == seller.loginAccount){
+                    $alert.show("当前用户是您")
+                    return;
+                }
 
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.contactSeller(seller);
-                            })
-                    })
+                $state.go($config.controllers.messageChat.name,{
+                    uid:$scope.userInfo.loginAccount,
+                    credential:$scope.userInfo.loginAccount,
+                    touid:seller.loginAccount,
+                    nickName:seller.nickName,
+                    type:2,
+                    userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                    toUserImage:seller.userImg?seller.userImg+'@414w':''})
+
             }
 
             $scope.showProductListByType = function(type){
@@ -241,6 +238,13 @@ angular.module('controllers.start',[])
             }
 
             $scope.myCenterSetup = function(_value){
+                if(!$scope.userInfo){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                $state.go(_value)
+            }
+            $scope.mySetupHelp = function(_value){
                 $state.go(_value)
             }
 
@@ -354,22 +358,17 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type,id){
-                $scope.checkLogin()
-                    .then(function(){
-                        if(id){
-                            $state.go($config.controllers.publish.name,{type:type,id:id});
-                        }
-                        else{
-                            $state.go($config.controllers.publish.name,{type:type});
-                            $scope.closeModal('publishModal');
-                        }
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.goPublish(type);
-                            })
-                    })
-
+                if(!$scope.userInfo){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if(id){
+                    $state.go($config.controllers.publish.name,{type:type,id:id});
+                }
+                else{
+                    $state.go($config.controllers.publish.name,{type:type});
+                    $scope.closeModal('publishModal');
+                }
             }
 
             $scope.codeTarget = '获取验证码';
