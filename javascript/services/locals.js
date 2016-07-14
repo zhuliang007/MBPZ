@@ -23,11 +23,7 @@ angular.module('services.locals',[])
                 return JSON.parse($window.localStorage[key] || '{}');
             }
             //清除对象
-<<<<<<< Updated upstream
             $locals.clearObject = function (key) {
-=======
-            $locals.clearObject = function(key){
->>>>>>> Stashed changes
                 $window.localStorage.removeItem(key);
             }
             return $locals;
