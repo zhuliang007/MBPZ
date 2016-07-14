@@ -358,6 +358,10 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type,id){
+                if(!$scope.userInfo){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
                 if(id){
                     $state.go($config.controllers.publish.name,{type:type,id:id});
                 }

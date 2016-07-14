@@ -115,7 +115,10 @@ angular.module('controllers.personalCenter',[])
 
             $scope.showEvaluateList = function(){
                 //$console.show("showEvaluateList")
-
+                if(!userInfo.loginAccount){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
                 if(userInfo.loginAccount == $scope.personalCenterInfo.userInfo.loginAccount){
                     $state.go($config.controllers.evaluateList.name)
                 }
