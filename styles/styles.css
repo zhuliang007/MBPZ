@@ -2863,6 +2863,8 @@ ion-content{
     padding:0px;
 }
 .receiveSpan span{
+    width: 80%;
+    white-space:pre-wrap;
     word-wrap: break-word;
 }
 .orderBtn .button{

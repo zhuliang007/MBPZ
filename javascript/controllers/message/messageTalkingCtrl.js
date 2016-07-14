@@ -9,7 +9,8 @@ angular.module('controllers.messageTalking',[])
         '$rootScope',
         '$stateParams',
         '$state',
-        function($scope,$console,$config,$rootScope,$stateParams,$state){
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals){
             $scope.items = [];
             $scope.WSDK = null;
 
@@ -25,9 +26,9 @@ angular.module('controllers.messageTalking',[])
                     container: document.getElementById('user_list'),
                     width: 700,
                     height: 500,
-                    uid: $scope.userPhone,
+                    uid: userInfo.loginAccount,
                     appkey:$config.appkeys ,
-                    credential:$scope.userPhone,
+                    credential:userInfo.loginAccount,
                     touid: '15901718791',
                     onBack:function(){
                         wkitDestroy();
@@ -35,14 +36,14 @@ angular.module('controllers.messageTalking',[])
                     },
                     onLoginSuccess:function(data){
                         $scope.WSDK = WKIT.Conn.sdk;
-                        loginIn( $scope.WSDK,$scope.userInfo);
+                        loginIn( $scope.WSDK);
                     }
                 });
             }
             initToken();
 
 
-            function loginIn(sdk,userInfo){
+            function loginIn(sdk){
                 sdk.Base.getRecentContact({
                     count:30,
                     success: function (data) {
@@ -74,10 +75,11 @@ angular.module('controllers.messageTalking',[])
             }
 
             $scope.contactFn = function(item,type){
+                console.log(item)
                 wkitDestroy();
                 $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
                     touid:item.uid,nickName:item.nickname,type:type,
-                    userImage:item.userImage?item.userImage+'@414w':'',toUserImage:item.avators?item.avators+'@414w':''});
+                    userImage:item.userImage,toUserImage:item.avators});
             }
 
             var wkitDestroy = function(){
