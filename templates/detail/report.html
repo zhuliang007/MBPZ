@@ -8,7 +8,16 @@
     <ion-content has-bouncing="true" overflow-scroll="false">
         <div class="title">请选择举报原因</div>
         <div class="reportBody">
-            <ion-radio icon="ion-ios-checkmark-outline" ng-class="{true:'radioBorder',false:''}[reportType.name=='其他']" ng-model="reportReason.choiceType" ng-value="reportType.value" ng-repeat="reportType in reportTypeList track by $index"><span ng-bind="reportType.name"></span></ion-radio>
+            <ion-item ng-repeat="reportType in reportTypeList track by $index" class="item-icon-left reportItem">
+                <input type="radio" name="report" ng-model="reportReason.choiceType" ng-value="reportType.value" class="reportRadio">
+                <i class="iconTarget">
+                    <i class="icon ion-ios-circle-outline unchecked"></i>
+                    <i class="icon ion-ios-checkmark-outline checked"></i>
+                </i>
+                <div class="row row-no-padding">
+                    <div class="col col-center" ng-bind="reportType.name"></div>
+                </div>
+            </ion-item>
             <div class="reasonBody" ng-if="reportTypeList&&reportTypeList.length>0">
                 <textarea maxlength="200" ng-disabled="reportReason.choiceType!=4" placeholder="其输入其他举报内容" ng-model="reportReason.reasonText">
                 </textarea>
