@@ -26,9 +26,7 @@ angular.module('controllers.personal',[])
                 head.appendChild(script);
             }
 
-            console.log($locals.hasOwnProperty($config.user_local_info));
-
-            if(!$locals.hasOwnProperty($config.user_local_info)){
+            if($locals.getObject($config.user_local_info)!=null){
                 var userInfo = $locals.getObject($config.user_local_info);
                 $scope.userHeaderImg =userInfo.userImg;
                 $scope.userName = userInfo.nickName;
