@@ -11,6 +11,7 @@ angular.module("services.http",[])
                 var deferred = $q.defer();
                 $http.post(action,data,config)
                     .success(function(result){
+                        console.log(result)
                         if(result.error){
                             var systemError;
                             switch (result.error.errorCode){

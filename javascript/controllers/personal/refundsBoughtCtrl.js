@@ -105,4 +105,31 @@ angular.module('controllers.refundsBoughtCtrl',[])
                 $state.go($config.controllers.submitDelivery.name,{id:id,type:type})
             }
 
+            //提醒收货
+            $scope.warnSubmit = function(id){
+                $scope.checkLogin()
+                    .then(function(){
+                        var remindData = {
+                            "cmd":$config.cmds.noticOrder,
+                            "parameters":{
+                                "id":id,
+                                "orderType":"refund",
+                                "saleType":"buy"
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+
+                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                            })
+                    },function(){
+                        $scope.autoLogin()
+                            .then(function(){
+                            })
+                    })
+
+            }
+
+
         }])
