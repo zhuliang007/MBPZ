@@ -24,14 +24,14 @@ angular.module('controllers.start',[])
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
 
-            window.localStorage.setItem('userPhone',$scope.userPhone);
-
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
+
             //登录获取token
             if($scope.userPhone!=null){
+                $locals.set($config.u_p, $scope.userPhone);
                 var data = {
                     "cmd": $config.cmds.login,
                     "parameters":{
@@ -57,9 +57,10 @@ angular.module('controllers.start',[])
                         }
                         $locals.setObject($config.user_local_info,userInfo);
                     })
-            }else{
+            }else if($scope.userPhone==null||$scope.userPhone==''||$scope.userPhone==undefined){
                 $locals.clearObject($config.user_local_info);
             }
+
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
