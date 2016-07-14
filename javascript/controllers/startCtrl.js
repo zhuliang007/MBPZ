@@ -30,6 +30,38 @@ angular.module('controllers.start',[])
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
+
+            //登录获取token
+            if($scope.userPhone!=null){
+                var data = {
+                    "cmd": $config.cmds.login,
+                    "parameters":{
+                        "loginAccount":$scope.userPhone,
+                        "thirdType":$scope.thirdType
+                    }
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        var userInfo = {
+                            loginToken:result.data.loginToken,
+                            loginAccount:result.data.loginAccount,
+                            id:result.data.id,
+                            city:result.data.city,
+                            cityText:result.data.cityText,
+                            introduce:result.data.introduce,
+                            nickName:result.data.nickName,
+                            province:result.data.province,
+                            provinceText:result.data.provinceText,
+                            sex:result.data.sex,
+                            userImg:result.data.userImg,
+                            userLevel:result.data.userLevel
+                        }
+                        $locals.setObject($config.userObj,userInfo);
+                    })
+            }else{
+                $locals.clearObject($config.userObj);
+            }
+
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){

@@ -11,6 +11,8 @@ angular.module('providers.config',[])
         $config.debug = false;
         $config.appkeys = '23369408';
 
+        $config.userObj = 'U_USER';
+
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
         $config.requestActionDebug = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
