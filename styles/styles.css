@@ -1067,42 +1067,52 @@ ion-content{
     padding: 0px;
 }
 
-.report .item-radio .item-content{
-    padding: 10px 16px 10px 49px;
-    font-size: 14px;
-    color: #666666;
+.report .reportBody .reportItem{
+    padding-left: 58px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
 }
 
-.report .item-radio .radio-icon{
-    right: inherit;
-    left:0;
-    visibility: visible;
-    padding: 6px;
-    color: #999999;
-    font-size: 20px;
+.report .reportBody .reportItem>.iconTarget{
+    left: 10px;
+    font-size: 24px;
     font-weight: bold;
 }
-.report .item-radio input:checked+.radio-content .item-content{
-    background-color: transparent;
+
+.report .reportBody .reportItem>.reportRadio + .iconTarget>i.unchecked{
+    color: #999999;
 }
 
-.report .item-radio input:checked+.radio-content .radio-icon{
-    color: #333333;
+.report .reportBody .reportItem>.reportRadio:checked + .iconTarget>i.checked{
+    color: #FF4E72;
 }
 
-.report .item-radio{
-    border: none;
+.report .reportBody .reportItem>.reportRadio:checked + .iconTarget>i.checked,
+.report .reportBody .reportItem>.reportRadio + .iconTarget>i.unchecked{
+    visibility: visible;
 }
 
-.report .item-radio.radioBorder{
-    border-top: 30px solid #F5F5F5;
+.report .reportBody .reportItem>.reportRadio:checked + .iconTarget>i.unchecked,
+.report .reportBody .reportItem>.reportRadio + .iconTarget>i.checked{
+    visibility: hidden;
 }
+
+.report .reportBody .reportItem>.reportRadio{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+}
+
 .report .reasonBody{
     width: 100%;
     height: 200px;
     padding: 10px;
 }
-
 .report .reasonBody>textarea{
     display: block;
     width: 100%;

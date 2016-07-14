@@ -22,7 +22,7 @@ angular.module('controllers.shop',[])
             var numberOfPerPage = 10;
             var pageNo = 0;
             $scope.infiniteFlag = true;
-            $scope.sortText = '筛选';
+            $scope.sortText = '全部';
 
             $keywords.setKeyWords('dictList')
                 .then(function(result){
@@ -147,12 +147,14 @@ angular.module('controllers.shop',[])
             $scope.changeSort = function(sortItem){
                 //$console.show(sortItem);
                 $scope.closePopover('shopSort');
-                $scope.sortText = sortItem.name;
-                sortSelect = sortItem;
-                $scope.productList = [];
-                pageNo = 0;
-                $scope.infiniteFlag = true;
-                tabsShopHandle.resize();
-                tabsShopHandle.scrollTop();
+                if($scope.sortText != sortItem.name){
+                    $scope.sortText = sortItem.name;
+                    sortSelect = sortItem;
+                    $scope.productList = [];
+                    pageNo = 0;
+                    $scope.infiniteFlag = true;
+                    tabsShopHandle.resize();
+                    tabsShopHandle.scrollTop();
+                }
             }
         }])
