@@ -13,59 +13,45 @@ angular.module('controllers.mySoldCtrl',[])
             var pageNo = 0;
             $scope.noMoreLoad = false;
             $scope.items = [];
-            var token ='';
-
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                        $scope.soldLoadMore();
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
             }
 
             $scope.soldLoadMore= function () {
-                if(token!=''){
-                    var data = {
-                        "cmd": $config.cmds.myOrderList,
-                        "parameters":{
-                            "orderType":$stateParams.orderType,
-                            "numberOfPerPage":numberOfPerPage,
-                            "pageNo":pageNo,
-                            "saleType":$stateParams.saleType
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            if(result.data.content.length==0||result.data.content==null){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }else{
-                                var arry = result.data.content;
-                                arry.forEach(function(item){
-                                    $scope.items.push(item);
-                                });
-                            }
-                            if(result.data.totalPages==0){
-                                $scope.noMoreLoad=true;
-                                $scope.items=null;
-                                return;
-                            }
-                            if(pageNo==(result.data.totalPages-1)){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }
-                            pageNo++;
-                        })
-                }else{
-                    initToken();
+                var data = {
+                    "cmd": $config.cmds.myOrderList,
+                    "parameters":{
+                        "orderType":$stateParams.orderType,
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo,
+                        "saleType":$stateParams.saleType
+                    },
+                    "token":userInfo.loginToken
                 }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.data.content.length==0||result.data.content==null){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }else{
+                            var arry = result.data.content;
+                            arry.forEach(function(item){
+                                $scope.items.push(item);
+                            });
+                        }
+                        if(result.data.totalPages==0){
+                            $scope.noMoreLoad=true;
+                            $scope.items=null;
+                            return;
+                        }
+                        if(pageNo==(result.data.totalPages-1)){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }
+                        pageNo++;
+                    })
 
             }
 
@@ -86,25 +72,19 @@ angular.module('controllers.mySoldCtrl',[])
 
             //提醒收货
             $scope.remindDeliverySell =function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.noticOrder,
-                            "parameters":{
-                                "id":id,
-                                "orderType":"order",
-                                "saleType":"sell"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":id,
+                        "orderType":"order",
+                        "saleType":"sell"
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg)
                     })
 
             }

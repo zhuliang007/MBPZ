@@ -19,25 +19,23 @@ angular.module('controllers.deliveryCtrl',[])
                 name : '',
                 value: ''
             }
+
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
+
             initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        var data={
-                            "cmd": $config.cmds.dictList,
-                            "parameters": {
-                                "typeCode":"expressCompany"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                $scope.delivery_servers=result.data;
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
+                var data={
+                    "cmd": $config.cmds.dictList,
+                    "parameters": {
+                        "typeCode":"expressCompany"
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.delivery_servers=result.data;
                     })
             }
 
@@ -73,34 +71,27 @@ angular.module('controllers.deliveryCtrl',[])
                     $alert.show('请输入快递单号');
                     return;
                 }
-                $scope.checkLogin()
-                    .then(function(){
-                        $alert.confirm('是否提交物流信息')
-                            .then(function () {
-                                var data={
-                                    "cmd": $config.cmds.orderSend,
-                                    "parameters": {
-                                        "id":$stateParams.id,
-                                        "express":$scope.delivery.value,
-                                        "expressNum":orderCodes
-                                    },
-                                    "token":$scope.userInfo.loginToken
+                $alert.confirm('是否提交物流信息')
+                    .then(function () {
+                        var data={
+                            "cmd": $config.cmds.orderSend,
+                            "parameters": {
+                                "id":$stateParams.id,
+                                "express":$scope.delivery.value,
+                                "expressNum":orderCodes
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg)
+                                if(result.msg=='操作成功'){
+                                    if($stateParams.type==1){
+                                        $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
+                                    }else{
+                                        $state.go($config.controllers.mySold.name);
+                                    }
                                 }
-                                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                    .then(function(result){
-                                        $alert.show(result.msg)
-                                        if(result.msg=='操作成功'){
-                                            if($stateParams.type==1){
-                                                $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
-                                            }else{
-                                                $state.go($config.controllers.mySold.name);
-                                            }
-                                        }
-                                    })
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
                             })
                     })
 

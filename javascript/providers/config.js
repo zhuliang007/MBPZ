@@ -12,6 +12,8 @@ angular.module('providers.config',[])
         $config.appkeys = '23369408';
 
         $config.userObj = 'U_USER';
+        $config.u_p = "U_PHONE";
+        $config.error_login = '请重新登录萌宝派';
 
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';

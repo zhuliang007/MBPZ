@@ -28,6 +28,7 @@ angular.module('controllers.personal',[])
 
             if($locals.getObject($config.user_local_info)!=null){
                 var userInfo = $locals.getObject($config.user_local_info);
+
                 $scope.userHeaderImg =userInfo.userImg;
                 $scope.userName = userInfo.nickName;
                 $scope.cityText = userInfo.cityText==null?'未设置':userInfo.cityText;
@@ -55,24 +56,8 @@ angular.module('controllers.personal',[])
                         $scope.productBoughtCount=result.data.productBoughtCount;
                         $scope.productCollectCount=result.data.productCollectCount;
                     })
+            }else{
+                $alert.show($config.error_login);
             }
-
-
-            //initToken = function(){
-            //    $scope.checkLogin()
-            //        .then(function(){
-            //
-            //
-            //
-            //        },function(){
-            //            $scope.autoLogin()
-            //                .then(function(){
-            //                    initToken()
-            //                })
-            //        })
-            //}
-            //
-            //initToken();
-
 
         }])
