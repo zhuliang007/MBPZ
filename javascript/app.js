@@ -14,6 +14,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.directives','s
             $ionicConfigProvider.platform.android.tabs.style('standard');
             $ionicConfigProvider.platform.android.tabs.position('standard');
 
+            $ionicConfigProvider.templates.maxPrefetch(0);
+
             $stateProvider
                 .state($configProvider.controllers.tabs.name,{
                     url:$configProvider.controllers.tabs.url,
