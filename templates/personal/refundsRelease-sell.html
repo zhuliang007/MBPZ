@@ -40,15 +40,15 @@
                     </div>
                 </a>
                 <div class="row">
-                    <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,4)">联系TA</button>
+                    <div class="col-20 shelvesBtn" ng-click="myContant(item,4)">
+                        <span class=" mbpz mbpz-icon-replies" >联系TA</span>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,3)">拒绝原因</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</button>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,3)">拒绝原因</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</span>
                     </div>
                 </div>
             </div>

@@ -22,30 +22,15 @@ angular.module('controllers.refusedApplyCtrl',[])
                 reason:''
             }
 
-            var token ='';
-
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
-            }
-            initToken();
-
             $scope.submitRefused = function(){
-                if(token!=''){
-                    if($scope.refused.reason==null
-                        ||$scope.refused.reason=='undefined'
-                        ||$scope.refused.reason==''){
-                        $alert.show("请填写拒绝原因");
-                        return ;
-                    }
-                    $alert.confirm("是否拒绝买家的退款申请?")
+                if($scope.refused.reason==null
+                    ||$scope.refused.reason=='undefined'
+                    ||$scope.refused.reason==''){
+                    $alert.show("请填写拒绝原因");
+                    return ;
+                }
+                $alert.confirm("是否拒绝买家的退款申请?")
+                    .then(function(){$scope.checkLogin()
                         .then(function(){
                             var data = {
                                 "cmd": $config.cmds.applyRefused,
@@ -54,7 +39,7 @@ angular.module('controllers.refusedApplyCtrl',[])
                                     "refundStatus":"REJECT",
                                     "rejectReason":$scope.refused.reason
                                 },
-                                "token":token
+                                "token":$scope.userInfo.loginToken
                             }
                             $httpService.getJsonFromPost($config.getRequestAction(),data)
                                 .then(function(result){
@@ -63,10 +48,13 @@ angular.module('controllers.refusedApplyCtrl',[])
                                         $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
                                     }
                                 })
+                        },function(){
+                            $scope.autoLogin()
+                                .then(function(){
+                                })
                         })
-                }else{
-                    initToken();
-                }
+
+                    })
 
             }
 
