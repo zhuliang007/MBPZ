@@ -9,7 +9,7 @@
         <ion-list>
                 <div class="row item">
                     <div class="col-20 ">
-                        <div class="bgImg border-radius-round orderDetailUserImg" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg||defaultHead),'1:1')" ></div>
+                        <div class="bgImg border-radius-round orderDetailUserImg" id="userHeaderImg" ng-style="resizeImage('userHeaderImg',(userHeaderImg?userHeaderImg+'@414w':defaultHead),'1:1')" ></div>
                     </div>
                     <div class="col-50 col-center">
                         <span ng-bind="nickName"></span>
@@ -21,7 +21,7 @@
                 <ion-item>
                     <div class="row">
                         <div class="col col-20 col-center" ng-if="items.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(items.product.productImageList) track by $index">
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                         </div>
                         <div class="col col-center">
                             <p class="orderDetailP" ng-bind="items.product.title"></p>

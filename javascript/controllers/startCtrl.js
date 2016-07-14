@@ -181,10 +181,10 @@ angular.module('controllers.start',[])
                             uid:$scope.userInfo.loginAccount,
                             credential:$scope.userInfo.loginAccount,
                             touid:seller.loginAccount,
-                            nickName:seller.nickName?seller.nickName+'@414w':'',
+                            nickName:seller.nickName,
                             type:2,
-                            userImage:$scope.userInfo.userImg,
-                            toUserImage:seller.userImg})
+                            userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                            toUserImage:seller.userImg?seller.userImg+'@414w':''})
 
                     },function(){
                         $scope.autoLogin()

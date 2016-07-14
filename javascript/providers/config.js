@@ -39,7 +39,8 @@ angular.module('providers.config',[])
             edit:"product/v1.1/edit"
         }
 
-        $config.imageUrl = 'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/';
+        //$config.imageUrl = 'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/';
+        $config.imageUrl = 'assets/';
         $config.imageUrlDebug = 'assets/';
         $config.getImageUrlDebug = function(){
             if(this.debug){

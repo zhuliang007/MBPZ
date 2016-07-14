@@ -68,7 +68,7 @@ angular.module('controllers.deliveryCtrl',[])
                     $alert.show('请选择快递公司');
                     return;
                 }
-                console.log(orderCodes)
+                //console.log(orderCodes)
                 if(orderCodes=='undefined'||orderCodes==undefined){
                     $alert.show('请输入快递单号');
                     return;
