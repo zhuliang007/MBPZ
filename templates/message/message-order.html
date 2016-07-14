@@ -10,7 +10,7 @@
             <a class="item message-order" ng-click="messagesOrder(item)">
                 <div class="row">
                     <div class="col-20 col-center">
-                        <img ng-src="{{item.img}}" />
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(item.img)" ></div>
                     </div>
                     <div class="col-80">
                         <p class="orderTitle" ng-bind="item.title"></p>
