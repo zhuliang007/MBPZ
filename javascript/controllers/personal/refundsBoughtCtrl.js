@@ -18,66 +18,44 @@ angular.module('controllers.refundsBoughtCtrl',[])
             var pageNo = 0;
             $scope.noMoreLoad = false;
             $scope.items = [];
-            var token ='';
-
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                        $scope.refundsBoughtLoadMore();
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
             }
             $scope.refundsBoughtLoadMore= function () {
-                if(token!=''){
-                    var data = {
-                        "cmd": $config.cmds.myOrderList,
-                        "parameters":{
-                            "orderType":"refund",
-                            "numberOfPerPage":numberOfPerPage,
-                            "pageNo":pageNo,
-                            "saleType":"buy"
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            if(result.data.content.length==0||result.data.content==null){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }else{
-                                var arry = result.data.content;
-                                arry.forEach(function(item){
-                                    $scope.items.push(item);
-                                });
-                            }
-                            if(result.data.totalPages==0){
-                                $scope.noMoreLoad=true;
-                                $scope.items=null;
-                                return;
-                            }
-                            if(pageNo==(result.data.totalPages-1)){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }
-                            pageNo++;
-                        },function(error){
-                            if(error.systemError){
-                                if(error.systemError.errorCode==14||error.systemError.errorCode==15){
-                                    $scope.autoLogin()
-                                        .then(function(){
-                                        })
-                                }
-                            }
-                        })
-                }else{
-                    initToken()
+                var data = {
+                    "cmd": $config.cmds.myOrderList,
+                    "parameters":{
+                        "orderType":"refund",
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo,
+                        "saleType":"buy"
+                    },
+                    "token":userInfo.loginToken
                 }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.data.content.length==0||result.data.content==null){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }else{
+                            var arry = result.data.content;
+                            arry.forEach(function(item){
+                                $scope.items.push(item);
+                            });
+                        }
+                        if(result.data.totalPages==0){
+                            $scope.noMoreLoad=true;
+                            $scope.items=null;
+                            return;
+                        }
+                        if(pageNo==(result.data.totalPages-1)){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }
+                        pageNo++;
+                    })
             }
 
             $scope.myContant = function(item,type){
@@ -108,26 +86,19 @@ angular.module('controllers.refundsBoughtCtrl',[])
 
             //提醒收货
             $scope.warnSubmit = function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.noticOrder,
-                            "parameters":{
-                                "id":id,
-                                "orderType":"refund",
-                                "saleType":"buy"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":id,
+                        "orderType":"refund",
+                        "saleType":"buy"
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                                $alert.show(result.msg);
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg);
                     })
 
             }

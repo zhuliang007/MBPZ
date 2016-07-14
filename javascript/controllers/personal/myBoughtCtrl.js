@@ -11,64 +11,51 @@ angular.module('controllers.myBoughtCtrl',[])
         '$state',
         '$httpService',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$alert){
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.noMoreLoad = false;
             $scope.items = [];
-            var token ='';
-
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                        $scope.boughtLoadMore();
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
             }
 
             $scope.boughtLoadMore= function () {
-                if(token!=''){
-                    var data = {
-                        "cmd": $config.cmds.myOrderList,
-                        "parameters":{
-                            "orderType":$stateParams.orderType,
-                            "numberOfPerPage":numberOfPerPage,
-                            "pageNo":pageNo,
-                            "saleType":$stateParams.saleType
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            if(result.data.content.length==0||result.data.content==null){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }else{
-                                var arry = result.data.content;
-                                arry.forEach(function(item){
-                                    $scope.items.push(item);
-                                });
-                            }
-                            if(result.data.totalPages==0){
-                                $scope.noMoreLoad=true;
-                                $scope.items=null;
-                                return;
-                            }
-                            if(pageNo==(result.data.totalPages-1)){
-                                $scope.noMoreLoad=true;
-                                return;
-                            }
-                            pageNo++;
-                        })
-                }else{
-                    initToken();
+                var data = {
+                    "cmd": $config.cmds.myOrderList,
+                    "parameters":{
+                        "orderType":$stateParams.orderType,
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo,
+                        "saleType":$stateParams.saleType
+                    },
+                    "token":userInfo.loginToken
                 }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.data.content.length==0||result.data.content==null){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }else{
+                            var arry = result.data.content;
+                            arry.forEach(function(item){
+                                $scope.items.push(item);
+                            });
+                        }
+                        if(result.data.totalPages==0){
+                            $scope.noMoreLoad=true;
+                            $scope.items=null;
+                            return;
+                        }
+                        if(pageNo==(result.data.totalPages-1)){
+                            $scope.noMoreLoad=true;
+                            return;
+                        }
+                        pageNo++;
+                    })
 
             }
 
@@ -89,18 +76,11 @@ angular.module('controllers.myBoughtCtrl',[])
 
             //立即支付
             $scope.showPay = function(obj,value){
-                $scope.checkLogin()
-                    .then(function(){
-                        var userToken = "token";
-                        obj[userToken]=$scope.userInfo.loginToken;
-                        var backImage = "backImg";
-                        obj[backImage] = $scope.mineAlipay;
-                        $state.go($config.controllers.pay.name,{obj:obj,routers:value});
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
-                    })
+                var userToken = "token";
+                obj[userToken]=userInfo.loginToken;
+                var backImage = "backImg";
+                obj[backImage] = $scope.mineAlipay;
+                $state.go($config.controllers.pay.name,{obj:obj,routers:value});
 
             }
 
@@ -115,52 +95,38 @@ angular.module('controllers.myBoughtCtrl',[])
             }
             //提醒发货
             $scope.remindDelivery = function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.noticOrder,
-                            "parameters":{
-                                "id":id,
-                                "orderType":"order",
-                                "saleType":"buy"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":id,
+                        "orderType":"order",
+                        "saleType":"buy"
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                                //console.log(result)
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg)
                     })
             }
             //确认收货
             $scope.submitBuyer = function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.orderReceive,
-                            "parameters":{
-                                "id":id
-                            },
-                            "token":$scope.userInfo.loginToken
+                var remindData = {
+                    "cmd":$config.cmds.orderReceive,
+                    "parameters":{
+                        "id":id
+                    },
+                    "token":userInfo.loginToken
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        //提示收货成功
+
+                        if(result.msg=='确认收货成功'){
+                            $state.go($config.controllers.myBought.name,null,{reload:true});
                         }
-
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                                //提示收货成功
-
-                                if(result.msg=='确认收货成功'){
-                                    $state.go($config.controllers.myBought.name,null,{reload:true});
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
                     })
             }
 
