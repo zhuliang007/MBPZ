@@ -13,34 +13,31 @@ angular.module('controllers.messageTalking',[])
             $scope.items = [];
             $scope.WSDK = null;
 
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        $state.reload;
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
 
-                        WKIT.init({
-                            container: document.getElementById('user_list'),
-                            width: 700,
-                            height: 500,
-                            uid: $scope.userPhone,
-                            appkey:$config.appkeys ,
-                            credential:$scope.userPhone,
-                            touid: '15901718791',
-                            onBack:function(){
-                                wkitDestroy();
-                                $state.go('tabs.tabsMessage')
-                            },
-                            onLoginSuccess:function(data){
-                                $scope.WSDK = WKIT.Conn.sdk;
-                                loginIn( $scope.WSDK,$scope.userInfo);
-                            }
-                        });
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
+            initToken = function(){
+                $state.reload;
+
+                WKIT.init({
+                    container: document.getElementById('user_list'),
+                    width: 700,
+                    height: 500,
+                    uid: $scope.userPhone,
+                    appkey:$config.appkeys ,
+                    credential:$scope.userPhone,
+                    touid: '15901718791',
+                    onBack:function(){
+                        wkitDestroy();
+                        $state.go('tabs.tabsMessage')
+                    },
+                    onLoginSuccess:function(data){
+                        $scope.WSDK = WKIT.Conn.sdk;
+                        loginIn( $scope.WSDK,$scope.userInfo);
+                    }
+                });
             }
             initToken();
 

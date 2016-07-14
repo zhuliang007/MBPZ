@@ -12,45 +12,31 @@ angular.module('controllers.message',[])
         '$httpService',
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
-            var token ='';
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
 
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token=$scope.userInfo.loginToken;
-                        messages();
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
+            init = function(){
+                var data = {
+                    "cmd":$config.cmds.messageNum,
+                    "parameters":{
+                        "modual" :"system"
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        var arry = result.data;
+                        arry.forEach(function (item) {
+                            if(item.noticeCount>0){
+                                document.getElementById(item.modual).innerHTML="您有"+item.noticeCount+"条新消息";
+                                document.getElementById(item.modual).style.color="red";
+                            }
+                        })
                     })
             }
-            initToken();
-            var messages = function(){
-                if(token==''){
-                    initToken();
-                }else{
-                    var data = {
-                        "cmd":$config.cmds.messageNum,
-                        "parameters":{
-                            "modual" :"system"
-                        },
-                        "token":token
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            var arry = result.data;
-                            arry.forEach(function (item) {
-                                if(item.noticeCount>0){
-                                    document.getElementById(item.modual).innerHTML="您有"+item.noticeCount+"条新消息";
-                                    document.getElementById(item.modual).style.color="red";
-                                }
-                            })
-                        })
-                }
-
-            }
+            init();
 
             if(typeof(WKIT)=='undefined'){
                 var head= document.getElementsByTagName('head')[0];
@@ -64,7 +50,5 @@ angular.module('controllers.message',[])
                 script.charset = 'utf-8';
                 head.appendChild(script);
             }
-
-            //setTimeout(messages(),1000*60*5);
 
         }])

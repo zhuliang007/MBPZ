@@ -22,6 +22,11 @@ angular.module('controllers.refusedApplyCtrl',[])
                 reason:''
             }
 
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
+
             $scope.submitRefused = function(){
                 if($scope.refused.reason==null
                     ||$scope.refused.reason=='undefined'
@@ -30,28 +35,22 @@ angular.module('controllers.refusedApplyCtrl',[])
                     return ;
                 }
                 $alert.confirm("是否拒绝买家的退款申请?")
-                    .then(function(){$scope.checkLogin()
-                        .then(function(){
-                            var data = {
-                                "cmd": $config.cmds.applyRefused,
-                                "parameters":{
-                                    "id":$stateParams.id,
-                                    "refundStatus":"REJECT",
-                                    "rejectReason":$scope.refused.reason
-                                },
-                                "token":$scope.userInfo.loginToken
-                            }
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                .then(function(result){
-                                    $alert.show(result.msg);
-                                    if(result.msg=='操作成功'){
-                                        $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
-                                    }
-                                })
-                        },function(){
-                            $scope.autoLogin()
-                                .then(function(){
-                                })
+                    .then(function(){
+                        var data = {
+                            "cmd": $config.cmds.applyRefused,
+                            "parameters":{
+                                "id":$stateParams.id,
+                                "refundStatus":"REJECT",
+                                "rejectReason":$scope.refused.reason
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                                if(result.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
+                                }
                         })
 
                     })

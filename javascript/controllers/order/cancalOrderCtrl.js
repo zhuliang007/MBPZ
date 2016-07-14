@@ -13,29 +13,26 @@ angular.module('controllers.cancalOrderCtrl',[])
         '$rootScope',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
 
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        //取消订单原因
-                        var data = {
-                            "cmd": $config.cmds.systemDict,
-                            "parameters": {
-                                "typeCode":"cancel_reason"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                $scope.items = result.data.cancel_reason;
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
+            var userInfo ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
+
+            init = function(){
+                //取消订单原因
+                var data = {
+                    "cmd": $config.cmds.systemDict,
+                    "parameters": {
+                        "typeCode":"cancel_reason"
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.items = result.data.cancel_reason;
                     })
             }
-            initToken();
+            init();
 
             $scope.cancelResponse = {
                 chooseType:"",
@@ -51,26 +48,18 @@ angular.module('controllers.cancalOrderCtrl',[])
                 if($scope.cancelResponse.chooseType=='其他原因'){
                     _value=$scope.cancelResponse.textValue;
                 }
-
-                $scope.checkLogin()
-                    .then(function(){
-                        //取消订单原因
-                        var responseData = {
-                            "cmd":$config.cmds.cancelOrder,
-                            "parameters": {
-                                "id":$stateParams.id,
-                                "cancelReason":_value
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
-                        $httpService.getJsonFromPost($config.getRequestAction(),responseData)
-                            .then(function(result){
-                                alert(result.msg)
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                //取消订单原因
+                var responseData = {
+                    "cmd":$config.cmds.cancelOrder,
+                    "parameters": {
+                        "id":$stateParams.id,
+                        "cancelReason":_value
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),responseData)
+                    .then(function(result){
+                        alert(result.msg)
                     })
 
             }
