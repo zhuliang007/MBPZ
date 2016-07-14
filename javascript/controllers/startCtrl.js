@@ -30,7 +30,7 @@ angular.module('controllers.start',[])
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
-
+            //登录获取token
             if($scope.userPhone!=null){
                 var data = {
                     "cmd": $config.cmds.login,
@@ -60,8 +60,6 @@ angular.module('controllers.start',[])
             }else{
                 $locals.clearObject($config.user_local_info);
             }
-
-
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
