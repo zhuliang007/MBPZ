@@ -26,45 +26,55 @@ angular.module('controllers.personal',[])
                 head.appendChild(script);
             }
 
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        $scope.userHeaderImg =$scope.userInfo.userImg;
-                        $scope.userName = $scope.userInfo.nickName;
-                        $scope.cityText = $scope.userInfo.cityText==null?'未设置':$scope.userInfo.cityText;
-                        switch (parseInt($scope.userInfo.sex)){
-                            case 0:
-                                $scope.userSex='女';
-                                break;
-                            case 1:
-                                $scope.userSex='男';
-                                break;
-                            default:
-                                $scope.userSex='未设置';
-                                break;
-                        }
-                        var data = {
-                            "cmd":$config.cmds.personalCount,
-                            "parameters":{
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                $scope.productPublicCount=result.data.productPublicCount;
-                                $scope.productSoldCount=result.data.productSoldCount;
-                                $scope.productBoughtCount=result.data.productBoughtCount;
-                                $scope.productCollectCount=result.data.productCollectCount;
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
+            console.log($locals.hasOwnProperty($config.user_local_info));
+
+            if(!$locals.hasOwnProperty($config.user_local_info)){
+                var userInfo = $locals.getObject($config.user_local_info);
+                $scope.userHeaderImg =userInfo.userImg;
+                $scope.userName = userInfo.nickName;
+                $scope.cityText = userInfo.cityText==null?'未设置':userInfo.cityText;
+                switch (parseInt(userInfo.sex)){
+                    case 0:
+                        $scope.userSex='女';
+                        break;
+                    case 1:
+                        $scope.userSex='男';
+                        break;
+                    default:
+                        $scope.userSex='未设置';
+                        break;
+                }
+                var data = {
+                    "cmd":$config.cmds.personalCount,
+                    "parameters":{
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $scope.productPublicCount=result.data.productPublicCount;
+                        $scope.productSoldCount=result.data.productSoldCount;
+                        $scope.productBoughtCount=result.data.productBoughtCount;
+                        $scope.productCollectCount=result.data.productCollectCount;
                     })
             }
 
-            initToken();
+
+            //initToken = function(){
+            //    $scope.checkLogin()
+            //        .then(function(){
+            //
+            //
+            //
+            //        },function(){
+            //            $scope.autoLogin()
+            //                .then(function(){
+            //                    initToken()
+            //                })
+            //        })
+            //}
+            //
+            //initToken();
 
 
         }])
