@@ -62,7 +62,7 @@ angular.module('controllers.messageTalking',[])
                             param.avators = item.avator;
                             param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
                             param.uid = sdk.Base.getNick(item.uid);
-                            param.userImage = userInfo.userImg;
+                            param.userImage = userInfo.userImg?userInfo.userImg+'@414w':'';
                             $scope.items.push(param);
                         })
                     },
@@ -78,8 +78,9 @@ angular.module('controllers.messageTalking',[])
 
             $scope.contactFn = function(item,type){
                 wkitDestroy();
-                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,touid:item.uid,nickName:item.nickname,type:type,
-                    userImage:item.userImage,toUserImage:item.avators});
+                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    touid:item.uid,nickName:item.nickname,type:type,
+                    userImage:item.userImage?item.userImage+'@414w':'',toUserImage:item.avators?item.avators+'@414w':''});
             }
 
             var wkitDestroy = function(){

@@ -1146,7 +1146,6 @@ ion-content{
     opacity: .7!important;
     color: #FF4E72;
 }
-
 /*图片作为背景*/
 .bgImg{
     width: 100%;
@@ -2214,6 +2213,10 @@ ion-content{
 .orderDirct,.orderTime{
     color:#b2b2b2 !important;
     font-size:12px !important;
+}
+
+.orderDirct{
+    clear:both;
 }
 
 .orderDirctDiv{

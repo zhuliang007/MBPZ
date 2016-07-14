@@ -20,7 +20,7 @@
                     </div>
                     <div class="row soldRow">
                         <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                         </div>
                         <div class="col col-70">
                             <div class="shelvesTitles">

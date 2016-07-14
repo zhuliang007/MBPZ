@@ -110,7 +110,17 @@ angular.module('controllers.start',[])
 
             $scope.parseTime = function(time){
                 if(time){
-                    return DateFormat.format.prettyDate(time);
+                    var tempStrs = time.split(" ");
+                    var dateStrs = tempStrs[0].split("-");
+                    var year = parseInt(dateStrs[0], 10);
+                    var month = parseInt(dateStrs[1], 10) - 1;
+                    var day = parseInt(dateStrs[2], 10);
+                    var timeStrs = tempStrs[1].split(":");
+                    var hour = parseInt(timeStrs[0], 10);
+                    var minute = parseInt(timeStrs[1], 10);
+                    var second = parseInt(timeStrs[2], 10);
+                    var date = new Date(year, month, day, hour, minute, second);
+                    return DateFormat.format.prettyDate(date);
                 }
             }
 
@@ -181,10 +191,10 @@ angular.module('controllers.start',[])
                             uid:$scope.userInfo.loginAccount,
                             credential:$scope.userInfo.loginAccount,
                             touid:seller.loginAccount,
-                            nickName:seller.nickName?seller.nickName+'@414w':'',
+                            nickName:seller.nickName,
                             type:2,
-                            userImage:$scope.userInfo.userImg,
-                            toUserImage:seller.userImg})
+                            userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                            toUserImage:seller.userImg?seller.userImg+'@414w':''})
 
                     },function(){
                         $scope.autoLogin()
