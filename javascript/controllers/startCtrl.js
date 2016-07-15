@@ -25,12 +25,10 @@ angular.module('controllers.start',[])
             $scope.userPhone = purl().param('loginAccount');
 
 
-
             login = function(){
                 //登录获取token
                 console.log($scope.userPhone)
                 if($scope.userPhone!=null){
-                    $locals.set($config.u_p, $scope.userPhone);
                     var data = {
                         "cmd": $config.cmds.login,
                         "parameters":{
@@ -40,7 +38,8 @@ angular.module('controllers.start',[])
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            console.log(result)
+                            $locals.clearObject($config.u_p)
+                            $locals.set($config.u_p, $scope.userPhone);
                             $scope.userInfo = {
                                 loginToken:result.data.loginToken,
                                 loginAccount:result.data.loginAccount,
@@ -62,6 +61,9 @@ angular.module('controllers.start',[])
                 }
             }
 
+
+
+            //$locals.clearAll();
             if($locals.getObject($config.user_local_info)==null){
                 login();
             }else if($locals.getObject($config.user_local_info)!=null&&
@@ -227,7 +229,7 @@ angular.module('controllers.start',[])
             }
 
             //联系卖家
-            $scope.contactSeller = function (seller) {
+            $scope.contactSeller = function (seller,id) {
                 if(!$scope.userInfo){
                     $alert.show('请先登录萌宝派')
                     return ;
@@ -238,14 +240,24 @@ angular.module('controllers.start',[])
                     return;
                 }
 
-                $state.go($config.controllers.messageChat.name,{
-                    uid:$scope.userInfo.loginAccount,
-                    credential:$scope.userInfo.loginAccount,
-                    touid:seller.loginAccount,
-                    nickName:seller.nickName,
-                    type:2,
-                    userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
-                    toUserImage:seller.userImg?seller.userImg+'@414w':''})
+               var  data={
+                    "uid":seller.loginAccount,
+                    "nickname":seller.nickName,
+                    "userImage":$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                    "avators":seller.userImg?seller.userImg+'@414w':'',
+                    "productId":id==null?"":id
+                };
+
+                $scope.clickChats(data,id==null?10:9);
+
+                //$state.go($config.controllers.messageChat.name,{
+                //    uid:$scope.userInfo.loginAccount,
+                //    credential:$scope.userInfo.loginAccount,
+                //    touid:seller.loginAccount,
+                //    nickName:seller.nickName,
+                //    type:2,
+                //    userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                //    toUserImage:seller.userImg?seller.userImg+'@414w':''})
 
             }
 
@@ -447,6 +459,30 @@ angular.module('controllers.start',[])
             $scope.showPersonalCenter = function($event,userId){
                 $event.stopPropagation();
                 $state.go($config.controllers.personalCenter.name,{userId:userId});
+            }
+
+            $scope.clickChats = function(data,type){
+                $locals.clearObject('mkit');
+                var json = JSON.stringify(data)
+                var item = JSON.parse(json);
+
+                var data = {
+                    "uid":$scope.userPhone,
+                    "credential":$scope.userPhone,
+                    "touid":item.uid,
+                    "nickName":item.nickname,
+                    "type":type,
+                    "userImage":item.userImage,
+                    "toUserImage":item.avators,
+                    "appkeys":$config.appkeys,
+                    "orderId":data.orderId,
+                    "orderType":data.orderType,
+                    "productId":data.productId
+                }
+
+                $locals.setObject('mkit',data);
+
+                window.location.href = "http://192.168.100.134:8081/MBPZ/mkit.html"
             }
         }
     ])
