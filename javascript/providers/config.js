@@ -53,6 +53,13 @@ angular.module('providers.config',[])
             return this.imageUrl;
         }
 
+        $config.getChatUrl = function(){
+            if(this.debug){
+                return "http://"+window.location.host+"/MBPZ/mkit.html";
+            }
+            return "http://"+window.location.host+"/smartMBPZ/mkit.html";
+        }
+
         /**图片资源配置*/
         $config.assets = {
             qgxx:"qgxx.png",
