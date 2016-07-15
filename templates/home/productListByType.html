@@ -24,7 +24,7 @@
     </div>
     <ion-content ng-class="{true:'leave-top',false:''}[filterFlag]" delegate-handle="productListByTypeHandle" has-bouncing="true" overflow-scroll="false">
         <div ng-if="productList !=null && productList.length != 0" class="card-group card-per">
-            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
+            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,24)">
                 <div class="card-item-per-body">
                     <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(product.productImageList[0].location+'@414w')"></div>
                     <div class="title" ng-bind="product.title"></div>

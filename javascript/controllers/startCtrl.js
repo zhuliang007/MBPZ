@@ -465,19 +465,6 @@ angular.module('controllers.start',[])
             $scope.showPersonalCenter = function($event,userId,type){
                 console.log(type)
                 $event.stopPropagation();
-                var types = '';
-                switch (parseInt(type)){
-                    case 21:
-                        types='201';
-                        break;
-                    case 22:
-                        types='202';
-                        break;
-                    case 23:
-                        types='203';
-                        break;
-                }
-                console.log(types)
                 $state.go($config.controllers.personalCenter.name,{userId:userId,type:type});
             }
 
