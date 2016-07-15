@@ -24,8 +24,14 @@ angular.module('controllers.publish',[])
                 selectChild:'MMYP_FZ'
             }
             $scope.publishObject = {
-                publishImageList : []
+                publishImageList : [],
+                title:'',
+                content:'',
+                currentPrice:null,
+                originalPrice:null,
+                freight:null
             }
+
             var userInfo ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
@@ -116,8 +122,8 @@ angular.module('controllers.publish',[])
                         return ;
                     }
                     for(var i in $files){
-                        if($files[i].size>3*1024*1024){
-                            $alert.show('每张图片不能超过3M');
+                        if($files[i].size>10*1024*1024){
+                            $alert.show('每张图片不能超过10M');
                             return;
                         }
                     }
@@ -193,6 +199,7 @@ angular.module('controllers.publish',[])
             }
 
             $scope.submitPublish = function(){
+
                 if(!$scope.publishObject.title){
                     $alert.show("标题不能为空")
                     return;
@@ -208,39 +215,77 @@ angular.module('controllers.publish',[])
                         $alert.show("缺少描述图片")
                         return;
                     }
-
-                    var priceReg = /^(-?\d+)(\.\d+)?$/;
-                    //$console.show($scope.publishObject.currentPrice)
-
-                    if($scope.publishObject.currentPrice==null){
-                        $alert.show("价格不能为空或格式错误")
+                    var priceReg = /^(-?\d+)(\.\d{0,2})?$/;
+                    if($scope.publishObject.currentPrice===null){
+                        $alert.show('价格不能为空')
+                        return;
+                    }
+                    else if($scope.publishObject.currentPrice===undefined){
+                        $alert.show('价格格式错误')
+                            .then(function(){
+                                $scope.publishObject.currentPrice = null;
+                            })
                         return;
                     }
                     else{
-                        if(parseFloat($scope.publishObject.currentPrice)<0){
-                            $alert.show("价格不能小于0")
+                        if(!priceReg.test($scope.publishObject.currentPrice.toString())){
+                            $alert.show('请保留小数点后两位')
                             return;
                         }
-                    }
-
-                    if($scope.publishObject.originalPrice){
-                        if(parseFloat($scope.publishObject.originalPrice)<0){
-                            $alert.show("原价不能小于0")
-                            return;
+                        else{
+                            if(parseFloat($scope.publishObject.currentPrice)<0){
+                                $alert.show('价格不能小于0')
+                                return;
+                            }
                         }
                     }
-
-                    if($scope.publishObject.freight){
-                        if(parseFloat($scope.publishObject.freight)<0){
-                            $alert.show("运费不能小于0")
+                    if($scope.publishObject.originalPrice!==null){
+                        if($scope.publishObject.originalPrice===undefined){
+                            $alert.show('原价格式错误')
+                                .then(function(){
+                                    $scope.publishObject.originalPrice = null;
+                                })
                             return;
+                        }
+                        else{
+                            if(!priceReg.test($scope.publishObject.originalPrice.toString())){
+                                $alert.show('请保留小数点后两位');
+                                return;
+                            }
+                            else{
+                                if(parseFloat($scope.publishObject.originalPrice)<0){
+                                    $alert.show('原价不能小于0');
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    if($scope.publishObject.freight!==null){
+                        if($scope.publishObject.freight===undefined){
+                            $alert.show('运费格式错误')
+                                .then(function(){
+                                    $scope.publishObject.freight = null;
+                                })
+                            return;
+                        }
+                        else{
+                            if(!priceReg.test($scope.publishObject.freight.toString())){
+                                $alert.show('请保留小数点后两位');
+                                return;
+                            }
+                            else{
+                                if(parseFloat($scope.publishObject.freight)<0){
+                                    $alert.show('运费不能小于0');
+                                    return;
+                                }
+                            }
                         }
                     }
 
                     if(!checkPublishImage()){
-                        $alert.show("描述图片尚未上传完毕")
-                        return;
-                    }
+                     $alert.show("描述图片尚未上传完毕")
+                     return;
+                     }
                 }
 
                 if(!$scope.selectType.selectParent || !$scope.selectType.selectChild){
@@ -270,9 +315,9 @@ angular.module('controllers.publish',[])
                 var formData = new FormData();
                 formData.append("title",$scope.publishObject.title);
                 formData.append("content",$scope.publishObject.content);
-                formData.append("currentPrice",$scope.publishObject.currentPrice?Math.round($scope.publishObject.currentPrice*100)/100:0);
-                formData.append("originalPrice",$scope.publishObject.originalPrice?Math.round($scope.publishObject.originalPrice*100)/100:0);
-                formData.append("freight",$scope.publishObject.freight?Math.round($scope.publishObject.freight*100)/100:0);
+                formData.append("currentPrice",$scope.publishObject.currentPrice);
+                formData.append("originalPrice",$scope.publishObject.originalPrice||'');
+                formData.append("freight",$scope.publishObject.freight||'');
                 formData.append("parentClassify",$scope.selectType.selectParent);
                 formData.append("secondClassify",$scope.selectType.selectChild);
                 formData.append("locationJosnStr",angular.toJson($rootScope.locationJosnStr));
