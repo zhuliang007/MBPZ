@@ -13,7 +13,7 @@ angular.module('controllers.orderEvaluate',[])
         '$locals',
         function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$locals){
             //$console.show($stateParams);
-            var userInfo ;
+            var userInfo = {};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

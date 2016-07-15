@@ -26,7 +26,7 @@ angular.module('controllers.personalCenter',[])
                 head.appendChild(script);
             }
 
-            var userInfo ;
+            var userInfo = {};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

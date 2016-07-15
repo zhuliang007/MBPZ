@@ -16,7 +16,7 @@ angular.module('controllers.report',[])
         function($scope,$console,$config,$httpService,$locals,$state,$stateParams,$keywords,$rootScope,$alert){
             var productId = $stateParams.productId;
             //$console.show(productId);
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

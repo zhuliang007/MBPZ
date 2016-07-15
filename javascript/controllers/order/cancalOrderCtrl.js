@@ -13,7 +13,7 @@ angular.module('controllers.cancalOrderCtrl',[])
         '$rootScope',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
 
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

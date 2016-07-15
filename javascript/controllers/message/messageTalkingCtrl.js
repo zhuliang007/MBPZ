@@ -15,7 +15,7 @@ angular.module('controllers.messageTalking',[])
             $scope.items = [];
             $scope.WSDK = null;
 
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

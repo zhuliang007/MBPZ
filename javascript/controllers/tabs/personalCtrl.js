@@ -11,7 +11,8 @@ angular.module('controllers.personal',[])
         '$state',
         '$httpService',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$alert){
 
             if($locals.getObject($config.user_local_info)!=null){
                 var userInfo = $locals.getObject($config.user_local_info);

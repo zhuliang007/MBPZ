@@ -19,19 +19,6 @@ angular.module('controllers.shopDetail',[])
         '$locals',
         function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$ionicScrollDelegate,$alert,$ionicPopover,$q,$locals){
 
-            if(typeof(WKIT)=='undefined'){
-                var head= document.getElementsByTagName('head')[0];
-                var script= document.createElement('script');
-                script.type= 'text/javascript';
-                script.onload = script.onreadystatechange = function() {
-                    if (!this.readyState || this.readyState === "loaded" ||    this.readyState === "complete" ) {
-                        script.onload = script.onreadystatechange = null;
-                    } };
-                script.src= 'https://g.alicdn.com/aliww/??h5.imsdk/2.1.5/scripts/yw/wsdk.js,h5.openim.kit/0.4.0/scripts/kit.js';
-                script.charset = 'utf-8';
-                head.appendChild(script);
-            }
-
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
@@ -42,7 +29,7 @@ angular.module('controllers.shopDetail',[])
             var pageNo = 0;
             $scope.replyList = []
             $scope.infiniteFlag = true;
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

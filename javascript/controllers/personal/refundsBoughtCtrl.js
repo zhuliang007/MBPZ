@@ -18,7 +18,7 @@ angular.module('controllers.refundsBoughtCtrl',[])
             var pageNo = 0;
             $scope.noMoreLoad = false;
             $scope.items = [];
-            var userInfo ;
+            var userInfo = {};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }
