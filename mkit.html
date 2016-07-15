@@ -38,6 +38,8 @@
             return locationHref;
         }
 
+        console.log(data.type)
+
         WKIT.init({
             uid: data.uid || 'test0',
             appkey: data.appkeys,
@@ -59,15 +61,20 @@
                         window.location.href=locationHref()+"#/talking";
                         break;
                     case 1:
+                        window.location.href=locationHref+"#/mySold";
+                        break;
                     case 2:
                         window.location.href =locationHref()+"#/orderDetail/"+data.orderId+"&"+data.orderType;
+                        break;
+                    case 3:
+                        window.location.href=locationHref+"#/myBought/";
                         break;
                     case 4:
                         window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
                         break;
-                    case 9:
-                        window.location.href=locationHref()+"#/productDetail/"+data.productId+"&10";
-                        break;
+                }
+                if(parseInt(data.type)>100){
+                    window.location.href=locationHref+"#/productDetail/"+data.productId+"&"+data.type;
                 }
             },
             onUploaderError: function(error){
