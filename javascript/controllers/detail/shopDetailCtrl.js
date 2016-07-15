@@ -48,6 +48,7 @@ angular.module('controllers.shopDetail',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result);
+                        result.data['type']=$stateParams.type;
                         $scope.product = result.data;
                         $timeout(function(){
                             if(productSlideBox){
@@ -329,5 +330,16 @@ angular.module('controllers.shopDetail',[])
                             $scope.goBack()
                         }
                     })
+            }
+
+            $scope.goBackBefore = function () {
+                switch (parseInt($stateParams.type)){
+                    case 150:
+                        $state.go($config.controllers.tabsShop.name);
+                        break;
+                    default:
+                        $scope.goBack();
+                        break;
+                }
             }
         }])

@@ -217,8 +217,8 @@ angular.module('controllers.start',[])
                 $state.go($config.controllers.productDetail.name,params)
             }
 
-            $scope.showShop = function(id){
-                var params = {id:id};
+            $scope.showShop = function(id,type){
+                var params = {id:id,type:type};
                 $state.go($config.controllers.shopDetail.name,params)
             }
 
@@ -250,7 +250,8 @@ angular.module('controllers.start',[])
                     "userImage":$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
                     "avators":seller.userImg?seller.userImg+'@414w':'',
                     "productId":id==null?"":id,
-                    "type":type
+                    "type":type,
+                    "currentId":seller.id
                 };
 
                 $scope.clickChats(data,type);
@@ -461,9 +462,23 @@ angular.module('controllers.start',[])
                 }
                 return true;
             }
-            $scope.showPersonalCenter = function($event,userId){
+            $scope.showPersonalCenter = function($event,userId,type){
+                console.log(type)
                 $event.stopPropagation();
-                $state.go($config.controllers.personalCenter.name,{userId:userId});
+                var types = '';
+                switch (parseInt(type)){
+                    case 21:
+                        types='201';
+                        break;
+                    case 22:
+                        types='202';
+                        break;
+                    case 23:
+                        types='203';
+                        break;
+                }
+                console.log(types)
+                $state.go($config.controllers.personalCenter.name,{userId:userId,type:type});
             }
 
             $scope.clickChats = function(data,type){
@@ -482,7 +497,8 @@ angular.module('controllers.start',[])
                     "appkeys":$config.appkeys,
                     "orderId":data.orderId,
                     "orderType":data.orderType,
-                    "productId":data.productId
+                    "productId":data.productId,
+                    "currentId":data.currentId
                 }
 
                 $locals.setObject('mkit',data);

@@ -35,6 +35,7 @@ angular.module('controllers.personalCenter',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result);
+                        result.data['type']=$stateParams.type;
                         $scope.personalCenterInfo = result.data;
                     })
             }
@@ -117,10 +118,12 @@ angular.module('controllers.personalCenter',[])
             }
 
             $scope.goBackBefore= function () {
-                switch (parseInt($stateParams.type)){
-                    case 20:
-                        $state.go($config.controllers.tabsHome.name)
-                        break;
+                if (parseInt($stateParams.type)==20||parseInt($stateParams.type)==21) {
+                    $state.go($config.controllers.tabsHome.name)
+                }else if(parseInt($stateParams.type)==22||parseInt($stateParams.type)==23) {
+                    $state.go($config.controllers.tabsShop.name)
+                }else{
+                    $scope.goBack();
                 }
             }
 
