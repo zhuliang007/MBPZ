@@ -122,6 +122,8 @@ angular.module('controllers.personalCenter',[])
                     $state.go($config.controllers.tabsHome.name)
                 }else if(parseInt($stateParams.type)==22||parseInt($stateParams.type)==23) {
                     $state.go($config.controllers.tabsShop.name)
+                }else if(parseInt($stateParams.type)==24){
+                    $state.go($config.controllers.productDetail.name)
                 }else{
                     $scope.goBack();
                 }
