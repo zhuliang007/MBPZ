@@ -66,9 +66,11 @@ angular.module('controllers.start',[])
             if(!$scope.userPhone||!$locals.get($config.u_p,null)){
                 $locals.clearObject($config.user_local_info);
                 $locals.clearObject($config.u_p);
+                console.log('!$scope.userPhone||!$locals.get($config.u_p,null)')
                 login();
             }
             else if($scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)){
+                console.log('$scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)')
                 $locals.clearObject($config.user_local_info);
                 $locals.clearObject($config.u_p);
                 login();
