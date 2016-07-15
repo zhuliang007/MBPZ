@@ -1,7 +1,7 @@
 <ion-view class="productDetail product">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+            <button class="button" ng-click="goBackBefore()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title">宝贝详情</h1>
         <div class="buttons">
@@ -21,7 +21,7 @@
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,product.type)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
         </div>

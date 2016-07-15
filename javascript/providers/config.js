@@ -494,7 +494,7 @@ angular.module('providers.config',[])
             },
             personalCenter:{
                 templateUrl:"templates/personal/personal-center.html",
-                url:"/personalCenter/:userId",
+                url:"/personalCenter/:userId&:type?",
                 name:"personalCenter",
                 controller:"PersonalCenterCtrl",
                 cache:false

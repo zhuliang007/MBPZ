@@ -57,4 +57,8 @@ angular.module('controllers.collectionCtrl',[])
                     })
 
             }
+            
+            $scope.goBackBefore= function () {
+                $state.go($config.controllers.tabsPersonal.name);
+            }
         }])

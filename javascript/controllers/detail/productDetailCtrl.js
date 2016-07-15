@@ -48,8 +48,9 @@ angular.module('controllers.productDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        //$console.show(result);
+                        console.log(result);
                         //console.log('productDetail',result)
+                        result.data["type"]=$stateParams.type;
                         $scope.product = result.data;
                     },function(error){
                         //$console.show(error);
@@ -260,6 +261,23 @@ angular.module('controllers.productDetail',[])
                             $scope.goBack()
                         }
                     })
+            }
+
+            $scope.goBackBefore = function () {
+                switch (parseInt($stateParams.type)){
+                    case 101:
+                        $state.go($config.controllers.myCollection.name);
+                        break;
+                    case 102:
+                        $state.go($config.controllers.personalCenter.name,{userId:$scope.product.publicUser.id,type:20})
+                        break;
+                    case 103:
+                        $state.go($config.controllers.tabsHome.name);
+                        break;
+                    default:
+                        $scope.goBack();
+                        break;
+                }
             }
 
         }])

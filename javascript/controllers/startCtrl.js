@@ -317,8 +317,8 @@ angular.module('controllers.start',[])
                     $rootScope.provinceCityList.districtList = result[110100];
                 })
 
-            $scope.showProduct = function(id){
-                var params = {id:id};
+            $scope.showProduct = function(id,type){
+                var params = {id:id,type:type};
                 $state.go($config.controllers.productDetail.name,params)
             }
 
@@ -339,7 +339,7 @@ angular.module('controllers.start',[])
             }
 
             //联系卖家
-            $scope.contactSeller = function (seller,id) {
+            $scope.contactSeller = function (seller,id,type) {
                 if(!$scope.userInfo){
                     $alert.show('请先登录萌宝派')
                     return ;
@@ -349,16 +349,16 @@ angular.module('controllers.start',[])
                     $alert.show("当前用户是您")
                     return;
                 }
-
                var  data={
                     "uid":seller.loginAccount,
                     "nickname":seller.nickName,
                     "userImage":$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
                     "avators":seller.userImg?seller.userImg+'@414w':'',
-                    "productId":id==null?"":id
+                    "productId":id==null?"":id,
+                    "type":type
                 };
 
-                $scope.clickChats(data,id==null?10:9);
+                $scope.clickChats(data,type);
 
                 //$state.go($config.controllers.messageChat.name,{
                 //    uid:$scope.userInfo.loginAccount,
