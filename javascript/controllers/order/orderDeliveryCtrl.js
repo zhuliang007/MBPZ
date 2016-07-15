@@ -73,8 +73,21 @@ angular.module('controllers.deliveryCtrl',[])
                 }
                 $alert.confirm('是否提交物流信息')
                     .then(function () {
+                        console.log($stateParams.id)
+                        console.log($scope.delivery.value)
+                        console.log(orderCodes)
+                        var cmds ;
+                        switch (parseInt($stateParams.type)) {
+                            case 0:
+                                cmds = $config.cmds.sellerSend;
+                                break;
+                            case 1:
+                                cmds = $config.cmds.orderSend;
+                                break;
+                        }
+
                         var data={
-                            "cmd": $config.cmds.orderSend,
+                            "cmd": cmds,
                             "parameters": {
                                 "id":$stateParams.id,
                                 "express":$scope.delivery.value,
