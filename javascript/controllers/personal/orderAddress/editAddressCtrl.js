@@ -20,7 +20,7 @@ angular.module('controllers.editAddress',[])
             var districtHandle = $ionicScrollDelegate.$getByHandle('districtHandle');
             $scope.addressId = $stateParams.id;
             $scope.title = $stateParams.id?'修改地址':'添加新地址';
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

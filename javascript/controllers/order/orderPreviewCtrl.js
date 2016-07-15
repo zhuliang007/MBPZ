@@ -14,7 +14,7 @@ angular.module('controllers.orderPreview',[])
         '$locals',
         function($scope,$config,$console,$httpService,$state,$stateParams,$alert,$rootScope,$locals){
             var id = $stateParams.productId;
-            var userInfo ;
+            var userInfo = {};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

@@ -17,7 +17,7 @@ angular.module('controllers.collectionCtrl',[])
             $scope.productList=[];
             $scope.noMoreLoad = false;
 
-            var userInfo ;
+            var userInfo = {};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

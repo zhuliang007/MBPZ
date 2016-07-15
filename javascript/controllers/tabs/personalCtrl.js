@@ -11,7 +11,8 @@ angular.module('controllers.personal',[])
         '$state',
         '$httpService',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
+        '$alert',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals,$alert){
 
             if(typeof(WKIT)=='undefined'){
                 var head= document.getElementsByTagName('head')[0];

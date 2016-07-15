@@ -20,7 +20,7 @@ angular.module('controllers.deliveryCtrl',[])
                 value: ''
             }
 
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

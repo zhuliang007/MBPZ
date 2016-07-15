@@ -12,7 +12,7 @@ angular.module('controllers.message',[])
         '$httpService',
         '$locals',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$locals){
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

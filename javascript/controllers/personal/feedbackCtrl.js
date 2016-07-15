@@ -14,7 +14,7 @@ angular.module('controllers.feedbackCtrl',[])
         '$alert',
         function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$http,$alert){
 
-            var userInfo ;
+            var userInfo ={};
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }

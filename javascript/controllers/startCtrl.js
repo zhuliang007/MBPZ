@@ -25,52 +25,104 @@ angular.module('controllers.start',[])
             $scope.userPhone = purl().param('loginAccount');
 
 
-
             login = function(){
                 //登录获取token
-                console.log($scope.userPhone)
-                if($scope.userPhone!=null){
-                    $locals.set($config.u_p, $scope.userPhone);
-                    var data = {
-                        "cmd": $config.cmds.login,
-                        "parameters":{
-                            "loginAccount":$scope.userPhone,
-                            "thirdType":$scope.thirdType
-                        }
-                    }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
-                        .then(function(result){
-                            console.log(result)
-                            $scope.userInfo = {
-                                loginToken:result.data.loginToken,
-                                loginAccount:result.data.loginAccount,
-                                id:result.data.id,
-                                city:result.data.city,
-                                cityText:result.data.cityText,
-                                introduce:result.data.introduce,
-                                nickName:result.data.nickName,
-                                province:result.data.province,
-                                provinceText:result.data.provinceText,
-                                sex:result.data.sex,
-                                userImg:result.data.userImg,
-                                userLevel:result.data.userLevel
+                if($locals.getObject($config.user_local_info,$scope.userInfo)){
+                    $scope.userInfo = $locals.getObject($config.user_local_info);
+                }
+                else{
+                    if($scope.userPhone){
+                        $locals.set($config.u_p, $scope.userPhone);
+                        var data = {
+                            "cmd": $config.cmds.login,
+                            "parameters":{
+                                "loginAccount":$scope.userPhone,
+                                "thirdType":$scope.thirdType
                             }
-                            $locals.setObject($config.user_local_info,$scope.userInfo);
-                        })
-                }else if($scope.userPhone==null||$scope.userPhone==''||$scope.userPhone==undefined){
-                    $locals.clearObject($config.user_local_info);
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                console.log(result)
+                                $scope.userInfo = {
+                                    loginToken:result.data.loginToken,
+                                    loginAccount:result.data.loginAccount,
+                                    id:result.data.id,
+                                    city:result.data.city,
+                                    cityText:result.data.cityText,
+                                    introduce:result.data.introduce,
+                                    nickName:result.data.nickName,
+                                    province:result.data.province,
+                                    provinceText:result.data.provinceText,
+                                    sex:result.data.sex,
+                                    userImg:result.data.userImg,
+                                    userLevel:result.data.userLevel
+                                }
+                                $locals.setObject($config.user_local_info,$scope.userInfo);
+                            })
+                    }
                 }
             }
 
-            if($locals.getObject($config.user_local_info)==null){
-                login();
-            }else if($locals.getObject($config.user_local_info)!=null&&
-                $scope.userPhone!=$locals.getObject($config.user_local_info).loginAccount) {
+            if(!$scope.userPhone||!$locals.get($config.u_p,null)){
                 $locals.clearObject($config.user_local_info);
+                $locals.clearObject($config.u_p);
                 login();
-            }else{
-                $scope.userInfo = $locals.getObject($config.user_local_info);
             }
+            else if($scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)){
+                $locals.clearObject($config.user_local_info);
+                $locals.clearObject($config.u_p);
+                login();
+            }
+            else{
+                login();
+            }
+
+
+            /*login = function(){
+             //登录获取token
+             console.log($scope.userPhone)
+             if($scope.userPhone!=null){
+             $locals.set($config.u_p, $scope.userPhone);
+             var data = {
+             "cmd": $config.cmds.login,
+             "parameters":{
+             "loginAccount":$scope.userPhone,
+             "thirdType":$scope.thirdType
+             }
+             }
+             $httpService.getJsonFromPost($config.getRequestAction(),data)
+             .then(function(result){
+             console.log(result)
+             $scope.userInfo = {
+             loginToken:result.data.loginToken,
+             loginAccount:result.data.loginAccount,
+             id:result.data.id,
+             city:result.data.city,
+             cityText:result.data.cityText,
+             introduce:result.data.introduce,
+             nickName:result.data.nickName,
+             province:result.data.province,
+             provinceText:result.data.provinceText,
+             sex:result.data.sex,
+             userImg:result.data.userImg,
+             userLevel:result.data.userLevel
+             }
+             $locals.setObject($config.user_local_info,$scope.userInfo);
+             })
+             }else if($scope.userPhone==null||$scope.userPhone==''||$scope.userPhone==undefined){
+             $locals.clearObject($config.user_local_info);
+             }
+             }
+
+             if($locals.getObject($config.user_local_info)==null){
+             login();
+             }else if($locals.getObject($config.user_local_info)!=null&&
+             $scope.userPhone!=$locals.getObject($config.user_local_info).loginAccount) {
+             $locals.clearObject($config.user_local_info);
+             login();
+             }else{
+             $scope.userInfo = $locals.getObject($config.user_local_info);
+             }*/
 
 
             var url = $location.url();

@@ -18,7 +18,7 @@ angular.module('controllers.evaluateDetail',[])
                 parentId:0,
                 content:''
             }
-            var userInfo ;
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
             }
