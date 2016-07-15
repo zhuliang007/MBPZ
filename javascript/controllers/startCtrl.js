@@ -24,9 +24,9 @@ angular.module('controllers.start',[])
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
 
-            console.log($locals.getObject($config.user_local_info))
 
-            if($locals.getObject($config.user_local_info)==null){
+
+            login = function(){
                 //登录获取token
                 console.log($scope.userPhone)
                 if($scope.userPhone!=null){
@@ -60,10 +60,17 @@ angular.module('controllers.start',[])
                 }else if($scope.userPhone==null||$scope.userPhone==''||$scope.userPhone==undefined){
                     $locals.clearObject($config.user_local_info);
                 }
-             }else{
-                $scope.userInfo = $locals.getObject($config.user_local_info);
             }
 
+            if($locals.getObject($config.user_local_info)==null){
+                login();
+            }else if($locals.getObject($config.user_local_info)!=null&&
+                $scope.userPhone!=$locals.getObject($config.user_local_info).loginAccount) {
+                $locals.clearObject($config.user_local_info);
+                login();
+            }else{
+                $scope.userInfo = $locals.getObject($config.user_local_info);
+            }
 
 
             var url = $location.url();
