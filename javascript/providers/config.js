@@ -8,7 +8,7 @@ angular.module('providers.config',[])
         $config.user_local_info= 'U_USER';
 
         /**debug模式*/
-        $config.debug = false;
+        $config.debug = true;
         $config.appkeys = '23369408';
 
         $config.userObj = 'U_USER';
@@ -194,7 +194,7 @@ angular.module('providers.config',[])
             },
             shopDetail:{
                 templateUrl:"templates/detail/shopDetail.html",
-                url:"/shopDetail/:id",
+                url:"/shopDetail/:id&:type?",
                 name:"shopDetail",
                 controller:"ShopDetailCtrl",
                 cache:false

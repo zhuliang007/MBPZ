@@ -26,7 +26,7 @@
         var data = JSON.parse(window.localStorage.getItem("mkit"));
 
 
-        var debug = false;
+        var debug = true;
         function locationHref(){
             var locationHref;
             if(debug){
@@ -61,20 +61,26 @@
                         window.location.href=locationHref()+"#/talking";
                         break;
                     case 1:
-                        window.location.href=locationHref+"#/mySold";
+                        window.location.href=locationHref()+"#/mySold";
                         break;
                     case 2:
                         window.location.href =locationHref()+"#/orderDetail/"+data.orderId+"&"+data.orderType;
                         break;
                     case 3:
-                        window.location.href=locationHref+"#/myBought/";
+                        window.location.href=locationHref()+"#/myBought/";
                         break;
                     case 4:
                         window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
                         break;
                 }
-                if(parseInt(data.type)>100){
-                    window.location.href=locationHref+"#/productDetail/"+data.productId+"&"+data.type;
+                if(parseInt(data.type)>100&&parseInt(data.type)<150){
+                    window.location.href=locationHref()+"#/productDetail/"+data.productId+"&"+data.type;
+                }
+                if(parseInt(data.type)>=150&&parseInt(data.type)<200){
+                    window.location.href=locationHref()+"#/shopDetail/"+data.productId+"&"+data.type;
+                }
+                if(parseInt(data.type)>20&&parseInt(data.type)<30){
+                    window.location.href=locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type;
                 }
             },
             onUploaderError: function(error){

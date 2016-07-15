@@ -1,7 +1,7 @@
 <ion-view class="productDetail">
     <ion-header-bar align-title="center" ng-if="(product.productImageList==null)||(product.productImageList.length==0)">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+            <button class="button" ng-click="goBackBefore()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title">求购</h1>
         <div class="buttons">
@@ -38,16 +38,16 @@
         </div>
         <div class="productDetailBody margin-normal-top">
             <div class="row row-no-padding border-bottom">
-                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type)">
                     <div class="col padding-none-horizontal">
                         <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                     </div>
                 </div>
-                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,23)">
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact padding-big-vertical" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,150)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
             <div class="row row-no-padding">
