@@ -25,7 +25,18 @@
 
         var data = JSON.parse(window.localStorage.getItem("mkit"));
 
-        var locationHref = "http://192.168.100.134:8081/MBPZ/index.html?loginAccount="+data.uid;
+
+        var debug = false;
+        function locationHref(){
+            var locationHref;
+            if(debug){
+                locationHref = "http://"+window.location.host+"/MBPZ/index.html?loginAccount="+data.uid
+            }
+            else{
+                locationHref = "http://"+window.location.host+"/smartMBPZ/index.html?loginAccount="+data.uid
+            }
+            return locationHref;
+        }
 
         WKIT.init({
             uid: data.uid || 'test0',
@@ -45,17 +56,17 @@
             onBack: function(){
                 switch (parseInt(data.type)){
                     case 0 :
-                        window.location.href=locationHref+"#/talking";
+                        window.location.href=locationHref()+"#/talking";
                         break;
                     case 1:
                     case 2:
-                        window.location.href =locationHref+"#/orderDetail/"+data.orderId+"&"+data.orderType;
+                        window.location.href =locationHref()+"#/orderDetail/"+data.orderId+"&"+data.orderType;
                         break;
                     case 4:
-                        window.location.href=locationHref+"#/refundsRelease/refundsReleaseSell";
+                        window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
                         break;
                     case 9:
-                        window.location.href=locationHref+"#/productDetail/"+data.productId+"&10";
+                        window.location.href=locationHref()+"#/productDetail/"+data.productId+"&10";
                         break;
                 }
             },
