@@ -220,19 +220,48 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             $scope.clickChat = function () {
+                var data ;
                 if(parseInt($stateParams.type)==0){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                        touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
-                        userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                     data={
+                        "uid":$scope.items.product.publicUser.imUserId,
+                        "nickname":$scope.items.product.publicUser.nickName,
+                        "userImage":$scope.items.product.publicUser.userImg,
+                        "avators":$scope.items.buyUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid: ,nickName:,type:2,
+                    //    userImage:,toUserImage:});
                 }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                        touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
-                        userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                     data={
+                        "uid":$scope.items.buyUser.imUserId,
+                        "nickname":$scope.items.buyUser.nickName,
+                        "userImage":$scope.items.product.publicUser.userImg,
+                        "avators":$scope.items.buyUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
+                    //    userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==2){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                        touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
-                        userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
+                     data={
+                        "uid":$scope.items.buyUser.imUserId,
+                        "nickname":$scope.items.product.publicUser.nickName,
+                        "userImage":$scope.items.buyUser.userImg,
+                        "avators":$scope.items.product.publicUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
+                    //    userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
                 }
+
+                $scope.clickChats(data,2);
+
 
             }
             //提醒发货
@@ -251,6 +280,16 @@ angular.module('controllers.orderDetailCtrl',[])
                     .then(function(result){
                         $alert.show(result.msg);
                     })
+            }
+
+            //立即评价
+            $scope.evaluation = function (id) {
+                $state.go($config.controllers.orderEvaluate.name,{orderId:id})
+            }
+
+            //查看评价
+            $scope.evaluationShow = function(id){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:1})
             }
 
 

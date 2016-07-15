@@ -29,6 +29,11 @@ angular.module('services.locals',[])
             $locals.clearObject = function (key) {
                 $window.localStorage.removeItem(key);
             }
+            //清除所有对象
+            $locals.clearAll = function () {
+                $window.localStorage.clear();
+            }
+
             return $locals;
         }
     ])

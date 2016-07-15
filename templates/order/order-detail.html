@@ -118,8 +118,8 @@
             <button class="button button-full button-assertive" ng-click="submitBuyer(items.id)">确认收货</button>
         </div>
         <div class="col" >
-            <button class="button button-full button-assertive" ng-if="items.status=='EVALUATING'">立即评价</button>
-            <button class="button button-full button-assertive" ng-click="evaluationShow(items.id)" ng-if="items.status=='EVALUATED'">查看评价</button>
+            <button class="button button-full button-assertive" ng-if="items.status=='EVALUATING'" ng-click="evaluation(items.id)">立即评价</button>
+            <button class="button button-full button-assertive" ng-click="evaluationShow(items.id)" ng-if="items.status=='EVALUATED'" ng-click="evaluationShow(items.id)">查看评价</button>
             <button class="button button-full button-assertive" ng-if="items.status =='RECEIVING'&&items.saleType=='sell'||items.refundStatus=='WAIT_RECEIVE'" ng-click="remindDeliverySell(items.id)">提醒收货</button>
 
         </div>

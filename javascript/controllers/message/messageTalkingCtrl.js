@@ -10,7 +10,8 @@ angular.module('controllers.messageTalking',[])
         '$stateParams',
         '$state',
         '$locals',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals){
+        '$q',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$locals,$q){
             $scope.items = [];
             $scope.WSDK = null;
 
@@ -36,37 +37,46 @@ angular.module('controllers.messageTalking',[])
                     },
                     onLoginSuccess:function(data){
                         $scope.WSDK = WKIT.Conn.sdk;
-                        loginIn( $scope.WSDK);
+                        loginIn( $scope.WSDK)
+                            .then(function(items){
+                                getRecentList(items,$scope.WSDK)
+                            })
                     }
                 });
             }
             initToken();
 
-
             function loginIn(sdk){
+                var deferred = $q.defer();
                 sdk.Base.getRecentContact({
                     count:30,
                     success: function (data) {
                         var list = data.data.cnts;
-                        list.forEach(function(item){
-                            var param={
-                                nickname:'',
-                                avator:'',
-                                emot:'',
-                                uid:'',
-                                userImage:''
-                            }
-                            param.nickname=item.nickname;
-                            param.avators = item.avator;
-                            param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
-                            param.uid = sdk.Base.getNick(item.uid);
-                            param.userImage = userInfo.userImg?userInfo.userImg+'@414w':'';
-                            $scope.items.push(param);
-                        })
+                        deferred.resolve(list)
                     },
                     error:function(error){
+                        deferred.reject(error)
                     }
                 });
+                return deferred.promise;
+            }
+
+            getRecentList = function (list,sdk){
+                list.forEach(function(item){
+                    var param={
+                        nickname:'',
+                        avator:'',
+                        emot:'',
+                        uid:'',
+                        userImage:''
+                    }
+                    param.nickname=item.nickname;
+                    param.avators = item.avator;
+                    param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
+                    param.uid = sdk.Base.getNick(item.uid);
+                    param.userImage = userInfo.userImg?userInfo.userImg+'@414w':'';
+                    $scope.items.push(param);
+                })
             }
 
             $scope.loginOut = function(){
@@ -75,11 +85,11 @@ angular.module('controllers.messageTalking',[])
             }
 
             $scope.contactFn = function(item,type){
-                console.log(item)
                 wkitDestroy();
-                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                    touid:item.uid,nickName:item.nickname,type:type,
-                    userImage:item.userImage,toUserImage:item.avators});
+                //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                //    touid:item.uid,nickName:item.nickname,type:type,
+                //    userImage:item.userImage,toUserImage:item.avators});
+                $scope.clickChats(item,type);
             }
 
             var wkitDestroy = function(){

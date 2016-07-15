@@ -180,7 +180,7 @@ angular.module('providers.config',[])
             },
             productDetail:{
                 templateUrl:"templates/detail/productDetail.html",
-                url:"/productDetail/:id",
+                url:"/productDetail/:id&:type?",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
                 cache:false
@@ -506,6 +506,7 @@ angular.module('providers.config',[])
                 controller:"EvaluateListCtrl",
                 cache:false
             }
+
         }
 
         /*popover配置*/
