@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/6.
  */
-
 angular.module('controllers.aliPayCtrl',[])
     .controller('AliPayCtrl',[
         '$scope',
@@ -18,13 +17,13 @@ angular.module('controllers.aliPayCtrl',[])
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$http,$ionicModal) {
             $scope.routers = $stateParams.routers;
         }])
-.directive('pay', function(){
-    return {
-        restrict: 'E',
-        transclude: true,
-        template: '<iframe id="payWindow" width="100%" height="100%"></iframe>',
-        controller: ['$scope', '$element', '$transclude','$stateParams', function ($scope, $element, $transclude,$stateParams) {
-            document.getElementById("payWindow").src='http://erpuat.mengbp.com:8094/wine-market-rest/market/order/h5payOrder?orderCode='+$stateParams.obj.orderCode+'&token='+$stateParams.obj.token;
-        }]
-    };
-});
+    .directive('pay', function(){
+        return {
+            restrict: 'E',
+            transclude: true,
+            template: '<iframe id="payWindow" width="100%" height="100%"></iframe>',
+            controller: ['$scope', '$element', '$transclude','$stateParams', function ($scope, $element, $transclude,$stateParams) {
+                document.getElementById("payWindow").src='http://erpuat.mengbp.com:8094/wine-market-rest/market/order/h5payOrder?orderCode='+$stateParams.obj.orderCode+'&token='+$stateParams.obj.token;
+            }]
+        };
+    });

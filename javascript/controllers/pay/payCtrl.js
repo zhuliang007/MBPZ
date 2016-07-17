@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/6.
  */
-
 angular.module('controllers.payCtrl',[])
     .controller('PayCtrl',[
         '$scope',

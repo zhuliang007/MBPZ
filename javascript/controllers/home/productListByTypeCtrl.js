@@ -283,5 +283,9 @@ angular.module('controllers.productListByTypeCtrl',[])
                 }
                 $scope.closeModal('cityModal');
             }
+
+            $scope.goBackBefore = function(){
+                $state.go($config.controllers.tabsHome.name);
+            }
         }
     ])

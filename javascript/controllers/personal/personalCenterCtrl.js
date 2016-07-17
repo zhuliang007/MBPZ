@@ -11,18 +11,12 @@ angular.module('controllers.personalCenter',[])
         '$stateParams',
         '$httpService',
         '$ionicScrollDelegate',
-        function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$ionicScrollDelegate){
-            if(typeof(WKIT)=='undefined'){
-                var head= document.getElementsByTagName('head')[0];
-                var script= document.createElement('script');
-                script.type= 'text/javascript';
-                script.onload = script.onreadystatechange = function() {
-                    if (!this.readyState || this.readyState === "loaded" ||    this.readyState === "complete" ) {
-                        script.onload = script.onreadystatechange = null;
-                    } };
-                script.src= 'https://g.alicdn.com/aliww/??h5.imsdk/2.1.5/scripts/yw/wsdk.js,h5.openim.kit/0.4.0/scripts/kit.js';
-                script.charset = 'utf-8';
-                head.appendChild(script);
+        '$locals',
+        function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$ionicScrollDelegate,$locals){
+
+            var userInfo = {};
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
             }
 
 
@@ -41,6 +35,8 @@ angular.module('controllers.personalCenter',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result);
+                        result.data['type']=$stateParams.type;
+                        result.data['productId']=$stateParams.productId;
                         $scope.personalCenterInfo = result.data;
                     })
             }
@@ -108,26 +104,33 @@ angular.module('controllers.personalCenter',[])
             }
 
             $scope.showEvaluateList = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        //$console.show("showEvaluateList")
-
-                        if($scope.userInfo.loginAccount == $scope.personalCenterInfo.userInfo.loginAccount){
-                            $state.go($config.controllers.evaluateList.name)
-                        }
-                        else{
-                            $state.go($config.controllers.evaluateList.name,{userId:$stateParams.userId});
-                        }
-
-                    },function(){
-                        $alert.confirm('请登录')
-                            .then(function(){
-                                $scope.autoLogin();
-                            })
-                    })
+                //$console.show("showEvaluateList")
+                if(!userInfo.loginAccount){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if(userInfo.loginAccount == $scope.personalCenterInfo.userInfo.loginAccount){
+                    $state.go($config.controllers.evaluateList.name)
+                }
+                else{
+                    $state.go($config.controllers.evaluateList.name,{userId:$stateParams.userId});
+                }
 
             }
 
+            $scope.goBackBefore= function () {
+                if (parseInt($stateParams.type)==20||parseInt($stateParams.type)==21) {
+                    $state.go($config.controllers.tabsHome.name);
+                }else if(parseInt($stateParams.type)==22) {
+                    $state.go($config.controllers.tabsShop.name);
+                }else if(parseInt($stateParams.type)==104){
+                    $state.go($config.controllers.productDetail.name,{id:$stateParams.productId,type:$stateParams.type});
+                }else if (parseInt($stateParams.type)==23){
+                    $state.go($config.controllers.shopDetail.name,{id:$stateParams.productId,type:$stateParams.type});
+                }else{
+                    $scope.goBack();
+                }
+            }
 
 
 

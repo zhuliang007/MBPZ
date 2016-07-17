@@ -11,13 +11,18 @@ angular.module("controllers.recommend",[])
         '$stateParams',
         '$ionicScrollDelegate',
         '$alert',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$ionicScrollDelegate,$alert){
+        '$locals',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$ionicScrollDelegate,$alert,$locals){
 
             //$console.show($stateParams);
             $scope.productList = [];
             var numberOfPerPage = 3;
             var pageNo = 0;
             $scope.infiniteFlag = true;
+            var userInfo = {};
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
 
             $scope.replyObject = {
@@ -33,58 +38,45 @@ angular.module("controllers.recommend",[])
             };
 
             function getMyProductList(){
-                $scope.checkLogin()
-                    .then(function(){
-                        var data = {
-                            "cmd": $config.cmds.productPublic,
-                            "parameters":{
-                                "type":0,
-                                "numberOfPerPage":numberOfPerPage,
-                                "pageNo":pageNo
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var data = {
+                    "cmd": $config.cmds.productPublic,
+                    "parameters":{
+                        "type":0,
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo,
+                        "status":0
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(
-                                function(result){
-                                    //$console.show(result);
-                                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                                    if(result.data.totalPages == 0){
-                                        $scope.infiniteFlag = false;
-                                        $scope.productList = null;
-                                        return ;
-                                    }
-                                    var items = result.data.content;
-                                    if(items==null||items.length==0){
-                                        $scope.infiniteFlag = false;
-                                        return ;
-                                    }
-                                    addItem(items);
-                                    if(pageNo == result.data.totalPages-1 ){
-                                        $scope.infiniteFlag = false;
-                                        return;
-                                    }
-                                    pageNo++;
-                                },
-                                function(error){
-                                    //$console.show(error);
-                                    if(!error){
-                                        $scope.goBack()
-                                    }
-                                })
-
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.productList = [];
-                                pageNo = 0;
-                                $scope.infiniteFlag = true;
-                                productHandle.resize();
-                                productHandle.scrollTop();
-                                getMyProductList();
-                            })
-                    })
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(
+                        function(result){
+                            //$console.show(result);
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            if(result.data.totalPages == 0){
+                                $scope.infiniteFlag = false;
+                                $scope.productList = null;
+                                return ;
+                            }
+                            var items = result.data.content;
+                            if(items==null||items.length==0){
+                                $scope.infiniteFlag = false;
+                                return ;
+                            }
+                            addItem(items);
+                            if(pageNo == result.data.totalPages-1 ){
+                                $scope.infiniteFlag = false;
+                                return;
+                            }
+                            pageNo++;
+                        },
+                        function(error){
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
+                            }
+                        })
             }
 
             function addItem(items){
@@ -96,52 +88,39 @@ angular.module("controllers.recommend",[])
 
             $scope.submit = function(){
                 //$console.show($scope.replyObject);
-                $scope.checkLogin()
-                    .then(function(){
-                        if(!$scope.replyObject.replyContents){
-                            $alert.show("回复内容不能为空");
-                            return;
-                        }
+                if(!$scope.replyObject.replyContents){
+                    $alert.show("回复内容不能为空");
+                    return;
+                }
 
-                        if(!$scope.replyObject.resolveProductId){
-                            $alert.show("请选择推荐商品");
-                            return;
-                        }
+                if(!$scope.replyObject.resolveProductId){
+                    $alert.show("请选择推荐商品");
+                    return;
+                }
 
-                        var data = {
-                            "cmd": $config.cmds.sendReply,
-                            "parameters":{
-                                "productId":$scope.replyObject.productId,
-                                "repUserId":$scope.replyObject.repUserId,
-                                "resolveProductId":$scope.replyObject.resolveProductId,
-                                "replyType":$scope.replyObject.replyType,
-                                "replyContents":$scope.replyObject.replyContents
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var data = {
+                    "cmd": $config.cmds.sendReply,
+                    "parameters":{
+                        "productId":$scope.replyObject.productId,
+                        "repUserId":$scope.replyObject.repUserId,
+                        "resolveProductId":$scope.replyObject.resolveProductId,
+                        "replyType":$scope.replyObject.replyType,
+                        "replyContents":$scope.replyObject.replyContents
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                $alert.show(result.msg)
-                                    .then(function(){
-                                        $scope.goBack();
-                                    })
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        $alert.show(result.msg)
                             .then(function(){
-                                $scope.productList = [];
-                                pageNo = 0;
-                                $scope.infiniteFlag = true;
-                                productHandle.resize();
-                                productHandle.scrollTop();
-                                getMyProductList();
+                                $scope.goBack();
                             })
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
             }
 

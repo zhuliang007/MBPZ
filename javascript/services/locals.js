@@ -20,8 +20,20 @@ angular.module('services.locals',[])
             }
             //读取对象
             $locals.getObject = function (key) {
-                return JSON.parse($window.localStorage[key] || '{}');
+                if($window.localStorage[key]==undefined){
+                    return null;
+                }
+                return JSON.parse($window.localStorage[key]);
             }
+            //清除对象
+            $locals.clearObject = function (key) {
+                $window.localStorage.removeItem(key);
+            }
+            //清除所有对象
+            $locals.clearAll = function () {
+                $window.localStorage.clear();
+            }
+
             return $locals;
         }
     ])

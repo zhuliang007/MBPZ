@@ -16,20 +16,8 @@ angular.module('controllers.shopDetail',[])
         '$alert',
         '$ionicPopover',
         '$q',
-        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$ionicScrollDelegate,$alert,$ionicPopover,$q){
-
-            if(typeof(WKIT)=='undefined'){
-                var head= document.getElementsByTagName('head')[0];
-                var script= document.createElement('script');
-                script.type= 'text/javascript';
-                script.onload = script.onreadystatechange = function() {
-                    if (!this.readyState || this.readyState === "loaded" ||    this.readyState === "complete" ) {
-                        script.onload = script.onreadystatechange = null;
-                    } };
-                script.src= 'https://g.alicdn.com/aliww/??h5.imsdk/2.1.5/scripts/yw/wsdk.js,h5.openim.kit/0.4.0/scripts/kit.js';
-                script.charset = 'utf-8';
-                head.appendChild(script);
-            }
+        '$locals',
+        function($scope,$config,$console,$httpService,$rootScope,$state,$stateParams,$timeout,$ionicSlideBoxDelegate,$ionicScrollDelegate,$alert,$ionicPopover,$q,$locals){
 
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
@@ -41,21 +29,26 @@ angular.module('controllers.shopDetail',[])
             var pageNo = 0;
             $scope.replyList = []
             $scope.infiniteFlag = true;
+            var userInfo = {} ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
+
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
             getProductDetail();
             function getProductDetail(){
-                var deferred = $q.defer();
                 var data = {
                     "cmd": $config.cmds.details,
                     "parameters":{
                         "productId":id
                     },
-                    "token": $scope.userInfo?$scope.userInfo.loginToken:''
+                    "token": userInfo.loginToken
                 }
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result);
+                        result.data['type']=$stateParams.type;
                         $scope.product = result.data;
                         $timeout(function(){
                             if(productSlideBox){
@@ -71,15 +64,12 @@ angular.module('controllers.shopDetail',[])
                                 })
                             }
                         })
-                        deferred.resolve();
                     },function(error){
                         //$console.show(error);
                         if(!error){
                             $scope.goBack()
                         }
                     })
-
-                return deferred.promise;
             }
 
             $scope.loadMore = function() {
@@ -165,75 +155,61 @@ angular.module('controllers.shopDetail',[])
             });
 
             $scope.judgeProduct = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        var data = {
-                            "cmd":$config.cmds.spot,
-                            "parameters":{
-                                "productId": $scope.product.id,
-                                "isSpot":$scope.product.isSpot?0:1
-                            },
-                            "token":$scope.userInfo.loginToken
-                        };
+                if(!userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                var data = {
+                    "cmd":$config.cmds.spot,
+                    "parameters":{
+                        "productId": $scope.product.id,
+                        "isSpot":$scope.product.isSpot?0:1
+                    },
+                    "token":userInfo.loginToken
+                };
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                //$console.show(result);
-                                $scope.product.isSpot = $scope.product.isSpot?0:1;
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getProductDetail()
-                                    .then(function(){
-                                        $scope.judgeProduct();
-                                    })
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        //$console.show(result);
+                        $scope.product.isSpot = $scope.product.isSpot?0:1;
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
             }
 
             $scope.submitShop = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        if($scope.userInfo.loginAccount == $scope.product.publicUser.loginAccount){
-                            //$console.show("确认解决")
-                            var data = {
-                                "cmd": $config.cmds.resolve,
-                                "parameters":{
-                                    "productId":id
-                                },
-                                "token":$scope.userInfo.loginToken
-                            }
+                if(!userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if($scope.userInfo.loginAccount == $scope.product.publicUser.loginAccount){
+                    //$console.show("确认解决")
+                    var data = {
+                        "cmd": $config.cmds.resolve,
+                        "parameters":{
+                            "productId":id
+                        },
+                        "token":userInfo.loginToken
+                    }
 
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                .then(function(result){
-                                    $alert.show(result.msg)
-                                    getProductDetail();
-                                },function(error){
-                                    //$console.show(error);
-                                    if(!error){
-                                        $scope.goBack()
-                                    }
-                                })
-                        }
-                        else{
-                            //$console.show("推荐给他");
-                            $state.go($config.controllers.recommend.name,{productId:id,repUserId:$scope.product.publicUser.id});
-                        }
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getProductDetail()
-                                    .then(function(){
-                                        $scope.submitShop();
-                                    })
-                            })
-                    })
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            $alert.show(result.msg)
+                            getProductDetail();
+                        },function(error){
+                            //$console.show(error);
+                            if(!error){
+                                $scope.goBack()
+                            }
+                        })
+                }
+                else{
+                    //$console.show("推荐给他");
+                    $state.go($config.controllers.recommend.name,{productId:id,repUserId:$scope.product.publicUser.id});
+                }
             }
 
             $scope.replyObject = {
@@ -243,78 +219,62 @@ angular.module('controllers.shopDetail',[])
             }
 
             $scope.productReply = function($event,userObject,type){
-                $scope.checkLogin()
-                    .then(function(){
-                        if(type==0){
-                            //$console.show("楼主回复楼主，其他人回复楼主")
-                            $scope.openPopover($event,'reply');
-                            if($scope.userInfo.id==userObject.id){
-                                $scope.replyPlaceholder = '回复';
-                            }
-                            else{
-                                $scope.replyPlaceholder = '回复@'+userObject.nickName;
-                            }
-                            if(!$scope.replyObject.repUserId){
+                if(!userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if(type==0){
+                    //$console.show("楼主回复楼主，其他人回复楼主")
+                    $scope.openPopover($event,'reply');
+                    if($scope.userInfo.id==userObject.id){
+                        $scope.replyPlaceholder = '回复';
+                    }
+                    else{
+                        $scope.replyPlaceholder = '回复@'+userObject.nickName;
+                    }
+                    if(!$scope.replyObject.repUserId){
+                        $scope.replyObject.repUserId = userObject.id;
+                        $scope.replyObject.replyContents = null;
+                    }
+                    else{
+                        if($scope.replyObject.repUserId != userObject.id){
+                            $scope.replyObject.repUserId = userObject.id;
+                            $scope.replyObject.replyContents = null;
+                        }
+                    }
+                    //$console.show($scope.replyObject);
+                }
+                else{
+                    if($scope.userInfo.id==$scope.product.publicUser.id){
+                        $scope.openPopover($event,'reply');
+                        //$console.show("楼主回复其他人")
+                        if($scope.userInfo.id==userObject.id){
+                            $scope.replyPlaceholder = '回复';
+                        }
+                        else{
+                            $scope.replyPlaceholder = '回复@'+userObject.nickName;
+                        }
+                        if(!$scope.replyObject.repUserId){
+                            $scope.replyObject.repUserId = userObject.id;
+                            $scope.replyObject.replyContents = null;
+                        }
+                        else{
+                            if($scope.replyObject.repUserId != userObject.id){
                                 $scope.replyObject.repUserId = userObject.id;
                                 $scope.replyObject.replyContents = null;
                             }
-                            else{
-                                if($scope.replyObject.repUserId != userObject.id){
-                                    $scope.replyObject.repUserId = userObject.id;
-                                    $scope.replyObject.replyContents = null;
-                                }
-                            }
-                            //$console.show($scope.replyObject);
                         }
-                        else{
-                            if($scope.userInfo.id==$scope.product.publicUser.id){
-                                $scope.openPopover($event,'reply');
-                                //$console.show("楼主回复其他人")
-                                if($scope.userInfo.id==userObject.id){
-                                    $scope.replyPlaceholder = '回复';
-                                }
-                                else{
-                                    $scope.replyPlaceholder = '回复@'+userObject.nickName;
-                                }
-                                if(!$scope.replyObject.repUserId){
-                                    $scope.replyObject.repUserId = userObject.id;
-                                    $scope.replyObject.replyContents = null;
-                                }
-                                else{
-                                    if($scope.replyObject.repUserId != userObject.id){
-                                        $scope.replyObject.repUserId = userObject.id;
-                                        $scope.replyObject.replyContents = null;
-                                    }
-                                }
-                                //$console.show($scope.replyObject);
-                            }
-                        }
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getProductDetail()
-                                    .then(function(){
-                                        $scope.productReply($event,userObject,type);
-                                    })
-                            })
-
-                    })
+                        //$console.show($scope.replyObject);
+                    }
+                }
             }
 
             $scope.report = function(productId){
-                $scope.checkLogin()
-                    .then(function(){
-                        $state.go($config.controllers.report.name,{productId:productId});
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getProductDetail()
-                                    .then(function(){
-                                        $scope.report(productId);
-                                    })
-                            })
-                    })
-
+                if(!userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                $state.go($config.controllers.report.name,{productId:productId});
             }
 
             $scope.showResolveProduct = function($event,productId){
@@ -331,51 +291,53 @@ angular.module('controllers.shopDetail',[])
             }
 
             $scope.sendReply = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        if(!$scope.replyObject.replyContents){
-                            $alert.show("回复内容不能为空")
-                            return;
-                        }
+                if(!userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if(!$scope.replyObject.replyContents){
+                    $alert.show("回复内容不能为空")
+                    return;
+                }
 
-                        var data ={
-                            "cmd": $config.cmds.sendReply,
-                            "parameters":{
-                                "replyType":1,
-                                "productId":$scope.replyObject.productId,
-                                "repUserId":$scope.replyObject.repUserId,
-                                "replyContents":$scope.replyObject.replyContents,
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var data ={
+                    "cmd": $config.cmds.sendReply,
+                    "parameters":{
+                        "replyType":1,
+                        "productId":$scope.replyObject.productId,
+                        "repUserId":$scope.replyObject.repUserId,
+                        "replyContents":$scope.replyObject.replyContents,
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                //$console.show(result);
-                                $alert.show(result.msg);
-                                $scope.replyObject.repUserId = 0;
-                                $scope.replyObject.replyContents = null;
-                                $scope.closeOwner();
-                                pageNo = 0;
-                                $scope.replyList = []
-                                productHandle.resize();
-                                var element = document.getElementById('replyBody');
-                                productHandle.scrollTo(0,element.offsetTop);
-                                $scope.infiniteFlag = true;
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                getProductDetail()
-                                    .then(function(){
-                                        $scope.sendReply();
-                                    })
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        //$console.show(result);
+                        $alert.show(result.msg);
+                        $scope.replyObject.repUserId = 0;
+                        $scope.replyObject.replyContents = null;
+                        $scope.closeOwner();
+                        pageNo = 0;
+                        $scope.replyList = []
+                        productHandle.resize();
+                        var element = document.getElementById('replyBody');
+                        productHandle.scrollTo(0,element.offsetTop);
+                        $scope.infiniteFlag = true;
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
+            }
+
+            $scope.goBackBefore = function () {
+                console.log($stateParams.type)
+                if(parseInt($stateParams.type)==150||parseInt($stateParams.type)==23){
+                    $state.go($config.controllers.tabsShop.name);
+                }else{
+                    $scope.goBack();
+                }
             }
         }])

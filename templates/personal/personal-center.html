@@ -2,8 +2,8 @@
 <ion-view class="personalCenter">
     <div class="bgImg bgImg-5-3 personalCenterTop" ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg?personalCenterInfo.userInfo.userImg+'@414w':defaultHead)"></div>
     <div class="personalCenterOperation">
-        <span class="icon ion-ios-arrow-back back" ng-click="goBack()"></span>
-        <span class="icon mbpz mbpz-icon-chat chat" ng-click="contactSeller(personalCenterInfo.userInfo)"></span>
+        <span class="icon ion-ios-arrow-back back" ng-click="goBackBefore()"></span>
+        <span class="icon mbpz mbpz-icon-chat chat" ng-click="contactSeller(personalCenterInfo.userInfo,personalCenterInfo.productId,personalCenterInfo.type)"></span>
     </div>
     <div class="personalCenterGroup">
         <div class="selectGroup row row-no-padding">
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="card-group card-per" ng-if="productType==0">
-            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
+            <div class="card-item-per" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,102)">
                 <div class="card-item-per-body">
                     <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(product.productImageList[0].location+'@414w')"></div>
                     <div class="title" ng-bind="product.title"></div>

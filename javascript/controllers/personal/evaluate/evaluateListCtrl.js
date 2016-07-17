@@ -10,58 +10,58 @@ angular.module('controllers.evaluateList',[])
         '$state',
         '$stateParams',
         '$httpService',
-        function($scope,$console,$config,$alert,$state,$stateParams,$httpService){
+        '$locals',
+        function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$locals){
             //$console.show($stateParams);
             $scope.evaluateList = []
             var numberOfPerPage = 10;
             var pageNo = 0;
             $scope.infiniteFlag = true;
+            var userInfo = {};
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
 
             function getEvaluateList(){
+                var data = {
+                    "cmd":$config.cmds.evaluateList,
+                    "parameters":{
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo
+                    },
+                    "token":userInfo.loginToken
+                }
+                if($stateParams.userId){
+                    data.parameters = {
+                        "userId":$stateParams.userId
+                    }
+                }
 
-                $scope.checkLogin()
-                    .then(function(){
-                        var data = {
-                            "cmd":$config.cmds.evaluateList,
-                            "token":$scope.userInfo.loginToken
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        //$console.show(result)
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if(result.data.totalPages == 0){
+                            $scope.infiniteFlag = false;
+                            $scope.evaluateList = null;
+                            return ;
                         }
-                        if($stateParams.userId){
-                            data.parameters = {
-                                "userId":$stateParams.userId
-                            }
+                        var items = result.data.content;
+                        if(items==null||items.length==0){
+                            $scope.infiniteFlag = false;
+                            return ;
                         }
-
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                //$console.show(result)
-                                $scope.$broadcast('scroll.infiniteScrollComplete');
-                                if(result.data.totalPages == 0){
-                                    $scope.infiniteFlag = false;
-                                    $scope.evaluateList = null;
-                                    return ;
-                                }
-                                var items = result.data.content;
-                                if(items==null||items.length==0){
-                                    $scope.infiniteFlag = false;
-                                    return ;
-                                }
-                                addItem(items);
-                                if(pageNo == result.data.totalPages-1 ){
-                                    $scope.infiniteFlag = false;
-                                    return;
-                                }
-                                pageNo++;
-                            },function(error){
-                                //$console.show(error);
-                                if(!error){
-                                    $scope.goBack()
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.loadMore();
-                            })
+                        addItem(items);
+                        if(pageNo == result.data.totalPages-1 ){
+                            $scope.infiniteFlag = false;
+                            return;
+                        }
+                        pageNo++;
+                    },function(error){
+                        //$console.show(error);
+                        if(!error){
+                            $scope.goBack()
+                        }
                     })
 
             }

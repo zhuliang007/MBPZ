@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title></title>
+</head>
+<body>
+<!--[if lt IE 9]>
+<script src="https://g.alicdn.com/aliww/ww/json/json.js" charset="utf-8"></script>
+<![endif]-->
+<!-- 自动适配移动端与pc端 -->
+<script src="https://g.alicdn.com/aliww/??h5.imsdk/2.1.5/scripts/yw/wsdk.js,h5.openim.kit/0.4.0/scripts/kit.js" charset="utf-8"></script>
+
+<style>
+    #J_WkitToast{
+        display:none;
+    }
+    .wkit-msg-wrap .wkit-avatar-wrap img{
+        height: 100%;
+    }
+    .wkit-theme-default .wkit-title,.wkit-theme-default .wkit-input-wrap button,.wkit-input-wrap button{
+        background: #FF4E72 !important;
+    }
+</style>
+
+<script>
+
+        var data = JSON.parse(window.localStorage.getItem("mkit"));
+        var homeType = window.localStorage.getItem("home_type");
+        var sellerType = window.localStorage.getItem("seller_type");
+
+        var debug = true;
+        function locationHref(){
+            var locationHref;
+            if(debug){
+                locationHref = "http://"+window.location.host+"/MBPZ/index.html?loginAccount="+data.uid
+            }
+            else{
+                locationHref = "http://"+window.location.host+"/smartMBPZ/index.html?loginAccount="+data.uid
+            }
+            return locationHref;
+        }
+
+        console.log(data.type)
+
+        WKIT.init({
+            uid: data.uid || 'test0',
+            appkey: data.appkeys,
+            credential: data.credential || '123456',
+            touid: data.touid || 'test1',
+            avatar:data.userImage||'',
+            toAvatar:data.toUserImage||'',
+            onMsgReceived: function(data){
+                console.log(data);
+            },
+            onMsgSent: function(data){
+                console.log(data);
+            },
+            titleBar: true,
+            title: data.nickName,
+            onBack: function(){
+                switch (parseInt(data.type)){
+                    case 0 :
+                        window.location.href=locationHref()+"#/talking";
+                        break;
+                    case 1:
+                        window.location.href=locationHref()+"#/mySold";
+                        break;
+                    case 2:
+                        window.location.href =locationHref()+"#/orderDetail/"+data.orderId+"&"+data.orderType;
+                        break;
+                    case 3:
+                        window.location.href=locationHref()+"#/myBought/";
+                        break;
+                    case 4:
+                        window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
+                        break;
+                }
+                if(parseInt(data.type)>100&&parseInt(data.type)<104){
+                    window.location.href=locationHref()+"#/productDetail/"+data.productId+"&"+data.type;
+                }
+                if(parseInt(data.type)==150){
+                    window.location.href=locationHref()+"#/shopDetail/"+data.productId+"&"+data.type;
+                }
+                if(parseInt(data.type)>20&&parseInt(data.type)<23){
+                    window.location.href=locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&";
+                }
+                if(parseInt(data.type)==23){
+                    window.location.href = locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&"+data.productId;
+                }
+                if(parseInt(data.type)==104){
+                    if(homeType!=null&&homeType!=undefined&&sellerType!=0){
+                        window.location.href = locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&"+data.productId;
+                    }else{
+                        window.location.href =locationHref()+"#/productDetail/"+data.productId+"&"+data.type;
+                    }
+                }
+            },
+            onUploaderError: function(error){
+                console.log(error);
+            }
+        });
+
+</script>
+</body>
+</html>

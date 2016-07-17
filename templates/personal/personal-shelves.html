@@ -11,7 +11,7 @@
                 <a  ng-click="showProduct(item.id)">
                     <div class="row shelvesRow">
                         <div class="col col-20 col-center" ng-if="item.productImageList.length!=0">
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(item.productImageList[0].location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(item.productImageList[0].location+'@414w')" ></div>
                         </div>
                         <div class="col col-70">
                             <div class="shelvesTitles">
@@ -32,7 +32,7 @@
                 </a>
                 <div class="row">
                     <div class="col shelvesBtn">
-                        <button class="button "  ng-click="releaseDetail(item.id,0)">重新上架</button>
+                        <span class=" soldBtn"  ng-click="releaseDetail(item.id,0)">重新上架</span>
                     </div>
                 </div>
             </div>

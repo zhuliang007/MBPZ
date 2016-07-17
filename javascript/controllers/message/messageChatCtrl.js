@@ -52,6 +52,7 @@ angular.module('controllers.messageChat',[])
                     document.getElementById('J_wkitTitle').innerHTML= $stateParams.nickName;
                 }
             });
+            $state.reload;
 
         }
     ])

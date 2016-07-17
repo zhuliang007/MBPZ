@@ -1,17 +1,17 @@
 <ion-view class="personal-setup">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><span class="icon ion-ios-arrow-back">我的</span></button>
+            <button class="button" ng-click="goBackBefore()"><span class="icon ion-ios-arrow-back">我的</span></button>
         </div>
         <h1 class="title">我的收藏</h1>
     </ion-header-bar>
     <ion-content >
         <div class="card-group">
-            <div class="card-item-normal collection-item" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id)">
+            <div class="card-item-normal collection-item" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,101)">
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
                         <div class="col col-75 col-offset-10 padding-none-vertical">
-                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage((product.publicUser.userImg||defaultHead))"></div>
+                            <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                         </div>
                     </div>
                     <div class="col col-center padding-none-vertical padding-normal-horizontal">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="row padding-small-horizontal" ng-if="checkProductImages(product.productImageList).length !=0">
                     <div class="col col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(product.productImageList) track by $index">
-                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                        <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                     </div>
                 </div>
                 <div class="row padding-small-horizontal">

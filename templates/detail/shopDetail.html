@@ -1,7 +1,7 @@
 <ion-view class="productDetail">
     <ion-header-bar align-title="center" ng-if="(product.productImageList==null)||(product.productImageList.length==0)">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+            <button class="button" ng-click="goBackBefore()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title">求购</h1>
         <div class="buttons">
@@ -11,7 +11,7 @@
 
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
         <div class="header" ng-if="(product.productImageList!=null)&&(product.productImageList.length>0)">
-            <span ng-click="goBack()" class="icon ion-ios-arrow-back"></span>
+            <span ng-click="goBackBefore()" class="icon ion-ios-arrow-back"></span>
             <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
         </div>
         <ion-slide-box ng-show="product.productImageList!=null"
@@ -38,16 +38,16 @@
         </div>
         <div class="productDetailBody margin-normal-top">
             <div class="row row-no-padding border-bottom">
-                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-center">
                     <div class="col padding-none-horizontal">
                         <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                     </div>
                 </div>
-                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-50 col-center">
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact padding-big-vertical" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,150)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
             <div class="row row-no-padding">
@@ -82,11 +82,11 @@
                 </div>
             </ion-item>
             <ion-item ng-if="reply.isRecommoned == null" class="row row-no-padding replyNormal" ng-class="{true:'',false:'disabled'}[userInfo?userInfo.id==product.publicUser.id:true]" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
-                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical" ng-click="showPersonalCenter($event,reply.createUser.id)">
+                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
                     <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(reply.createUser.userImg?reply.createUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
-                    <div><span class="userNick" ng-bind="reply.createUser.nickName" ng-click="showPersonalCenter($event,reply.createUser.id)"></span><span class="publicTime padding-normal-left" ng-bind="parseTime(reply.createDate)"></span><span class="publicTime">回复</span></div>
+                    <div><span class="userNick" ng-bind="reply.createUser.nickName"></span><span class="publicTime padding-normal-left" ng-bind="parseTime(reply.createDate)"></span><span class="publicTime">回复</span></div>
                     <div class="margin-normal-top"><span class="content" ng-bind="reply.contents"></span></div>
                 </div>
                 <div class="col padding-normal-horizontal padding-normal-vertical">

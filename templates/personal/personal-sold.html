@@ -20,7 +20,7 @@
                     </div>
                     <div class="row soldRow">
                         <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                         </div>
                         <div class="col col-70">
                             <div class="shelvesTitles">
@@ -40,14 +40,14 @@
                     </div>
                 </a>
                 <div class="row">
-                    <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,1)">联系TA</button>
+                    <div class="col-20 shelvesBtn" ng-click="myContant(item,1)">
+                        <span class=" mbpz mbpz-icon-replies soldBtn">联系TA</span>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button mbpz" ng-if="item.status =='PAID'" ng-click="submitDelivery(item.id)">确认发货</button>
-                        <button class="button mbpz" ng-if="item.status =='RECEIVING'" ng-click="remindDeliverySell(item.id)">提醒收货</button>
+                        <span class=" mbpz soldBtn" ng-if="item.status =='PAID'" ng-click="submitSoldDelivery(item.id)">确认发货</span>
+                        <span class=" mbpz soldBtn" ng-if="item.status =='RECEIVING'" ng-click="remindDeliverySell(item.id)">提醒收货</span>
                         <!--<button class="button mbpz" ng-if="item.status =='EVALUATING'" ng-click="evaluationShow(item.id)">立即评价</button>-->
-                        <button class="button mbpz" ng-if="item.status =='EVALUATED'" ng-click="evaluationShow(item.id)">查看评价</button>
+                        <span class=" mbpz soldBtn" ng-if="item.status =='EVALUATED'" ng-click="evaluationShow(item.id,2)">查看评价</span>
                     </div>
                 </div>
             </div>

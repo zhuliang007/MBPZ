@@ -14,7 +14,7 @@
                     </div>
                     <div class="row ">
                         <div class="col col-20 col-center" ng-if="item.product.productImageList.length!=0" ng-repeat="productImage in checkProductImages(item.product.productImageList) track by $index">
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                         </div>
                         <div class="col col-70">
                             <div class="shelvesTitles">
@@ -40,15 +40,16 @@
                     </div>
                 </a>
                 <div class="row">
-                    <div class="col-20 shelvesBtn">
-                        <button class="button mbpz mbpz-icon-replies" ng-click="myContant(item,4)">联系TA</button>
+                    <div class="col-20 shelvesBtn" ng-click="myContant(item,4)">
+                        <span class=" mbpz mbpz-icon-replies" >联系TA</span>
                     </div>
                     <div class="col shelvesBtn">
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,3)">拒绝原因</button>
-                        <button class="button mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</button>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refoundsDetail(item.id,item.price,item)">退款详情</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="refusedApply(item.id)">拒绝</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='APPLY'" ng-click="agreeApply(item.id)">同意</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='REJECT'" ng-click="refusedApply(item.id,1,item,3)">拒绝原因</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='WAIT_RECEIVE'" ng-click="submitGoods(item.id)">确认收货</span>
+                        <span class=" mbpz" ng-if="item.refundStatus =='SENDING'" ng-click="remindDelivery(item.id)">提醒退货</span>
                     </div>
                 </div>
             </div>

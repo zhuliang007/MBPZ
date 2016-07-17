@@ -24,12 +24,75 @@ angular.module('controllers.start',[])
             $scope.thirdType = 4;
             $scope.userPhone = purl().param('loginAccount');
 
-            window.localStorage.setItem('userPhone',$scope.userPhone);
+
+            login = function(){
+                if($scope.userPhone){
+                //登录获取token
+                //if($locals.getObject($config.user_local_info,$scope.userInfo)){
+                //    $scope.userInfo = $locals.getObject($config.user_local_info);
+                //}else if($scope.userPhone){
+                    $locals.set($config.u_p, $scope.userPhone);
+                    var data = {
+                        "cmd": $config.cmds.h5Login,
+                        "parameters":{
+                            "loginAccount":$scope.userPhone
+                        }
+                    }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            console.log(result)
+                            $scope.userInfo = {
+                                loginToken:result.data.loginToken,
+                                loginAccount:result.data.loginAccount,
+                                id:result.data.id,
+                                city:result.data.city,
+                                cityText:result.data.cityText,
+                                introduce:result.data.introduce,
+                                nickName:result.data.nickName,
+                                province:result.data.province,
+                                provinceText:result.data.provinceText,
+                                sex:result.data.sex,
+                                userImg:result.data.userImg,
+                                userLevel:result.data.userLevel
+                            }
+                            if(result.data.loginToken){
+                                $locals.setObject($config.user_local_info,$scope.userInfo);
+                            }else{
+                                $locals.clearObject($config.user_local_info);
+                                $locals.clearObject($config.u_p);
+                            }
+                        })
+                }else{
+                    $locals.clearObject($config.user_local_info);
+                    $locals.clearObject($config.u_p);
+                }
+            }
+            //
+            //console.log($scope.userPhone)
+            //console.log($locals.get($config.u_p,null))
+
+            //if(!$scope.userPhone||!$locals.get($config.u_p,null)){
+            //    $locals.clearObject($config.user_local_info);
+            //    $locals.clearObject($config.u_p);
+            //    console.log('!$scope.userPhone||!$locals.get($config.u_p,null)')
+            //    login();
+            //}
+            //else if($scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)){
+            //    console.log('$scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)')
+            //    $locals.clearObject($config.user_local_info);
+            //    $locals.clearObject($config.u_p);
+            //    login();
+            //}
+            //else{
+                login();
+            //}
+
 
             var url = $location.url();
             if(!url){
                 $state.go($config.controllers.tabsHome.name);
             }
+
             $scope.autoLogin = function(){
                 var deferred = $q.defer();
                 if($scope.userPhone){
@@ -110,7 +173,17 @@ angular.module('controllers.start',[])
 
             $scope.parseTime = function(time){
                 if(time){
-                    return DateFormat.format.prettyDate(time);
+                    var tempStrs = time.split(" ");
+                    var dateStrs = tempStrs[0].split("-");
+                    var year = parseInt(dateStrs[0], 10);
+                    var month = parseInt(dateStrs[1], 10) - 1;
+                    var day = parseInt(dateStrs[2], 10);
+                    var timeStrs = tempStrs[1].split(":");
+                    var hour = parseInt(timeStrs[0], 10);
+                    var minute = parseInt(timeStrs[1], 10);
+                    var second = parseInt(timeStrs[2], 10);
+                    var date = new Date(year, month, day, hour, minute, second);
+                    return DateFormat.format.prettyDate(date);
                 }
             }
 
@@ -147,13 +220,16 @@ angular.module('controllers.start',[])
                     $rootScope.provinceCityList.districtList = result[110100];
                 })
 
-            $scope.showProduct = function(id){
-                var params = {id:id};
+            $scope.showProduct = function(id,type){
+                if($locals.get($config.home_type)){
+                    type='104';
+                }
+                var params = {id:id,type:type};
                 $state.go($config.controllers.productDetail.name,params)
             }
 
-            $scope.showShop = function(id){
-                var params = {id:id};
+            $scope.showShop = function(id,type){
+                var params = {id:id,type:type};
                 $state.go($config.controllers.shopDetail.name,params)
             }
 
@@ -169,37 +245,58 @@ angular.module('controllers.start',[])
             }
 
             //联系卖家
-            $scope.contactSeller = function (seller) {
-                $scope.checkLogin()
-                    .then(function(){
-                        if($scope.userInfo.loginAccount == seller.loginAccount){
-                            $alert.show("当前用户是您")
-                            return;
-                        }
+            $scope.contactSeller = function (seller,id,type,homeType) {
+                $locals.clearObject($config.seller_type)
+                if(homeType==0){
+                    $locals.set($config.seller_type,homeType)
+                }
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
 
-                        $state.go($config.controllers.messageChat.name,{
-                            uid:$scope.userInfo.loginAccount,
-                            credential:$scope.userInfo.loginAccount,
-                            touid:seller.loginAccount,
-                            nickName:seller.nickName?seller.nickName+'@414w':'',
-                            type:2,
-                            userImage:$scope.userInfo.userImg,
-                            toUserImage:seller.userImg})
+                if($scope.userInfo.loginAccount == seller.loginAccount){
+                    $alert.show("当前用户是您")
+                    return;
+                }
+               var  data={
+                    "uid":seller.loginAccount,
+                    "nickname":seller.nickName,
+                    "userImage":$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                    "avators":seller.userImg?seller.userImg+'@414w':'',
+                    "productId":id==null?"":id,
+                    "type":type,
+                    "currentId":seller.id
+                };
 
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.contactSeller(seller);
-                            })
-                    })
+                $scope.clickChats(data,type);
+
+                //$state.go($config.controllers.messageChat.name,{
+                //    uid:$scope.userInfo.loginAccount,
+                //    credential:$scope.userInfo.loginAccount,
+                //    touid:seller.loginAccount,
+                //    nickName:seller.nickName,
+                //    type:2,
+                //    userImage:$scope.userInfo.userImg?$scope.userInfo.userImg+'@414w':'',
+                //    toUserImage:seller.userImg?seller.userImg+'@414w':''})
+
             }
 
             $scope.showProductListByType = function(type){
+                $locals.clearObject($config.home_type);
+                $locals.set($config.home_type,type);
                 var params = {type:type};
                 $state.go($config.controllers.productListByType.name,params)
             }
 
             $scope.myCenterSetup = function(_value){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派');
+                }else{
+                    $state.go(_value)
+                }
+            }
+            $scope.mySetupHelp = function(_value){
                 $state.go(_value)
             }
 
@@ -313,22 +410,17 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type,id){
-                $scope.checkLogin()
-                    .then(function(){
-                        if(id){
-                            $state.go($config.controllers.publish.name,{type:type,id:id});
-                        }
-                        else{
-                            $state.go($config.controllers.publish.name,{type:type});
-                            $scope.closeModal('publishModal');
-                        }
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                $scope.goPublish(type);
-                            })
-                    })
-
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派')
+                    return ;
+                }
+                if(id){
+                    $state.go($config.controllers.publish.name,{type:type,id:id});
+                }
+                else{
+                    $state.go($config.controllers.publish.name,{type:type});
+                    $scope.closeModal('publishModal');
+                }
             }
 
             $scope.codeTarget = '获取验证码';
@@ -387,9 +479,38 @@ angular.module('controllers.start',[])
                 }
                 return true;
             }
-            $scope.showPersonalCenter = function($event,userId){
-                $event.stopPropagation();
-                $state.go($config.controllers.personalCenter.name,{userId:userId});
+            $scope.showPersonalCenter = function($event,userId,type,productId){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派');
+                }else{
+                    $event.stopPropagation();
+                    $state.go($config.controllers.personalCenter.name,{userId:userId,type:type,productId:productId});
+                }
+            }
+
+            $scope.clickChats = function(data,type){
+                $locals.clearObject('mkit');
+                var json = JSON.stringify(data)
+                var item = JSON.parse(json);
+
+                var data = {
+                    "uid":$scope.userPhone,
+                    "credential":$scope.userPhone,
+                    "touid":item.uid,
+                    "nickName":item.nickname,
+                    "type":type,
+                    "userImage":item.userImage,
+                    "toUserImage":item.avators,
+                    "appkeys":$config.appkeys,
+                    "orderId":data.orderId,
+                    "orderType":data.orderType,
+                    "productId":data.productId,
+                    "currentId":data.currentId
+                }
+
+                $locals.setObject('mkit',data);
+
+                window.location.href = $config.getChatUrl();
             }
         }
     ])

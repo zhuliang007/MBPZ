@@ -5,11 +5,17 @@ angular.module('providers.config',[])
     .provider('$config',[function(){
 
         var $config = {}
-        //$config.USER_INFO_NAME = 'userInfo';
+        $config.user_local_info= 'U_USER';
 
         /**debug模式*/
-        $config.debug = false;
+        $config.debug = true;
         $config.appkeys = '23369408';
+
+        $config.userObj = 'U_USER';
+        $config.u_p = "U_PHONE";
+        $config.home_type = "home_type";
+        $config.seller_type = "seller_type";
+        $config.error_login = '请重新登录萌宝派';
 
         /**请求地址配置*/
         $config.requestAction = 'http://erpuat.mengbp.com:8094/wine-market-rest/cgi/';
@@ -39,13 +45,21 @@ angular.module('providers.config',[])
             edit:"product/v1.1/edit"
         }
 
-        $config.imageUrl = 'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/';
+        //$config.imageUrl = 'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/';
+        $config.imageUrl = 'assets/';
         $config.imageUrlDebug = 'assets/';
         $config.getImageUrlDebug = function(){
             if(this.debug){
                 return this.imageUrlDebug;
             }
             return this.imageUrl;
+        }
+
+        $config.getChatUrl = function(){
+            if(this.debug){
+                return "http://"+window.location.host+"/MBPZ/mkit.html";
+            }
+            return "http://"+window.location.host+"/smartMBPZ/mkit.html";
         }
 
         /**图片资源配置*/
@@ -74,6 +88,7 @@ angular.module('providers.config',[])
 
         /**接口cmd配置*/
         $config.cmds = {
+            h5Login:"market/h5login",
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
             details:"product/details",
@@ -175,14 +190,14 @@ angular.module('providers.config',[])
             },
             productDetail:{
                 templateUrl:"templates/detail/productDetail.html",
-                url:"/productDetail/:id",
+                url:"/productDetail/:id&:type?",
                 name:"productDetail",
                 controller:"ProductDetailCtrl",
                 cache:false
             },
             shopDetail:{
                 templateUrl:"templates/detail/shopDetail.html",
-                url:"/shopDetail/:id",
+                url:"/shopDetail/:id&:type?",
                 name:"shopDetail",
                 controller:"ShopDetailCtrl",
                 cache:false
@@ -415,7 +430,7 @@ angular.module('providers.config',[])
                 url:"/applyRefund/:id&:price&:freight:&:type?",
                 name:"applyRefund",
                 params:{
-                  obj:null
+                    obj:null
                 },
                 controller:"ApplyRefundCtrl",
                 cache:false
@@ -489,7 +504,7 @@ angular.module('providers.config',[])
             },
             personalCenter:{
                 templateUrl:"templates/personal/personal-center.html",
-                url:"/personalCenter/:userId",
+                url:"/personalCenter/:userId&:type&:productId?",
                 name:"personalCenter",
                 controller:"PersonalCenterCtrl",
                 cache:false
@@ -501,6 +516,7 @@ angular.module('providers.config',[])
                 controller:"EvaluateListCtrl",
                 cache:false
             }
+
         }
 
         /*popover配置*/

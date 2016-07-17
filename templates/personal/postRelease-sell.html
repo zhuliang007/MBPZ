@@ -11,7 +11,7 @@
                 <a ng-click="showProduct(item.id)">
                     <div class="row" ng-if="item.productImageList.length!=0" >
                         <div class="col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index" >
-                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location)" ></div>
+                            <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>
                         </div>
                     </div>
                     <div class="row">
@@ -29,8 +29,8 @@
                 </a>
                 <div class="row releaseRows">
                     <div class="col-90 releaseBtns">
-                        <button class="button button-light releaseBtn" ng-click="showConfirm(item.id)">删除</button>
-                        <button class="button button-light releaseBtn" ng-click="releaseDetail(item.id,0)">编辑</button>
+                        <span class=" releaseBtn" ng-click="showConfirm(item.id)">删除</span>
+                        <span class=" releaseBtn" ng-click="releaseDetail(item.id,0)">编辑</span>
                     </div>
                 </div>
             </div>

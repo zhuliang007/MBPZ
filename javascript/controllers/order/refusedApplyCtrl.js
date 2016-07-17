@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/5.
  */
-
 angular.module('controllers.refusedApplyCtrl',[])
     .controller('RefusedApplyCtrl',[
         '$scope',
@@ -23,51 +22,38 @@ angular.module('controllers.refusedApplyCtrl',[])
                 reason:''
             }
 
-            var token ='';
-
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        token = $scope.userInfo.loginToken;
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
-                    })
+            var userInfo ={};
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
             }
-            initToken();
 
             $scope.submitRefused = function(){
-                if(token!=''){
-                    if($scope.refused.reason==null
-                        ||$scope.refused.reason=='undefined'
-                        ||$scope.refused.reason==''){
-                        $alert.show("请填写拒绝原因");
-                        return ;
-                    }
-                    $alert.confirm("是否拒绝买家的退款申请?")
-                        .then(function(){
-                            var data = {
-                                "cmd": $config.cmds.applyRefused,
-                                "parameters":{
-                                    "id":$stateParams.id,
-                                    "refundStatus":"REJECT",
-                                    "rejectReason":$scope.refused.reason
-                                },
-                                "token":token
-                            }
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                .then(function(result){
-                                    $alert.show(result.msg);
-                                    if(result.msg=='操作成功'){
-                                        $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
-                                    }
-                                })
-                        })
-                }else{
-                    initToken();
+                if($scope.refused.reason==null
+                    ||$scope.refused.reason=='undefined'
+                    ||$scope.refused.reason==''){
+                    $alert.show("请填写拒绝原因");
+                    return ;
                 }
+                $alert.confirm("是否拒绝买家的退款申请?")
+                    .then(function(){
+                        var data = {
+                            "cmd": $config.cmds.applyRefused,
+                            "parameters":{
+                                "id":$stateParams.id,
+                                "refundStatus":"REJECT",
+                                "rejectReason":$scope.refused.reason
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                                if(result.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
+                                }
+                        })
+
+                    })
 
             }
 
@@ -87,3 +73,4 @@ angular.module('controllers.refusedApplyCtrl',[])
             }
 
         }])
+

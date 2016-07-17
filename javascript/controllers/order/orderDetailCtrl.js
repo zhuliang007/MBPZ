@@ -1,7 +1,6 @@
 /**
  * Created by sam on 16/7/6.
  */
-
 angular.module('controllers.orderDetailCtrl',[])
     .controller('OrderDetailCtrl',[
         '$scope',
@@ -16,43 +15,40 @@ angular.module('controllers.orderDetailCtrl',[])
         '$alert',
         function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$ionicActionSheet,$alert) {
 
-            initToken = function(){
-                $scope.checkLogin()
-                    .then(function(){
-                        var data = {
-                            "cmd":$config.cmds.orderDetail,
-                            "parameters":{
-                                "id":$stateParams.id
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                console.log(result)
-                                if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
-                                    $scope.userHeaderImg=result.data.product.publicUser.userImg;
-                                    $scope.nickName = result.data.product.publicUser.nickName;
-                                    $scope.currentUserId = result.data.product.publicUserId;
-                                }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3) {
-                                    $scope.userHeaderImg=result.data.buyUser.userImg;
-                                    $scope.nickName = result.data.buyUser.nickName;
-                                    $scope.currentUserId = result.data.buyUser.id;
-                                 }
-                                $scope.items=result.data;
+            var userInfo = {};
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+            }
 
-                                var processScroll = document.getElementById('processScrolls');
-                                var $element = angular.element(processScroll);
-                                $element.children('.scroll').css({'width':(120*result.data.process.length)+"px"});
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                                initToken()
-                            })
+            init = function () {
+                var data = {
+                    "cmd":$config.cmds.orderDetail,
+                    "parameters":{
+                        "id":$stateParams.id
+                    },
+                    "token":userInfo.loginToken
+                }
+                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    .then(function(result){
+                        console.log(result)
+                        if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
+                            $scope.userHeaderImg=result.data.product.publicUser.userImg;
+                            $scope.nickName = result.data.product.publicUser.nickName;
+                            $scope.currentUserId = result.data.product.publicUserId;
+                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3||parseInt($stateParams.type)==10) {
+                            $scope.userHeaderImg=result.data.buyUser.userImg;
+                            $scope.nickName = result.data.buyUser.nickName;
+                            $scope.currentUserId = result.data.buyUser.id;
+                        }
+                        $scope.items=result.data;
+
+                        var processScroll = document.getElementById('processScrolls');
+                        var $element = angular.element(processScroll);
+                        $element.children('.scroll').css({'width':(120*result.data.process.length)+"px"});
                     })
             }
-            initToken();
 
+            init();
 
 
             $scope.backParent = function(){
@@ -95,25 +91,19 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //提醒收货
             $scope.remindDeliverySell =function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.noticOrder,
-                            "parameters":{
-                                "id":id,
-                                "orderType":"order",
-                                "saleType":"sell"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":id,
+                        "orderType":"order",
+                        "saleType":"sell"
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg)
                     })
 
             }
@@ -125,43 +115,29 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //立即支付
             $scope.showPay = function(obj,value){
-                $scope.checkLogin()
-                    .then(function(){
-                        var userToken = "token";
-                        obj[userToken]=$scope.userInfo.loginToken;
-                        var backImage = "backImg";
-                        obj[backImage] = $scope.mineAlipay;
-                        $state.go($config.controllers.pay.name,{obj:obj,routers:value});
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
-                    })
+                var userToken = "token";
+                obj[userToken]=userInfo.loginToken;
+                var backImage = "backImg";
+                obj[backImage] = $scope.mineAlipay;
+                $state.go($config.controllers.pay.name,{obj:obj,routers:value});
 
             }
 
             //提醒发货
             $scope.remindDelivery = function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.noticOrder,
-                            "parameters":{
-                                "id":id,
-                                "orderType":"order",
-                                "saleType":"buy"
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":id,
+                        "orderType":"order",
+                        "saleType":"buy"
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                                $alert.show(result.msg);
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg);
                     })
             }
             //申请退款
@@ -171,28 +147,21 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //确认收货
             $scope.submitBuyer = function(id){
-                $scope.checkLogin()
-                    .then(function(){
-                        var remindData = {
-                            "cmd":$config.cmds.orderReceive,
-                            "parameters":{
-                                "id":id
-                            },
-                            "token":$scope.userInfo.loginToken
-                        }
+                var remindData = {
+                    "cmd":$config.cmds.orderReceive,
+                    "parameters":{
+                        "id":id
+                    },
+                    "token":userInfo.loginToken
+                }
 
-                        $httpService.getJsonFromPost($config.getRequestAction(),remindData)
-                            .then(function(result){
-                                $alert.show(result.msg);
-                                //提示收货成功
-                                if(result.msg=='确认收货成功'){
-                                    $state.go($config.controllers.myBought.name,null,{reload:true});
-                                }
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
-                            })
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg);
+                        //提示收货成功
+                        if(result.msg=='确认收货成功'){
+                            $state.go($config.controllers.myBought.name,null,{reload:true});
+                        }
                     })
             }
             //拒绝
@@ -207,29 +176,22 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //同意
             $scope.agreeApplys = function(id){
-                $scope.checkLogin()
+                $alert.confirm("是否同意退款?")
                     .then(function(){
-                        $alert.confirm("是否同意退款?")
-                            .then(function(){
-                                var data = {
-                                    "cmd": $config.cmds.applyRefused,
-                                    "parameters":{
-                                        "id":id,
-                                        "refundStatus":"AGREE"
-                                    },
-                                    "token":$scope.userInfo.loginToken
+                        var data = {
+                            "cmd": $config.cmds.applyRefused,
+                            "parameters":{
+                                "id":id,
+                                "refundStatus":"AGREE"
+                            },
+                            "token":userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg)
+                                if(result.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
                                 }
-                                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                    .then(function(result){
-                                        $alert.show(result.msg)
-                                        if(result.msg=='操作成功'){
-                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
-                                        }
-                                    })
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
                             })
                     })
 
@@ -237,49 +199,105 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //确认收货
             $scope.submitGoods = function(id){
-                $scope.checkLogin()
+                $alert.confirm('是否确认收货')
                     .then(function(){
-                        $alert.confirm('是否确认收货')
-                            .then(function(){
-                                var data =  {
-                                    "cmd":$config.cmds.sellerReceive,
-                                    "parameters":{
-                                        "id":id
-                                    },
-                                    "token":$scope.userInfo.loginToken
+                        var data =  {
+                            "cmd":$config.cmds.sellerReceive,
+                            "parameters":{
+                                "id":id
+                            },
+                            "token":$scope.userInfo.loginToken
+                        }
+                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            .then(function(result){
+                                $alert.show(result.msg);
+                                if(result.msg=='操作成功'){
+                                    $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
                                 }
-                                $httpService.getJsonFromPost($config.getRequestAction(),data)
-                                    .then(function(result){
-                                        $alert.show(result.msg);
-                                        if(result.msg=='操作成功'){
-                                            $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})
-                                        }
-                                    })
-                            })
-                    },function(){
-                        $scope.autoLogin()
-                            .then(function(){
                             })
                     })
 
             }
 
             $scope.clickChat = function () {
+                var data ;
                 if(parseInt($stateParams.type)==0){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                        touid: $scope.items.product.publicUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
-                        userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                     data={
+                        "uid":$scope.items.product.publicUser.imUserId,
+                        "nickname":$scope.items.product.publicUser.nickName,
+                        "userImage":$scope.items.product.publicUser.userImg,
+                        "avators":$scope.items.buyUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid: ,nickName:,type:2,
+                    //    userImage:,toUserImage:});
                 }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                     touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
-                     userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
+                     data={
+                        "uid":$scope.items.buyUser.imUserId,
+                        "nickname":$scope.items.buyUser.nickName,
+                        "userImage":$scope.items.product.publicUser.userImg,
+                        "avators":$scope.items.buyUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid:$scope.items.buyUser.imUserId,nickName:$scope.items.buyUser.nickName,type:2,
+                    //    userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==2){
-                    $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                        touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
-                        userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
+                     data={
+                        "uid":$scope.items.buyUser.imUserId,
+                        "nickname":$scope.items.product.publicUser.nickName,
+                        "userImage":$scope.items.buyUser.userImg,
+                        "avators":$scope.items.product.publicUser.userImg,
+                         "orderType":$stateParams.type,
+                         "orderId":$stateParams.id
+                    };
+                    //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                    //    touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
+                    //    userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
                 }
 
+                $scope.clickChats(data,2);
+
+
             }
+            //提醒发货
+            $scope.remindDelivery = function(){
+                var remindData = {
+                    "cmd":$config.cmds.noticOrder,
+                    "parameters":{
+                        "id":$stateParams.id,
+                        "orderType":"refund",
+                        "saleType":"sell"
+                    },
+                    "token":$scope.userInfo.loginToken
+                }
+
+                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                    .then(function(result){
+                        $alert.show(result.msg);
+                    })
+            }
+
+            //立即评价
+            $scope.evaluation = function (id) {
+                $state.go($config.controllers.orderEvaluate.name,{orderId:id})
+            }
+
+            //查看评价
+            $scope.evaluationShow = function(id,type){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:type})
+            }
+
+            //确认发货
+            //确认发货
+            $scope.submitSoldDelivery = function(id){
+                $state.go($config.controllers.submitDelivery.name,{id:id,type:0})
+            }
+
 
 
         }])

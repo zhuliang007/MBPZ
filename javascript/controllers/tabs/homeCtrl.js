@@ -17,7 +17,8 @@ angular.module('controllers.home',[])
         '$city',
         '$ionicScrollDelegate',
         '$alert',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$alert){
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$alert,$locals){
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
             var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
             var QGXXListCache = [];
@@ -26,6 +27,7 @@ angular.module('controllers.home',[])
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.infiniteFlag = true;
+            $locals.clearObject($config.home_type);
 
             getAds();
             getQGXX();
@@ -38,18 +40,18 @@ angular.module('controllers.home',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                            $scope.adList = result.data;
-                            adSlideBox.update();
-                            $timeout(function(){
-                                if(adSlideBox.slidesCount()>1){
-                                    $scope.showPager = true;
-                                    adSlideBox.loop(true);
-                                }
-                                else{
-                                    $scope.showPager = false;
-                                }
-                            })
+                        $scope.adList = result.data;
+                        adSlideBox.update();
+                        $timeout(function(){
+                            if(adSlideBox.slidesCount()>1){
+                                $scope.showPager = true;
+                                adSlideBox.loop(true);
+                            }
+                            else{
+                                $scope.showPager = false;
+                            }
                         })
+                    })
             }
             function getQGXX(){
                 var data = {
@@ -90,8 +92,12 @@ angular.module('controllers.home',[])
             }
 
             $scope.loadMore = function() {
+                //console.log('loadMore')
                 getProductHome();
             };
+
+            $scope.$on('$stateChangeSuccess', function() {
+            });
 
             function getProductHome(){
                 var data = {
@@ -107,6 +113,7 @@ angular.module('controllers.home',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result)
+                        //console.log("home",result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
                             $scope.infiniteFlag = false;

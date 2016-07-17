@@ -1,7 +1,7 @@
 <ion-view class="productDetail product">
     <ion-header-bar align-title="center">
         <div class="buttons">
-            <button class="button" ng-click="goBack()"><i class="icon ion-ios-arrow-back"></i></button>
+            <button class="button" ng-click="goBackBefore()"><i class="icon ion-ios-arrow-back"></i></button>
         </div>
         <h1 class="title">宝贝详情</h1>
         <div class="buttons">
@@ -12,16 +12,16 @@
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
         <div class="productDetailBody padding-small-vertical border-bottom">
             <div class="row row-no-padding">
-                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <div class="col padding-none-horizontal padding-none-vertical">
                         <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                     </div>
                 </div>
-                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id)">
+                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,product.type,0)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
         </div>
@@ -70,11 +70,11 @@
         </div>
         <ion-list class="replyBody" id="replyBody">
             <ion-item class="row row-no-padding" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
-                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical"  ng-click="showPersonalCenter($event,reply.createUser.id)">
+                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
                     <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(reply.createUser.userImg?reply.createUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
-                    <div ng-bind="reply.createUser.nickName" class="userNick" ng-click="showPersonalCenter($event,reply.createUser.id)"></div>
+                    <div ng-bind="reply.createUser.nickName" class="userNick"></div>
                     <div class="margin-normal-top"><span ng-bind="reply.contents" class="content"></span></div>
                 </div>
                 <div class="col col-top text-right padding-normal-horizontal padding-normal-vertical">
