@@ -100,7 +100,7 @@
 
     </ion-content>
     <div class="orderBtn bar bar-footer " ng-if="items.status!=null&&displayRef(items.refundStatus)">
-        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)&&items.saleType!='sell'">
             <button class="button button-full button-stable refusedApply" ng-click="cancalOrder()">取消订单</button>
         </div>
         <div class="col-50 " ng-if="items.status=='PAID'&&isCurrentUser(userInfo.id,currentUserId)
@@ -108,7 +108,7 @@
         &&!items.refundStatus=='APPLY'">
             <button class="button button-full button-stable refusedApply" ng-click="applyRefund(items.id,items.product.currentPrice,items.freight)">申请退款</button>
         </div>
-        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)">
+        <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)&&items.saleType!='sell'">
             <button class="button button-full button-assertive" ng-click="showPay(items,1)">立即支付</button>
         </div>
         <div class="col-50 " ng-if="items.status=='PAID'&&isCurrentUser(userInfo.id,currentUserId)&&!items.refundStatus=='APPLY'">
