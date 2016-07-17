@@ -290,7 +290,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.myCenterSetup = function(_value){
-                if(!$scope.userInfo.loginToken){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
                     $alert.show('请先登录萌宝派');
                 }else{
                     $state.go(_value)
