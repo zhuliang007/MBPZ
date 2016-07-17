@@ -71,7 +71,7 @@ angular.module('controllers.messageTalking',[])
                         userImage:''
                     }
                     param.nickname=item.nickname;
-                    param.avators = item.avator;
+                    param.avators = item.avator+'@414w';
                     param.emot=sdk.Plugin.Emot.decode(item.msg[0][1]);
                     param.uid = sdk.Base.getNick(item.uid);
                     param.userImage = userInfo.userImg?userInfo.userImg+'@414w':'';
