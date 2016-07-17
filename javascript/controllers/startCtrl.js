@@ -250,7 +250,7 @@ angular.module('controllers.start',[])
                 if(homeType==0){
                     $locals.set($config.seller_type,homeType)
                 }
-                if(!$scope.userInfo){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
                     $alert.show('请先登录萌宝派')
                     return ;
                 }
@@ -410,7 +410,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type,id){
-                if(!$scope.userInfo.loginToken){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
                     $alert.show('请先登录萌宝派')
                     return ;
                 }
