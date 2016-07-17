@@ -70,7 +70,7 @@
         </div>
         <ion-list class="replyBody" id="replyBody">
             <ion-item class="row row-no-padding" ng-repeat="reply in replyList track by $index" ng-click="productReply($event,reply.createUser)">
-                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical"  ng-click="showPersonalCenter($event,reply.createUser.id)">
+                <div class="col col-15 col-top padding-normal-horizontal padding-normal-vertical">
                     <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(reply.createUser.userImg?reply.createUser.userImg+'@414w':defaultHead)"></div>
                 </div>
                 <div class="col col-60 col-center padding-normal-horizontal padding-normal-vertical">
