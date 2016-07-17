@@ -288,8 +288,14 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             //查看评价
-            $scope.evaluationShow = function(id){
-                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:1})
+            $scope.evaluationShow = function(id,type){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:type})
+            }
+
+            //确认发货
+            //确认发货
+            $scope.submitSoldDelivery = function(id){
+                $state.go($config.controllers.submitDelivery.name,{id:id,type:0})
             }
 
 
