@@ -47,7 +47,7 @@
                         <span class=" mbpz soldBtn" ng-if="item.status =='PAID'" ng-click="submitSoldDelivery(item.id)">确认发货</span>
                         <span class=" mbpz soldBtn" ng-if="item.status =='RECEIVING'" ng-click="remindDeliverySell(item.id)">提醒收货</span>
                         <!--<button class="button mbpz" ng-if="item.status =='EVALUATING'" ng-click="evaluationShow(item.id)">立即评价</button>-->
-                        <span class=" mbpz soldBtn" ng-if="item.status =='EVALUATED'" ng-click="evaluationShow(item.id)">查看评价</span>
+                        <span class=" mbpz soldBtn" ng-if="item.status =='EVALUATED'" ng-click="evaluationShow(item.id,2)">查看评价</span>
                     </div>
                 </div>
             </div>

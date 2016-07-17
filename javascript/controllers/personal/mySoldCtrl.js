@@ -74,7 +74,6 @@ angular.module('controllers.mySoldCtrl',[])
 
             //确认发货
             $scope.submitSoldDelivery = function(id){
-                console.log(id)
                 $state.go($config.controllers.submitDelivery.name,{id:id,type:0})
             }
 
@@ -103,8 +102,8 @@ angular.module('controllers.mySoldCtrl',[])
             }
 
             //查看评价
-            $scope.evaluationShow = function(id){
-                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:0})
+            $scope.evaluationShow = function(id,type){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:type})
             }
 
         }])

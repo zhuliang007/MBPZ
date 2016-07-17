@@ -143,8 +143,8 @@ angular.module('controllers.myBoughtCtrl',[])
             }
 
             //查看评价
-            $scope.evaluationShow = function(id){
-                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:1})
+            $scope.evaluationShow = function(id,type){
+                $state.go($config.controllers.evaluateDetail.name,{orderId:id,type:type})
             }
 
         }])
