@@ -45,6 +45,7 @@ angular.module('controllers.personal',[])
                         $scope.productCollectCount=result.data.productCollectCount;
                     })
             }else{
+                $scope.userName='未登录';
                 $alert.show($config.error_login);
             }
 

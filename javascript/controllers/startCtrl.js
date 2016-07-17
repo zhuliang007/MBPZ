@@ -26,11 +26,11 @@ angular.module('controllers.start',[])
 
 
             login = function(){
+                if($scope.userPhone){
                 //登录获取token
-                if($locals.getObject($config.user_local_info,$scope.userInfo)){
-                    $scope.userInfo = $locals.getObject($config.user_local_info);
-                }
-                else if($scope.userPhone){
+                //if($locals.getObject($config.user_local_info,$scope.userInfo)){
+                //    $scope.userInfo = $locals.getObject($config.user_local_info);
+                //}else if($scope.userPhone){
                     $locals.set($config.u_p, $scope.userPhone);
                     var data = {
                         "cmd": $config.cmds.h5Login,
@@ -55,26 +55,37 @@ angular.module('controllers.start',[])
                                 userImg:result.data.userImg,
                                 userLevel:result.data.userLevel
                             }
-                            $locals.setObject($config.user_local_info,$scope.userInfo);
+                            if(result.data.loginToken){
+                                $locals.setObject($config.user_local_info,$scope.userInfo);
+                            }else{
+                                $locals.clearObject($config.user_local_info);
+                                $locals.clearObject($config.u_p);
+                            }
                         })
+                }else{
+                    $locals.clearObject($config.user_local_info);
+                    $locals.clearObject($config.u_p);
                 }
             }
+            //
+            //console.log($scope.userPhone)
+            //console.log($locals.get($config.u_p,null))
 
-            if(!$scope.userPhone||!$locals.get($config.u_p,null)){
-                $locals.clearObject($config.user_local_info);
-                $locals.clearObject($config.u_p);
-                console.log('!$scope.userPhone||!$locals.get($config.u_p,null)')
+            //if(!$scope.userPhone||!$locals.get($config.u_p,null)){
+            //    $locals.clearObject($config.user_local_info);
+            //    $locals.clearObject($config.u_p);
+            //    console.log('!$scope.userPhone||!$locals.get($config.u_p,null)')
+            //    login();
+            //}
+            //else if($scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)){
+            //    console.log('$scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)')
+            //    $locals.clearObject($config.user_local_info);
+            //    $locals.clearObject($config.u_p);
+            //    login();
+            //}
+            //else{
                 login();
-            }
-            else if($scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)){
-                console.log('$scope.userPhone&&$locals.get($config.u_p,null)&&$scope.userPhone!=$locals.get($config.u_p,null)')
-                $locals.clearObject($config.user_local_info);
-                $locals.clearObject($config.u_p);
-                login();
-            }
-            else{
-                login();
-            }
+            //}
 
 
             var url = $location.url();
@@ -279,11 +290,11 @@ angular.module('controllers.start',[])
             }
 
             $scope.myCenterSetup = function(_value){
-                if(!$scope.userInfo){
-                    $alert.show('请先登录萌宝派')
-                    return ;
+                if(!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派');
+                }else{
+                    $state.go(_value)
                 }
-                $state.go(_value)
             }
             $scope.mySetupHelp = function(_value){
                 $state.go(_value)
@@ -399,7 +410,7 @@ angular.module('controllers.start',[])
             }
 
             $scope.goPublish = function(type,id){
-                if(!$scope.userInfo){
+                if(!$scope.userInfo.loginToken){
                     $alert.show('请先登录萌宝派')
                     return ;
                 }
@@ -469,8 +480,12 @@ angular.module('controllers.start',[])
                 return true;
             }
             $scope.showPersonalCenter = function($event,userId,type,productId){
-                $event.stopPropagation();
-                $state.go($config.controllers.personalCenter.name,{userId:userId,type:type,productId:productId});
+                if(!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派');
+                }else{
+                    $event.stopPropagation();
+                    $state.go($config.controllers.personalCenter.name,{userId:userId,type:type,productId:productId});
+                }
             }
 
             $scope.clickChats = function(data,type){
