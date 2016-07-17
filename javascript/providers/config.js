@@ -13,6 +13,8 @@ angular.module('providers.config',[])
 
         $config.userObj = 'U_USER';
         $config.u_p = "U_PHONE";
+        $config.home_type = "home_type";
+        $config.seller_type = "seller_type";
         $config.error_login = '请重新登录萌宝派';
 
         /**请求地址配置*/
@@ -501,7 +503,7 @@ angular.module('providers.config',[])
             },
             personalCenter:{
                 templateUrl:"templates/personal/personal-center.html",
-                url:"/personalCenter/:userId&:type?",
+                url:"/personalCenter/:userId&:type&:productId?",
                 name:"personalCenter",
                 controller:"PersonalCenterCtrl",
                 cache:false

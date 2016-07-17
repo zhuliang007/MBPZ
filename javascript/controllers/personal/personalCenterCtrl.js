@@ -36,6 +36,7 @@ angular.module('controllers.personalCenter',[])
                     .then(function(result){
                         //$console.show(result);
                         result.data['type']=$stateParams.type;
+                        result.data['productId']=$stateParams.productId;
                         $scope.personalCenterInfo = result.data;
                     })
             }
@@ -119,11 +120,13 @@ angular.module('controllers.personalCenter',[])
 
             $scope.goBackBefore= function () {
                 if (parseInt($stateParams.type)==20||parseInt($stateParams.type)==21) {
-                    $state.go($config.controllers.tabsHome.name)
-                }else if(parseInt($stateParams.type)==22||parseInt($stateParams.type)==23) {
-                    $state.go($config.controllers.tabsShop.name)
-                }else if(parseInt($stateParams.type)==24){
-                    $state.go($config.controllers.productDetail.name)
+                    $state.go($config.controllers.tabsHome.name);
+                }else if(parseInt($stateParams.type)==22) {
+                    $state.go($config.controllers.tabsShop.name);
+                }else if(parseInt($stateParams.type)==104){
+                    $state.go($config.controllers.productDetail.name,{id:$stateParams.productId,type:$stateParams.type});
+                }else if (parseInt($stateParams.type)==23){
+                    $state.go($config.controllers.shopDetail.name,{id:$stateParams.productId,type:$stateParams.type});
                 }else{
                     $scope.goBack();
                 }

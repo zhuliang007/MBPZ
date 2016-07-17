@@ -24,7 +24,8 @@
 <script>
 
         var data = JSON.parse(window.localStorage.getItem("mkit"));
-
+        var homeType = window.localStorage.getItem("home_type");
+        var sellerType = window.localStorage.getItem("seller_type");
 
         var debug = true;
         function locationHref(){
@@ -73,14 +74,24 @@
                         window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
                         break;
                 }
-                if(parseInt(data.type)>100&&parseInt(data.type)<150){
+                if(parseInt(data.type)>100&&parseInt(data.type)<104){
                     window.location.href=locationHref()+"#/productDetail/"+data.productId+"&"+data.type;
                 }
-                if(parseInt(data.type)>=150&&parseInt(data.type)<200){
+                if(parseInt(data.type)==150){
                     window.location.href=locationHref()+"#/shopDetail/"+data.productId+"&"+data.type;
                 }
-                if(parseInt(data.type)>20&&parseInt(data.type)<30){
-                    window.location.href=locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type;
+                if(parseInt(data.type)>20&&parseInt(data.type)<23){
+                    window.location.href=locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&";
+                }
+                if(parseInt(data.type)==23){
+                    window.location.href = locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&"+data.productId;
+                }
+                if(parseInt(data.type)==104){
+                    if(homeType!=null&&homeType!=undefined&&sellerType!=0){
+                        window.location.href = locationHref()+"#/personalCenter/"+data.currentId+"&"+data.type+"&"+data.productId;
+                    }else{
+                        window.location.href =locationHref()+"#/productDetail/"+data.productId+"&"+data.type;
+                    }
                 }
             },
             onUploaderError: function(error){
