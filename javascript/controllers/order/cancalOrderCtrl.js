@@ -59,7 +59,8 @@ angular.module('controllers.cancalOrderCtrl',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),responseData)
                     .then(function(result){
-                        alert(result.msg)
+                        $alert.show(result.msg);
+                        $state.go($config.controllers.tabsPersonal.name,null,{reload:true});
                     })
 
             }
