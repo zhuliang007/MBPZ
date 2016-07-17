@@ -480,7 +480,7 @@ angular.module('controllers.start',[])
                 return true;
             }
             $scope.showPersonalCenter = function($event,userId,type,productId){
-                if(!$scope.userInfo.loginToken){
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
                     $alert.show('请先登录萌宝派');
                 }else{
                     $event.stopPropagation();
