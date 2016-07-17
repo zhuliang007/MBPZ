@@ -88,6 +88,7 @@ angular.module('providers.config',[])
 
         /**接口cmd配置*/
         $config.cmds = {
+            h5Login:"market/h5login",
             adInfo:"market/home/advert/info",
             getPage:"product/getPage",
             details:"product/details",

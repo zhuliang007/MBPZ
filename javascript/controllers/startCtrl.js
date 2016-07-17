@@ -30,36 +30,33 @@ angular.module('controllers.start',[])
                 if($locals.getObject($config.user_local_info,$scope.userInfo)){
                     $scope.userInfo = $locals.getObject($config.user_local_info);
                 }
-                else{
-                    if($scope.userPhone){
-                        $locals.set($config.u_p, $scope.userPhone);
-                        var data = {
-                            "cmd": $config.cmds.login,
-                            "parameters":{
-                                "loginAccount":$scope.userPhone,
-                                "thirdType":$scope.thirdType
-                            }
+                else if($scope.userPhone){
+                    $locals.set($config.u_p, $scope.userPhone);
+                    var data = {
+                        "cmd": $config.cmds.h5Login,
+                        "parameters":{
+                            "loginAccount":$scope.userPhone
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
-                            .then(function(result){
-                                console.log(result)
-                                $scope.userInfo = {
-                                    loginToken:result.data.loginToken,
-                                    loginAccount:result.data.loginAccount,
-                                    id:result.data.id,
-                                    city:result.data.city,
-                                    cityText:result.data.cityText,
-                                    introduce:result.data.introduce,
-                                    nickName:result.data.nickName,
-                                    province:result.data.province,
-                                    provinceText:result.data.provinceText,
-                                    sex:result.data.sex,
-                                    userImg:result.data.userImg,
-                                    userLevel:result.data.userLevel
-                                }
-                                $locals.setObject($config.user_local_info,$scope.userInfo);
-                            })
                     }
+                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        .then(function(result){
+                            console.log(result)
+                            $scope.userInfo = {
+                                loginToken:result.data.loginToken,
+                                loginAccount:result.data.loginAccount,
+                                id:result.data.id,
+                                city:result.data.city,
+                                cityText:result.data.cityText,
+                                introduce:result.data.introduce,
+                                nickName:result.data.nickName,
+                                province:result.data.province,
+                                provinceText:result.data.provinceText,
+                                sex:result.data.sex,
+                                userImg:result.data.userImg,
+                                userLevel:result.data.userLevel
+                            }
+                            $locals.setObject($config.user_local_info,$scope.userInfo);
+                        })
                 }
             }
 

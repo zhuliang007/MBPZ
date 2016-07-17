@@ -99,7 +99,7 @@ angular.module('controllers.deliveryCtrl',[])
                                     if($stateParams.type==1){
                                         $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
                                     }else{
-                                        $state.go($config.controllers.mySold.name);
+                                        $state.go($config.controllers.mySold.name,null,{reload:true});
                                     }
                                 }
                             })
