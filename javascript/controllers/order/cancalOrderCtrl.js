@@ -11,7 +11,8 @@ angular.module('controllers.cancalOrderCtrl',[])
         '$stateParams',
         '$locals',
         '$rootScope',
-        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope){
+        '$alert',
+        function($scope,$config,$console,$httpService,$state,$stateParams,$locals,$rootScope,$alert){
 
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
