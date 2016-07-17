@@ -43,7 +43,8 @@ angular.module("controllers.recommend",[])
                     "parameters":{
                         "type":0,
                         "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
+                        "pageNo":pageNo,
+                        "status":0
                     },
                     "token":userInfo.loginToken
                 }

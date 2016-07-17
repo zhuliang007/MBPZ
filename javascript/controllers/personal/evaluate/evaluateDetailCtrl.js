@@ -65,7 +65,7 @@ angular.module('controllers.evaluateDetail',[])
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
                         //$console.show(result);
-                        $alert.show(result.msg)
+                        $alert.show('回复成功')
                             .then(function(){
                                 getEvaluateDetail();
                             })
