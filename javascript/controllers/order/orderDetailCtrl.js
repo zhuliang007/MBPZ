@@ -30,12 +30,12 @@ angular.module('controllers.orderDetailCtrl',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        console.log(result)
+                        console.log($stateParams.type)
                         if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
                             $scope.userHeaderImg=result.data.product.publicUser.userImg;
                             $scope.nickName = result.data.product.publicUser.nickName;
                             $scope.currentUserId = result.data.product.publicUserId;
-                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3) {
+                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3||parseInt($stateParams.type)==10) {
                             $scope.userHeaderImg=result.data.buyUser.userImg;
                             $scope.nickName = result.data.buyUser.nickName;
                             $scope.currentUserId = result.data.buyUser.id;

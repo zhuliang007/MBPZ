@@ -11,7 +11,7 @@
 
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
         <div class="header" ng-if="(product.productImageList!=null)&&(product.productImageList.length>0)">
-            <span ng-click="goBack()" class="icon ion-ios-arrow-back"></span>
+            <span ng-click="goBackBefore()" class="icon ion-ios-arrow-back"></span>
             <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
         </div>
         <ion-slide-box ng-show="product.productImageList!=null"
@@ -38,12 +38,12 @@
         </div>
         <div class="productDetailBody margin-normal-top">
             <div class="row row-no-padding border-bottom">
-                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type)">
+                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <div class="col padding-none-horizontal">
                         <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                     </div>
                 </div>
-                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,23)">
+                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">

@@ -333,13 +333,11 @@ angular.module('controllers.shopDetail',[])
             }
 
             $scope.goBackBefore = function () {
-                switch (parseInt($stateParams.type)){
-                    case 150:
-                        $state.go($config.controllers.tabsShop.name);
-                        break;
-                    default:
-                        $scope.goBack();
-                        break;
+                console.log($stateParams.type)
+                if(parseInt($stateParams.type)==150||parseInt($stateParams.type)==23){
+                    $state.go($config.controllers.tabsShop.name);
+                }else{
+                    $scope.goBack();
                 }
             }
         }])

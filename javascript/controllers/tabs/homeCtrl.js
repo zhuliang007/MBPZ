@@ -17,7 +17,8 @@ angular.module('controllers.home',[])
         '$city',
         '$ionicScrollDelegate',
         '$alert',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$alert){
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$ionicSlideBoxDelegate,$timeout,$cache,$ionicModal,$city,$ionicScrollDelegate,$alert,$locals){
             var adSlideBox = $ionicSlideBoxDelegate.$getByHandle("adSlideBox");
             var productHomeHandle = $ionicScrollDelegate.$getByHandle('productHomeHandle');
             var QGXXListCache = [];
@@ -26,6 +27,7 @@ angular.module('controllers.home',[])
             var numberOfPerPage = 5;
             var pageNo = 0;
             $scope.infiniteFlag = true;
+            $locals.clearObject($config.home_type);
 
             getAds();
             getQGXX();

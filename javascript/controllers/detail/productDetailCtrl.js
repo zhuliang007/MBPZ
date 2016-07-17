@@ -274,6 +274,17 @@ angular.module('controllers.productDetail',[])
                     case 103:
                         $state.go($config.controllers.tabsHome.name);
                         break;
+                    case 104:
+                        var type=1;
+                        if($locals.get($config.home_type)==2){
+                           type=2;
+                        }else if($locals.get($config.home_type)==3){
+                            type=3;
+                        }else if($locals.get($config.home_type)==4){
+                            type=4;
+                        }
+                        $state.go($config.controllers.productListByType.name,{type:type});
+                        break;
                     default:
                         $scope.goBack();
                         break;

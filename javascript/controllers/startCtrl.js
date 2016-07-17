@@ -213,6 +213,9 @@ angular.module('controllers.start',[])
                 })
 
             $scope.showProduct = function(id,type){
+                if($locals.get($config.home_type)){
+                    type='104';
+                }
                 var params = {id:id,type:type};
                 $state.go($config.controllers.productDetail.name,params)
             }
@@ -234,7 +237,11 @@ angular.module('controllers.start',[])
             }
 
             //联系卖家
-            $scope.contactSeller = function (seller,id,type) {
+            $scope.contactSeller = function (seller,id,type,homeType) {
+                $locals.clearObject($config.seller_type)
+                if(homeType==0){
+                    $locals.set($config.seller_type,homeType)
+                }
                 if(!$scope.userInfo){
                     $alert.show('请先登录萌宝派')
                     return ;
@@ -268,6 +275,8 @@ angular.module('controllers.start',[])
             }
 
             $scope.showProductListByType = function(type){
+                $locals.clearObject($config.home_type);
+                $locals.set($config.home_type,type);
                 var params = {type:type};
                 $state.go($config.controllers.productListByType.name,params)
             }
@@ -462,10 +471,9 @@ angular.module('controllers.start',[])
                 }
                 return true;
             }
-            $scope.showPersonalCenter = function($event,userId,type){
-                console.log(type)
+            $scope.showPersonalCenter = function($event,userId,type,productId){
                 $event.stopPropagation();
-                $state.go($config.controllers.personalCenter.name,{userId:userId,type:type});
+                $state.go($config.controllers.personalCenter.name,{userId:userId,type:type,productId:productId});
             }
 
             $scope.clickChats = function(data,type){

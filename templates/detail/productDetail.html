@@ -12,16 +12,16 @@
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
         <div class="productDetailBody padding-small-vertical border-bottom">
             <div class="row row-no-padding">
-                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type)">
+                <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <div class="col padding-none-horizontal padding-none-vertical">
                         <div class="bgImg bgImg-1-1 border-radius-round" ng-style="setBackGroundImage(product.publicUser.userImg?product.publicUser.userImg+'@414w':defaultHead)"></div>
                     </div>
                 </div>
-                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type)">
+                <div class="col col-50 col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
                     <span ng-bind="product.publicUser.nickName" class="userNick"></span>
                 </div>
                 <div class="col col-33 col-center text-center">
-                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,product.type)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
+                    <div class="contact  padding-big-vertical" ng-click="contactSeller(product.publicUser,product.id,product.type,0)"><span class="mbpz mbpz-icon-replies"></span>联系卖家</div>
                 </div>
             </div>
         </div>
