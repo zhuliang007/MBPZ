@@ -250,7 +250,7 @@ angular.module('controllers.orderDetailCtrl',[])
                     //    userImage:$scope.items.product.publicUser.userImg,toUserImage:$scope.items.buyUser.userImg});
                 }else if(parseInt($stateParams.type)==2){
                      data={
-                        "uid":$scope.items.buyUser.imUserId,
+                        "uid":$scope.items.product.publicUser.imUserId,
                         "nickname":$scope.items.product.publicUser.nickName,
                         "userImage":$scope.items.buyUser.userImg,
                         "avators":$scope.items.product.publicUser.userImg,
@@ -260,6 +260,15 @@ angular.module('controllers.orderDetailCtrl',[])
                     //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
                     //    touid:$scope.items.buyUser.imUserId,nickName:$scope.items.product.publicUser.nickName,type:2,
                     //    userImage:$scope.items.buyUser.userImg,toUserImage:$scope.items.product.publicUser.userImg});
+                }else if(parseInt($stateParams.type)==4){
+                    data={
+                        "uid":$scope.items.buyUser.imUserId,
+                        "nickname":$scope.items.buyUser.nickName,
+                        "userImage":$scope.items.product.publicUser.userImg,
+                        "avators":$scope.items.buyUser.userImg,
+                        "orderType":$stateParams.type,
+                        "orderId":$stateParams.id
+                    };
                 }
 
                 $scope.clickChats(data,2);
