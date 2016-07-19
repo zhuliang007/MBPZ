@@ -3187,3 +3187,14 @@ a:active{
 a{
     text-decoration: none !important;
 }
+
+.deliveryFont{
+    word-break: break-all;
+}
+
+.deliveryFont p{
+    width:95%;
+    word-break: break-all;
+    word-wrap:break-word;
+    white-space: normal;
+}
