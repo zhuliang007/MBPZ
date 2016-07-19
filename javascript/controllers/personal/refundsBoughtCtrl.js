@@ -60,9 +60,16 @@ angular.module('controllers.refundsBoughtCtrl',[])
             }
 
             $scope.myContant = function(item,type){
-                $state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
-                    touid:item.product.publicUser.imUserId,nickName:item.product.publicUser.nickName,type:type,
-                    userImage:item.buyUser.userImg,toUserImage:item.product.publicUser.userImg})
+                var data = {
+                    "uid":item.product.publicUser.imUserId,
+                    "nickname":item.product.publicUser.nickName,
+                    "userImage":item.buyUser.userImg,
+                    "avators":item.product.publicUser.userImg
+                }
+                $scope.clickChats(data,type);
+                //$state.go($config.controllers.messageChat.name,{uid:$scope.userPhone,credential:$scope.userPhone,
+                //    touid:item.product.publicUser.imUserId,nickName:item.product.publicUser.nickName,type:type,
+                //    userImage:item.buyUser.userImg,toUserImage:item.product.publicUser.userImg})
             }
 
             //重新申请退款
