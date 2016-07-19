@@ -281,11 +281,6 @@ angular.module('controllers.publish',[])
                             }
                         }
                     }
-
-                    if(!checkPublishImage()){
-                     $alert.show("描述图片尚未上传完毕")
-                     return;
-                     }
                 }
 
                 if(!$scope.selectType.selectParent || !$scope.selectType.selectChild){
@@ -295,6 +290,11 @@ angular.module('controllers.publish',[])
 
                 if(!$scope.publishCity || $scope.publishCity=='城市'){
                     $alert.show("请选择所在城市")
+                    return;
+                }
+
+                if(!checkPublishImage()){
+                    $alert.show("描述图片尚未上传完毕")
                     return;
                 }
 
@@ -315,7 +315,7 @@ angular.module('controllers.publish',[])
                 var formData = new FormData();
                 formData.append("title",$scope.publishObject.title);
                 formData.append("content",$scope.publishObject.content);
-                formData.append("currentPrice",$scope.publishObject.currentPrice);
+                formData.append("currentPrice",$scope.publishObject.currentPrice||'');
                 formData.append("originalPrice",$scope.publishObject.originalPrice||'');
                 formData.append("freight",$scope.publishObject.freight||'');
                 formData.append("parentClassify",$scope.selectType.selectParent);
