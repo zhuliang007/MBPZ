@@ -1,6 +1,11 @@
 <ion-view >
     <ion-content   >
-        <div class="list" ng-repeat="item in items track by $index">
+        <div class="row" ng-if="items.length==0">
+            <div  class="col col-center noListFont">
+                <span>没有相关内容</span>
+            </div>
+        </div>
+        <ion-list ng-repeat="item in items track by $index"  ng-if="items.length>0">
             <div class="item releaseItem">
                 <a ng-click="showProduct(item.id)">
                     <div class="row" ng-if="item.productImageList.length!=0" >
@@ -19,7 +24,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </ion-list>
         <ion-infinite-scroll
                 on-infinite="lookLoadMore()"
                 ng-if="!noMoreLoad"

@@ -3198,3 +3198,10 @@ a{
     word-wrap:break-word;
     white-space: normal;
 }
+
+.noListFont {
+    text-align: center;
+    padding-top:40%;
+    font-size: 16px;
+    color:#999999;
+}
