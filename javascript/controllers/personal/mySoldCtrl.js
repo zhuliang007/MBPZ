@@ -91,7 +91,8 @@ angular.module('controllers.mySoldCtrl',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),remindData)
                     .then(function(result){
-                        $alert.show(result.msg)
+                        $alert.show(result.msg);
+                        $state.go($config.controllers.mySold.name,null,{reload:true});
                     })
 
             }

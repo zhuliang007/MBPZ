@@ -2875,7 +2875,7 @@ ion-content{
 .orderBtn{
     padding:0px !important;
     background-position:bottom !important;
-    background: rgba(242,242,242,0.1);
+    background: transparent !important;
 }
 .processItem{
     padding:0px;
@@ -3186,4 +3186,15 @@ a:active{
 
 a{
     text-decoration: none !important;
+}
+
+.deliveryFont{
+    word-break: break-all;
+}
+
+.deliveryFont p{
+    width:95%;
+    word-break: break-all;
+    word-wrap:break-word;
+    white-space: normal;
 }

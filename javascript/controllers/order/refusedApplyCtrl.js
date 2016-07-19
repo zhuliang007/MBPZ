@@ -64,11 +64,13 @@ angular.module('controllers.refusedApplyCtrl',[])
                 }else if($stateParams.routers==1){
                     $state.go($config.controllers.boughtRefundsRelease.name)
                 }else if($stateParams.routers==2){
-                    $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:2});
+                    $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.routers});
                 }else if($stateParams.routers==4){
-                    $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:3});
+                    $state.go($config.controllers.orderDetail.name,{id:$stateParams.id,type:$stateParams.routers});
                 }else if($stateParams.routers==3){
                     $state.go($config.controllers.sellRefundsRelease.name)
+                }else{
+                    $scope.goBack();
                 }
             }
 

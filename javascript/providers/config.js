@@ -427,7 +427,7 @@ angular.module('providers.config',[])
             },
             applyRefund:{
                 templateUrl:"templates/order/apply-refund.html",
-                url:"/applyRefund/:id&:price&:freight:&:type?",
+                url:"/applyRefund/:id&:price&:freight&:type?",
                 name:"applyRefund",
                 params:{
                     obj:null

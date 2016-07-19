@@ -35,11 +35,13 @@ angular.module('controllers.orderDetailCtrl',[])
                             $scope.userHeaderImg=result.data.product.publicUser.userImg;
                             $scope.nickName = result.data.product.publicUser.nickName;
                             $scope.currentUserId = result.data.product.publicUserId;
-                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3||parseInt($stateParams.type)==10) {
+                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==3
+                            ||parseInt($stateParams.type)==10||parseInt($stateParams.type)==4) {
                             $scope.userHeaderImg=result.data.buyUser.userImg;
                             $scope.nickName = result.data.buyUser.nickName;
                             $scope.currentUserId = result.data.buyUser.id;
                         }
+                        result.data['type']=$stateParams.type;
                         $scope.items=result.data;
 
                         var processScroll = document.getElementById('processScrolls');
@@ -62,7 +64,7 @@ angular.module('controllers.orderDetailCtrl',[])
                     case 2:
                         $state.go($config.controllers.boughtRefundsRelease.name);
                         break;
-                    case 3:
+                    case 4:
                         $state.go($config.controllers.sellRefundsRelease.name);
                         break;
                     case 10:
@@ -225,8 +227,8 @@ angular.module('controllers.orderDetailCtrl',[])
                      data={
                         "uid":$scope.items.product.publicUser.imUserId,
                         "nickname":$scope.items.product.publicUser.nickName,
-                        "userImage":$scope.items.product.publicUser.userImg,
-                        "avators":$scope.items.buyUser.userImg,
+                        "userImage":$scope.items.buyUser.userImg,
+                        "avators":$scope.items.product.publicUser.userImg,
                          "orderType":$stateParams.type,
                          "orderId":$stateParams.id
                     };
