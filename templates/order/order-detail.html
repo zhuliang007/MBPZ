@@ -87,11 +87,11 @@
                 </ion-item>
                 <ion-item class="processItem" ng-if="items.logistics.length>0">
                     <div class="row" ng-repeat="processligs in items.logistics track by $index">
-                        <div class="col10 col-center">
-                            <i class="icon ion-record processlig"></i>
-                        </div>
+                        <!--<div class="col10 col-center">-->
+
+                        <!--</div>-->
                         <div class="col col-center deliveryFont">
-                            <p ng-bind="processligs.info" ></p>
+                            <div class="icon ion-record processlig"></div><p ng-bind="processligs.info" ></p>
                             <p ng-bind="processligs.date"></p>
                         </div>
                     </div>

@@ -2950,6 +2950,8 @@ ion-content{
 
 .processlig{
     color:#FF4E72 !important;
+    float: left;
+    font-size:14px !important;
 }
 
 /*评价详情*/
@@ -3197,6 +3199,7 @@ a{
     word-break: break-all;
     word-wrap:break-word;
     white-space: normal;
+    margin-left:20px !important;
 }
 
 .noListFont {
