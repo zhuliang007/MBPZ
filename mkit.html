@@ -29,7 +29,7 @@
         var data = JSON.parse(window.localStorage.getItem("mkit"));
         var homeType = window.localStorage.getItem("home_type");
         var sellerType = window.localStorage.getItem("seller_type");
-
+        console.log("data",data);
         var debug = true;
         function locationHref(){
             var locationHref;
@@ -47,7 +47,7 @@
             appkey: data.appkeys,
             credential: data.credential || '123456',
             touid: data.touid || 'test1',
-            avatar:data.userImage||'',
+            avatar:data.userImage||'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
             toAvatar:data.toUserImage||'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
             onMsgReceived: function(data){
                 console.log(data);
@@ -74,6 +74,9 @@
                         break;
                     case 4:
                         window.location.href=locationHref()+"#/refundsRelease/refundsReleaseSell";
+                        break;
+                    case 5:
+                        window.location.href = locationHref()+"#/refundsRelease/bought";
                         break;
                 }
                 if(parseInt(data.type)>100&&parseInt(data.type)<104){
