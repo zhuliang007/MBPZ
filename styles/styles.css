@@ -3198,3 +3198,7 @@ a{
     word-wrap:break-word;
     white-space: normal;
 }
+
+.wkit-img-wrap{
+    display: none;
+}
