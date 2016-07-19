@@ -74,13 +74,10 @@ angular.module('controllers.deliveryCtrl',[])
                 $alert.confirm('是否提交物流信息')
                     .then(function () {
                         var cmds ;
-                        switch (parseInt($stateParams.type)) {
-                            case 0:
-                                cmds = $config.cmds.sellerSend;
-                                break;
-                            case 1:
-                                cmds = $config.cmds.orderSend;
-                                break;
+                        if(parseInt($stateParams.type)==0){
+                            cmds = $config.cmds.sellerSend;
+                        }else if(parseInt($stateParams.type)==1||parseInt($stateParams.type)==2){
+                            cmds = $config.cmds.orderSend;
                         }
 
                         var data={
@@ -94,9 +91,10 @@ angular.module('controllers.deliveryCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
+                                console.log(result.msg)
                                 $alert.show(result.msg)
                                 if(result.msg=='操作成功'||result.msg=='发货成功'){
-                                    if($stateParams.type==1){
+                                    if($stateParams.type==1||$stateParams.type==2){
                                         $state.go($config.controllers.boughtRefundsRelease.name,null,{reload:true});
                                     }else{
                                         $state.go($config.controllers.mySold.name,null,{reload:true});

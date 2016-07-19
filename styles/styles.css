@@ -2875,7 +2875,7 @@ ion-content{
 .orderBtn{
     padding:0px !important;
     background-position:bottom !important;
-    background: rgba(242,242,242,0.1);
+    background: transparent !important;
 }
 .processItem{
     padding:0px;
