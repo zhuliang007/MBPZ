@@ -1483,8 +1483,8 @@ ion-content{
 .personal-user-image div{
     margin-left:10px;
     margin-top:9px;
-    width:60px;
-    height: 60px;
+    width:50px !important;
+    height: 50px !important;
     float:left;
 }
 .personal-name{
@@ -3197,4 +3197,11 @@ a{
     word-break: break-all;
     word-wrap:break-word;
     white-space: normal;
+}
+
+.noListFont {
+    text-align: center;
+    padding-top:40%;
+    font-size: 16px;
+    color:#999999;
 }

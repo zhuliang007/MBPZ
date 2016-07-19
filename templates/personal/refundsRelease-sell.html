@@ -1,6 +1,11 @@
 <ion-view >
     <ion-content >
-        <ion-list ng-repeat="item in items track by $index" class="soldList">
+        <div class="row" ng-if="items.length==0">
+            <div  class="col col-center noListFont">
+                <span>没有相关内容</span>
+            </div>
+        </div>
+        <ion-list ng-repeat="item in items track by $index" class="soldList" ng-if="items.length>0">
             <div class="item shelvesItems">
                 <a  ng-click="orderDetail(item.id,4)">
                     <div class="row shelvesRow">
