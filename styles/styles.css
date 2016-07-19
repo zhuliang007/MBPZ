@@ -1483,8 +1483,8 @@ ion-content{
 .personal-user-image div{
     margin-left:10px;
     margin-top:9px;
-    width:60px;
-    height: 60px;
+    width:50px !important;
+    height: 50px !important;
     float:left;
 }
 .personal-name{
