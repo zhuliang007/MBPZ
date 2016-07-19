@@ -9,7 +9,7 @@
         <div id="user_list" style="display: none;" ></div>
         <ion-list class="message-list" ng-repeat="item in items track by $index">
             <a class="item item-avatar" ng-click="contactFn(item,0)">
-                <img ng-src="{{item.avators||defaultHead}}">
+                <img ng-src="{{item.avators?item.avators+'@414w':defaultHead}}">
                 <h2 >{{item.nickname}}</h2>
                 <p ng-bind-html="item.emot"></p>
             </a>

@@ -44,8 +44,8 @@
 .mbpz-icon-readers:before { content: "\e60d"; }
 
 /*百度地图*/
-bd-map{
-    display: none;
+map{
+    display: block;
 }
 
 ion-content{

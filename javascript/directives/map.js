@@ -1,10 +1,10 @@
 /**
  * Created by Administrator on 2016/6/15.
  */
-angular.module('directives.bdMap',[])
-    .directive('bdMap',[
+angular.module('directives.map',[])
+    .directive('map',[
         function(){
-            var bdMap = {}
+           /* var bdMap = {}
             var timeFlag = true;
 
             bdMap.restrict = 'E';
@@ -104,6 +104,87 @@ angular.module('directives.bdMap',[])
                 }
             }]
 
-            return bdMap;
+            return bdMap;*/
+
+
+            var map = {};
+            map.restrict = 'E';
+            map.template = '<div id="container" style="width:500px; height:300px"></div>';
+            map.controller = ['$scope','$rootScope','$console','$config','$httpService','$locals','$interval','$alert',
+                function($scope,$rootScope,$console,$config,$httpService,$locals,$interval,$alert){
+                    var qMaps = new qq.maps.Map(document.getElementById("container"), {
+                        // 地图的中心地理坐标。
+                        center: new qq.maps.LatLng(39.916527,116.397128)
+                    });
+
+                    var cs=new qq.maps.CityService({
+                        map : qMaps,
+                        complete : function(results){
+                            alert(JSON.stringify(results));
+                            qMaps.setCenter(results.detail.latLng);
+                            var marker = new qq.maps.Marker({
+                                map:qMaps,
+                                position: results.detail.latLng
+                            });
+                        }
+                    });
+
+                    var geocoder = new qq.maps.Geocoder({
+                        complete:function(result){
+                            alert(JSON.stringify(result));
+                        }
+                    });
+
+
+                    var latitude ;//纬度
+                    var longitude ; //经度
+                    getLocation();
+                    function getLocation()
+                    {
+                        if (navigator.geolocation)
+                        {
+                            navigator.geolocation.getCurrentPosition(showPosition,showError);
+                        }
+                        else{
+                            $alert.show('您当前设备不支持定位功能');
+                        }
+                    }
+
+                    function showPosition(position)
+                    {
+                        latitude = position.coords.latitude;
+                        longitude = position.coords.longitude;
+                        console.log(latitude)
+                        console.log(longitude)
+                        /*new qq.maps.convertor.translate(new qq.maps.LatLng(latitude, longitude), 3, function(res) {
+                            alert(JSON.stringify(res));
+                        });*/
+                        //cs.searchCityByLatLng(new qq.maps.LatLng(latitude,longitude));
+                        /*var coord=new qq.maps.LatLng(latitude,longitude);
+                        geocoder.getAddress(coord);*/
+                    }
+
+                    function showError(error)
+                    {
+                        switch(error.code)
+                        {
+                            case error.PERMISSION_DENIED:
+                                $alert.show('当前定位功能不可用');
+                                $rootScope.currentCity = '';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                $rootScope.currentCity = '';
+                                break;
+                            case error.TIMEOUT:
+                                $rootScope.currentCity = '';
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                $rootScope.currentCity = '';
+                                break;
+                        }
+                    }
+            }]
+
+            return map;
         }
     ])
