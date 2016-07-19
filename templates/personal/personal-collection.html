@@ -7,6 +7,9 @@
     </ion-header-bar>
     <ion-content >
         <div class="card-group">
+            <div ng-if="productList == null" class="notFoundList">
+                暂无数据
+            </div>
             <div class="card-item-normal collection-item" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,101)">
                 <div class="row padding-none-horizontal padding-normal-vertical">
                     <div class="col col-25 col-center padding-none-horizontal padding-none-vertical">
