@@ -496,8 +496,8 @@ angular.module('controllers.start',[])
                 var item = JSON.parse(json);
 
                 var data = {
-                    "uid":$scope.userPhone,
-                    "credential":$scope.userPhone,
+                    "uid":$scope.userInfo.loginAccount,
+                    "credential":$scope.userInfo.loginAccount,
                     "touid":item.uid,
                     "nickName":item.nickname,
                     "type":type,
@@ -507,7 +507,8 @@ angular.module('controllers.start',[])
                     "orderId":data.orderId,
                     "orderType":data.orderType,
                     "productId":data.productId,
-                    "currentId":data.currentId
+                    "currentId":data.currentId,
+                    "loginToken":token
                 }
 
                 $locals.setObject('mkit',data);
