@@ -3025,8 +3025,10 @@ ion-content{
 .personalCenter .personalCenterTop{
     position: fixed;
     z-index:200;
-    -webkit-filter: blur(20px);
-    filter: blur(20px);
+}
+
+.personalCenter .personalCenterTop.none-header{
+    background-color: gray;
 }
 
 .personalCenter .personalCenterOperation{

@@ -1,6 +1,7 @@
 <!--个人中心-->
 <ion-view class="personalCenter">
-    <div class="bgImg bgImg-5-3 personalCenterTop" ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg?personalCenterInfo.userInfo.userImg+'@414w':defaultHead)"></div>
+    <div class="bgImg bgImg-5-3 personalCenterTop" ng-class="{true:'none-header',false:''}[personalCenterInfo.userInfo.userImg==null]"
+         ng-style="setBackGroundImage(personalCenterInfo.userInfo.userImg?personalCenterInfo.userInfo.userImg+'@414w_25-25bl':'')"></div>
     <div class="personalCenterOperation">
         <span class="icon ion-ios-arrow-back back" ng-click="goBackBefore()"></span>
         <span class="icon mbpz mbpz-icon-chat chat" ng-click="contactSeller(personalCenterInfo.userInfo,personalCenterInfo.productId,personalCenterInfo.type)"></span>
