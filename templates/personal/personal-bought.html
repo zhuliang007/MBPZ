@@ -6,11 +6,6 @@
         <h1 class="title">宝贝已购</h1>
     </ion-header-bar>
     <ion-content >
-        <div class="row" ng-if="items.length==0">
-            <div  class="col col-center noListFont">
-                <span>没有相关内容</span>
-            </div>
-        </div>
         <ion-list ng-repeat="item in items track by $index" class="soldList" ng-if="items.length>0">
             <div class="item shelvesItems">
                 <a  ng-click="orderDetail(item.id,0)">
@@ -61,6 +56,11 @@
                 </div>
             </div>
         </ion-list>
+        <div class="row" ng-if="items==null">
+            <div  class="col col-center noListFont">
+                <span>没有相关内容</span>
+            </div>
+        </div>
         <ion-infinite-scroll
                 on-infinite="boughtLoadMore()"
                 ng-if="!noMoreLoad"
