@@ -6,12 +6,6 @@
         <h1 class="title">我的收藏</h1>
     </ion-header-bar>
     <ion-content >
-        <div class="row" ng-if="productList.length==0">
-            <div  class="col col-center noListFont">
-               <span>没有相关内容</span>
-            </div>
-        </div>
-
         <div class="card-group" ng-if="productList.length>0">
             <div class="card-item-normal collection-item" ng-repeat="product in productList track by $index" ng-click="showProduct(product.id,101)">
                 <div class="row padding-none-horizontal padding-normal-vertical">
@@ -60,6 +54,11 @@
                         <span ng-bind="(product.replyNumber||0)" class="counts"></span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row" ng-if="productList==null">
+            <div  class="col col-center noListFont">
+                <span>没有相关内容</span>
             </div>
         </div>
         <ion-infinite-scroll
