@@ -191,9 +191,9 @@ angular.module('controllers.orderDetailCtrl',[])
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
                                 $alert.show(result.msg)
-                                if(result.msg=='操作成功'){
+                                //if(result.msg=='操作成功'){
                                     $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true});
-                                }
+                                //}
                             })
                     })
 
