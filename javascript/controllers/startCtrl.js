@@ -22,8 +22,10 @@ angular.module('controllers.start',[])
         function($scope,$console,$config,$rootScope,$state,$stateParams,$city,$ionicModal,$location,$interval,$httpService,$ionicHistory,$q,$keywords,$alert,$locals){
 
             $scope.thirdType = 4;
-            $scope.userPhone = purl().param('loginAccount');
-
+            var token = purl().param('loginToken');
+            var account = purl().param('loginAccount');
+            $scope.userPhone = token?token:account;
+//ZDEzYTlmNDAtOTBjYy00NTRhLTk4M2UtY2ViM2U5ZWZmNjU1
 
             login = function(){
                 if($scope.userPhone){
@@ -35,12 +37,12 @@ angular.module('controllers.start',[])
                     var data = {
                         "cmd": $config.cmds.h5Login,
                         "parameters":{
-                            "loginAccount":$scope.userPhone
+                            "loginAccount":account,
+                            "loginToken":token
                         }
                     }
                     $httpService.getJsonFromPost($config.getRequestAction(),data)
                         .then(function(result){
-                            console.log(result)
                             $scope.userInfo = {
                                 loginToken:result.data.loginToken,
                                 loginAccount:result.data.loginAccount,
@@ -494,8 +496,8 @@ angular.module('controllers.start',[])
                 var item = JSON.parse(json);
 
                 var data = {
-                    "uid":$scope.userPhone,
-                    "credential":$scope.userPhone,
+                    "uid":$scope.userInfo.loginAccount,
+                    "credential":$scope.userInfo.loginAccount,
                     "touid":item.uid,
                     "nickName":item.nickname,
                     "type":type,
@@ -505,7 +507,8 @@ angular.module('controllers.start',[])
                     "orderId":data.orderId,
                     "orderType":data.orderType,
                     "productId":data.productId,
-                    "currentId":data.currentId
+                    "currentId":data.currentId,
+                    "loginToken":token
                 }
 
                 $locals.setObject('mkit',data);

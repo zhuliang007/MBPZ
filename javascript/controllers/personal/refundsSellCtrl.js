@@ -99,7 +99,6 @@ angular.module('controllers.refundsSellCtrl',[])
                         }
                         $httpService.getJsonFromPost($config.getRequestAction(),data)
                             .then(function(result){
-                                console.log(result)
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){
                                     $state.go($config.controllers.sellRefundsRelease.name,null,{reload:true})

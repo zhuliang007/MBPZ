@@ -29,26 +29,31 @@
         var data = JSON.parse(window.localStorage.getItem("mkit"));
         var homeType = window.localStorage.getItem("home_type");
         var sellerType = window.localStorage.getItem("seller_type");
-        console.log("data",data);
-        var debug = true;
+        var debug = false;
         function locationHref(){
             var locationHref;
+            var requestAccount = "loginAccount="+data.uid;
+            if(data.loginToken){
+                requestAccount="loginToken="+data.loginToken;
+            }
             if(debug){
-                locationHref = "http://"+window.location.host+"/MBPZ/index.html?loginAccount="+data.uid
+                locationHref = "http://"+window.location.host+"/MBPZ/index.html?"+requestAccount;
             }
             else{
-                locationHref = "http://"+window.location.host+"/smartMBPZ/index.html?loginAccount="+data.uid
+                locationHref = "http://"+window.location.host+"/smartMBPZ/index.html?"+requestAccount;
             }
             return locationHref;
         }
+
+
 
         WKIT.init({
             uid: data.uid || 'test0',
             appkey: data.appkeys,
             credential: data.credential || '123456',
             touid: data.touid || 'test1',
-            avatar:data.userImage||'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
-            toAvatar:data.toUserImage||'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
+            avatar:data.userImage?data.userImage+'@40w':'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
+            toAvatar:data.toUserImage?data.toUserImage+'@40w':'http://mbpz.image.alimmdn.com/smartMBPZ/resources/image/default-head.png',
             onMsgReceived: function(data){
                 console.log(data);
             },

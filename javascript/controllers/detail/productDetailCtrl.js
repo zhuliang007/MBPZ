@@ -48,7 +48,7 @@ angular.module('controllers.productDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        console.log(result);
+                        //console.log(result);
                         //console.log('productDetail',result)
                         result.data["type"]=$stateParams.type;
                         $scope.product = result.data;

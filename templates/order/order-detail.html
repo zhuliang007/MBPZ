@@ -79,7 +79,7 @@
                         <div class="processDiv" ng-repeat="processItem in items.process track by $index" ng-if="items.process.length>0">
                             <p class="processFont" ng-bind="processItem.statusName"></p>
                             <p>
-                                <img src="{{progresBar}}" width="100%" height="100%">
+                                <img ng-src="{{progresBar}}" width="100%" height="100%">
                             </p>
                             <p class="processTime" ng-bind="processItem.statusDate"></p>
                         </div>
