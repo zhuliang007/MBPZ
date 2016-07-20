@@ -77,7 +77,14 @@ angular.module('controllers.cancalOrderCtrl',[])
                 }
             }
 
-
+            document.getElementById('cancelResponse').readOnly = 'readonly';
+            $scope.displayCancel = function (value) {
+                if(value=='其他原因'){
+                    document.getElementById('cancelResponse').readOnly = '';
+                }else{
+                    document.getElementById('cancelResponse').readOnly = 'readonly';
+                }
+            }
 
         }])
 
