@@ -17,7 +17,7 @@ angular.module('controllers.message',[])
                 userInfo =  $locals.getObject($config.user_local_info);
             }
 
-            console.log(userInfo)
+            //console.log(userInfo)
 
             init = function(){
                 var data = {

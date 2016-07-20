@@ -50,20 +50,18 @@ angular.module('controllers.shopDetail',[])
                         //$console.show(result);
                         result.data['type']=$stateParams.type;
                         $scope.product = result.data;
-                        $timeout(function(){
-                            if(productSlideBox){
-                                productSlideBox.update();
-                                $timeout(function(){
-                                    if(productSlideBox.slidesCount()>1){
-                                        $scope.showPager = true;
-                                        productSlideBox.loop(true);
-                                    }
-                                    else{
-                                        $scope.showPager = false;
-                                    }
-                                })
-                            }
-                        })
+                        if(productSlideBox){
+                            productSlideBox.update();
+                            $timeout(function(){
+                                if(productSlideBox.slidesCount()>1){
+                                    $scope.showPager = true;
+                                    productSlideBox.loop(true);
+                                }
+                                else{
+                                    $scope.showPager = false;
+                                }
+                            })
+                        }
                     },function(error){
                         //$console.show(error);
                         if(!error){
@@ -170,7 +168,7 @@ angular.module('controllers.shopDetail',[])
 
                 $httpService.getJsonFromPost($config.getRequestAction(),data)
                     .then(function(result){
-                        //$console.show(result);
+                        $alert.show(result.msg);
                         $scope.product.isSpot = $scope.product.isSpot?0:1;
                     },function(error){
                         //$console.show(error);
@@ -333,7 +331,7 @@ angular.module('controllers.shopDetail',[])
             }
 
             $scope.goBackBefore = function () {
-                console.log($stateParams.type)
+                //console.log($stateParams.type)
                 if(parseInt($stateParams.type)==150||parseInt($stateParams.type)==23){
                     $state.go($config.controllers.tabsShop.name);
                 }else{
