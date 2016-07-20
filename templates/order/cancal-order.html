@@ -10,11 +10,11 @@
             <div class="item item-divider cancelOrderTitle">
                 请选择取消订单原因
             </div>
-            <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-repeat="item in items track by $index" ng-value="item.value" ng-model="cancelResponse.chooseType">
+            <ion-radio class="orderRadio" icon="ion-ios-checkmark-outline" ng-repeat="item in items track by $index" ng-value="item.value" ng-model="cancelResponse.chooseType" ng-click="displayCancel(item.value)">
                 <span ng-bind="item.name"></span>
             </ion-radio>
-            <div class="cancelOrderText">
-                <textarea placeholder="请输入取消订单原因" ng-model="cancelResponse.textValue"></textarea>
+            <div class="cancelOrderText" >
+                <textarea placeholder="请输入取消订单原因" ng-model="cancelResponse.textValue" id="cancelResponse" ></textarea>
             </div>
             <div class="padding-normal-horizontal">
                 <button class="button button-block button-positive" ng-click="submitOrder()">提交申请</button>
