@@ -32,13 +32,11 @@ angular.module('controllers.home',[])
             getAds();
             getQGXX();
             function getAds(){
-                var data = {
-                    "cmd":$config.cmds.adInfo,
-                    "parameters":{
-                        "adType" : 'INDEX'
-                    }
+                $scope.commonBean.cmd = $config.cmds.adInfo;
+                $scope.commonBean.parameters={
+                    "adType" : 'INDEX'
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.adList = result.data;
                         adSlideBox.update();
@@ -54,16 +52,16 @@ angular.module('controllers.home',[])
                     })
             }
             function getQGXX(){
-                var data = {
-                    "cmd":$config.cmds.getPage,
-                    "parameters":{
-                        "type":1,
-                        "numberOfPerPage":10,
-                        "pageNo":0
-                    }
-                }
 
-                $cache.setValue($config.getRequestAction(),data,'qgHome')
+                $scope.commonBean.cmd = $config.cmds.getPage;
+                $scope.commonBean.parameters={
+                    "type":1,
+                    "numberOfPerPage":10,
+                    "pageNo":0
+                }
+                $scope.commonBean.token = null
+
+                $cache.setValue($config.getRequestAction(),JSON.stringify($scope.commonBean),'qgHome')
                     .then(function(result){
                         QGXXListCache = $cache.getValue('qgHome');
                         slideQGXX();
@@ -100,17 +98,15 @@ angular.module('controllers.home',[])
             });
 
             function getProductHome(){
-                var data = {
-                    "cmd": $config.cmds.getPage,
-                    "parameters":{
-                        "numberOfPerPage":numberOfPerPage,
-                        "city":$rootScope.currentCity&&$rootScope.currentCity!='城市'?$rootScope.currentCity:'',
-                        "pageNo":pageNo,
-                        "type":0
-                    }
+                $scope.commonBean.cmd = $config.cmds.getPage;
+                $scope.commonBean.parameters={
+                    "numberOfPerPage":numberOfPerPage,
+                    "city":$rootScope.currentCity&&$rootScope.currentCity!='城市'?$rootScope.currentCity:'',
+                    "pageNo":pageNo,
+                    "type":0
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)
                         //console.log("home",result);

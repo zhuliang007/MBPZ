@@ -223,7 +223,7 @@ angular.module('controllers.start',[])
                 districtList: []
             }
 
-            $keywords.getProvinceCity()
+            $keywords.getProvinceCity($scope)
                 .then(function(result){
                     $rootScope.provinceCityList.provinceList = result.provinceList;
                     $rootScope.provinceCityList.cityList = result[110000];
@@ -322,12 +322,12 @@ angular.module('controllers.start',[])
                 return deferred.promise;
             }
 
-            $city.setHotCity()
+            $city.setHotCity($scope)
                 .then(function(){
                     $scope.hotCityList = $city.hotCity;
                 })
 
-            $city.setAllCity()
+            $city.setAllCity($scope)
                 .then(function(){
                     $scope.allCityList = $city.allCity;
                 })

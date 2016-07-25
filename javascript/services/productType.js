@@ -10,22 +10,21 @@ angular.module('services.productType',[])
         function($httpService,$config,$console,$q){
             var $productType = {}
 
-            $productType.setTypeCodes = function(){
+            $productType.setTypeCodes = function($scope){
                 var deferred = $q.defer();
                 if($productType.typeCodes == null || $productType.typeCodes == undefined){
                     $productType.typeCodes = [];
                 }
 
                 if($productType.typeCodes.length == 0){
-                    var data = {
-                        "cmd": $config.cmds.codeInfo,
-                        "parameters":{
-                            "typeCode":"market_product_type",
-                            "levelCount":2
-                        }
-                    }
+                    $scope.commonBean.cmd = $config.cmds.codeInfo;
+                    $scope.commonBean.parameters={
+                        "typeCode":"market_product_type",
+                        "levelCount":2
+                    };
+                    $scope.commonBean.token = null;
 
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $productType.typeCodes = result.data;
                             deferred.resolve();

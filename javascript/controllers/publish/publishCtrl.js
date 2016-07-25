@@ -39,14 +39,12 @@ angular.module('controllers.publish',[])
             getPublishDetail();
             function getPublishDetail(){
                 if($stateParams.id){
-                    var data = {
-                        "cmd": $config.cmds.details,
-                        "parameters":{
-                            "productId":parseInt($stateParams.id,10)
-                        },
-                        "token": userInfo.loginToken
+                    $scope.commonBean.cmd = $config.cmds.details;
+                    $scope.commonBean.parameters={
+                        "productId":parseInt($stateParams.id,10)
                     }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $scope.commonBean.token = userInfo.loginToken;
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             //$console.show(result);
                             $scope.publishObject.title = result.data.title;
@@ -76,7 +74,7 @@ angular.module('controllers.publish',[])
                             var element = document.getElementById('publishImageHandle');
                             var $element = angular.element(element);
                             $element.children('.scroll').css({'width': (98 * ($scope.publishObject.publishImageList.length+1)) + 'px'});
-                            $productType.setTypeCodes()
+                            $productType.setTypeCodes($scope)
                                 .then(function(){
                                     $scope.typeCodes = $productType.typeCodes;
                                     //$console.show($scope.typeCodes)
@@ -87,7 +85,7 @@ angular.module('controllers.publish',[])
                         })
                 }
                 else{
-                    $productType.setTypeCodes()
+                    $productType.setTypeCodes($scope)
                         .then(function(){
                             $scope.typeCodes = $productType.typeCodes;
                             //$console.show($scope.typeCodes)

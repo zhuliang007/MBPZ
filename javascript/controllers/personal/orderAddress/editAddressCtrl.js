@@ -60,7 +60,7 @@ angular.module('controllers.editAddress',[])
                     }
                     $scope.commonBean.token = userInfo.loginToken;
 
-                    $keywords.getProvinceCity()
+                    $keywords.getProvinceCity($scope)
                         .then(function(result){
                             var provinceCityList = result;
                             $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
@@ -96,7 +96,7 @@ angular.module('controllers.editAddress',[])
                         })
                 }
                 else{
-                    $keywords.getProvinceCity()
+                    $keywords.getProvinceCity($scope)
                         .then(function(result){
                             $rootScope.provinceCityList.provinceList = result.provinceList;
                             $rootScope.provinceCityList.cityList = result[110000];

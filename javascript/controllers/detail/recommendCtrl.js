@@ -38,18 +38,16 @@ angular.module("controllers.recommend",[])
             };
 
             function getMyProductList(){
-                var data = {
-                    "cmd": $config.cmds.productPublic,
-                    "parameters":{
-                        "type":0,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "status":0
-                    },
-                    "token":userInfo.loginToken
+                $scope.commonBean.cmd = $config.cmds.productPublic;
+                $scope.commonBean.parameters={
+                    "type":0,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "status":0
                 }
+                $scope.commonBean.token =userInfo.loginToken;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(
                         function(result){
                             //$console.show(result);
@@ -98,19 +96,17 @@ angular.module("controllers.recommend",[])
                     return;
                 }
 
-                var data = {
-                    "cmd": $config.cmds.sendReply,
-                    "parameters":{
-                        "productId":$scope.replyObject.productId,
-                        "repUserId":$scope.replyObject.repUserId,
-                        "resolveProductId":$scope.replyObject.resolveProductId,
-                        "replyType":$scope.replyObject.replyType,
-                        "replyContents":$scope.replyObject.replyContents
-                    },
-                    "token":userInfo.loginToken
+                $scope.commonBean.cmd = $config.cmds.sendReply;
+                $scope.commonBean.parameters={
+                    "productId":$scope.replyObject.productId,
+                    "repUserId":$scope.replyObject.repUserId,
+                    "resolveProductId":$scope.replyObject.resolveProductId,
+                    "replyType":$scope.replyObject.replyType,
+                    "replyContents":$scope.replyObject.replyContents
                 }
+                $scope.commonBean.token =userInfo.loginToken;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg)
                             .then(function(){

@@ -87,16 +87,15 @@ angular.module('controllers.searchHome',[])
 
             function searchContentByType(searchContent){
                 if(searchContent){
-                    var data = {
-                        "cmd":$config.cmds.search,
-                        "parameters":{
-                            "searchContent":searchContent,
-                            "type":$scope.chooseType.type,
-                            "numberOfPerPage":numberOfPerPage,
-                            "pageNo":pageNo
-                        }
+                    $scope.commonBean.cmd = $config.cmds.search;
+                    $scope.commonBean.parameters={
+                        "searchContent":searchContent,
+                        "type":$scope.chooseType.type,
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo
                     }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $scope.commonBean.token = null;
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $console.show(result);
                             $scope.$broadcast('scroll.infiniteScrollComplete');

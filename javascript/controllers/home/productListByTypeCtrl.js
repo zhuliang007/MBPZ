@@ -40,7 +40,7 @@ angular.module('controllers.productListByTypeCtrl',[])
             }
             checkType();
             function checkType(){
-                $productType.setTypeCodes()
+                $productType.setTypeCodes($scope)
                     .then(function(){
                         switch (parseInt($stateParams.type,10)){
                             case 2:
@@ -74,17 +74,16 @@ angular.module('controllers.productListByTypeCtrl',[])
             }
 
             function getRecommendationProducts(){
-                var data = {
-                    "cmd":$config.cmds.recommendationProduct,
-                    "parameters":{
-                        "isProductRecommoned":"1",
-                        "type":"0",
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    }
+                $scope.commonBean.cmd = $config.cmds.recommendationProduct;
+                $scope.commonBean.parameters={
+                    "isProductRecommoned":"1",
+                    "type":"0",
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo
                 }
+                $scope.commonBean.token = null;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.totalPages == 0){
@@ -108,23 +107,22 @@ angular.module('controllers.productListByTypeCtrl',[])
             }
 
             function getOtherProducts(){
-
-                var data = {
-                    "cmd": $config.cmds.getPage,
-                    "parameters":{
-                        "parentClassify":$scope.filterObject.parentClassify,
-                        "secondClassify": $scope.filterObject.secondClassify==$scope.childCode?'':$scope.filterObject.secondClassify,
-                        "city":$scope.filterObject.city&&$scope.filterObject.city!='城市'?$scope.filterObject.city:'',
-                        "beginPrice":$scope.checkPrice()?null:$scope.priceObject.beginPrice,
-                        "endPrice": $scope.checkPrice()?null:$scope.priceObject.endPrice,
-                        "sortType": $scope.filterObject.sortType,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "type":0
-                    }
+                $scope.commonBean.cmd = $config.cmds.getPage;
+                $scope.commonBean.parameters={
+                    "parentClassify":$scope.filterObject.parentClassify,
+                    "secondClassify": $scope.filterObject.secondClassify==$scope.childCode?'':$scope.filterObject.secondClassify,
+                    "city":$scope.filterObject.city&&$scope.filterObject.city!='城市'?$scope.filterObject.city:'',
+                    "beginPrice":$scope.checkPrice()?null:$scope.priceObject.beginPrice,
+                    "endPrice": $scope.checkPrice()?null:$scope.priceObject.endPrice,
+                    "sortType": $scope.filterObject.sortType,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "type":0
                 }
+                $scope.commonBean.token = null;
+
                 //$console.show(data);
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');

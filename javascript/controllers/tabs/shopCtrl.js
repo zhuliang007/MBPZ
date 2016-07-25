@@ -24,7 +24,7 @@ angular.module('controllers.shop',[])
             $scope.infiniteFlag = true;
             $scope.sortText = '全部';
 
-            $keywords.setKeyWords('dictList')
+            $keywords.setKeyWords($scope,'dictList')
                 .then(function(result){
                     $scope.sortObject = result;
                 })
@@ -32,46 +32,38 @@ angular.module('controllers.shop',[])
             var sortSelect = null;
 
             function getProductShop(){
-                var data;
+                $scope.commonBean.cmd = $config.cmds.getPage;
+
                 if(!sortSelect)
                 {
-                    data = {
-                        "cmd": $config.cmds.getPage,
-                        "parameters":{
-                            "numberOfPerPage":numberOfPerPage,
-                            "pageNo":pageNo,
-                            "type":1,
-                            "sortType":'new_publish'
-                        }
+                    $scope.commonBean.parameters={
+                        "numberOfPerPage":numberOfPerPage,
+                        "pageNo":pageNo,
+                        "type":1,
+                        "sortType":'new_publish'
                     }
                 }
                 else{
                     switch (sortSelect.remark){
                         case 'sortType':
-                            data = {
-                                "cmd": $config.cmds.getPage,
-                                "parameters":{
-                                    "numberOfPerPage":numberOfPerPage,
-                                    "pageNo":pageNo,
-                                    "type":1,
-                                    "sortType":sortSelect.value
-                                }
+                            $scope.commonBean.parameters={
+                                "numberOfPerPage":numberOfPerPage,
+                                "pageNo":pageNo,
+                                "type":1,
+                                "sortType":sortSelect.value
                             }
                             break;
                         case 'isResolve':
-                            data = {
-                                "cmd": $config.cmds.getPage,
-                                "parameters":{
-                                    "numberOfPerPage":numberOfPerPage,
-                                    "pageNo":pageNo,
-                                    "type":1,
-                                    "isResolve":sortSelect.value
-                                }
+                            $scope.commonBean.parameters={
+                                "numberOfPerPage":numberOfPerPage,
+                                "pageNo":pageNo,
+                                "type":1,
+                                "isResolve":sortSelect.value
                             }
                             break;
                     }
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');

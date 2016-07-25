@@ -22,7 +22,7 @@ angular.module('controllers.report',[])
             }
             getKeyWords();
             function getKeyWords(){
-                $keywords.setKeyWords('report',userInfo.loginToken)
+                $keywords.setKeyWords($scope,'report',userInfo.loginToken)
                     .then(function(result){
                         $scope.reportTypeList = result;
                         //$console.show(result)
@@ -53,18 +53,16 @@ angular.module('controllers.report',[])
                     }
                 }
 
-                var data = {
-                    "cmd": $config.cmds.report,
-                    "parameters":{
-                        "reportContentType":chooseType,
-                        "relateId":productId,
-                        "reportContent":chooseType==4?reasonText:''
-                    },
-                    "token":userInfo.loginToken
+                $scope.commonBean.cmd = $config.cmds.report;
+                $scope.commonBean.parameters={
+                    "reportContentType":chooseType,
+                    "relateId":productId,
+                    "reportContent":chooseType==4?reasonText:''
                 }
+                $scope.commonBean.token =userInfo.loginToken;
                 //console.log('report',data)
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result.msg);
                         $alert.show(result.msg)

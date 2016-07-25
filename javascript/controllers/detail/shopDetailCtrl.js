@@ -37,22 +37,19 @@ angular.module('controllers.shopDetail',[])
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
             getProductDetail();
             function getProductDetail(){
-                var data = {
-                    "cmd": $config.cmds.details,
-                    "parameters":{
-                        "productId":id
-                    },
-                    "token": userInfo.loginToken
+                $scope.commonBean.cmd = $config.cmds.details;
+                $scope.commonBean.parameters={
+                    "productId":id
                 }
+                $scope.commonBean.token = userInfo.loginToken;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         result.data['type']=$stateParams.type;
                         $scope.product = result.data;
                         productSlideBox.update();
                         if(productSlideBox){
-
                             $timeout(function(){
                                 if(productSlideBox.slidesCount()>1){
                                     $scope.showPager = true;
@@ -76,17 +73,16 @@ angular.module('controllers.shopDetail',[])
             };
 
             function getReplyList(){
-                var data = {
-                    "cmd": $config.cmds.replyList,
-                    "parameters":{
-                        "productId":id,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "replyType": 1
-                    }
+                $scope.commonBean.cmd = $config.cmds.replyList;
+                $scope.commonBean.parameters={
+                    "productId":id,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "replyType": 1
                 }
+                $scope.commonBean.token = null;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -158,16 +154,15 @@ angular.module('controllers.shopDetail',[])
                     $alert.show('请先登录萌宝派')
                     return ;
                 }
-                var data = {
-                    "cmd":$config.cmds.spot,
-                    "parameters":{
-                        "productId": $scope.product.id,
-                        "isSpot":$scope.product.isSpot?0:1
-                    },
-                    "token":userInfo.loginToken
-                };
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.spot;
+                $scope.commonBean.parameters={
+                    "productId": $scope.product.id,
+                    "isSpot":$scope.product.isSpot?0:1
+                }
+                $scope.commonBean.token =userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                         $scope.product.isSpot = $scope.product.isSpot?0:1;
@@ -186,15 +181,14 @@ angular.module('controllers.shopDetail',[])
                 }
                 if($scope.userInfo.loginAccount == $scope.product.publicUser.loginAccount){
                     //$console.show("确认解决")
-                    var data = {
-                        "cmd": $config.cmds.resolve,
-                        "parameters":{
-                            "productId":id
-                        },
-                        "token":userInfo.loginToken
-                    }
 
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $scope.commonBean.cmd = $config.cmds.resolve;
+                    $scope.commonBean.parameters={
+                        "productId":id
+                    }
+                    $scope.commonBean.token =userInfo.loginToken;
+
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $alert.show(result.msg)
                             getProductDetail();
@@ -299,18 +293,16 @@ angular.module('controllers.shopDetail',[])
                     return;
                 }
 
-                var data ={
-                    "cmd": $config.cmds.sendReply,
-                    "parameters":{
-                        "replyType":1,
-                        "productId":$scope.replyObject.productId,
-                        "repUserId":$scope.replyObject.repUserId,
-                        "replyContents":$scope.replyObject.replyContents,
-                    },
-                    "token":userInfo.loginToken
+                $scope.commonBean.cmd = $config.cmds.sendReply;
+                $scope.commonBean.parameters={
+                    "replyType":1,
+                    "productId":$scope.replyObject.productId,
+                    "repUserId":$scope.replyObject.repUserId,
+                    "replyContents":$scope.replyObject.replyContents,
                 }
+                $scope.commonBean.token =userInfo.loginToken;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $alert.show(result.msg);
@@ -323,6 +315,7 @@ angular.module('controllers.shopDetail',[])
                         var element = document.getElementById('replyBody');
                         productHandle.scrollTo(0,element.offsetTop);
                         $scope.infiniteFlag = true;
+                        getProductDetail();
                     },function(error){
                         //$console.show(error);
                         if(!error){

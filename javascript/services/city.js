@@ -14,15 +14,16 @@ angular.module('services.city',[])
 
             $city.allCity = [];
 
-            $city.setHotCity = function(){
+            $city.setHotCity = function($scope){
                 var deferred = $q.defer();
 
                 if($city.hotCity.length==0){
-                    var data = {
-                        "cmd":$config.cmds.getHotCityList
-                    }
 
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $scope.commonBean.cmd = $config.cmds.getHotCityList;
+                    $scope.commonBean.parameters=null;
+                    $scope.commonBean.token = null;
+
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $city.hotCity = result.data.hotCity;
                             deferred.resolve();
@@ -37,15 +38,15 @@ angular.module('services.city',[])
                 return deferred.promise;
             }
 
-            $city.setAllCity = function(){
+            $city.setAllCity = function($scope){
                 var deferred = $q.defer();
 
                 if($city.allCity.length==0){
-                    var data = {
-                        "cmd":$config.cmds.getAllCityList
-                    }
+                    $scope.commonBean.cmd = $config.cmds.getAllCityList;
+                    $scope.commonBean.parameters=null;
+                    $scope.commonBean.token = null;
 
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $city.allCity = result.data.allCity;
                             deferred.resolve();
