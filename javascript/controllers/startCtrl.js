@@ -26,6 +26,7 @@ angular.module('controllers.start',[])
             var account = purl().param('loginAccount');
             $scope.userPhone = token?token:account;
 //ZDEzYTlmNDAtOTBjYy00NTRhLTk4M2UtY2ViM2U5ZWZmNjU1
+            $scope.commonBean = new commonBean();
 
             login = function(){
                 if($scope.userPhone){
@@ -34,14 +35,20 @@ angular.module('controllers.start',[])
                 //    $scope.userInfo = $locals.getObject($config.user_local_info);
                 //}else if($scope.userPhone){
                     $locals.set($config.u_p, $scope.userPhone);
-                    var data = {
-                        "cmd": $config.cmds.h5Login,
-                        "parameters":{
-                            "loginAccount":account,
-                            "loginToken":token
-                        }
+                    //var data = {
+                    //    "cmd": $config.cmds.h5Login,
+                    //    "parameters":{
+                    //        "loginAccount":account,
+                    //        "loginToken":token
+                    //    }
+                    //}
+
+                    $scope.commonBean.cmd = $config.cmds.h5Login;
+                    $scope.commonBean.parameters={
+                        "loginAccount":account,
+                        "loginToken":token
                     }
-                    $httpService.getJsonFromPost($config.getRequestAction(),data)
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $scope.userInfo = {
                                 loginToken:result.data.loginToken,
