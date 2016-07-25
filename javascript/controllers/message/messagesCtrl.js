@@ -22,16 +22,24 @@ angular.module('controllers.messagesCtrl',[])
             }
 
             $scope.loadMore = function() {
-                var data = {
-                    "cmd":$config.cmds.systemMessage,
-                    "parameters":{
-                        "modual" :$stateParams.modual,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.systemMessage,
+                //    "parameters":{
+                //        "modual" :$stateParams.modual,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.systemMessage;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "modual" :$stateParams.modual,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
