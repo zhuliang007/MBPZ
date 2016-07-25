@@ -50,8 +50,9 @@ angular.module('controllers.shopDetail',[])
                         //$console.show(result);
                         result.data['type']=$stateParams.type;
                         $scope.product = result.data;
+                        productSlideBox.update();
                         if(productSlideBox){
-                            productSlideBox.update();
+
                             $timeout(function(){
                                 if(productSlideBox.slidesCount()>1){
                                     $scope.showPager = true;
