@@ -46,7 +46,7 @@ angular.module('controllers.refundsSellCtrl',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
-                        console.log(result)
+                        //console.log(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
                             $scope.noMoreLoad=true;

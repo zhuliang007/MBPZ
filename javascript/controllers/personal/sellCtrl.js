@@ -25,16 +25,23 @@ angular.module('controllers.sellCtrl',[])
 
             $scope.items = [];
             $scope.publicLoadMore = function () {
-                var data = {
-                    "cmd":$config.cmds.productPublic,
-                    "parameters":{
-                        "type":0,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.productPublic,
+                //    "parameters":{
+                //        "type":0,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.productPublic;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "type":0,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
@@ -67,14 +74,19 @@ angular.module('controllers.sellCtrl',[])
             $scope.showConfirm = function(productid) {
                 $alert.confirm('是否确定删除?')
                     .then(function () {
-                        var delData =  {
-                            "cmd": $config.cmds.productDel,
-                            "parameters":{
-                                "productId":productid
-                            },
-                            "token":userInfo.loginToken
+                        //var delData =  {
+                        //    "cmd": $config.cmds.productDel,
+                        //    "parameters":{
+                        //        "productId":productid
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+                        $scope.commonBean.cmd = $config.cmds.productDel;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "productId":productid
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),delData)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 $state.reload();

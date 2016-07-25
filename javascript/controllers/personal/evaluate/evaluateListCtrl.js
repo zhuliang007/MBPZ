@@ -23,21 +23,30 @@ angular.module('controllers.evaluateList',[])
             }
 
             function getEvaluateList(){
-                var data = {
-                    "cmd":$config.cmds.evaluateList,
-                    "parameters":{
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.evaluateList,
+                //    "parameters":{
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.evaluateList;
+                $scope.commonBean.parameters={
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo
                 }
+                $scope.commonBean.token = userInfo.loginToken;
                 if($stateParams.userId){
-                    data.parameters = {
+                    //data.parameters = {
+                    //    "userId":$stateParams.userId
+                    //}
+                    $scope.commonBean.parameters = {
                         "userId":$stateParams.userId
                     }
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');

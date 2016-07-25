@@ -46,19 +46,25 @@ angular.module('controllers.editAddress',[])
             getAddressObject();
             function getAddressObject(){
                 if($stateParams.id){
-                    var data = {
-                        "cmd":$config.cmds.userAddressDetail,
-                        "parameters":{
-                            "id":$stateParams.id
-                        },
-                        "token":userInfo.loginToken
+                    //var data = {
+                    //    "cmd":$config.cmds.userAddressDetail,
+                    //    "parameters":{
+                    //        "id":$stateParams.id
+                    //    },
+                    //    "token":userInfo.loginToken
+                    //}
+
+                    $scope.commonBean.cmd = $config.cmds.userAddressDetail;
+                    $scope.commonBean.parameters={
+                        "id":$stateParams.id
                     }
+                    $scope.commonBean.token = userInfo.loginToken;
 
                     $keywords.getProvinceCity()
                         .then(function(result){
                             var provinceCityList = result;
                             $rootScope.provinceCityList.provinceList = provinceCityList.provinceList;
-                            $httpService.getJsonFromPost($config.getRequestAction(),data)
+                            $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                                 .then(function(result){
                                     //$console.show(result);
                                     $rootScope.provinceCityList.cityList = provinceCityList[result.data.province];
@@ -102,14 +108,19 @@ angular.module('controllers.editAddress',[])
             $scope.deleteAddress = function(){
                 $alert.confirm('是否删除当前地址?')
                     .then(function(){
-                        var data = {
-                            "cmd":$config.cmds.userAddressDelete,
-                            "parameters":{
-                                "id":$scope.addressId
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd":$config.cmds.userAddressDelete,
+                        //    "parameters":{
+                        //        "id":$scope.addressId
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+                        $scope.commonBean.cmd = $config.cmds.userAddressDelete;
+                        $scope.commonBean.parameters={
+                            "id":$scope.addressId
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg)
                                     .then(function(){
@@ -223,23 +234,37 @@ angular.module('controllers.editAddress',[])
                     }
                 }
                 //$console.show("保存中");
-                var data = {
-                    "cmd":$config.cmds.userAddressSave,
-                    "parameters":{
-                        "id": $stateParams.id,
-                        "receiveName":$scope.addressObject.receiveName,
-                        "receivePhone":$scope.addressObject.receivePhone,
-                        "postCode":$scope.addressObject.postCode,
-                        "province":$scope.addressObject.provinceCode,
-                        "city":$scope.addressObject.cityCode,
-                        "district":$scope.addressObject.districtCode,
-                        "address":$scope.addressObject.address,
-                        "isDefault":$scope.addressObject.isDefault?1:0
-                    },
-                    "token":userInfo.loginToken
-                }
+                //var data = {
+                //    "cmd":$config.cmds.userAddressSave,
+                //    "parameters":{
+                //        "id": $stateParams.id,
+                //        "receiveName":$scope.addressObject.receiveName,
+                //        "receivePhone":$scope.addressObject.receivePhone,
+                //        "postCode":$scope.addressObject.postCode,
+                //        "province":$scope.addressObject.provinceCode,
+                //        "city":$scope.addressObject.cityCode,
+                //        "district":$scope.addressObject.districtCode,
+                //        "address":$scope.addressObject.address,
+                //        "isDefault":$scope.addressObject.isDefault?1:0
+                //    },
+                //    "token":userInfo.loginToken
+                //}
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.userAddressSave;
+                $scope.commonBean.parameters={
+                    "id": $stateParams.id,
+                    "receiveName":$scope.addressObject.receiveName,
+                    "receivePhone":$scope.addressObject.receivePhone,
+                    "postCode":$scope.addressObject.postCode,
+                    "province":$scope.addressObject.provinceCode,
+                    "city":$scope.addressObject.cityCode,
+                    "district":$scope.addressObject.districtCode,
+                    "address":$scope.addressObject.address,
+                    "isDefault":$scope.addressObject.isDefault?1:0
+                }
+                $scope.commonBean.token = userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $alert.show(result.msg)

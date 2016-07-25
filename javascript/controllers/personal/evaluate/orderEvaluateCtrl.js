@@ -50,18 +50,27 @@ angular.module('controllers.orderEvaluate',[])
                     return ;
                 }
 
-                var data = {
-                    "cmd":$config.cmds.evaluateSave,
-                    "parameters":{
-                        "orderId":$stateParams.orderId,
-                        "expressSpeed":$scope.orderEvaluateObject.expressSpeed,
-                        "productMatche":$scope.orderEvaluateObject.productMatche,
-                        "content":$scope.orderEvaluateObject.content
-                    },
-                    "token":userInfo.loginToken
-                }
+                //var data = {
+                //    "cmd":$config.cmds.evaluateSave,
+                //    "parameters":{
+                //        "orderId":$stateParams.orderId,
+                //        "expressSpeed":$scope.orderEvaluateObject.expressSpeed,
+                //        "productMatche":$scope.orderEvaluateObject.productMatche,
+                //        "content":$scope.orderEvaluateObject.content
+                //    },
+                //    "token":userInfo.loginToken
+                //}
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.evaluateSave;
+                $scope.commonBean.parameters={
+                    "orderId":$stateParams.orderId,
+                    "expressSpeed":$scope.orderEvaluateObject.expressSpeed,
+                    "productMatche":$scope.orderEvaluateObject.productMatche,
+                    "content":$scope.orderEvaluateObject.content
+                }
+                $scope.commonBean.token = userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $alert.show(result.msg)
