@@ -20,14 +20,19 @@ angular.module('controllers.message',[])
             //console.log(userInfo)
 
             init = function(){
-                var data = {
-                    "cmd":$config.cmds.messageNum,
-                    "parameters":{
-                        "modual" :"system"
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.messageNum,
+                //    "parameters":{
+                //        "modual" :"system"
+                //    },
+                //    "token":
+                //}
+                $scope.commonBean.cmd = $config.cmds.messageNum;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "modual":"system"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         var arry = result.data;
                         arry.forEach(function (item) {

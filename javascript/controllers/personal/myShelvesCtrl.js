@@ -20,17 +20,25 @@ angular.module('controllers.myShelvesCtrl',[])
             }
 
             $scope.shelvesLoadMore= function () {
-                var data = {
-                    "cmd": $config.cmds.productPublic,
-                    "parameters":{
-                        "type":0,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "status":1
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.productPublic,
+                //    "parameters":{
+                //        "type":0,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "status":1
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.productPublic;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "type":0,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "status":1
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){

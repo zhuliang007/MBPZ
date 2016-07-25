@@ -8,7 +8,7 @@
 var commonBean = function(){
     this.cmd;
     this.parameters;
-    this.token='';
+    this.token=null;
     this.resolution = getWH();
     this.locationXy;
     this.deviceInfo = getDeviceData();

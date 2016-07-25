@@ -25,17 +25,26 @@ angular.module('controllers.refundsSellCtrl',[])
             }
 
             $scope.refundsSellLoadMore= function () {
-                var data = {
-                    "cmd": $config.cmds.myOrderList,
-                    "parameters":{
-                        "orderType":"refund",
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "saleType":"sell"
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.myOrderList,
+                //    "parameters":{
+                //        "orderType":"refund",
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "saleType":"sell"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.myOrderList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "orderType":"refund",
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "saleType":"sell"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         console.log(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -89,15 +98,21 @@ angular.module('controllers.refundsSellCtrl',[])
             $scope.agreeApply = function(id){
                 $alert.confirm("是否同意退款?")
                     .then(function(){
-                        var data = {
-                            "cmd": $config.cmds.applyRefused,
-                            "parameters":{
-                                "id":id,
-                                "refundStatus":"AGREE"
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd": $config.cmds.applyRefused,
+                        //    "parameters":{
+                        //        "id":id,
+                        //        "refundStatus":"AGREE"
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+                        $scope.commonBean.cmd = $config.cmds.applyRefused;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":id,
+                            "refundStatus":"AGREE"
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){
@@ -117,14 +132,19 @@ angular.module('controllers.refundsSellCtrl',[])
             $scope.submitGoods = function(id){
                 $alert.confirm('是否确认收货')
                     .then(function(){
-                        var data =  {
-                            "cmd":$config.cmds.sellerReceive,
-                            "parameters":{
-                                "id":id
-                            },
-                            "token":userInfo.loginToken
+                        //var data =  {
+                        //    "cmd":$config.cmds.sellerReceive,
+                        //    "parameters":{
+                        //        "id":id
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+                        $scope.commonBean.cmd = $config.cmds.sellerReceive;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":id
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){
@@ -137,17 +157,23 @@ angular.module('controllers.refundsSellCtrl',[])
 
             //提醒发货
             $scope.remindDelivery = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"refund",
-                        "saleType":"sell"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"refund",
+                //        "saleType":"sell"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"refund",
+                    "saleType":"sell"
                 }
-
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                     })

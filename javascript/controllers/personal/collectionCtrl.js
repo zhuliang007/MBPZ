@@ -23,16 +23,23 @@ angular.module('controllers.collectionCtrl',[])
             }
 
             $scope.collectionLoadMore = function(){
-                var data = {
-                    "cmd": $config.cmds.myProductList,
-                    "parameters":{
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.myProductList,
+                //    "parameters":{
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.myProductList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){

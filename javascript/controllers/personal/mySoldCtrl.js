@@ -19,17 +19,25 @@ angular.module('controllers.mySoldCtrl',[])
             }
 
             $scope.soldLoadMore= function () {
-                var data = {
-                    "cmd": $config.cmds.myOrderList,
-                    "parameters":{
-                        "orderType":$stateParams.orderType,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "saleType":$stateParams.saleType
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.myOrderList,
+                //    "parameters":{
+                //        "orderType":$stateParams.orderType,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "saleType":$stateParams.saleType
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.myOrderList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "orderType":$stateParams.orderType,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "saleType":$stateParams.saleType
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
@@ -79,17 +87,25 @@ angular.module('controllers.mySoldCtrl',[])
 
             //提醒收货
             $scope.remindDeliverySell =function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"order",
-                        "saleType":"sell"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"order",
+                //        "saleType":"sell"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"order",
+                    "saleType":"sell"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                         $state.go($config.controllers.mySold.name,null,{reload:true});
