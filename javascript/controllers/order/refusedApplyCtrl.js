@@ -36,16 +36,24 @@ angular.module('controllers.refusedApplyCtrl',[])
                 }
                 $alert.confirm("是否拒绝买家的退款申请?")
                     .then(function(){
-                        var data = {
-                            "cmd": $config.cmds.applyRefused,
-                            "parameters":{
-                                "id":$stateParams.id,
-                                "refundStatus":"REJECT",
-                                "rejectReason":$scope.refused.reason
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd": $config.cmds.applyRefused,
+                        //    "parameters":{
+                        //        "id":$stateParams.id,
+                        //        "refundStatus":"REJECT",
+                        //        "rejectReason":$scope.refused.reason
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+
+                        $scope.commonBean.cmd = $config.cmds.applyRefused;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":$stateParams.id,
+                            "refundStatus":"REJECT",
+                            "rejectReason":$scope.refused.reason
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){

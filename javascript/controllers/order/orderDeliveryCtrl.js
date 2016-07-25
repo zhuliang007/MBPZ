@@ -26,14 +26,20 @@ angular.module('controllers.deliveryCtrl',[])
             }
 
             init = function(){
-                var data={
-                    "cmd": $config.cmds.dictList,
-                    "parameters": {
-                        "typeCode":"expressCompany"
-                    },
-                    "token":userInfo.loginToken
+                //var data={
+                //    "cmd": $config.cmds.dictList,
+                //    "parameters": {
+                //        "typeCode":"expressCompany"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.dictList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "typeCode":"expressCompany"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.delivery_servers=result.data;
                     })

@@ -21,14 +21,19 @@ angular.module('controllers.orderDetailCtrl',[])
             }
 
             init = function () {
-                var data = {
-                    "cmd":$config.cmds.orderDetail,
-                    "parameters":{
-                        "id":$stateParams.id
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.orderDetail,
+                //    "parameters":{
+                //        "id":$stateParams.id
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.orderDetail;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":$stateParams.id
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         console.log(result)
                         if(parseInt($stateParams.type)==0||parseInt($stateParams.type)==2){
@@ -93,17 +98,25 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //提醒收货
             $scope.remindDeliverySell =function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"order",
-                        "saleType":"sell"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"order",
+                //        "saleType":"sell"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"order",
+                    "saleType":"sell"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg)
                     })
@@ -127,17 +140,25 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //提醒发货
             $scope.remindDelivery = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"order",
-                        "saleType":"buy"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"order",
+                //        "saleType":"buy"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"order",
+                    "saleType":"buy"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                     })
@@ -149,15 +170,21 @@ angular.module('controllers.orderDetailCtrl',[])
 
             //确认收货
             $scope.submitBuyer = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.orderReceive,
-                    "parameters":{
-                        "id":id
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.orderReceive,
+                //    "parameters":{
+                //        "id":id
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.orderReceive;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                         //提示收货成功
@@ -180,15 +207,22 @@ angular.module('controllers.orderDetailCtrl',[])
             $scope.agreeApplys = function(id){
                 $alert.confirm("是否同意退款?")
                     .then(function(){
-                        var data = {
-                            "cmd": $config.cmds.applyRefused,
-                            "parameters":{
-                                "id":id,
-                                "refundStatus":"AGREE"
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd": $config.cmds.applyRefused,
+                        //    "parameters":{
+                        //        "id":id,
+                        //        "refundStatus":"AGREE"
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+
+                        $scope.commonBean.cmd = $config.cmds.applyRefused;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":id,
+                            "refundStatus":"AGREE"
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){
@@ -203,14 +237,20 @@ angular.module('controllers.orderDetailCtrl',[])
             $scope.submitGoods = function(id){
                 $alert.confirm('是否确认收货')
                     .then(function(){
-                        var data =  {
-                            "cmd":$config.cmds.sellerReceive,
-                            "parameters":{
-                                "id":id
-                            },
-                            "token":$scope.userInfo.loginToken
+                        //var data =  {
+                        //    "cmd":$config.cmds.sellerReceive,
+                        //    "parameters":{
+                        //        "id":id
+                        //    },
+                        //    "token":$scope.userInfo.loginToken
+                        //}
+
+                        $scope.commonBean.cmd = $config.cmds.sellerReceive;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":id
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='操作成功'){
@@ -277,17 +317,25 @@ angular.module('controllers.orderDetailCtrl',[])
             }
             //提醒发货
             $scope.remindDelivery = function(){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":$stateParams.id,
-                        "orderType":"refund",
-                        "saleType":"sell"
-                    },
-                    "token":$scope.userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":$stateParams.id,
+                //        "orderType":"refund",
+                //        "saleType":"sell"
+                //    },
+                //    "token":$scope.userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":$stateParams.id,
+                    "orderType":"refund",
+                    "saleType":"sell"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                     })

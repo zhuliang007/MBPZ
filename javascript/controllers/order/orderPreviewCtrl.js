@@ -27,15 +27,21 @@ angular.module('controllers.orderPreview',[])
             getOrderPreview();
 
             function getOrderPreview(){
-                var data = {
-                    "cmd":$config.cmds.reserve,
-                    "parameters":{
-                        "productId":id
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.reserve,
+                //    "parameters":{
+                //        "productId":id
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.reserve;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "productId":id
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $scope.product = result.data.product;
@@ -59,21 +65,33 @@ angular.module('controllers.orderPreview',[])
                     return ;
                 }
 
-                var data = {
-                    "cmd":$config.cmds.orderCommit,
-                    "parameters":{
-                        "productId":$scope.order.product.id,
-                        "price":$scope.order.price,
-                        "freight":$scope.order.freight,
-                        "receiveName":$scope.order.receiveName,
-                        "receivePhone":$scope.order.receivePhone,
-                        "address":$scope.order.address,
-                        "postCode":$scope.order.postCode
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.orderCommit,
+                //    "parameters":{
+                //        "productId":$scope.order.product.id,
+                //        "price":$scope.order.price,
+                //        "freight":$scope.order.freight,
+                //        "receiveName":$scope.order.receiveName,
+                //        "receivePhone":$scope.order.receivePhone,
+                //        "address":$scope.order.address,
+                //        "postCode":$scope.order.postCode
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.orderCommit;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "productId":$scope.order.product.id,
+                    "price":$scope.order.price,
+                    "freight":$scope.order.freight,
+                    "receiveName":$scope.order.receiveName,
+                    "receivePhone":$scope.order.receivePhone,
+                    "address":$scope.order.address,
+                    "postCode":$scope.order.postCode
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //显示支付选择
                         //将生成的订单信息传递给支付操作页面，选择支付方式
