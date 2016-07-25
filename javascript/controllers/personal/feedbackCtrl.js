@@ -29,14 +29,19 @@ angular.module('controllers.feedbackCtrl',[])
                     return;
                 }
 
-                var data = {
-                    "cmd":$config.cmds.addFeedback,
-                    "parameters":{
-                        "contents" : val
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd":$config.cmds.addFeedback,
+                //    "parameters":{
+                //        "contents" : val
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.addFeedback;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "contents" : val
                 }
-                $http.post($config.getRequestAction(),data).success(function(data){
+                $http.post($config.getRequestAction(),JSON.stringify($scope.commonBean)).success(function(data){
                     if(data.statusCode=='200'){
                         $alert.show('提交成功')
                         $state.go('myCenterSetup');

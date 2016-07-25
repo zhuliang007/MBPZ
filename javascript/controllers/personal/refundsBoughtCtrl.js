@@ -23,17 +23,25 @@ angular.module('controllers.refundsBoughtCtrl',[])
                 userInfo =  $locals.getObject($config.user_local_info);
             }
             $scope.refundsBoughtLoadMore= function () {
-                var data = {
-                    "cmd": $config.cmds.myOrderList,
-                    "parameters":{
-                        "orderType":"refund",
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "saleType":"buy"
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.myOrderList,
+                //    "parameters":{
+                //        "orderType":"refund",
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "saleType":"buy"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.myOrderList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "orderType":"refund",
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "saleType":"buy"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         console.log(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -94,17 +102,25 @@ angular.module('controllers.refundsBoughtCtrl',[])
 
             //提醒收货
             $scope.warnSubmit = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"refund",
-                        "saleType":"buy"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"refund",
+                //        "saleType":"buy"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"refund",
+                    "saleType":"buy"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                     })

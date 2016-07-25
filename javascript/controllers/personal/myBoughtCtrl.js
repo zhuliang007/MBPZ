@@ -23,17 +23,26 @@ angular.module('controllers.myBoughtCtrl',[])
             }
 
             $scope.boughtLoadMore= function () {
-                var data = {
-                    "cmd": $config.cmds.myOrderList,
-                    "parameters":{
-                        "orderType":$stateParams.orderType,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "saleType":$stateParams.saleType
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.myOrderList,
+                //    "parameters":{
+                //        "orderType":$stateParams.orderType,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "saleType":$stateParams.saleType
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.myOrderList;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "orderType":$stateParams.orderType,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "saleType":$stateParams.saleType
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         if(result.data.content.length==0||result.data.content==null){
@@ -102,32 +111,45 @@ angular.module('controllers.myBoughtCtrl',[])
             }
             //提醒发货
             $scope.remindDelivery = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.noticOrder,
-                    "parameters":{
-                        "id":id,
-                        "orderType":"order",
-                        "saleType":"buy"
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.noticOrder,
+                //    "parameters":{
+                //        "id":id,
+                //        "orderType":"order",
+                //        "saleType":"buy"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.noticOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id,
+                    "orderType":"order",
+                    "saleType":"buy"
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg)
                     })
             }
             //确认收货
             $scope.submitBuyer = function(id){
-                var remindData = {
-                    "cmd":$config.cmds.orderReceive,
-                    "parameters":{
-                        "id":id
-                    },
-                    "token":userInfo.loginToken
+                //var remindData = {
+                //    "cmd":$config.cmds.orderReceive,
+                //    "parameters":{
+                //        "id":id
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.orderReceive;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":id
                 }
 
-                $httpService.getJsonFromPost($config.getRequestAction(),remindData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //提示收货成功
 

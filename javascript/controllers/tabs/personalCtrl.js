@@ -31,13 +31,16 @@ angular.module('controllers.personal',[])
                         $scope.userSex='未设置';
                         break;
                 }
-                var data = {
-                    "cmd":$config.cmds.personalCount,
-                    "parameters":{
-                    },
-                    "token":userInfo.loginToken
-                }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                //var data = {
+                //    "cmd":$config.cmds.personalCount,
+                //    "parameters":{
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.personalCount;
+                $scope.commonBean.token = userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.productPublicCount=result.data.productPublicCount;
                         $scope.productSoldCount=result.data.productSoldCount;
