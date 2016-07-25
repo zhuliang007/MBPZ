@@ -24,15 +24,21 @@ angular.module('controllers.evaluateDetail',[])
             }
             getEvaluateDetail();
             function getEvaluateDetail(){
-                var data = {
-                    "cmd":$config.cmds.evaluateDetail,
-                    "parameters":{
-                        "orderId":$stateParams.orderId
-                    },
-                    "token":userInfo.loginToken
-                }
+                //var data = {
+                //    "cmd":$config.cmds.evaluateDetail,
+                //    "parameters":{
+                //        "orderId":$stateParams.orderId
+                //    },
+                //    "token":userInfo.loginToken
+                //}
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.evaluateDetail;
+                $scope.commonBean.parameters={
+                    "orderId":$stateParams.orderId
+                }
+                $scope.commonBean.token = userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $scope.detailObject = result.data;
@@ -53,16 +59,23 @@ angular.module('controllers.evaluateDetail',[])
                     return;
                 }
 
-                var data = {
-                    "cmd":$config.cmds.evaluateSave,
-                    "parameters":{
-                        "parentId":$scope.childEvaluateObject.parentId,
-                        "content":$scope.childEvaluateObject.content
-                    },
-                    "token":userInfo.loginToken
-                }
+                //var data = {
+                //    "cmd":$config.cmds.evaluateSave,
+                //    "parameters":{
+                //        "parentId":$scope.childEvaluateObject.parentId,
+                //        "content":$scope.childEvaluateObject.content
+                //    },
+                //    "token":userInfo.loginToken
+                //}
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.evaluateSave;
+                $scope.commonBean.parameters={
+                    "parentId":$scope.childEvaluateObject.parentId,
+                    "content":$scope.childEvaluateObject.content
+                }
+                $scope.commonBean.token = userInfo.loginToken;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         $alert.show('回复成功')

@@ -24,15 +24,20 @@ angular.module('controllers.personalCenter',[])
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
             getPersonalInfo();
             function getPersonalInfo(){
-                var data = {
-                    "cmd": $config.cmds.personCenterInfo,
-                    "parameters":{
-                        "userId":$stateParams.userId
-                    }
-
+                //var data = {
+                //    "cmd": $config.cmds.personCenterInfo,
+                //    "parameters":{
+                //        "userId":$stateParams.userId
+                //    }
+                //
+                //}
+                $scope.commonBean.cmd = $config.cmds.personCenterInfo;
+                $scope.commonBean.parameters={
+                    "userId":$stateParams.userId
                 }
+                $scope.commonBean.token=null;
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
                         result.data['type']=$stateParams.type;
@@ -64,17 +69,26 @@ angular.module('controllers.personalCenter',[])
 
 
             function getProductList(){
-                var data = {
-                    "cmd": $config.cmds.selectProduct,
-                    "parameters":{
-                        "type":$scope.productType,
-                        "numberOfPerPage":numberOfPerPage,
-                        "pageNo":pageNo,
-                        "userId":$stateParams.userId
-                    }
-                }
+                //var data = {
+                //    "cmd": $config.cmds.selectProduct,
+                //    "parameters":{
+                //        "type":$scope.productType,
+                //        "numberOfPerPage":numberOfPerPage,
+                //        "pageNo":pageNo,
+                //        "userId":$stateParams.userId
+                //    }
+                //}
 
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $scope.commonBean.cmd = $config.cmds.selectProduct;
+                $scope.commonBean.parameters={
+                    "type":$scope.productType,
+                    "numberOfPerPage":numberOfPerPage,
+                    "pageNo":pageNo,
+                    "userId":$stateParams.userId
+                }
+                $scope.commonBean.token=null;
+
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)
                         $scope.$broadcast('scroll.infiniteScrollComplete');
