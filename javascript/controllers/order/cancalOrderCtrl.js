@@ -21,14 +21,19 @@ angular.module('controllers.cancalOrderCtrl',[])
 
             init = function(){
                 //取消订单原因
-                var data = {
-                    "cmd": $config.cmds.systemDict,
-                    "parameters": {
-                        "typeCode":"cancel_reason"
-                    },
-                    "token":userInfo.loginToken
+                //var data = {
+                //    "cmd": $config.cmds.systemDict,
+                //    "parameters": {
+                //        "typeCode":"cancel_reason"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.systemDict;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "typeCode":"cancel_reason"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),data)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $scope.items = result.data.cancel_reason;
                     })
@@ -50,15 +55,22 @@ angular.module('controllers.cancalOrderCtrl',[])
                     _value=$scope.cancelResponse.textValue;
                 }
                 //取消订单原因
-                var responseData = {
-                    "cmd":$config.cmds.cancelOrder,
-                    "parameters": {
-                        "id":$stateParams.id,
-                        "cancelReason":_value
-                    },
-                    "token":userInfo.loginToken
+                //var responseData = {
+                //    "cmd":$config.cmds.cancelOrder,
+                //    "parameters": {
+                //        "id":$stateParams.id,
+                //        "cancelReason":_value
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+
+                $scope.commonBean.cmd = $config.cmds.cancelOrder;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "id":$stateParams.id,
+                    "cancelReason":_value
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),responseData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg);
                         $state.go($config.controllers.tabsPersonal.name,null,{reload:true});

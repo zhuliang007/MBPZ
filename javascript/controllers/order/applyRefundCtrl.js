@@ -44,14 +44,19 @@ angular.module('controllers.applyRefundCtrl',[])
             }
 
             init = function(){
-                var refundsData={
-                    "cmd": $config.cmds.systemDict,
-                    "parameters": {
-                        "typeCode":"refund_server,refund_reason"
-                    },
-                    "token":userInfo.loginToken
+                //var refundsData={
+                //    "cmd": $config.cmds.systemDict,
+                //    "parameters": {
+                //        "typeCode":"refund_server,refund_reason"
+                //    },
+                //    "token":userInfo.loginToken
+                //}
+                $scope.commonBean.cmd = $config.cmds.systemDict;
+                $scope.commonBean.token = userInfo.loginToken;
+                $scope.commonBean.parameters={
+                    "typeCode":"refund_server,refund_reason"
                 }
-                $httpService.getJsonFromPost($config.getRequestAction(),refundsData)
+                $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         if(result.data.refund_server!=null&&result.data.refund_server.length>0){
                             $scope.refunds.name = result.data.refund_server[0].name;
@@ -122,17 +127,26 @@ angular.module('controllers.applyRefundCtrl',[])
 
                 $alert.confirm('是否确定申请退款?')
                     .then(function() {
-                        var data = {
-                            "cmd": $config.cmds.applyRefound,
-                            "parameters":{
-                                "id":$stateParams.id,
-                                "refundServer":$scope.refunds.value,
-                                "refundReason":$scope.reasonRef.name,
-                                "refundMark":$scope.reasonText.text
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd": $config.cmds.applyRefound,
+                        //    "parameters":{
+                        //        "id":$stateParams.id,
+                        //        "refundServer":$scope.refunds.value,
+                        //        "refundReason":$scope.reasonRef.name,
+                        //        "refundMark":$scope.reasonText.text
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+
+                        $scope.commonBean.cmd = $config.cmds.applyRefound;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":$stateParams.id,
+                            "refundServer":$scope.refunds.value,
+                            "refundReason":$scope.reasonRef.name,
+                            "refundMark":$scope.reasonText.text
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg);
                                 if(result.msg=='申请退款成功，等待处理'){
@@ -151,15 +165,22 @@ angular.module('controllers.applyRefundCtrl',[])
             $scope.agreeApply = function(){
                 $alert.confirm("是否同意退款?")
                     .then(function(){
-                        var data = {
-                            "cmd": $config.cmds.applyRefused,
-                            "parameters":{
-                                "id":$stateParams.obj.id,
-                                "refundStatus":"AGREE"
-                            },
-                            "token":userInfo.loginToken
+                        //var data = {
+                        //    "cmd": $config.cmds.applyRefused,
+                        //    "parameters":{
+                        //        "id":$stateParams.obj.id,
+                        //        "refundStatus":"AGREE"
+                        //    },
+                        //    "token":userInfo.loginToken
+                        //}
+
+                        $scope.commonBean.cmd = $config.cmds.applyRefused;
+                        $scope.commonBean.token = userInfo.loginToken;
+                        $scope.commonBean.parameters={
+                            "id":$stateParams.obj.id,
+                            "refundStatus":"AGREE"
                         }
-                        $httpService.getJsonFromPost($config.getRequestAction(),data)
+                        $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg)
                                 if(result.msg=='操作成功'){
