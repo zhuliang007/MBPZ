@@ -48,6 +48,7 @@ angular.module('controllers.start',[])
                         "loginAccount":account,
                         "loginToken":token
                     }
+                    $scope.commonBean.token = null;
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $scope.userInfo = {
