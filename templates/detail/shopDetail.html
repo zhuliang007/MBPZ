@@ -14,11 +14,10 @@
             <span ng-click="goBackBefore()" class="icon ion-ios-arrow-back"></span>
             <span class="icon ion-more" ng-click="openPopover($event,'productReport')"></span>
         </div>
-        <ion-slide-box ng-show="product.productImageList!=null"
-                       ng-class="{true:'margin-normal-bottom',false:''}[productType==1]"
+        <ion-slide-box ng-class="{true:'margin-normal-bottom',false:''}[productType==1]"
                        class="headSliders"
                        delegate-handle="productSlideBox"
-                       does-continue="false"
+                       does-continue="true"
                        auto-play="true" slide-interval="2000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="productImage in product.productImageList track by $index">
                 <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage((productImage.location)+'@414w')"></div>
