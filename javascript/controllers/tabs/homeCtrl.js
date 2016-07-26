@@ -29,6 +29,12 @@ angular.module('controllers.home',[])
             $scope.infiniteFlag = true;
             $locals.clearObject($config.home_type);
 
+            var userInfo = $locals.getObject($config.user_local_info);
+            if(userInfo){
+                $scope.commonBean.token = userInfo.loginToken;
+            }
+
+
             getAds();
             getQGXX();
             function getAds(){
@@ -59,7 +65,6 @@ angular.module('controllers.home',[])
                     "numberOfPerPage":10,
                     "pageNo":0
                 }
-                $scope.commonBean.token = null
 
                 $cache.setValue($config.getRequestAction(),JSON.stringify($scope.commonBean),'qgHome')
                     .then(function(result){
@@ -105,7 +110,7 @@ angular.module('controllers.home',[])
                     "pageNo":pageNo,
                     "type":0
                 }
-
+                //console.log($scope.commonBean)
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)
