@@ -19,9 +19,10 @@ angular.module("controllers.recommend",[])
             var numberOfPerPage = 3;
             var pageNo = 0;
             $scope.infiniteFlag = true;
-            var userInfo = {};
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             var productHandle = $ionicScrollDelegate.$getByHandle('productHandle');
 
@@ -45,8 +46,6 @@ angular.module("controllers.recommend",[])
                     "pageNo":pageNo,
                     "status":0
                 }
-                $scope.commonBean.token =userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(
                         function(result){
@@ -104,8 +103,6 @@ angular.module("controllers.recommend",[])
                     "replyType":$scope.replyObject.replyType,
                     "replyContents":$scope.replyObject.replyContents
                 }
-                $scope.commonBean.token =userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         $alert.show(result.msg)

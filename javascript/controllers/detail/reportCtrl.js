@@ -19,6 +19,7 @@ angular.module('controllers.report',[])
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             getKeyWords();
             function getKeyWords(){
@@ -59,7 +60,6 @@ angular.module('controllers.report',[])
                     "relateId":productId,
                     "reportContent":chooseType==4?reasonText:''
                 }
-                $scope.commonBean.token =userInfo.loginToken;
                 //console.log('report',data)
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))

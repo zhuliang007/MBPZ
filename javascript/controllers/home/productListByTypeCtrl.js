@@ -15,7 +15,8 @@ angular.module('controllers.productListByTypeCtrl',[])
         '$timeout',
         '$ionicModal',
         '$rootScope',
-        function($scope,$config,$console,$state,$stateParams,$productType,$httpService,$ionicPopover,$ionicScrollDelegate,$timeout,$ionicModal,$rootScope){
+        '$locals',
+        function($scope,$config,$console,$state,$stateParams,$productType,$httpService,$ionicPopover,$ionicScrollDelegate,$timeout,$ionicModal,$rootScope,$locals){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
@@ -37,6 +38,11 @@ angular.module('controllers.productListByTypeCtrl',[])
             $scope.priceObject = {
                 beginPrice:null,
                 endPrice:null
+            }
+            var userInfo = {} ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             checkType();
             function checkType(){
@@ -81,7 +87,6 @@ angular.module('controllers.productListByTypeCtrl',[])
                     "numberOfPerPage":numberOfPerPage,
                     "pageNo":pageNo
                 }
-                $scope.commonBean.token = null;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
@@ -119,8 +124,6 @@ angular.module('controllers.productListByTypeCtrl',[])
                     "pageNo":pageNo,
                     "type":0
                 }
-                $scope.commonBean.token = null;
-
                 //$console.show(data);
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){

@@ -14,9 +14,10 @@ angular.module('controllers.personalCenter',[])
         '$locals',
         function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$ionicScrollDelegate,$locals){
 
-            var userInfo = {};
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
 
 
@@ -35,7 +36,6 @@ angular.module('controllers.personalCenter',[])
                 $scope.commonBean.parameters={
                     "userId":$stateParams.userId
                 }
-                $scope.commonBean.token=null;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
@@ -86,8 +86,6 @@ angular.module('controllers.personalCenter',[])
                     "pageNo":pageNo,
                     "userId":$stateParams.userId
                 }
-                $scope.commonBean.token=null;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)

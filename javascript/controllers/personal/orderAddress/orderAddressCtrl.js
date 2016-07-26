@@ -23,6 +23,7 @@ angular.module('controllers.orderAddress',[])
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             $scope.loadMore = function() {
                 getAddressList();
@@ -41,7 +42,6 @@ angular.module('controllers.orderAddress',[])
                     "numberOfPerPage" : numberOfPerPage,
                     "pageNo" : pageNo
                 }
-                $scope.commonBean.token = userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){

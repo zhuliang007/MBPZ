@@ -30,9 +30,10 @@ angular.module('controllers.productDetail',[])
             $scope.replyList = []
             $scope.infiniteFlag = true;
 
-            var userInfo = {};
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
 
 
@@ -42,7 +43,6 @@ angular.module('controllers.productDetail',[])
                 $scope.commonBean.parameters={
                     "productId":id
                 }
-                $scope.commonBean.token = userInfo.loginToken;
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //console.log(result);
@@ -65,8 +65,6 @@ angular.module('controllers.productDetail',[])
                     "pageNo":pageNo,
                     "replyType": $scope.productType
                 }
-                $scope.commonBean.token = null;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
@@ -111,8 +109,6 @@ angular.module('controllers.productDetail',[])
                     "productId": $scope.product.id,
                     "isCollect":$scope.product.isCollect?0:1
                 }
-                $scope.commonBean.token = userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
@@ -233,8 +229,6 @@ angular.module('controllers.productDetail',[])
                     "repUserId":$scope.replyObject.repUserId,
                     "replyContents":$scope.replyObject.replyContents,
                 }
-                $scope.commonBean.token = userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);

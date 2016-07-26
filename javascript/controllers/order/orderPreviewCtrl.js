@@ -14,9 +14,10 @@ angular.module('controllers.orderPreview',[])
         '$locals',
         function($scope,$config,$console,$httpService,$state,$stateParams,$alert,$rootScope,$locals){
             var id = $stateParams.productId;
-            var userInfo = {};
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             checkOrderAddressObject();
             function checkOrderAddressObject(){
@@ -36,7 +37,6 @@ angular.module('controllers.orderPreview',[])
                 //}
 
                 $scope.commonBean.cmd = $config.cmds.reserve;
-                $scope.commonBean.token = userInfo.loginToken;
                 $scope.commonBean.parameters={
                     "productId":id
                 }
@@ -80,7 +80,6 @@ angular.module('controllers.orderPreview',[])
                 //}
 
                 $scope.commonBean.cmd = $config.cmds.orderCommit;
-                $scope.commonBean.token = userInfo.loginToken;
                 $scope.commonBean.parameters={
                     "productId":$scope.order.product.id,
                     "price":$scope.order.price,

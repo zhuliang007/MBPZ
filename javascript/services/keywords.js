@@ -21,7 +21,6 @@ angular.module('services.keywords',[])
                         "parentCode":0,
                         "levelCount":3
                     }
-                    $scope.commonBean.token = null;
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             var parentList = result.data;

@@ -13,7 +13,8 @@ angular.module('controllers.shop',[])
         '$keywords',
         '$ionicPopover',
         '$ionicScrollDelegate',
-        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$keywords,$ionicPopover,$ionicScrollDelegate){
+        '$locals',
+        function($scope,$console,$config,$rootScope,$stateParams,$state,$httpService,$keywords,$ionicPopover,$ionicScrollDelegate,$locals){
             document.body.classList.remove('platform-ios');
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
@@ -23,13 +24,18 @@ angular.module('controllers.shop',[])
             var pageNo = 0;
             $scope.infiniteFlag = true;
             $scope.sortText = '全部';
-
+            var userInfo = {} ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
+            }
             $keywords.setKeyWords($scope,'dictList')
                 .then(function(result){
                     $scope.sortObject = result;
                 })
 
             var sortSelect = null;
+
 
             function getProductShop(){
                 $scope.commonBean.cmd = $config.cmds.getPage;

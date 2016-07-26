@@ -32,6 +32,7 @@ angular.module('controllers.shopDetail',[])
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
 
             var productSlideBox = $ionicSlideBoxDelegate.$getByHandle("productSlideBox");
@@ -41,8 +42,6 @@ angular.module('controllers.shopDetail',[])
                 $scope.commonBean.parameters={
                     "productId":id
                 }
-                $scope.commonBean.token = userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
@@ -80,8 +79,6 @@ angular.module('controllers.shopDetail',[])
                     "pageNo":pageNo,
                     "replyType": 1
                 }
-                $scope.commonBean.token = null;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
@@ -160,7 +157,6 @@ angular.module('controllers.shopDetail',[])
                     "productId": $scope.product.id,
                     "isSpot":$scope.product.isSpot?0:1
                 }
-                $scope.commonBean.token =userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
@@ -186,8 +182,6 @@ angular.module('controllers.shopDetail',[])
                     $scope.commonBean.parameters={
                         "productId":id
                     }
-                    $scope.commonBean.token =userInfo.loginToken;
-
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $alert.show(result.msg)
@@ -300,8 +294,6 @@ angular.module('controllers.shopDetail',[])
                     "repUserId":$scope.replyObject.repUserId,
                     "replyContents":$scope.replyObject.replyContents,
                 }
-                $scope.commonBean.token =userInfo.loginToken;
-
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result);
