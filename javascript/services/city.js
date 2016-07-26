@@ -21,7 +21,6 @@ angular.module('services.city',[])
 
                     $scope.commonBean.cmd = $config.cmds.getHotCityList;
                     $scope.commonBean.parameters=null;
-                    $scope.commonBean.token = null;
 
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
@@ -44,7 +43,6 @@ angular.module('services.city',[])
                 if($city.allCity.length==0){
                     $scope.commonBean.cmd = $config.cmds.getAllCityList;
                     $scope.commonBean.parameters=null;
-                    $scope.commonBean.token = null;
 
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){

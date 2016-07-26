@@ -13,9 +13,10 @@ angular.module('controllers.orderEvaluate',[])
         '$locals',
         function($scope,$console,$config,$alert,$state,$stateParams,$httpService,$locals){
             //$console.show($stateParams);
-            var userInfo = {};
+            var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             $scope.orderEvaluateObject = {
                 content:'',
@@ -68,7 +69,6 @@ angular.module('controllers.orderEvaluate',[])
                     "productMatche":$scope.orderEvaluateObject.productMatche,
                     "content":$scope.orderEvaluateObject.content
                 }
-                $scope.commonBean.token = userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){

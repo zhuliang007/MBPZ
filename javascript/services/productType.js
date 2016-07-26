@@ -22,7 +22,6 @@ angular.module('services.productType',[])
                         "typeCode":"market_product_type",
                         "levelCount":2
                     };
-                    $scope.commonBean.token = null;
 
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){

@@ -21,6 +21,7 @@ angular.module('controllers.evaluateDetail',[])
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             getEvaluateDetail();
             function getEvaluateDetail(){
@@ -36,7 +37,6 @@ angular.module('controllers.evaluateDetail',[])
                 $scope.commonBean.parameters={
                     "orderId":$stateParams.orderId
                 }
-                $scope.commonBean.token = userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
@@ -73,7 +73,6 @@ angular.module('controllers.evaluateDetail',[])
                     "parentId":$scope.childEvaluateObject.parentId,
                     "content":$scope.childEvaluateObject.content
                 }
-                $scope.commonBean.token = userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){

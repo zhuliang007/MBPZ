@@ -23,6 +23,7 @@ angular.module('controllers.editAddress',[])
             var userInfo = {} ;
             if($locals.getObject($config.user_local_info)!=null) {
                 userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
             }
             $scope.addressObject = {
                 receiveName:'',
@@ -58,7 +59,6 @@ angular.module('controllers.editAddress',[])
                     $scope.commonBean.parameters={
                         "id":$stateParams.id
                     }
-                    $scope.commonBean.token = userInfo.loginToken;
 
                     $keywords.getProvinceCity($scope)
                         .then(function(result){
@@ -119,7 +119,6 @@ angular.module('controllers.editAddress',[])
                         $scope.commonBean.parameters={
                             "id":$scope.addressId
                         }
-                        $scope.commonBean.token = userInfo.loginToken;
                         $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                             .then(function(result){
                                 $alert.show(result.msg)
@@ -262,7 +261,6 @@ angular.module('controllers.editAddress',[])
                     "address":$scope.addressObject.address,
                     "isDefault":$scope.addressObject.isDefault?1:0
                 }
-                $scope.commonBean.token = userInfo.loginToken;
 
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){

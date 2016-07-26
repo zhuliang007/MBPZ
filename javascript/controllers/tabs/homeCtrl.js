@@ -29,14 +29,23 @@ angular.module('controllers.home',[])
             $scope.infiniteFlag = true;
             $locals.clearObject($config.home_type);
 
-            var userInfo = $locals.getObject($config.user_local_info);
-            if(userInfo){
-                $scope.commonBean.token = userInfo.loginToken;
-            }
-
-
-            getAds();
-            getQGXX();
+            var userInfo = {} ;
+            setTimeout(function(){
+                if($locals.getObject($config.user_local_info)!=null) {
+                    userInfo =  $locals.getObject($config.user_local_info);
+                    $scope.commonBean.token = userInfo.loginToken;
+                }
+                getAds();
+                getQGXX();
+            },200);
+            $scope.loadMore = function() {
+                if($locals.getObject($config.user_local_info)!=null) {
+                    getProductHome();
+                }
+                else{
+                    setTimeout(getProductHome,500);
+                }
+            };
             function getAds(){
                 $scope.commonBean.cmd = $config.cmds.adInfo;
                 $scope.commonBean.parameters={
@@ -58,14 +67,12 @@ angular.module('controllers.home',[])
                     })
             }
             function getQGXX(){
-
                 $scope.commonBean.cmd = $config.cmds.getPage;
                 $scope.commonBean.parameters={
                     "type":1,
                     "numberOfPerPage":10,
                     "pageNo":0
                 }
-
                 $cache.setValue($config.getRequestAction(),JSON.stringify($scope.commonBean),'qgHome')
                     .then(function(result){
                         QGXXListCache = $cache.getValue('qgHome');
@@ -94,11 +101,6 @@ angular.module('controllers.home',[])
                 },2000)
             }
 
-            $scope.loadMore = function() {
-                //console.log('loadMore')
-                getProductHome();
-            };
-
             $scope.$on('$stateChangeSuccess', function() {
             });
 
@@ -110,7 +112,6 @@ angular.module('controllers.home',[])
                     "pageNo":pageNo,
                     "type":0
                 }
-                //console.log($scope.commonBean)
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
                         //$console.show(result)

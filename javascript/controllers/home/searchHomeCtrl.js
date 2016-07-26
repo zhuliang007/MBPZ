@@ -19,6 +19,11 @@ angular.module('controllers.searchHome',[])
             document.body.classList.remove('platform-android');
             document.body.classList.add('platform-ios');
             var searchHandle = $ionicScrollDelegate.$getByHandle('searchHandle');
+            var userInfo = {} ;
+            if($locals.getObject($config.user_local_info)!=null) {
+                userInfo =  $locals.getObject($config.user_local_info);
+                $scope.commonBean.token = userInfo.loginToken;
+            }
             $scope.searchContentFlag = false;
             $scope.searchTypes = [
                 {
@@ -94,7 +99,6 @@ angular.module('controllers.searchHome',[])
                         "numberOfPerPage":numberOfPerPage,
                         "pageNo":pageNo
                     }
-                    $scope.commonBean.token = null;
                     $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                         .then(function(result){
                             $console.show(result);
