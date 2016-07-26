@@ -56,19 +56,20 @@ angular.module('controllers.deliveryCtrl',[])
                     })
                 }
 
-                $ionicActionSheet.show({
-                    buttons:$scope.delivery_servers,
-                    buttonClicked: function(index,obj) {
-                        $scope.delivery.name=obj.text;
-                        $scope.delivery.value = obj.value;
-                        return true;
-                    }
-                });
+                //$ionicActionSheet.show({
+                //    buttons:$scope.delivery_servers,
+                //    buttonClicked: function(index,obj) {
+                //        $scope.delivery.name=obj.text;
+                //        $scope.delivery.value = obj.value;
+                //        return true;
+                //    },
+                //    cssClass:'scroll:true'
+                //});
             }
 
             //提交快递
             $scope.submitDelivery=function(orderCodes){
-                if($scope.delivery.name==''){
+                if($scope.delivery.name.name==''){
                     $alert.show('请选择快递公司');
                     return;
                 }
@@ -77,6 +78,9 @@ angular.module('controllers.deliveryCtrl',[])
                     $alert.show('请输入快递单号');
                     return;
                 }
+                //console.log($scope.delivery.name)
+                //console.log($scope.delivery.name.name)
+                //return;
                 $alert.confirm('是否提交物流信息')
                     .then(function () {
                         var cmds ;
@@ -90,7 +94,7 @@ angular.module('controllers.deliveryCtrl',[])
                             "cmd": cmds,
                             "parameters": {
                                 "id":$stateParams.id,
-                                "express":$scope.delivery.value,
+                                "express":$scope.delivery.name.value,
                                 "expressNum":orderCodes
                             },
                             "token":userInfo.loginToken
