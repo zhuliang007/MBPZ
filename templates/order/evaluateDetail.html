@@ -6,7 +6,7 @@
         </div>
         <h1 class="title">查看评价</h1>
     </ion-header-bar>
-    <ion-content has-bouncing="true" overflow-scroll="false" ng-class="{true:'has-footer',false:''}[userInfo&&detailObject&&!detailObject.childEvaluate&&userInfo.id==detailObject.product.publicUser.id]">
+    <ion-content has-bouncing="true" overflow-scroll="false" >
         <div class="bg-color-white">
             <div class="row row-no-padding padding-big-vertical padding-normal-horizontal">
                 <div class="col col-center col-10">
@@ -93,7 +93,7 @@
             </div>
         </div>
     </ion-content>
-    <ion-footer-bar align-title="center" ng-if="userInfo&&detailObject&&!detailObject.childEvaluate&&userInfo.id==detailObject.product.publicUser.id">
+    <ion-footer-bar align-title="center" ng-show="userInfo&&detailObject&&!detailObject.childEvaluate&&userInfo.id==detailObject.product.publicUser.id">
         <button type="button" class="button-block submit" ng-click="submit()">提交追评</button>
     </ion-footer-bar>
 </ion-view>

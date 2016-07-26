@@ -74,7 +74,7 @@ angular.module('controllers.productListByTypeCtrl',[])
             }
 
             function getRecommendationProducts(){
-                $scope.commonBean.cmd = $config.cmds.recommendationProduct;
+                $scope.commonBean.cmd = $config.cmds.getPage;
                 $scope.commonBean.parameters={
                     "isProductRecommoned":"1",
                     "type":"0",
