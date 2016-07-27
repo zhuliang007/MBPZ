@@ -98,7 +98,7 @@
                 </ion-item>
         </ion-list>
     </ion-content>
-    <ion-footer-bar class="orderBtn" ng-if="items.status!=null&&items.refundStatus==null">
+    <ion-footer-bar id="footerBarA"  class="orderBtn" ng-show="items.status!=null&&items.refundStatus==null">
         <div class="col-50 " ng-if="items.status=='NOT_PAID'&&isCurrentUser(userInfo.id,currentUserId)&&items.saleType!='sell'">
             <button class="button button-full button-stable refusedApply" ng-click="cancalOrder()">取消订单</button>
         </div>
@@ -130,7 +130,7 @@
             <button class="button button-full button-assertive"  ng-click="remindDeliverySell(items.id)">提醒收货</button>
         </div>
     </ion-footer-bar>
-    <ion-footer-bar class="orderBtn " ng-if="items.refundStatus!=null">
+    <ion-footer-bar id="footerBarB"   class="orderBtn " ng-show="items.refundStatus!=null">
         <div class="col-50 " ng-if="(items.refundServer=='TKTH'||items.refundServer=='TK')&&items.refundStatus=='APPLY'&&items.saleType=='sell'">
             <button class="button button-full button-stable refusedApply" ng-click="refusedApply(items.id,0,items,4)" >拒绝</button>
         </div>

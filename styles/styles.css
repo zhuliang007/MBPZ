@@ -2877,6 +2877,7 @@ ion-content{
     padding:0px !important;
     background-position:bottom !important;
     background: #F5F5F5 !important;
+    height: 0px;
 }
 .processItem{
     padding:0px;

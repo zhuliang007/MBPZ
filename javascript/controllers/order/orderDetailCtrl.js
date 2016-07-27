@@ -52,10 +52,26 @@ angular.module('controllers.orderDetailCtrl',[])
                         var processScroll = document.getElementById('processScrolls');
                         var $element = angular.element(processScroll);
                         $element.children('.scroll').css({'width':(120*result.data.process.length)+"px"});
+
+
                     })
             }
 
             init();
+
+            setTimeout(function () {
+                var footerBarB = document.getElementById('footerBarB');
+                var eleB = angular.element(B);
+                if(eleB[0].childElementCount>0){
+                    document.getElementsByClassName('orderBtn')[1].style.height = '44px';
+                }
+
+                var footerBarA = document.getElementById('footerBarA');
+                var eleA = angular.element(footerBarA);
+                if(eleA[0].childElementCount>0){
+                    document.getElementsByClassName('orderBtn')[0].style.height = '44px';
+                }
+            },400)
 
 
             $scope.backParent = function(){
