@@ -1163,6 +1163,7 @@ ion-content{
     background-size:cover;
     background-position:center;
     -webkit-background-size: cover;
+    display: block;
 }
 
 .bgImg-3-1{

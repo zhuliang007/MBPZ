@@ -12,7 +12,7 @@
     <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHomeHandle">
         <ion-slide-box class="headSliders margin-normal-bottom" delegate-handle="adSlideBox" does-continue="false" auto-play="true" slide-interval="1000" show-pager="{{showPager}}">
             <ion-slide ng-repeat="ad in adList track by $index">
-                <div class="bgImg bgImg-3-1" ng-style="setBackGroundImage(ad.adImg+'@414w')"></div>
+                <a class="bgImg bgImg-3-1" ng-style="setBackGroundImage(ad.adImg+'@414w')" ng-href="{{ad.redirectUrl}}"></a>
             </ion-slide>
         </ion-slide-box>
 
