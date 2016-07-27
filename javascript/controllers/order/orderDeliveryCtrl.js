@@ -73,14 +73,13 @@ angular.module('controllers.deliveryCtrl',[])
                     $alert.show('请选择快递公司');
                     return;
                 }
-                //console.log(orderCodes)
-                if(orderCodes=='undefined'||orderCodes==undefined){
+
+                if(orderCodes=='undefined'||orderCodes==undefined
+                ||orderCodes==''){
                     $alert.show('请输入快递单号');
                     return;
                 }
-                //console.log($scope.delivery.name)
-                //console.log($scope.delivery.name.name)
-                //return;
+
                 $alert.confirm('是否提交物流信息')
                     .then(function () {
                         var cmds ;

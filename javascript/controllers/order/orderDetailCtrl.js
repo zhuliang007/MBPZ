@@ -62,16 +62,16 @@ angular.module('controllers.orderDetailCtrl',[])
             setTimeout(function () {
                 var footerBarB = document.getElementById('footerBarB');
                 var eleB = angular.element(footerBarB);
-                console.log(eleB[0].childElementCount)
-                if(eleB[0].childElementCount>0){
+                if(eleB[0].childElementCount>0&&($stateParams.type==2||$stateParams.type==4)){
                     document.getElementsByClassName('orderBtn')[1].style.height = '44px';
+                    document.getElementsByClassName('scroll-content')[1].style.bottom='44px';
                 }
 
                 var footerBarA = document.getElementById('footerBarA');
                 var eleA = angular.element(footerBarA);
-console.log(eleA[0].childElementCount)
-                if(eleA[0].childElementCount>0){
+                if(eleA[0].childElementCount>0&&($stateParams.type==0||$stateParams.type==1)){
                     document.getElementsByClassName('orderBtn')[0].style.height = '44px';
+                    document.getElementsByClassName('scroll-content')[1].style.bottom='44px';
                 }
 
                /* if(eleB[0].childElementCount==0||eleA[0].childElementCount==0){
