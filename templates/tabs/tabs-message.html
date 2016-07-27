@@ -4,17 +4,17 @@
     </ion-header-bar>
     <ion-content has-bouncing="true" >
         <ion-list class="message-list">
-            <a class="item item-thumbnail-left" ng-click="myCenterSetup('messageSystem')">
+            <a class="item item-thumbnail-left" ng-click="messageSetup('messageSystem',arry[0].id)">
                 <img src="./assets/icon_message_system40x40.png">
                 <p class="message-title">系统消息</p>
                 <p class="message-p" id="system">没有新消息</p>
             </a>
-            <a class="item item-thumbnail-left" ng-click="myCenterSetup('messageProduct')">
+            <a class="item item-thumbnail-left" ng-click="messageSetup('messageProduct',arry[2].id)">
                 <img src="./assets/icon_message_goods40x40.png">
                 <p class="message-title">商品回复</p>
                 <p class="message-p" id="product">没有新消息</p>
             </a>
-            <a class="item item-thumbnail-left" ng-click="myCenterSetup('messageOrder')">
+            <a class="item item-thumbnail-left" ng-click="messageSetup('messageOrder',arry[1].id)">
                 <img src="./assets/icon_message_order40x40.png">
                 <p class="message-title">订单动态</p>
                 <p class="message-p" id="order">没有新消息</p>

@@ -140,6 +140,7 @@ angular.module('providers.config',[])
             personCenterInfo:"market/center/personCenterInfo",
             selectProduct:"market/center/selectProductList",
             evaluateList:"market/evaluate/list",
+            setMessageType:"market/message/setMessageType",
         }
 
 

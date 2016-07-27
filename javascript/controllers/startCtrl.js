@@ -306,6 +306,25 @@ angular.module('controllers.start',[])
                     $state.go(_value)
                 }
             }
+            $scope.messageSetup = function (_value,_id) {
+                if($scope.userInfo==undefined||!$scope.userInfo.loginToken){
+                    $alert.show('请先登录萌宝派');
+                }else{
+                    $scope.commonBean.cmd = $config.cmds.setMessageType;
+                    $scope.commonBean.token = $scope.userInfo.loginToken;
+                    $scope.commonBean.parameters={
+                        "id":_id
+                    }
+                    
+                    //console.log(_id)
+                    $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
+                        .then(function (result) {
+                            
+                        })
+                    $state.go(_value)
+                }
+            }
+            
             $scope.mySetupHelp = function(_value){
                 $state.go(_value)
             }

@@ -34,8 +34,8 @@ angular.module('controllers.message',[])
                 }
                 $httpService.getJsonFromPost($config.getRequestAction(),JSON.stringify($scope.commonBean))
                     .then(function(result){
-                        var arry = result.data;
-                        arry.forEach(function (item) {
+                        $scope.arry = result.data;
+                        $scope.arry.forEach(function (item) {
                             if(item.noticeCount>0){
                                 document.getElementById(item.modual).innerHTML="您有"+item.noticeCount+"条新消息";
                                 document.getElementById(item.modual).style.color="red";
