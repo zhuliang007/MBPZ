@@ -64,20 +64,22 @@ angular.module('controllers.orderDetailCtrl',[])
                 var eleB = angular.element(footerBarB);
                 if(eleB[0].childElementCount>0&&($stateParams.type==2||$stateParams.type==4)){
                     document.getElementsByClassName('orderBtn')[1].style.height = '44px';
-                    document.getElementsByClassName('scroll-content')[1].style.bottom='44px';
+                    document.getElementsByClassName('hasContent')[0].style.bottom='44px';
                 }
 
                 var footerBarA = document.getElementById('footerBarA');
                 var eleA = angular.element(footerBarA);
+                console.log($stateParams.type)
+                console.log(eleA[0].childElementCount)
                 if(eleA[0].childElementCount>0&&($stateParams.type==0||$stateParams.type==1)){
                     document.getElementsByClassName('orderBtn')[0].style.height = '44px';
-                    document.getElementsByClassName('scroll-content')[1].style.bottom='44px';
+                    document.getElementsByClassName('hasContent')[0].style.bottom='44px';
                 }
 
                /* if(eleB[0].childElementCount==0||eleA[0].childElementCount==0){
                     document.getElementsByClassName('has-footer')[0].style.bottom='0px';
                 }*/
-            },400)
+            },500)
 
 
             $scope.backParent = function(){
