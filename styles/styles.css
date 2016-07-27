@@ -3212,3 +3212,7 @@ a{
     font-size: 16px;
     color:#999999;
 }
+
+.orderDetailView .has-footer{
+    bottom:0px;
+}

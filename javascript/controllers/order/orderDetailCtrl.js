@@ -73,6 +73,10 @@ console.log(eleA[0].childElementCount)
                 if(eleA[0].childElementCount>0){
                     document.getElementsByClassName('orderBtn')[0].style.height = '44px';
                 }
+
+               /* if(eleB[0].childElementCount==0||eleA[0].childElementCount==0){
+                    document.getElementsByClassName('has-footer')[0].style.bottom='0px';
+                }*/
             },400)
 
 
