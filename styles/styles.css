@@ -1815,7 +1815,8 @@ ion-content{
     color: #FFFFFF;
     position: absolute;
     z-index: 2;
-    bottom: 92px;
+    bottom: calc(50% - 46px);
+    bottom: -webkit-calc(50% - 46px);
 }
 
 .publishModal .chooseGroup>img{
