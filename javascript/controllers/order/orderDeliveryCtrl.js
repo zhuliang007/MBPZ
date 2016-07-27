@@ -69,7 +69,7 @@ angular.module('controllers.deliveryCtrl',[])
 
             //提交快递
             $scope.submitDelivery=function(orderCodes){
-                if($scope.delivery.name.name==''){
+                if($scope.delivery.name==''){
                     $alert.show('请选择快递公司');
                     return;
                 }
