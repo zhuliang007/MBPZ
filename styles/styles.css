@@ -992,9 +992,9 @@ ion-content{
     margin-top: 10px;
 }
 
-.productDetail ion-content{
-    margin-bottom: 48px;
-}
+/*.productDetail ion-content{*/
+    /*margin-bottom: 48px;*/
+/*}*/
 
 .replyNormal.disabled.activated{
     background-color: #FFFFFF;

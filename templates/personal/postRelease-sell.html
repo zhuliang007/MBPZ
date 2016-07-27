@@ -2,7 +2,7 @@
     <ion-content >
         <ion-list ng-repeat="item in items track by $index"  ng-if="items.length>0">
             <div class="item releaseItem">
-                <a ng-click="showProduct(item.id)">
+                <a ng-click="showProduct(item.id,500)">
                     <div class="row" ng-if="item.productImageList.length!=0" >
                         <div class="col-33 col-center padding-small-horizontal padding-none-vertical" ng-repeat="productImage in checkProductImages(item.productImageList) track by $index" >
                             <div class="bgImg bgImg-1-1" ng-style="setBackGroundImage(productImage.location+'@414w')" ></div>

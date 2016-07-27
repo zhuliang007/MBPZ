@@ -9,7 +9,7 @@
         </div>
     </ion-header-bar>
 
-    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle">
+    <ion-content has-bouncing="true" overflow-scroll="false" delegate-handle="productHandle" id="productDetailContent">
         <div class="productDetailBody padding-small-vertical border-bottom">
             <div class="row row-no-padding">
                 <div class="col col-center" ng-click="showPersonalCenter($event,product.publicUser.id,product.type,product.id)">
@@ -90,7 +90,7 @@
         </ion-infinite-scroll>
     </ion-content>
 
-    <div class="userCtrl">
+    <div class="userCtrl" id="productDetail">
         <div ng-click="productReply($event,product.publicUser)"><span class="mbpz mbpz-icon-replies padding-small-right"></span><span ng-bind="product.replyNumber"></span></div>
         <div class="judge star" ng-click="judgeProduct()">
             <span class="mbpz" ng-class="{true:'mbpz-icon-star',false:'mbpz-icon-fill-star'}[product.isCollect==null||product.isCollect==0]"></span>

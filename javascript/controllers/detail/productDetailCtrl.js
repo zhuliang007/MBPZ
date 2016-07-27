@@ -36,6 +36,13 @@ angular.module('controllers.productDetail',[])
                 $scope.commonBean.token = userInfo.loginToken;
             }
 
+            if($stateParams.type==500){
+                document.getElementById('productDetail').style.display='none';
+                document.getElementById('productDetailContent').style.marginBottom = '0px';
+            }else{
+                document.getElementById('productDetailContent').style.marginBottom = '48px';
+            }
+
 
             getProductDetail();
             function getProductDetail(){
